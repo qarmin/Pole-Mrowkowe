@@ -1,0 +1,4524 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM2.tres" type="Material" id=1]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM1.tres" type="Material" id=2]
+[ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM3.tres" type="Material" id=4]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM4.tres" type="Material" id=5]
+[ext_resource path="res://Terrain/SingleHex/SingleHexBase.tres" type="Material" id=6]
+
+[sub_resource type="ArrayMesh" id=1]
+resource_name = "Cylinder"
+surfaces/0 = {
+"aabb": AABB( -0.866025, -1, -1, 1.73205, 2.00001, 2 ),
+"array_data": PoolByteArray( 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 63, 0, 147, 0, 147, 0, 193, 127, 0, 60, 0, 0, 216, 179, 93, 63, 0, 0, 128, 191, 255, 255, 255, 190, 63, 0, 147, 0, 147, 0, 193, 127, 170, 58, 0, 56, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 63, 0, 147, 0, 147, 0, 193, 127, 0, 60, 0, 56, 216, 179, 93, 63, 0, 0, 128, 63, 255, 255, 255, 190, 63, 0, 147, 0, 147, 0, 193, 127, 170, 58, 0, 0, 216, 179, 93, 63, 0, 0, 128, 63, 255, 255, 255, 190, 127, 0, 0, 0, 0, 0, 129, 127, 170, 58, 0, 0, 215, 179, 93, 63, 0, 0, 128, 191, 1, 0, 0, 63, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 56, 216, 179, 93, 63, 0, 0, 128, 191, 255, 255, 255, 190, 127, 0, 0, 0, 0, 0, 129, 127, 170, 58, 0, 56, 215, 179, 93, 63, 0, 0, 128, 63, 1, 0, 0, 63, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 0, 215, 179, 93, 63, 0, 0, 128, 63, 1, 0, 0, 63, 63, 0, 109, 0, 109, 0, 193, 127, 85, 57, 0, 0, 46, 189, 187, 179, 0, 0, 128, 191, 0, 0, 128, 63, 63, 0, 109, 0, 109, 0, 193, 127, 255, 55, 0, 56, 215, 179, 93, 63, 0, 0, 128, 191, 1, 0, 0, 63, 63, 0, 109, 0, 109, 0, 193, 127, 85, 57, 0, 56, 46, 189, 187, 179, 0, 0, 128, 63, 0, 0, 128, 63, 63, 0, 109, 0, 109, 0, 193, 127, 255, 55, 0, 0, 46, 189, 187, 179, 0, 0, 128, 63, 0, 0, 128, 63, 193, 0, 109, 0, 109, 0, 63, 127, 255, 55, 0, 0, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 62, 193, 0, 109, 0, 109, 0, 63, 127, 85, 53, 0, 56, 46, 189, 187, 179, 0, 0, 128, 191, 0, 0, 128, 63, 193, 0, 109, 0, 109, 0, 63, 127, 255, 55, 0, 56, 216, 179, 93, 191, 0, 0, 128, 63, 253, 255, 255, 62, 193, 0, 109, 0, 109, 0, 63, 127, 85, 53, 0, 0, 216, 179, 93, 191, 0, 0, 128, 63, 253, 255, 255, 190, 0, 127, 0, 0, 127, 0, 0, 127, 101, 41, 10, 57, 216, 179, 93, 63, 0, 0, 128, 63, 255, 255, 255, 190, 0, 127, 0, 0, 127, 0, 0, 127, 83, 55, 10, 57, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 0, 127, 0, 0, 127, 0, 0, 127, 0, 52, 20, 56, 215, 179, 93, 63, 0, 0, 128, 63, 1, 0, 0, 63, 0, 127, 0, 0, 127, 0, 0, 127, 83, 55, 245, 58, 216, 179, 93, 191, 0, 0, 128, 63, 253, 255, 255, 62, 0, 127, 0, 0, 127, 0, 0, 127, 101, 41, 245, 58, 46, 189, 187, 179, 0, 0, 128, 63, 0, 0, 128, 63, 0, 127, 0, 0, 127, 0, 0, 127, 255, 51, 235, 59, 216, 179, 93, 191, 0, 0, 128, 63, 253, 255, 255, 62, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 0, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 190, 129, 0, 0, 0, 0, 0, 127, 127, 85, 49, 0, 56, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 62, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 56, 216, 179, 93, 191, 0, 0, 128, 63, 253, 255, 255, 190, 129, 0, 0, 0, 0, 0, 127, 127, 85, 49, 0, 0, 216, 179, 93, 191, 0, 0, 128, 63, 253, 255, 255, 190, 193, 0, 147, 0, 147, 0, 63, 127, 85, 49, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 193, 0, 147, 0, 147, 0, 63, 127, 0, 0, 0, 56, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 190, 193, 0, 147, 0, 147, 0, 63, 127, 85, 49, 0, 56, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 193, 0, 147, 0, 147, 0, 63, 127, 0, 0, 0, 0, 216, 179, 93, 63, 0, 0, 128, 191, 255, 255, 255, 190, 0, 129, 0, 0, 127, 0, 0, 129, 169, 59, 10, 57, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 190, 0, 129, 0, 0, 127, 0, 0, 129, 86, 56, 10, 57, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 0, 129, 0, 0, 127, 0, 0, 129, 0, 58, 20, 56, 215, 179, 93, 63, 0, 0, 128, 191, 1, 0, 0, 63, 0, 129, 0, 0, 127, 0, 0, 129, 169, 59, 245, 58, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 62, 0, 129, 0, 0, 127, 0, 0, 129, 86, 56, 245, 58, 46, 189, 187, 179, 0, 0, 128, 191, 0, 0, 128, 63, 0, 129, 0, 0, 127, 0, 0, 129, 0, 58, 235, 59 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 3, 0, 4, 0, 6, 0, 5, 0, 4, 0, 5, 0, 7, 0, 8, 0, 10, 0, 9, 0, 8, 0, 9, 0, 11, 0, 12, 0, 14, 0, 13, 0, 12, 0, 13, 0, 15, 0, 16, 0, 18, 0, 17, 0, 16, 0, 17, 0, 19, 0, 20, 0, 16, 0, 19, 0, 21, 0, 20, 0, 19, 0, 22, 0, 24, 0, 23, 0, 22, 0, 23, 0, 25, 0, 26, 0, 28, 0, 27, 0, 26, 0, 27, 0, 29, 0, 30, 0, 32, 0, 31, 0, 33, 0, 30, 0, 31, 0, 33, 0, 31, 0, 34, 0, 33, 0, 34, 0, 35, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 60,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 36
+}
+
+[node name="map" type="Spatial"]
+
+[node name="SingleHex0" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.735984, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex1" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.256011, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.92217, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex3" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.615166, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex4" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.255518, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex5" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.990301, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex6" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.746508, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex7" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.300631, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex8" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.800927, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex9" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.381488, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex10" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.386759, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex11" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.878558, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex12" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.393885, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex13" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.115546, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex14" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.459821, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex15" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.143225, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex16" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.871559, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex17" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.419303, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex18" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.0973487, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex19" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.452144, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex20" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.989919, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex21" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.536825, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex22" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.163289, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex23" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.330661, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex24" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.216537, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex25" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.848742, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex26" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.44931, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex27" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.703849, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex28" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.471709, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex29" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.501144, -21.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex30" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.374313, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex31" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.868357, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex32" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.510868, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex33" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.162435, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex34" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.467272, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex35" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.343818, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex36" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.290648, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex37" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.660357, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex38" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.400053, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex39" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.679581, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex40" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.290244, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex41" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.336022, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex42" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.867529, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex43" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.848642, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex44" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.11166, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex45" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.141401, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex46" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.11351, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex47" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.957181, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex48" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.0929223, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex49" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.768369, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex50" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.826421, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex51" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.843529, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex52" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.0876951, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex53" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.670208, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex54" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.178726, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex55" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.449058, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex56" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.657619, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex57" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.85277, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex58" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.310863, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex59" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.453402, -20.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex60" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.622144, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex61" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.726246, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex62" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.0209843, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex63" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.431473, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex64" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.164459, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex65" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.563124, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex66" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.753916, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex67" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.0470198, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex68" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.542912, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex69" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.0912403, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex70" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.74901, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex71" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.871417, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex72" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.993148, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex73" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.490144, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex74" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.979338, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex75" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.0409002, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex76" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.891323, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex77" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.270873, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex78" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.836322, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex79" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.405122, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex80" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.0747555, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex81" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.0676325, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex82" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.954982, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex83" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.707789, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex84" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.77945, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex85" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.774615, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex86" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.854929, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex87" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.0938824, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex88" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.113727, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex89" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.255997, -18.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex90" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.348892, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex91" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.256694, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex92" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.610624, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex93" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.0700438, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex94" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.90498, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex95" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.101324, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex96" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.72214, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex97" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.740442, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex98" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.997992, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex99" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.669541, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex100" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.846479, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex101" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.657715, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex102" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.737483, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex103" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.818223, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex104" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.886431, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex105" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.406265, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex106" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.927778, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex107" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.846242, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex108" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.702388, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex109" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.673933, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex110" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.65787, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex111" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.325962, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex112" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.213816, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex113" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.766934, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex114" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.495874, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex115" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.727868, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex116" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.762717, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex117" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.495231, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex118" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.494763, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex119" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.224783, -17.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex120" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.238667, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex121" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.923923, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex122" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.855913, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex123" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.0785505, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex124" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.143681, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex125" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.682796, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex126" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.000202746, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex127" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.372449, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex128" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.816004, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex129" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.737416, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex130" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.40945, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex131" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.895818, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex132" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.588471, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex133" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.764342, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex134" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.745469, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex135" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.503856, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex136" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.377586, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex137" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.179129, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex138" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.56123, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex139" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.167316, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex140" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.630667, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex141" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.353468, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex142" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.905011, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex143" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.618749, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex144" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.506017, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex145" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.532442, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex146" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.524675, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex147" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.26841, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex148" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.207864, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex149" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.499559, -15.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex150" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.206266, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex151" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.128818, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex152" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.564338, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex153" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.330657, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex154" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.010669, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex155" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.748575, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex156" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.0308466, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex157" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.282194, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex158" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.686203, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex159" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.418601, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex160" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.170028, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex161" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.365515, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex162" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.211611, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex163" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.575852, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex164" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.575527, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex165" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.92102, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex166" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.0587352, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex167" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.942344, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex168" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.806152, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex169" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.522253, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex170" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.117493, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex171" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.628553, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex172" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.390926, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex173" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.863582, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex174" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.703547, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex175" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.467254, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex176" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.745066, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex177" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.0857285, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex178" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.213206, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex179" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.415492, -14.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex180" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.752775, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex181" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.786708, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex182" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.440218, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex183" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.907912, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex184" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.0445298, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex185" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.801621, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex186" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.789106, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex187" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.717576, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex188" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.0782946, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex189" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.774216, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex190" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.848014, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex191" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.949518, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex192" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.646828, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex193" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.859726, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex194" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.657976, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex195" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.659542, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex196" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.0870559, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex197" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.447122, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex198" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.61984, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex199" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.197725, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex200" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.554982, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex201" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.944896, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex202" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.061868, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex203" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.0877968, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex204" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.115033, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex205" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.291031, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex206" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.585216, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex207" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.882549, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex208" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.449453, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex209" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.947451, -12.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex210" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.759306, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex211" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.700607, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex212" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.492989, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex213" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.772725, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex214" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.508882, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex215" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.186618, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex216" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.768217, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex217" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.219856, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex218" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.708312, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex219" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.741463, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex220" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.97346, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex221" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.37706, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex222" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.659422, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex223" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.898687, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex224" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.622293, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex225" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.734741, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex226" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.0181392, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex227" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.989616, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex228" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.961745, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex229" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.708256, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex230" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.0374824, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex231" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.231026, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex232" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.434776, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex233" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.653508, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex234" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.566365, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex235" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.0657559, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex236" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.575975, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex237" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.759272, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex238" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.756789, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex239" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.32645, -11.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex240" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.177792, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex241" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.522152, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex242" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.364353, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex243" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.627282, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex244" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.446107, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex245" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.187266, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex246" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.0315334, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex247" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.246489, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex248" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.291236, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex249" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.253189, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex250" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.153163, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex251" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.269704, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex252" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.345967, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex253" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.135065, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex254" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.817457, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex255" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.735983, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex256" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.24986, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex257" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.325449, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex258" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.0397954, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex259" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.893077, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex260" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.582721, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex261" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.0689892, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex262" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.650719, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex263" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.0424506, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex264" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.0398649, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex265" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.883738, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex266" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.342345, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex267" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.0666585, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex268" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.309377, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex269" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.539431, -9.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex270" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.473515, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex271" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.632268, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex272" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.268233, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex273" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.537874, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex274" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.937687, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex275" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.433001, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex276" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.506522, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex277" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.800401, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex278" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.466586, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex279" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.123722, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex280" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.514008, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex281" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.296164, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex282" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.842231, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex283" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.835553, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex284" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.829178, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex285" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.396119, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex286" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.67185, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex287" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.688465, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex288" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.0674995, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex289" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.955572, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex290" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.614795, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex291" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.0033985, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex292" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.598159, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex293" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.855945, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex294" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.246679, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex295" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.154383, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex296" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.213367, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex297" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.500763, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex298" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.620739, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex299" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.444663, -8.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex300" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.96919, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex301" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.517939, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex302" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.0154396, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex303" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.330329, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex304" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.963562, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex305" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.762085, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex306" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.925046, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex307" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.0948235, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex308" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.468603, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex309" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.202106, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex310" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.877678, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex311" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.806031, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex312" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.823547, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex313" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.947903, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex314" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.943383, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex315" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.660498, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex316" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.746916, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex317" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.177859, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex318" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.224704, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex319" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.279188, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex320" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.587877, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex321" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.910537, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex322" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.880991, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex323" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.800407, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex324" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.783234, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex325" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.479831, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex326" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.250665, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex327" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.247118, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex328" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.863541, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex329" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.495525, -6.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex330" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.895557, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex331" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.804276, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex332" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.909783, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex333" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.75566, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex334" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.644876, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex335" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.648969, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex336" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.94348, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex337" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.806533, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex338" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.535857, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex339" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.979737, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex340" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.403748, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex341" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.712842, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex342" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.565329, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex343" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.549182, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex344" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.720474, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex345" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.676589, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex346" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.503418, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex347" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.368031, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex348" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.13156, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex349" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.334976, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex350" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.575306, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex351" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.950188, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex352" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.207025, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex353" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.186679, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex354" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.457122, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex355" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.376262, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex356" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.726711, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex357" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.708075, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex358" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.809372, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex359" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.0982705, -5.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex360" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.966268, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex361" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.030164, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex362" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.90022, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex363" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.997381, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex364" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.114189, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex365" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.33172, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex366" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.0214789, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex367" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.698838, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex368" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.195654, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex369" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.712815, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex370" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.0740994, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex371" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.92615, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex372" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.363191, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex373" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.902366, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex374" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.602059, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex375" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.824243, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex376" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.492929, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex377" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.264054, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex378" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.567856, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex379" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.704934, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex380" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.355731, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex381" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.656142, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex382" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.734023, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex383" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.982926, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex384" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.848388, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex385" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.872143, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex386" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.954091, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex387" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.811916, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex388" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.285433, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex389" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.821501, -3.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex390" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.526902, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex391" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.297294, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex392" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.175063, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex393" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.482612, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex394" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.462545, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex395" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.620269, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex396" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.460993, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex397" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.196746, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex398" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.165835, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex399" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.270418, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex400" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.55329, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex401" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.900127, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex402" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.933508, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex403" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.521855, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex404" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.316152, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex405" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.619828, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex406" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.240348, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex407" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.20055, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex408" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.507411, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex409" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.751739, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex410" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.770302, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex411" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.820012, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex412" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.22054, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex413" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.937782, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex414" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.196674, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex415" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.544691, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex416" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.124855, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex417" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.906433, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex418" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.798126, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex419" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.732464, -2.15 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex420" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.000839306, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex421" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.695731, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex422" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.0359311, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex423" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.206862, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex424" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.297243, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex425" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.230789, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex426" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.882434, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex427" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.394855, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex428" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.906752, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex429" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.228693, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex430" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.527864, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex431" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.0274121, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex432" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.851667, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex433" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.441902, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex434" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.91729, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex435" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.116398, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex436" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.058158, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex437" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.898099, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex438" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.744965, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex439" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.245426, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex440" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.76278, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex441" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.527714, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex442" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.680586, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex443" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.0426168, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex444" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.288356, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex445" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.778092, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex446" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.0393655, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex447" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.569955, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex448" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.349381, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex449" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.926015, -0.65 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex450" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.230505, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex451" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.258954, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex452" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.110316, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex453" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.0857164, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex454" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.721568, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex455" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.12728, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex456" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.360132, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex457" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.109813, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex458" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.635995, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex459" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.16379, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex460" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.239885, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex461" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.905737, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex462" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.727135, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex463" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.685567, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex464" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.416807, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex465" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.285577, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex466" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.571319, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex467" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.00247396, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex468" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.479938, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex469" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.413384, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex470" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.819675, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex471" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.979821, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex472" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.541551, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex473" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.864458, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex474" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.387994, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex475" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.011278, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex476" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.836836, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex477" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.349762, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex478" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.517841, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex479" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.970883, 0.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex480" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.635165, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex481" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.0432743, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex482" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.654251, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex483" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.94175, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex484" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.772255, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex485" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.942744, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex486" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.180521, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex487" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.00460335, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex488" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.232314, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex489" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.224026, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex490" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.0186174, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex491" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.161248, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex492" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.246953, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex493" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.29458, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex494" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.0317638, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex495" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.558036, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex496" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.361043, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex497" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.682148, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex498" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.355809, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex499" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.457283, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex500" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.739096, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex501" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.330456, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex502" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.907893, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex503" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.463336, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex504" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.937203, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex505" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.620914, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex506" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.77042, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex507" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.929962, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex508" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.619055, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex509" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.781146, 2.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex510" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.0434239, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex511" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.763599, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex512" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.683391, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex513" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.458336, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex514" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.589048, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex515" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.193364, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex516" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.161158, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex517" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.40389, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex518" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.0160837, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex519" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.127603, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex520" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.64259, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex521" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.380935, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex522" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.24487, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex523" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.533648, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex524" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.340761, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex525" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.363335, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex526" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.84908, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex527" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.974036, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex528" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.704009, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex529" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.315175, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex530" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.194124, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex531" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.283931, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex532" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.875663, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex533" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.976582, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex534" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.134422, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex535" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.101942, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex536" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.291443, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex537" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.449726, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex538" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.89142, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex539" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.09571, 3.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex540" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.231147, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex541" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.0450469, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex542" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.784665, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex543" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.621044, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex544" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.0321834, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex545" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.675788, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex546" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.518188, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex547" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.372786, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex548" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.41657, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex549" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.620557, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex550" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.244521, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex551" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.869073, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex552" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.306824, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex553" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.135744, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex554" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.512924, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex555" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.95101, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex556" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.915129, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex557" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.212397, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex558" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.90901, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex559" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.566328, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex560" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.824161, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex561" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.766797, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex562" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.367755, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex563" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.833848, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex564" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.116941, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex565" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.0944877, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex566" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.785099, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex567" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.513436, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex568" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.53788, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex569" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.74533, 5.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex570" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.252232, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex571" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.176224, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex572" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.360814, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex573" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.555636, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex574" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.769769, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex575" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.94134, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex576" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.326417, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex577" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.233213, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex578" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.287768, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex579" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.56367, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex580" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.467518, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex581" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.55209, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex582" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.708187, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex583" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.867498, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex584" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.951793, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex585" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.557341, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex586" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.462992, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex587" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.676439, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex588" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.796409, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex589" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.794646, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex590" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.82297, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex591" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.811819, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex592" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.367297, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex593" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.999501, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex594" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.295949, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex595" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.433958, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex596" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.609089, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex597" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.539244, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex598" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.16304, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex599" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.406829, 6.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex600" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.558857, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex601" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.14777, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex602" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.148137, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex603" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.186952, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex604" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.596621, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex605" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.502662, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex606" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.188923, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex607" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.25272, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex608" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.418265, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex609" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.344764, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex610" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.606856, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex611" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.277351, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex612" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.146762, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex613" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.321877, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex614" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.0717279, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex615" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.411906, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex616" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.209048, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex617" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.27013, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex618" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.301623, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex619" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.870851, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex620" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.908259, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex621" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.0346082, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex622" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.46942, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex623" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.189465, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex624" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.869111, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex625" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.535719, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex626" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.801235, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex627" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.494742, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex628" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.7045, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex629" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.225187, 8.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex630" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.0840932, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex631" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.67937, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex632" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.808013, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex633" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.537745, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex634" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.287061, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex635" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.0874072, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex636" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.862642, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex637" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.795524, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex638" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.0343597, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex639" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.508638, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex640" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.87332, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex641" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.709887, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex642" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.416646, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex643" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.506864, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex644" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.455344, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex645" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.149777, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex646" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.378106, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex647" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.993473, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex648" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.904685, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex649" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.456423, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex650" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.347888, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex651" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.732611, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex652" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.101955, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex653" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.768878, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex654" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.579434, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex655" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.0578823, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex656" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.0255258, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex657" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.897843, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex658" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.822142, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex659" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.605276, 9.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex660" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.826573, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex661" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.79484, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex662" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.346889, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex663" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.530863, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex664" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.500117, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex665" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.518312, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex666" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.847379, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex667" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.492668, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex668" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.458221, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex669" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.836309, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex670" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.277228, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex671" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.514048, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex672" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.627438, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex673" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.383454, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex674" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.408171, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex675" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.372958, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex676" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.135167, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex677" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.682157, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex678" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.748711, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex679" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.703221, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex680" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.0493905, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex681" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.978321, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex682" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.242381, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex683" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.411651, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex684" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.0415241, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex685" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.0912116, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex686" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.390895, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex687" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.707273, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex688" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.320044, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex689" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.808787, 11.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex690" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.123641, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex691" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.328445, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex692" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.137554, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex693" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.217578, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex694" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.920515, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex695" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.582199, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex696" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.674072, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex697" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.011167, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex698" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.895147, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex699" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.510806, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex700" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.299836, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex701" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.274895, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex702" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.596366, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex703" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.427182, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex704" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.268997, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex705" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.428227, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex706" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.551987, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex707" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.522909, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex708" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.835945, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex709" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.967878, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex710" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.132343, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex711" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.508177, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex712" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.729093, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex713" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.571019, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex714" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.231829, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex715" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.922059, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex716" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.503343, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex717" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.239649, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex718" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.772301, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex719" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.545872, 12.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex720" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.100854, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex721" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.187151, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex722" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.967094, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex723" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.891397, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex724" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.598397, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex725" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.612525, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex726" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.340034, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex727" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.721179, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex728" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.325674, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex729" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.64574, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex730" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.28456, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex731" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.694341, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex732" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.0993442, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex733" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.961281, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex734" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.089907, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex735" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.979657, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex736" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.0492964, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex737" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.395042, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex738" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.984608, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex739" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.93655, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex740" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.229938, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex741" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.428182, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex742" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.972548, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex743" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.706233, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex744" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.463896, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex745" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.616167, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex746" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.267269, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex747" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.747813, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex748" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.569329, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex749" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.152292, 14.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex750" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.374445, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex751" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.583057, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex752" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.746644, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex753" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.226178, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex754" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.0524017, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex755" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.419521, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex756" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.785689, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex757" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.63603, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex758" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.0958366, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex759" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.830449, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex760" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.339465, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex761" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.203098, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex762" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.812627, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex763" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.389681, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex764" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.447479, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex765" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.410509, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex766" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.860639, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex767" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.15027, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex768" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.999017, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex769" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.928067, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex770" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.481998, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex771" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.785597, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex772" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.644585, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex773" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.829095, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex774" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.247142, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex775" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.382301, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex776" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.132468, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex777" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.620653, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex778" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.37751, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex779" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.429941, 15.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex780" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.0543548, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex781" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.571101, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex782" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.298256, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex783" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.865673, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex784" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.986874, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex785" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.292376, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex786" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.682307, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex787" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.3104, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex788" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.932884, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex789" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.181529, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex790" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.943595, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex791" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.594338, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex792" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.0601593, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex793" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.523652, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex794" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.538664, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex795" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.370347, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex796" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.40135, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex797" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.582245, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex798" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.898914, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex799" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.29203, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex800" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.0952335, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex801" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.200137, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex802" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.0301065, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex803" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.365237, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex804" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.0394199, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex805" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.345885, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex806" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.104443, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex807" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.269651, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex808" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.867973, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex809" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.836627, 17.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex810" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.731797, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex811" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.443858, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex812" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.824939, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex813" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.911857, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex814" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.23774, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex815" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.0337794, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex816" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.0691201, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex817" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.358896, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex818" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.568582, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex819" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.620227, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex820" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.950993, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex821" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.738094, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex822" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.349474, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex823" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.358576, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex824" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.904905, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex825" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.180061, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex826" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.677719, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex827" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.734559, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex828" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.0724498, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex829" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.710941, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex830" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.720167, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex831" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.676245, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex832" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.102209, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex833" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.969938, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex834" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.0577578, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex835" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.499378, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex836" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.806416, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex837" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.509839, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex838" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.80815, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex839" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.0406716, 18.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex840" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.075, 0.0839763, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex841" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.375, 0.620258, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex842" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.675, 0.386664, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex843" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.975, 0.21124, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex844" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275, 0.34949, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex845" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.575, 0.20695, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex846" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.875, 0.372037, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex847" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.175, 0.785327, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex848" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.475, 0.627592, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex849" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0.458888, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex850" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.075, 0.984432, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex851" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.375, 0.620501, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex852" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.675, 0.609511, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex853" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.975, 0.793623, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex854" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.275, 0.172477, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex855" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424999, 0.204644, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex856" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.245274, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex857" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, 0.220389, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex858" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.525, 0.808444, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex859" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.225, 0.397662, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex860" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.925, 0.230528, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex861" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0.844119, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex862" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.325, 0.417625, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex863" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.025, 0.0476947, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex864" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.725, 0.801915, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex865" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.425, 0.0308288, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex866" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.125, 0.671288, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex867" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.825, 0.639903, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex868" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.525, 0.877739, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex869" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.225, 0.474501, 20.35 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex870" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.225, 0.19758, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex871" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.525, 0.408357, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex872" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825, 0.822978, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex873" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.125, 0.35367, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex874" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 0.242081, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex875" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.725, 0.34243, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex876" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.025, 0.920675, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex877" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.325, 0.0154536, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="SingleHex878" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.625, 0.532981, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex879" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.925, 0.178271, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex880" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.225, 0.54109, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex881" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525, 0.690925, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex882" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.825, 0.867869, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex883" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.914707, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex884" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, 0.50595, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex885" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.275, 0.396909, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex886" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.975, 0.240974, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex887" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.675, 0.236074, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex888" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 0.09042, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex889" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.075, 0.480274, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex890" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.775, 0.50611, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="SingleHex891" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.475, 0.895467, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex892" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.175, 0.755659, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex893" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.875, 0.910055, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex894" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.575, 0.51788, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex895" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.275, 0.374689, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex896" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.975, 0.0768993, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="SingleHex897" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.675, 0.438643, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="SingleHex898" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.375, 0.741315, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="SingleHex899" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.075, 0.0725012, 21.85 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )

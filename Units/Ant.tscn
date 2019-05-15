@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Units/Ant.gd" type="Script" id=1]
+[ext_resource path="res://Units/Body/Body.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Units/Outfit/Outfit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Units/Helmets/Helmet.tscn" type="PackedScene" id=4]
+
+
+
+[node name="Ant" type="Spatial"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.19187, 0 )
+script = ExtResource( 1 )
+
+[node name="Body" parent="." instance=ExtResource( 2 )]
+
+[node name="Helmet" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
+
+[node name="Outfit" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
