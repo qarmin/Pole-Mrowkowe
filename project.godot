@@ -34,8 +34,9 @@ config/icon="res://icon.png"
 
 Shortcuts="*res://Autoloads/Shortcuts.gd"
 GameSettings="*res://Autoloads/GameSettings.gd"
-Prices="*res://Autoloads/PricesAndProduction.gd"
+PricesAndProduction="*res://Autoloads/PricesAndProduction.gd"
 SaveSystem="*res://Autoloads/SaveSystem.gd"
+Units="*res://Autoloads/Units.gd"
 
 [editor_plugins]
 
