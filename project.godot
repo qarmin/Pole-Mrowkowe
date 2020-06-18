@@ -54,6 +54,10 @@ game_exit={
 
 limits/message_queue/max_size_kb=131072
 
+[physics]
+
+2d/thread_model=2
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

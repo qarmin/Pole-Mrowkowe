@@ -7,6 +7,5 @@ const HELMETS_DEFENSE : PoolIntArray = PoolIntArray([2,4,6])
 
 
 func _ready() -> void:
-	if HELMETS_DEFENSE.size() != TYPES_OF_HELMETS.size():
-		printerr("Nie zgadza się rozmiar hełmów")
+	assert(HELMETS_DEFENSE.size() == TYPES_OF_HELMETS.size())
 	pass
