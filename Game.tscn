@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Terrain/Environment/ENVLake.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Units/Ant.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Buildings/House/House.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Terrain/Map30.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Menu/Performance/Performance.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cylinder"
@@ -30,15 +32,13 @@ surfaces/0 = {
 script = ExtResource( 8 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.683846, 0.314053, -0.658579, 0, 0.902624, 0.43043, 0.729627, 0.294348, -0.617256, 0.0602963, 6.48596, 1.19924 )
+transform = Transform( 0.999861, 0.0122955, -0.0112273, 0, 0.674302, 0.738456, 0.0166503, -0.738353, 0.674209, -0.443072, 7.12693, 5.62376 )
+current = true
+size = 10.0
 script = ExtResource( 2 )
 
-[node name="CameraO" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.55636, 0 )
-visible = false
-projection = 1
-
 [node name="Map" type="Spatial" parent="."]
+visible = false
 
 [node name="SingleHex0" parent="Map" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.735984, -1.384 )
@@ -102,3 +102,14 @@ material/0 = ExtResource( 7 )
 transform = Transform( -2.18557e-08, 0.866025, -0.5, 3.78552e-08, 0.5, 0.866025, 1, -1.95399e-14, -4.37114e-08, -8.29793, 11.5272, 0 )
 light_energy = 0.2
 shadow_enabled = true
+
+[node name="map" parent="." instance=ExtResource( 12 )]
+
+[node name="Menu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Performance" parent="Menu" instance=ExtResource( 13 )]

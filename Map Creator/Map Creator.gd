@@ -20,6 +20,8 @@ func _ready() -> void:
 	Map.name = "Map"
 	add_child(Map)
 	
+	assert(GameSettings.MAX_TEAMS == 4)
+	
 	var texture_array : Array = [	load("res://Terrain/SingleHex/SingleHexTEAM1.tres"),
 									load("res://Terrain/SingleHex/SingleHexTEAM2.tres"),
 									load("res://Terrain/SingleHex/SingleHexTEAM3.tres"),
@@ -54,9 +56,6 @@ func _ready() -> void:
 	if(ResourceSaver.save("res://Terrain/Map.tscn", packed_scene)):
 		printerr("Nie powiodła się próba zapisu mapy")
 		
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_down"):
-		if $Camera.get_projection() == Camera.PROJECTION_PERSPECTIVE:
-			$Camera.set_projection(Camera.PROJECTION_ORTHOGONAL)
-		else:
-			$Camera.set_projection(Camera.PROJECTION_PERSPECTIVE)
+#func _process(delta: float) -> void:
+#	print("AAA")
+

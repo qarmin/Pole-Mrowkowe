@@ -6,6 +6,7 @@ var SingleHexOwner : PoolIntArray = PoolIntArray([]) # 100 - neutralny, -1 - nie
 #Testowe dodawanie mrówek na mapie
 #export (PackedScene) var Ant
 
+
 func _ready() -> void:
 #	Testowe dodawanie mrówek na mapie
 #	for i in $Map.get_children():
@@ -14,7 +15,10 @@ func _ready() -> void:
 		
 	hex_number = $Map.get_child_count() #TODO Później trzeba to zamienić na wartości wprowadzane przez gracza
 	SingleHexOwner.resize(hex_number)
-
+	
+	assert(int(sqrt(hex_number)) * int(sqrt(hex_number)) == hex_number) # Rozmiar chyba powinien być kwadratym
+	assert(GameSettings.MAX_TEAMS == 4) # Należy dodać nowy wygląd Hexa oraz strój dla danego hexa
+	
 	var Single_Hex_texture_array : Array = [load("res://Terrain/SingleHex/SingleHexTEAM1.tres"),
 											load("res://Terrain/SingleHex/SingleHexTEAM2.tres"),
 											load("res://Terrain/SingleHex/SingleHexTEAM3.tres"),
