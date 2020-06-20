@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Menu/MenuCommon/MenuTitle.tres" type="DynamicFont" id=1]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.0243902, 0.0243902, 0.0243902, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 1
+
+[node name="SubmenuTitle" type="Label"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.2
+margin_left = -0.200001
+margin_right = 0.200012
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.768627 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 0.9
+texture = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

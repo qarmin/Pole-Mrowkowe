@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Pole Mrowkowe"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://Menu/MenuCommon/MenuCommon.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -38,9 +38,17 @@ PricesAndProduction="*res://Autoloads/PricesAndProduction.gd"
 SaveSystem="*res://Autoloads/SaveSystem.gd"
 Units="*res://Autoloads/Units.gd"
 
+[display]
+
+window/vsync/use_vsync=false
+
 [editor_plugins]
 
 enabled=PoolStringArray(  )
+
+[filesystem]
+
+import/open_asset_import/use_fbx=false
 
 [input]
 
@@ -63,3 +71,4 @@ limits/message_queue/max_size_kb=131072
 quality/driver/driver_name="GLES2"
 threads/thread_model=2
 environment/default_clear_color=Color( 0.419608, 0.419608, 0.419608, 1 )
+quality/depth/hdr=false

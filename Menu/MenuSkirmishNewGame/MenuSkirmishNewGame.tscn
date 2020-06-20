@@ -1,6 +1,9 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="NewGame" type="MarginContainer"]
+[ext_resource path="res://Menu/MenuSkirmishNewGame/ButtonBack.gd" type="Script" id=1]
+[ext_resource path="res://Menu/MenuSkirmishNewGame/ButtonStart.gd" type="Script" id=2]
+
+[node name="MenuSkirmishNewGame" type="MarginContainer"]
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
@@ -139,14 +142,17 @@ max_length = 20
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="ButtonStart" type="Button" parent="VBoxContainer"]
 margin_top = 196.0
 margin_right = 921.0
 margin_bottom = 216.0
 text = "Start"
+script = ExtResource( 2 )
 
 [node name="ButtonBack" type="Button" parent="VBoxContainer"]
 margin_top = 220.0
 margin_right = 921.0
 margin_bottom = 240.0
 text = "Back"
+script = ExtResource( 1 )
+[connection signal="pressed" from="VBoxContainer/ButtonBack" to="VBoxContainer/ButtonBack" method="_on_ButtonBack_pressed"]
