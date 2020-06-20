@@ -3,9 +3,9 @@ extends Spatial
 export (PackedScene) var SingleHex
 export (PackedScene) var Ant
 
-const CREATE_EMPTY : bool = true
+const CREATE_EMPTY : bool = false
 
-const NUMBER_OF_HEX : Vector2 = Vector2(3,3)
+const NUMBER_OF_HEX : Vector2 = Vector2(150,150)
 const SINGLE_HEX_DIMENSION : Vector2 = Vector2(1.732,1.5)
 var START_POSITION : Vector3
 const NODE_BASE_NAME : String = "SingleHex"
