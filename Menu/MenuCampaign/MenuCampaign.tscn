@@ -36,22 +36,47 @@ script = ExtResource( 4 )
 text = "campaign"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_left = 0.05
+anchor_left = 0.1
 anchor_top = 0.25
-anchor_right = 0.95
+anchor_right = 0.9
 anchor_bottom = 0.7
+custom_constants/separation = 126
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="NewGame" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 346.0
+margin_bottom = 270.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/NewGame"]
+self_modulate = Color( 0.592157, 0.192157, 0.192157, 1 )
+margin_right = 346.0
+margin_bottom = 226.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="NewGame" type="Label" parent="HBoxContainer/NewGame"]
+margin_top = 230.0
+margin_right = 346.0
+margin_bottom = 270.0
+custom_fonts/font = ExtResource( 5 )
+text = "New Game"
+align = 1
+
 [node name="LoadGame" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 458.0
+margin_left = 472.0
+margin_right = 819.0
 margin_bottom = 270.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextureButton" type="TextureButton" parent="HBoxContainer/LoadGame"]
-margin_right = 458.0
+margin_right = 347.0
 margin_bottom = 226.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -60,33 +85,9 @@ expand = true
 
 [node name="LoadGame" type="Label" parent="HBoxContainer/LoadGame"]
 margin_top = 230.0
-margin_right = 458.0
+margin_right = 347.0
 margin_bottom = 270.0
 custom_fonts/font = ExtResource( 5 )
 text = "Load Game"
-align = 1
-
-[node name="SaveGame" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 462.0
-margin_right = 921.0
-margin_bottom = 270.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/SaveGame"]
-self_modulate = Color( 0.592157, 0.192157, 0.192157, 1 )
-margin_right = 459.0
-margin_bottom = 226.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture_normal = ExtResource( 2 )
-expand = true
-
-[node name="SaveGame" type="Label" parent="HBoxContainer/SaveGame"]
-margin_top = 230.0
-margin_right = 459.0
-margin_bottom = 270.0
-custom_fonts/font = ExtResource( 5 )
-text = "Save Game"
 align = 1
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

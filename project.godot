@@ -37,6 +37,7 @@ GameSettings="*res://Autoloads/GameSettings.gd"
 PricesAndProduction="*res://Autoloads/PricesAndProduction.gd"
 SaveSystem="*res://Autoloads/SaveSystem.gd"
 Units="*res://Autoloads/Units.gd"
+Benchmark="*res://Autoloads/Benchmark.gd"
 
 [display]
 
