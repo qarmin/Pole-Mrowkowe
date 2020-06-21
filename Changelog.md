@@ -11,3 +11,7 @@
 - Tło 3D w menu
 - Dodanie podstawowego menu Skirmish oraz Options
 - Przycisk do wyłączania gry
+## 21.06.2020
+- Dodanie szablonów kilku innych menusów
+- Podstawowy benchmark
+
