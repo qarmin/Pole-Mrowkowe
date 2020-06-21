@@ -4,14 +4,19 @@ export (PackedScene) var SingleHex
 export (PackedScene) var Ant
 
 const CREATE_EMPTY : bool = false
+const ANTS : bool = true
+const ANT_CHANCE : int = 100
 
-const NUMBER_OF_HEX : Vector2 = Vector2(150,150)
+const NUMBER_OF_HEX : Vector2 = Vector2(3,3)
 const SINGLE_HEX_DIMENSION : Vector2 = Vector2(1.732,1.5)
 var START_POSITION : Vector3
 const NODE_BASE_NAME : String = "SingleHex"
 #var hex_array : Array
 
 func _ready() -> void:
+	
+	randomize() # Bez tego za każdym razem wychdzą takie same wyniki randi()
+	
 	## To tylko przybliżenie, nie chce mi się dokładnie środka wyznaczać
 	START_POSITION = Vector3(-NUMBER_OF_HEX[0] * SINGLE_HEX_DIMENSION[0] / 2.0,0.0,-NUMBER_OF_HEX[1] * SINGLE_HEX_DIMENSION[1] / 2.0)
 	START_POSITION += Vector3(SINGLE_HEX_DIMENSION[0]/4.0,0.0,SINGLE_HEX_DIMENSION[0]/2.0) 
@@ -43,12 +48,17 @@ func _ready() -> void:
 				else:
 					mat = texture_array[randi() % texture_array.size()]
 			SH.set_surface_material(0,mat)
+			print(SH.get_scene_instance_load_placeholder())
+			SH.set_scene_instance_load_placeholder(true)
 			get_node("Map").add_child(SH)
 			SH.set_owner(get_node("Map"))
-#			if randi() % 100 < 40:
-#				var AN : MeshInstance = Ant.instance(PackedScene.GEN_EDIT_STATE_DISABLED)
-#				AN.translation = SH.translation + Vector3(0.0,1.0,0.0)
-#				SH.add_child(AN)
+			if !CREATE_EMPTY && ANTS:
+				if randi() % 100 < ANT_CHANCE:
+					var AN : Spatial = Ant.instance()#PackedScene.GEN_EDIT_STATE_DISABLED) # Zostało z testów autozapisywania mapy, na chwilę obecną robię to poprzez Remote w drzewie sceny przy ZATRZYMANEJ grze(jest to wymagane bo inaczej nie działa)
+					AN.translation = Vector3(0.0,1.0,0.0)
+					AN.get_node("Outfit").set_surface_material(0,mat)
+					SH.add_child(AN)
+					#AN.set_owner(SH)
 
 
 	var packed_scene = PackedScene.new()

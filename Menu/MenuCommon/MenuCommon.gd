@@ -7,22 +7,43 @@ func _ready() -> void:
 func _exit_game() -> void:
 	get_tree().quit()
 
+func hide_all_except(var choosen_node : Node):
+	if choosen_node == $MainMenu:
+		$MainMenu.show()
+	else:
+		$MainMenu.hide()
+		
+	if choosen_node == $MenuBenchmark:
+		$MenuBenchmark.show()
+	else:
+		$MenuBenchmark.hide()
+		
+	if choosen_node == $MenuOptions:
+		$MenuOptions.show()
+	else:
+		$MenuOptions.hide()
+		
+	if choosen_node == $MenuSkirmishNewGame:
+		$MenuSkirmishNewGame.show()
+	else:
+		$MenuSkirmishNewGame.hide()
+		
+	if choosen_node == $MenuCampaign:
+		$MenuCampaign.show()
+	else:
+		$MenuCampaign.hide()
 
 func _back_to_menu() -> void:
-	$MenuSkirmishNewGame.hide()
-	$MenuOptions.hide()
-	
-	$MainMenu.show()
-
+	hide_all_except($MainMenu)
 
 func _skirmish_menu_show() -> void:
-	$MainMenu.hide()
-	$MenuOptions.hide()
-	
-	$MenuSkirmishNewGame.show()
+	hide_all_except($MenuSkirmishNewGame)
 	
 func _options_menu_show() -> void:
-	$MainMenu.hide()
-	$MenuSkirmishNewGame.hide()
+	hide_all_except($MenuOptions)
 	
-	$MenuOptions.show()
+func _benchmark_menu_show() -> void:
+	hide_all_except($MenuBenchmark)
+	
+func _campaign_menu_show() -> void:
+	hide_all_except($MenuCampaign)

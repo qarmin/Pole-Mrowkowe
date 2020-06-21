@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Terrain/SingleHex/SingleHexBase.tres" type="Material" id=3]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM2.tres" type="Material" id=2]
+[ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM4.tres" type="Material" id=4]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM3.tres" type="Material" id=5]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM1.tres" type="Material" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cylinder"
@@ -19,47 +22,47 @@ surfaces/0 = {
 
 [node name="Map" type="Spatial"]
 
-[node name="SingleHex0" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.735984, -1.384 )
+[node name="SingleHex0" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.0830616, -1.384 )
 mesh = SubResource( 1 )
-material/0 = null
+material/0 = ExtResource( 5 )
 
-[node name="SingleHex1" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.433, 0.621225, -1.384 )
+[node name="SingleHex1" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.433, 0.264319, -1.384 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 2 )
 
-[node name="SingleHex2" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.962688, -1.384 )
+[node name="SingleHex2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.849877, -1.384 )
 mesh = SubResource( 1 )
-material/0 = null
+material/0 = ExtResource( 6 )
 
-[node name="SingleHex3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.299, 0.978975, 0.116 )
+[node name="SingleHex3" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.299, 0.476157, 0.116 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 6 )
 
-[node name="SingleHex4" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.433, 0.256011, 0.116 )
+[node name="SingleHex4" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.433, 0.132692, 0.116 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 4 )
 
-[node name="SingleHex5" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.165, 0.734578, 0.116 )
+[node name="SingleHex5" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.165, 0.747364, 0.116 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 4 )
 
-[node name="SingleHex6" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.353845, 1.616 )
+[node name="SingleHex6" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.70418, 1.616 )
 mesh = SubResource( 1 )
-material/0 = null
+material/0 = ExtResource( 6 )
 
-[node name="SingleHex7" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.433, 0.315224, 1.616 )
+[node name="SingleHex7" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.433, 0.115114, 1.616 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 6 )
 
-[node name="SingleHex8" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.92217, 1.616 )
+[node name="SingleHex8" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.0819457, 1.616 )
 mesh = SubResource( 1 )
-material/0 = null
+material/0 = ExtResource( 6 )

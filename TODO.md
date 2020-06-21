@@ -81,9 +81,18 @@
 ## Gra
 - Autosave
 - Licznik dat
+- Zablokowane pola - np. kamienie
+- Budynki - mrowiska itp.
+- Kataklizmy np. powódź, zalanie, pies, człowiek
 - 
 
 ## Pomoc
-- F1 - Wypisuje wszystkie możliwe opcje
+- F1 - Wypisuje wszystkie możliwe opcje(tylko w trakcie gry)
 
+
+## Kody
+- Kody
+- Freelook
+
+## 
 

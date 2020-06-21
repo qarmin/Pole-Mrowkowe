@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Menu/MenuCommon/MenuEntries.tres" type="DynamicFont" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Menu/MenuCommon/SubmenuTitle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Menu/MenuCampaign/BackToMenu.gd" type="Script" id=4]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignSaveText.tres" type="DynamicFont" id=5]
+
+[node name="MenuCampaign" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+anchor_left = 0.683
+anchor_top = 0.781
+anchor_right = 0.95
+anchor_bottom = 0.9
+custom_constants/separation = 18
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToMenu" type="Button" parent="Buttons"]
+margin_right = 273.0
+margin_bottom = 71.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Back to menu"
+script = ExtResource( 4 )
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+text = "campaign"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.05
+anchor_top = 0.25
+anchor_right = 0.95
+anchor_bottom = 0.7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadGame" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 458.0
+margin_bottom = 270.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/LoadGame"]
+margin_right = 458.0
+margin_bottom = 226.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="LoadGame" type="Label" parent="HBoxContainer/LoadGame"]
+margin_top = 230.0
+margin_right = 458.0
+margin_bottom = 270.0
+custom_fonts/font = ExtResource( 5 )
+text = "Load Game"
+align = 1
+
+[node name="SaveGame" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 462.0
+margin_right = 921.0
+margin_bottom = 270.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/SaveGame"]
+self_modulate = Color( 0.592157, 0.192157, 0.192157, 1 )
+margin_right = 459.0
+margin_bottom = 226.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="SaveGame" type="Label" parent="HBoxContainer/SaveGame"]
+margin_top = 230.0
+margin_right = 459.0
+margin_bottom = 270.0
+custom_fonts/font = ExtResource( 5 )
+text = "Save Game"
+align = 1
+[connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

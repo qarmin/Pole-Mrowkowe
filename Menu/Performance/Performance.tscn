@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Menu/Performance/Performance.gd" type="Script" id=1]
 
-
 [node name="Performance" type="VBoxContainer"]
 custom_constants/separation = 0
 script = ExtResource( 1 )
