@@ -179,7 +179,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Back to menu"
 script = ExtResource( 5 )
 
-[node name="Benchmark" parent="." instance=ExtResource( 4 )]
+[node name="Skirmish" parent="." instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_right = 0.0
 margin_bottom = 0.0

@@ -1,7 +1,12 @@
 extends Control
 
 func _ready() -> void:
-	_back_to_menu()
+	if Benchmark.benchmarks_waits_to_be_shown:
+		hide_all_except($MenuBenchmark)
+		$MenuBenchmark.show_benchmarks()
+		Benchmark.benchmarks_waits_to_be_shown = false
+	else:
+		_back_to_menu()
 
 
 func _exit_game() -> void:

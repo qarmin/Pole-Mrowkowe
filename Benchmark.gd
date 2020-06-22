@@ -11,16 +11,14 @@ var benchmark_started : bool = false
 func _ready(): 
 	$Settings.set_text("Configuring environment")
 		
-	Benchmark.points = 0
-	for i in range (3):
-		Benchmark.stages[i] = 0
+	Benchmark.clear_results()
 	
 func test_started() -> void:
 	benchmark_started = true
 	
 	$CameraMovement.play("CameraMovement1")
 	$CameraMovement.set_speed_scale(test_speed)
-	$Settings.set_text("Minimal Settings\nMap 3x3")
+	$Settings.set_text("Minimal Settings(1/6)\nMap 3x3")
 	
 
 func test_ended() -> void:
@@ -35,6 +33,10 @@ func test_ended() -> void:
 	print("Etap 4 - " + str(Benchmark.stages[3]))
 	print("Etap 5 - " + str(Benchmark.stages[4]))
 	print("Etap 6 - " + str(Benchmark.stages[5]))
+	
+	Benchmark.benchmarks_waits_to_be_shown = true
+	
+	get_tree().change_scene("res://Menu/MenuCommon/MenuCommon.tscn")
 	
 func _process(delta: float) -> void:
 	if benchmark_started && !benchmark_ended:
@@ -54,14 +56,14 @@ func _animation_finished(anim_name: String) -> void:
 			$Map2.show()
 			$CameraMovement.play("CameraMovement2")
 			$CameraMovement.set_speed_scale(test_speed)
-			$Settings.set_text("Minimal Settings\nMap 10x10")
+			$Settings.set_text("Minimal Settings(2/6)\nMap 10x10")
 		else:
 			current_stage = 5
 			$Map.hide()
 			$Map2.show()
 			$CameraMovement.play("CameraMovement2")
 			$CameraMovement.set_speed_scale(test_speed)
-			$Settings.set_text("Maximum Settings\nMap 10x10")
+			$Settings.set_text("Maximum Settings(5/6)\nMap 10x10")
 	elif(anim_name == "CameraMovement2"):
 		if settings == "Min":
 			current_stage = 3
@@ -69,14 +71,14 @@ func _animation_finished(anim_name: String) -> void:
 			$Map3.show()
 			$CameraMovement.play("CameraMovement3")
 			$CameraMovement.set_speed_scale(test_speed)
-			$Settings.set_text("Minimal Settings\nMap 30x30")
+			$Settings.set_text("Minimal Settings(3/6)\nMap 30x30")
 		else:
 			current_stage = 6
 			$Map2.hide()
 			$Map3.show()
 			$CameraMovement.play("CameraMovement3")
 			$CameraMovement.set_speed_scale(test_speed)
-			$Settings.set_text("Maximum Settings\nMap 30x30")
+			$Settings.set_text("Maximum Settings(6/6)\nMap 30x30(6/6)")
 	elif anim_name == "CameraMovement3":
 		if settings == "Min":
 			current_stage = 4
@@ -84,11 +86,8 @@ func _animation_finished(anim_name: String) -> void:
 			$Map.show()
 			$CameraMovement.play("CameraMovement1")
 			$CameraMovement.set_speed_scale(test_speed)
-			$Settings.set_text("Maximum Settings\nMap 3x3")
+			$Settings.set_text("Maximum Settings(4/6)\nMap 3x3")
 			
 			settings = "Max"
 		else:
 			test_ended()
-		
-
-	pass # Replace with function body.
