@@ -14,4 +14,8 @@
 ## 21.06.2020
 - Dodanie szablonów kilku innych menusów
 - Podstawowy benchmark
+## 22.06.2020
+- Zintegorwanie benchmarku z menu
+## 23.06.2020
+- Zmiana w benchmarku punktów na FPS
 
