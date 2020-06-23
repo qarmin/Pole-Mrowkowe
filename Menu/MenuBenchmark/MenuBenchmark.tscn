@@ -99,14 +99,5 @@ size_flags_vertical = 3
 custom_fonts/font = ExtResource( 6 )
 align = 1
 valign = 1
-
-[node name="RequiredPoints" type="Label" parent="TextureRect/VBoxContainer"]
-margin_top = 88.0
-margin_right = 819.0
-margin_bottom = 171.0
-custom_fonts/font = ExtResource( 6 )
-text = "STAGES WITH MORE THAN 3000 points should works fine
-on your hardware"
-align = 1
 [connection signal="pressed" from="Buttons/StartBenchmark" to="Buttons/StartBenchmark" method="_on_StartBenchmark_pressed"]
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

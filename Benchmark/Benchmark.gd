@@ -9,6 +9,14 @@ var middle_wait_time : float = 1.0
 var benchmark_ended : bool = false
 var benchmark_started : bool = false
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.is_pressed():
+			if event.get_scancode() == KEY_ESCAPE:
+				ready = false
+				Benchmark.clear_results()
+				test_ended()
+
 func _ready(): 
 	$Settings.set_text("Configuring environment")
 		
@@ -40,12 +48,16 @@ func test_middle() -> void:
 	$Settings.set_text("Maximum Settings(4/6)\nMap 3x3")
 	
 	ready = true
-		
-
+	
 func test_ended() -> void:
 	benchmark_ended = true
 	
 	Options.benchmark_load_saved_settings_state()
+	
+	for i in range(6):
+		Benchmark.stages[i] = int(Benchmark.stages[i] * test_speed)
+	Benchmark.points = int(Benchmark.points * test_speed)
+	
 	
 	print("Wynik ogólny - " + str(Benchmark.points))
 	print("Minimalne Ustawienia")
@@ -59,7 +71,8 @@ func test_ended() -> void:
 	
 	Benchmark.benchmarks_waits_to_be_shown = true
 	
-	get_tree().change_scene("res://Menu/MenuCommon/MenuCommon.tscn")
+	if get_tree().change_scene("res://Menu/MenuCommon/MenuCommon.tscn") != OK:
+		assert(false)
 	
 func _process(delta: float) -> void:
 	if !benchmark_ended:
