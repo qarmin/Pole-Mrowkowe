@@ -21,13 +21,28 @@ func _ready():
 		
 	Benchmark.clear_results()
 	
+func show_map(map_number : int) -> void:
+	var map_array : Array = [false,false,false]
+	assert(map_number >= 1 && map_number <= map_array.size())
+	map_array[map_number - 1] = true
+	
+	for i in range(map_array.size()):
+		if map_array[i] == true:
+			get_node("Map" + str(i + 1)).show()
+		else:
+			get_node("Map" + str(i + 1)).hide()
+	
 func test_started() -> void:
 	benchmark_started = true
 	
 	Options.benchmark_save_current_settings_state()
 	Options.load_min_settings()
 	$WorldEnvironment.set_environment(null)
+	#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.8)
+	$DirectionalLight.set_shadow(false)
 	
+	current_stage = 1
+	show_map(1)
 	$CameraMovement.play("CameraMovement1")
 	$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 	$Settings.set_text("Minimal Settings(1/6)\nMap 3x3")
@@ -40,8 +55,7 @@ func test_middle() -> void:
 	Options.load_max_settings()
 	
 	current_stage = 4
-	$Map3.hide()
-	$Map.show()
+	show_map(1)
 	$CameraMovement.play("CameraMovement4")
 	$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 	$Settings.set_text("Maximum Settings(4/6)\nMap 3x3")
@@ -53,11 +67,9 @@ func test_ended() -> void:
 	
 	Options.benchmark_load_saved_settings_state()
 	
-	for i in range(6):
-		Benchmark.stages_frames[i] = int(Benchmark.stages_frames[i] * Benchmark.speed_scale)
-	Benchmark.points = int(Benchmark.points * Benchmark.speed_scale)
-	
-	
+	Benchmark.normalize_results()
+
+	### Print Values
 	print("Wynik ogólny - " + str(Benchmark.points))
 	print("Minimalne Ustawienia")
 	print("Etap 1 - " + str(Benchmark.stages_frames[0]))
@@ -68,6 +80,7 @@ func test_ended() -> void:
 	print("Etap 5 - " + str(Benchmark.stages_frames[4]))
 	print("Etap 6 - " + str(Benchmark.stages_frames[5]))
 	
+	## Ustawia zmienną, która spowoduje że przejście do Menu Głównego od razu przeniesie do benchmarku
 	Benchmark.benchmarks_waits_to_be_shown = true
 	
 	if get_tree().change_scene("res://Menu/MenuCommon/MenuCommon.tscn") != OK:
@@ -92,33 +105,31 @@ func _process(delta: float) -> void:
 func _animation_finished(anim_name: String) -> void:
 	if anim_name == "CameraMovement1":
 		current_stage = 2
-		$Map.hide()
-		$Map2.show()
+		show_map(2)
 		$CameraMovement.play("CameraMovement2")
 		$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 		$Settings.set_text("Minimal Settings(2/6)\nMap 10x10")
 	elif(anim_name == "CameraMovement2"):
 		current_stage = 3
-		$Map2.hide()
-		$Map3.show()
+		show_map(3)
 		$CameraMovement.play("CameraMovement3")
 		$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 		$Settings.set_text("Minimal Settings(3/6)\nMap 30x30")
 	elif anim_name == "CameraMovement3":
 		$Settings.set_text("Configuring environment")
 		$WorldEnvironment.set_environment(load("res://default_env.tres"))
+		#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.0)
+		$DirectionalLight.set_shadow(true)
 		ready = false
 	elif anim_name == "CameraMovement4":
 		current_stage = 5
-		$Map.hide()
-		$Map2.show()
+		show_map(2)
 		$CameraMovement.play("CameraMovement5")
 		$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 		$Settings.set_text("Maximum Settings(5/6)\nMap 10x10")
 	elif anim_name == "CameraMovement5":
 		current_stage = 6
-		$Map2.hide()
-		$Map3.show()
+		show_map(3)
 		$CameraMovement.play("CameraMovement6")
 		$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 		$Settings.set_text("Maximum Settings(6/6)\nMap 30x30(6/6)")
