@@ -91,6 +91,7 @@ func _process(delta: float) -> void:
 		if ready:
 			Benchmark.stages_frames[current_stage-1] += 1
 			Benchmark.points += 1
+			Benchmark.time_frame[current_stage - 1].append(delta)
 		else:
 			if start_wait_time >= 0:
 				start_wait_time -= delta

@@ -2,6 +2,33 @@ extends Control
 
 
 func show_benchmarks() -> void:
+#	if Benchmark.time_frame.size() > 5 && Benchmark.points > 5:
+#		var step_x : float = 2048.0 / (Benchmark.time_frame.size() - 1) 
+#		var step_y : float = 512.0 / min(Benchmark.time_frame.max(), 0.2) # Najmniej 5 FPS
+#
+#		for i in range(1,Benchmark.time_frame.size()):
+#			$Viewport/FrameTime.add_point(Vector2(i*step_x,Benchmark.time_frame[i] * step_y))
+	var x_offset : float = 2048.0 / Benchmark.STAGES
+	for i in range(Benchmark.STAGES):
+		if Benchmark.time_frame[i].size() > 1:
+			
+			var new_line2D : Line2D = get_node("Viewport/FrameTime" + str(i+1))
+				
+			var step_x : float = x_offset / (Benchmark.time_frame[i].size() - 1) 
+			var step_y : float = 512.0 / (1.0 / max(Benchmark.time_frame[i].min(), 1.0 / 120.0)) # Najwięcej 120 FPS
+			
+			if i > 0: # Bierze ostatni wynik z poprzedniego diagramu tak aby nie było brzydkiego przeskoku w wykresie
+				var old_line2D : Line2D = get_node("Viewport/FrameTime" + str(i))
+				
+				new_line2D.add_point(old_line2D.get_point_position(old_line2D.get_point_count() - 1))
+			
+			for j in range(0,Benchmark.time_frame[i].size()):
+				if Benchmark.time_frame[i][j] < 1/120.0:
+					Benchmark.time_frame[i][j] = 1/119.0
+				new_line2D.add_point(Vector2(j * step_x + x_offset * i, 1.0 / Benchmark.time_frame[i][j] * step_y))
+	
+	$TextureRect/VBoxContainer/Graph.set_texture($Viewport.get_texture())
+	
 	
 #	find_node("WarningStart").set_text("Average " + str(Benchmark.points))
 #
@@ -21,7 +48,7 @@ func show_benchmarks() -> void:
 #	)
 	
 	find_node("WarningStart").set_text("Average - " + str(stepify(Benchmark.points / 60.0,0.1)) + " fps")
-	
+
 	var low_points = Benchmark.stages_frames[0] + Benchmark.stages_frames[1] + Benchmark.stages_frames[2]
 	find_node("Low").set_text(
 		"LOW GRAPHICS - " + str(stepify(low_points / 30.0,0.1))  +" fps\n"+

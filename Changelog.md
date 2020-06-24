@@ -18,4 +18,6 @@
 - Zintegorwanie benchmarku z menu
 ## 23.06.2020
 - Zmiana w benchmarku punktów na FPS
+## 24.06.2020
+- Dodanie wykresu wydajności w czasie
 

@@ -99,5 +99,42 @@ size_flags_vertical = 3
 custom_fonts/font = ExtResource( 6 )
 align = 1
 valign = 1
+
+[node name="Graph" type="TextureRect" parent="TextureRect/VBoxContainer"]
+margin_top = 88.0
+margin_right = 819.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand = true
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 2048, 512 )
+usage = 0
+
+[node name="FrameTime1" type="Line2D" parent="Viewport"]
+width = 5.0
+default_color = Color( 0.105882, 0.709804, 0, 1 )
+
+[node name="FrameTime2" type="Line2D" parent="Viewport"]
+width = 5.0
+default_color = Color( 0.184314, 0.27451, 0.168627, 1 )
+
+[node name="FrameTime3" type="Line2D" parent="Viewport"]
+width = 5.0
+default_color = Color( 0, 0.694118, 0.709804, 1 )
+
+[node name="FrameTime4" type="Line2D" parent="Viewport"]
+width = 5.0
+default_color = Color( 0.121569, 0, 0.709804, 1 )
+
+[node name="FrameTime5" type="Line2D" parent="Viewport"]
+width = 5.0
+default_color = Color( 0.709804, 0, 0.45098, 1 )
+
+[node name="FrameTime6" type="Line2D" parent="Viewport"]
+width = 5.0
+default_color = Color( 0.709804, 0.2, 0, 1 )
 [connection signal="pressed" from="Buttons/StartBenchmark" to="Buttons/StartBenchmark" method="_on_StartBenchmark_pressed"]
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]
