@@ -2,6 +2,7 @@ extends Node
 
 # Todo - zapisywanie ustawień do pliku jeśli nie jest to akurat zapisywanie ustawień przez benchmark
 
+var vsync : bool = 0
 var msaa : int = 0
 var default_environment : String = ""
 var framebuffer_allocation : int = 0
@@ -18,7 +19,8 @@ var use_nearest_mipmap_filter : bool = false
 
 
 
-func benchmark_save_current_settings_state():
+func save_current_settings_state():
+	vsync = ProjectSettings.get_setting("display/window/vsync/use_vsync")
 	msaa = ProjectSettings.get_setting("rendering/quality/filters/msaa")
 	default_environment = ProjectSettings.get_setting("rendering/environment/default_environment")
 	framebuffer_allocation = ProjectSettings.get_setting("rendering/quality/intended_usage/framebuffer_allocation")
@@ -34,7 +36,8 @@ func benchmark_save_current_settings_state():
 	use_nearest_mipmap_filter = ProjectSettings.get_setting("rendering/quality/filters/use_nearest_mipmap_filter")
 	
 
-func benchmark_load_saved_settings_state():
+func load_saved_settings_state():
+	ProjectSettings.set_setting("display/window/vsync/use_vsync", vsync)
 	ProjectSettings.set_setting("rendering/quality/filters/msaa", msaa)
 	ProjectSettings.set_setting("rendering/environment/default_environment", default_environment)
 	ProjectSettings.set_setting("rendering/quality/intended_usage/framebuffer_allocation", framebuffer_allocation)
@@ -50,6 +53,7 @@ func benchmark_load_saved_settings_state():
 	ProjectSettings.set_setting("rendering/quality/filters/use_nearest_mipmap_filter", use_nearest_mipmap_filter)
 	
 func load_min_settings():
+	ProjectSettings.set_setting("display/window/vsync/use_vsync", true)
 	ProjectSettings.set_setting("rendering/quality/filters/msaa", Viewport.MSAA_DISABLED)
 	ProjectSettings.set_setting("rendering/environment/default_environment", null)
 	ProjectSettings.set_setting("rendering/quality/intended_usage/framebuffer_allocation", VisualServer.VIEWPORT_USAGE_3D_NO_EFFECTS)
@@ -65,6 +69,7 @@ func load_min_settings():
 	ProjectSettings.set_setting("rendering/quality/filters/use_nearest_mipmap_filter", true)
 
 func load_max_settings():
+	ProjectSettings.set_setting("display/window/vsync/use_vsync", false)
 	ProjectSettings.set_setting("rendering/quality/filters/msaa", Viewport.MSAA_16X)
 	ProjectSettings.set_setting("rendering/environment/default_environment", "res://default_env.tres")
 	ProjectSettings.set_setting("rendering/quality/intended_usage/framebuffer_allocation", VisualServer.VIEWPORT_USAGE_3D)
@@ -78,4 +83,10 @@ func load_max_settings():
 	ProjectSettings.set_setting("rendering/quality/shading/force_lambert_over_burley", false)
 	ProjectSettings.set_setting("rendering/quality/shading/force_blinn_over_ggx", false)
 	ProjectSettings.set_setting("rendering/quality/filters/use_nearest_mipmap_filter", false)
+	
+func benchmark_load_min_settings():
+	get_viewport().msaa = Viewport.MSAA_DISABLED
+
+func benchmark_load_max_settings():
+	get_viewport().msaa = Viewport.MSAA_16X
 

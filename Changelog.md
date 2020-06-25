@@ -20,4 +20,5 @@
 - Zmiana w benchmarku punktów na FPS
 ## 24.06.2020
 - Dodanie wykresu wydajności w czasie
-
+## 25.06.2020
+- Poprawa wykresu

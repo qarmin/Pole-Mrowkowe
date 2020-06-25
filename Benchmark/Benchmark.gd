@@ -35,8 +35,7 @@ func show_map(map_number : int) -> void:
 func test_started() -> void:
 	benchmark_started = true
 	
-	Options.benchmark_save_current_settings_state()
-	Options.load_min_settings()
+	Options.benchmark_load_min_settings()
 	$WorldEnvironment.set_environment(null)
 	#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.8)
 	$DirectionalLight.set_shadow(false)
@@ -52,7 +51,7 @@ func test_started() -> void:
 func test_middle() -> void:
 	benchmark_started = true
 	
-	Options.load_max_settings()
+	Options.benchmark_load_max_settings()
 	
 	current_stage = 4
 	show_map(1)
@@ -64,8 +63,6 @@ func test_middle() -> void:
 	
 func test_ended() -> void:
 	benchmark_ended = true
-	
-	Options.benchmark_load_saved_settings_state()
 	
 	Benchmark.normalize_results()
 
