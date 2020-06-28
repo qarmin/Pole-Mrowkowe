@@ -72,7 +72,7 @@ func show_benchmarks() -> void:
 			
 			for j in range(0,Benchmark.time_frame[i].size()):
 				if Benchmark.time_frame[i][j] < 1.0/MAX_FPS:
-					Benchmark.time_frame[i][j] = 1.0/(MAX_FPS + 1)
+					Benchmark.time_frame[i][j] = 1.0/(MAX_FPS -1)
 				new_line2D.add_point(Vector2(j * step_x + x_offset * i, 1.0 / Benchmark.time_frame[i][j] * step_y - 3))
 	$TextureRect/VBoxContainer/Graph.set_texture($Viewport.get_texture())
 	

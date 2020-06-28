@@ -115,11 +115,11 @@ usage = 0
 
 [node name="FrameTime1" type="Line2D" parent="Viewport"]
 width = 5.0
-default_color = Color( 0.105882, 0.709804, 0, 1 )
+default_color = Color( 0.729412, 0.772549, 0, 1 )
 
 [node name="FrameTime2" type="Line2D" parent="Viewport"]
 width = 5.0
-default_color = Color( 0.184314, 0.27451, 0.168627, 1 )
+default_color = Color( 0.129412, 0.811765, 0.556863, 1 )
 
 [node name="FrameTime3" type="Line2D" parent="Viewport"]
 width = 5.0
