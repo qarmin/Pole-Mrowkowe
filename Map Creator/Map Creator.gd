@@ -21,9 +21,9 @@ func _ready() -> void:
 	START_POSITION = Vector3(-NUMBER_OF_HEX[0] * SINGLE_HEX_DIMENSION[0] / 2.0,0.0,-NUMBER_OF_HEX[1] * SINGLE_HEX_DIMENSION[1] / 2.0)
 	START_POSITION += Vector3(SINGLE_HEX_DIMENSION[0]/4.0,0.0,SINGLE_HEX_DIMENSION[0]/2.0) 
 
-	var Map : Spatial = Spatial.new()
-	Map.name = "Map"
-	add_child(Map)
+#	var Map : Spatial = Spatial.new()
+#	Map.name = "Map"
+#	add_child(Map)
 	
 	assert(GameSettings.MAX_TEAMS == 4)
 	
@@ -48,23 +48,26 @@ func _ready() -> void:
 				else:
 					mat = texture_array[randi() % texture_array.size()]
 			SH.set_surface_material(0,mat)
-			print(SH.get_scene_instance_load_placeholder())
-			SH.set_scene_instance_load_placeholder(true)
 			get_node("Map").add_child(SH)
 			SH.set_owner(get_node("Map"))
 			if !CREATE_EMPTY && ANTS:
 				if randi() % 100 < ANT_CHANCE:
 					var AN : Spatial = Ant.instance()#PackedScene.GEN_EDIT_STATE_DISABLED) # Zostało z testów autozapisywania mapy, na chwilę obecną robię to poprzez Remote w drzewie sceny przy ZATRZYMANEJ grze(jest to wymagane bo inaczej nie działa)
-					AN.translation = Vector3(0.0,1.0,0.0)
+					AN.translation = Vector3(0.0,1.2,0.0)
 					AN.get_node("Outfit").set_surface_material(0,mat)
 					SH.add_child(AN)
-					#AN.set_owner(SH)
+					AN.set_owner(get_node("Map"))
 
 
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(get_node("Map"))
-	if(ResourceSaver.save("res://Terrain/Map.tscn", packed_scene)):
+	if(ResourceSaver.save("res://GeneratedMap.tscn", packed_scene) != OK):
 		printerr("Nie powiodła się próba zapisu mapy")
+	
+	var node : Spatial = Spatial.new()
+	node.add_child(packed_scene.instance())
+	add_child(node)
+	
 		
 #func _process(delta: float) -> void:
 #	print("AAA")
