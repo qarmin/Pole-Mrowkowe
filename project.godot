@@ -39,6 +39,7 @@ SaveSystem="*res://Autoloads/SaveSystem.gd"
 Units="*res://Autoloads/Units.gd"
 Benchmark="*res://Autoloads/Benchmark.gd"
 Options="*res://Autoloads/Options.gd"
+MapCreator="*res://Autoloads/MapCreator.gd"
 
 [editor_plugins]
 
