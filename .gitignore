@@ -10,3 +10,4 @@ logs/
 *.x86_64
 *.x86
 GeneratedMap.tscn
+NoGIT/
