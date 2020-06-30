@@ -21,4 +21,9 @@
 ## 24.06.2020
 - Dodanie wykresu wydajności w czasie
 ## 25.06.2020
-- Poprawa wykresu
+- Poprawa wykresu wydajności
+## 28.06.2020
+- Poprawa górnej granicy wykresu wydajności(wychodziła poza określony obszar)
+## 29.06.2020
+- Przepisanie tworzenia map na Singleton
+- Dodanie tworzonych map do .gitignore(tylko do celów testowych bo res:// nie jest dobrym pomysłem w buildach release)

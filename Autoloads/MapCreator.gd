@@ -28,10 +28,7 @@ func generate_map(var hex_number : Vector2, var number_of_players : int = GameSe
 	
 	var START_POSITION : Vector3
 	
-	## To tylko przybliżenie, nie chce mi się dokładnie środka wyznaczać
-	START_POSITION = Vector3(0,0,0) #Vector3(-hex_number[0] * SINGLE_HEX_DIMENSION[0] / 2.0,0.0,-hex_number[1] * SINGLE_HEX_DIMENSION[1] / 2.0)
-	#START_POSITION += Vector3(SINGLE_HEX_DIMENSION[0]/4.0,0.0,SINGLE_HEX_DIMENSION[0]/2.0) 
-
+	START_POSITION = Vector3(SINGLE_HEX_DIMENSION.x / 2.0, 0.0 , SINGLE_HEX_DIMENSION.y / 2.0) # Początkowe przesuniecie, nie idealne, ale może być
 	
 	var map : Spatial = Spatial.new()
 	map.set_name("Map")
