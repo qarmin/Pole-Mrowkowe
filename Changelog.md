@@ -27,3 +27,5 @@
 ## 29.06.2020
 - Przepisanie tworzenia map na Singleton
 - Dodanie tworzonych map do .gitignore(tylko do celów testowych bo res:// nie jest dobrym pomysłem w buildach release)
+## 30.06.2020
+- Dodanie podstawowej logiki generacji map niepełnych
