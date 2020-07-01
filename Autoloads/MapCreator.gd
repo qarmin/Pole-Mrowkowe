@@ -73,65 +73,188 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 		for j in hex_number.y:
 			array[array.size() - 1].append(0)
 				
-	var generated_array : Array = array
-	while true: # Dopóki nie wygeneruje się mapa jaką można dojść z jednego do drugiego miejsca
-		var can_exit : bool = false
-		while true: # Musi zostać wygenerowana na początku przynajmniej jeden ląd na samej górze
-			for i in hex_number.y:
-				if array[0][i] == 1:
-					can_exit = true
-					break
-			if can_exit:
-				break
-			for i in hex_number.y:
-				if randi() % 100 < chance_to_terrain:
-					array[0][i] = 1
-					
-		
-		# Teraz generowane są połączenia
-		var have_neighbour : bool
-		var LOOK_AT_LEFT : bool = false
-		for i in range(1,hex_number.x):
-			for j in hex_number.y:
-				if j % 2 == 0:
-					if i > 0:
-						if j > 0:
-							if array[i - 1][j - 1] == 1:
-								have_neighbour = true
-						if j < hex_number.y - 1:
-							if array[i - 1][j + 1] == 1:
-								have_neighbour = true
-						if array[i - 1][  j  ] == 1:
-							have_neighbour = true
-					
-					if LOOK_AT_LEFT:
-						if j > 0:
-							if array[  i  ][j - 1] == 1:
-								have_neighbour = true
-				else:
-					if i > 0:
-						if j > 0:
-							if array[i - 1][j - 1] == 1:
-								have_neighbour = true
-						if j < hex_number.y - 1:
-							if array[i - 1][j + 1] == 1:
-								have_neighbour = true
-						if array[i - 1][  j  ] == 1:
-							have_neighbour = true
-					
-					if LOOK_AT_LEFT:
-						if j > 0:
-							if array[  i  ][j - 1] == 1:
-								have_neighbour = true
 				
-				if have_neighbour == true:
-					if randi() % 100 < chance_to_terrain:
-						array[i][j] = 1
-		
-		if !find_route(array):
+	# Wybierz jeden ląd na górze
+	var first_element : int = randi() % array.size()
+	array[0][first_element] = 1
+				
+	var to_check : Array = []
+	var checked : Array = []
+	var current_element : Vector2i = Vector2i.new(0,0)
+	
+	var ce_x : int = 0
+	var ce_y : int = 0
+	while true:
+		to_check.append(Vector2i.new(0,first_element))
+		print(array[0][first_element])
+		while to_check.size() > 0:
+			current_element = to_check.pop_front()
+			
+#			if array[current_element.x][current_element.y] == 0:
+#				continue
+			
+			assert(array[current_element.x][current_element.y] == 1)
+			assert(current_element.x < array.size() && current_element.x >= 0)
+			assert(current_element.y < array.size() && current_element.y >= 0)
+			
+			var help_array_1 = [[-1,-1],
+								[-1, 0],
+								[-1, 1],
+								[ 0,-1],
+								[ 0, 1],
+								[ 1, 0]]
+								
+			for i in range(6):
+				if (current_element.x + help_array_1[i].x > 0) && (current_element.x + help_array_1[i].x < array.size() - 1) && (current_element.y + help_array_1[i].y > 0) && (current_element.y + help_array_1[i].y < array.size() - 1) :
+					var cep_x = current_element.x + help_array_1[i].x
+					var cep_y = current_element.y + help_array_1[i].y
+					if !Vector2i.is_in_array(checked,Vector2i.new(cep_x,cep_y)):
+					pass
+			
+			if current_element.y % 2 == 1:
+	#					array[i - 1][j - 1] == 1
+	#					array[i - 1][  j  ] == 1
+	#					array[i - 1][j + 1] == 1
+	#					array[  i  ][j - 1] == 1
+	#					array[  i  ][j + 1] == 1
+	#					array[i + 1][  j  ] == 1
+				if (current_element.x > 0 && current_element.y > 0):
+					ce_x = current_element.x - 1
+					ce_y = current_element.y - 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						assert(array[ce_x][ce_y] == 0)
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.x > 0):
+					ce_x = current_element.x - 1
+					ce_y = current_element.y
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.x > 0 && current_element.y < array.size() - 1):
+					ce_x = current_element.x - 1
+					ce_y = current_element.y + 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.y > 0):
+					ce_x = current_element.x
+					ce_y = current_element.y - 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.y < array.size() - 1):
+					ce_x = current_element.x
+					ce_y = current_element.y + 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.x < array.size() - 1):
+					ce_x = current_element.x + 1
+					ce_y = current_element.y
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+			else:
+	#					array[i + 1][j - 1] == 1
+	#					array[i + 1][  j  ] == 1
+	#					array[i + 1][j + 1] == 1
+	#					array[  i  ][j - 1] == 1
+	#					array[  i  ][j + 1] == 1
+	#					array[i - 1][  j  ] == 1
+				if (current_element.x < array.size() - 1 && current_element.y > 0):
+					ce_x = current_element.x + 1
+					ce_y = current_element.y - 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.x < array.size() - 1):
+					ce_x = current_element.x + 1
+					ce_y = current_element.y
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.x < array.size() - 1 && current_element.y < array.size() - 1):
+					ce_x = current_element.x + 1
+					ce_y = current_element.y + 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.y > 0):
+					ce_x = current_element.x
+					ce_y = current_element.y - 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.y < array.size() - 1):
+					ce_x = current_element.x
+					ce_y = current_element.y + 1
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				if (current_element.x > 0):
+					ce_x = current_element.x - 1
+					ce_y = current_element.y
+					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
+						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
+						if array[ce_x][ce_y] == 1:
+							to_check.append(Vector2i.new(ce_x,ce_y))
+						else:
+							checked.append(Vector2i.new(ce_x,ce_y))
+				
+			for i in to_check:
+				if array[i.x][i.y] == 0:
+					print("HUUH")
+
+			if Vector2i.is_in_array(checked,current_element):
+				print("Co do chuja")
+			checked.append(current_element)
+			
+		# Jest niewielka szansa, że nie zostanie stworzony żaden hex, dlatego szansę tą zmniejszamy wielokrotnie
+		if checked.size() > 5:
 			break
-		
-		array = generated_array
+		elif hex_number.x * hex_number.y < 4:
+			break
+			
+		to_check.clear()
+		checked.clear()
+		for i in array:
+			for j in i:
+				j = 0
+		array[0][first_element] = 1
 			
 
 	for i in hex_number.x:
@@ -155,110 +278,6 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 	if(ResourceSaver.save("res://GeneratedMap.tscn", packed_scene,ResourceSaver.FLAG_REPLACE_SUBRESOURCE_PATHS) != OK):
 		printerr("Nie powiodła się próba zapisu mapy")
 	map.queue_free()
-
-#class Vector2i:
-#	var x : int = 0
-#	var y : int = 0
-#
-#	func _init(var x, var y) -> void:
-#		self.x = x
-#		self.y = y
-#
-#	func is_equal_to(var other_vector : Vector2i) -> bool:
-#		if other_vector.x == x:
-#			if other_vector.y == y:
-#				return true
-#		return false
-
-func find_route(var array : Array) -> bool:
-	var to_check : Array = []
-	var checked : Array = []
-	var current_element : Vector2 = Vector2(0,0)
-	for i in array[0]: # OD
-		if i != 1:
-			continue
-		to_check.append(Vector2(0,i))
-		while to_check.size() > 0:
-			current_element = to_check.pop_front()
-			
-			if int(current_element.y) % 2 == 1:
-				if (current_element.x > 0 && current_element.y > 0):
-					if(array[current_element.x - 1][current_element.y - 1] == 1):
-						if !checked.has(Vector2(current_element.x-1,current_element.y-1)):
-							to_check.append(Vector2(current_element.x-1,current_element.y-1))
-				if (current_element.x > 0):
-					if(array[current_element.x - 1][  current_element.y  ] == 1):
-						if !checked.has(Vector2(current_element.x-1,current_element.y)):
-							to_check.append(Vector2(current_element.x-1,current_element.y))
-				if (current_element.x > 0 && current_element.y < array.size() - 1):
-					if(array[current_element.x - 1][current_element.y + 1] == 1):
-						if !checked.has(Vector2(current_element.x-1,current_element.y+1)):
-							to_check.append(Vector2(current_element.x-1,current_element.y+1))
-				if (current_element.y > 0):
-					if(array[  current_element.x  ][current_element.y - 1] == 1):
-						if !checked.has(Vector2(current_element.x,current_element.y-1)):
-							to_check.append(Vector2(current_element.x,current_element.y-1))
-				if (current_element.y < array.size() - 1):
-					if(array[  current_element.x  ][current_element.y + 1] == 1):
-						if !checked.has(Vector2(current_element.x,current_element.y+1)):
-							to_check.append(Vector2(current_element.x,current_element.y+1))
-				if (current_element.x < array.size() - 1):
-					if(array[current_element.x + 1][  current_element.y  ] == 1):
-						if !checked.has(Vector2(current_element.x+1,current_element.y)):
-							to_check.append(Vector2(current_element.x+1,current_element.y))
-				
-				
-#					array[i - 1][j - 1] == 1
-#					array[i - 1][  j  ] == 1
-#					array[i - 1][j + 1] == 1
-#					array[  i  ][j - 1] == 1
-#					array[  i  ][j + 1] == 1
-#					array[i + 1][  j  ] == 1
-			else:
-				if (current_element.x < array.size() - 1 && current_element.y > 0):
-					if(array[current_element.x + 1][current_element.y - 1] == 1):
-						if !checked.has(Vector2(current_element.x+1,current_element.y-1)):
-							to_check.append(Vector2(current_element.x+1,current_element.y-1))
-				if (current_element.x  < array.size() - 1):
-					if(array[current_element.x + 1][  current_element.y  ] == 1):
-						if !checked.has(Vector2(current_element.x+1,current_element.y)):
-							to_check.append(Vector2(current_element.x+1,current_element.y))
-				if (current_element.x < array.size() - 1 && current_element.y < array.size() - 1):
-					if(array[current_element.x + 1][current_element.y + 1] == 1):
-						if !checked.has(Vector2(current_element.x+1,current_element.y+1)):
-							to_check.append(Vector2(current_element.x+1,current_element.y+1))
-				if (current_element.y > 0):
-					if(array[  current_element.x  ][current_element.y - 1] == 1):
-						if !checked.has(Vector2(current_element.x,current_element.y-1)):
-							to_check.append(Vector2(current_element.x,current_element.y-1))
-				if (current_element.y < array.size() - 1):
-					if(array[  current_element.x  ][current_element.y + 1] == 1):
-						if !checked.has(Vector2(current_element.x,current_element.y+1)):
-							to_check.append(Vector2(current_element.x,current_element.y+1))
-				if (current_element.x > 0):
-					if(array[current_element.x - 1][  current_element.y  ] == 1):
-						if !checked.has(Vector2(current_element.x-1,current_element.y)):
-							to_check.append(Vector2(current_element.x-1,current_element.y))
-				
-#					array[i + 1][j - 1] == 1
-#					array[i + 1][  j  ] == 1
-#					array[i + 1][j + 1] == 1
-#					array[  i  ][j - 1] == 1
-#					array[  i  ][j + 1] == 1
-#					array[i - 1][  j  ] == 1
-				
-				
-			checked.append(current_element)
-				
-				
-#		for j in checked:
-#			if 
-			
-			
-		to_check = []
-		checked = []
-		
-	return true
 
 	
 func populate_random_map(var ant_chance : int = 100, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:

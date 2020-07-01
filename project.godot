@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "SingleHex",
 "language": "GDScript",
 "path": "res://Terrain/SingleHex/SingleHex.gd"
+}, {
+"base": "Reference",
+"class": "Vector2i",
+"language": "GDScript",
+"path": "res://Classes/Vector2i.gd"
 } ]
 _global_script_class_icons={
 "AntBase": "",
-"SingleHex": ""
+"SingleHex": "",
+"Vector2i": ""
 }
 
 [application]
