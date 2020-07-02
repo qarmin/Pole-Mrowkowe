@@ -7,6 +7,7 @@ var y : int = 0
 func _init(var p_x : int, var p_y : int) -> void:
 	x = p_x
 	y = p_y
+	
 
 #func is_in_array(var array : Array) -> bool:
 #	for i in array:
@@ -22,3 +23,5 @@ static func is_in_array(var array : Array, var vector) -> bool:# : Vector2i) -> 
 			if i.y == vector.y:
 				return true
 	return false
+
+

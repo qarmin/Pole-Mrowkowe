@@ -10,6 +10,8 @@ var texture_array : Array = []
 var ant_base : SpatialMaterial
 var ant_array : Array = []
 
+
+
 func _ready() -> void:
 	
 	randomize() # Bez tego za każdym razem wychdzą takie same wyniki randi()
@@ -74,187 +76,92 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 			array[array.size() - 1].append(0)
 				
 				
-	# Wybierz jeden ląd na górze
-	var first_element : int = randi() % array.size()
-	array[0][first_element] = 1
+
 				
 	var to_check : Array = []
 	var checked : Array = []
 	var current_element : Vector2i = Vector2i.new(0,0)
 	
-	var ce_x : int = 0
-	var ce_y : int = 0
 	while true:
-		to_check.append(Vector2i.new(0,first_element))
-		print(array[0][first_element])
+		# Resetowanie tablicy
+		for i in array:
+			for j in i:
+				j = 0
+		
+		# Wybrany jeden ląd z samej góry
+		array[hex_number.x / 2][hex_number.y / 2] = 1
+		to_check.append(Vector2i.new(int(hex_number.x / 2),int(hex_number.y / 2)))
+		assert(array[int(hex_number.x / 2)][int(hex_number.y / 2)] == 1)
+		
 		while to_check.size() > 0:
 			current_element = to_check.pop_front()
-			
-#			if array[current_element.x][current_element.y] == 0:
-#				continue
 			
 			assert(array[current_element.x][current_element.y] == 1)
 			assert(current_element.x < array.size() && current_element.x >= 0)
 			assert(current_element.y < array.size() && current_element.y >= 0)
 			
-			var help_array_1 = [[-1,-1],
+#			var help_array_1 = [[-1,-1],
+#								[-1, 0],
+#								[-1, 1],
+#								[ 0,-1],
+#								[ 0, 1],
+#								[ 1, 0]]
+#			var help_array_2 = [[ 1,-1],
+#								[ 1, 0],
+#								[ 1, 1],
+#								[ 0,-1],
+#								[ 0, 1],
+#								[-1, 0]]
+								
+			var help_array = [	[-1,-1],
 								[-1, 0],
 								[-1, 1],
 								[ 0,-1],
 								[ 0, 1],
 								[ 1, 0]]
-								
-			for i in range(6):
-				if (current_element.x + help_array_1[i].x > 0) && (current_element.x + help_array_1[i].x < array.size() - 1) && (current_element.y + help_array_1[i].y > 0) && (current_element.y + help_array_1[i].y < array.size() - 1) :
-					var cep_x = current_element.x + help_array_1[i].x
-					var cep_y = current_element.y + help_array_1[i].y
-					if !Vector2i.is_in_array(checked,Vector2i.new(cep_x,cep_y)):
-					pass
-			
-			if current_element.y % 2 == 1:
-	#					array[i - 1][j - 1] == 1
-	#					array[i - 1][  j  ] == 1
-	#					array[i - 1][j + 1] == 1
-	#					array[  i  ][j - 1] == 1
-	#					array[  i  ][j + 1] == 1
-	#					array[i + 1][  j  ] == 1
-				if (current_element.x > 0 && current_element.y > 0):
-					ce_x = current_element.x - 1
-					ce_y = current_element.y - 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						assert(array[ce_x][ce_y] == 0)
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.x > 0):
-					ce_x = current_element.x - 1
-					ce_y = current_element.y
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.x > 0 && current_element.y < array.size() - 1):
-					ce_x = current_element.x - 1
-					ce_y = current_element.y + 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.y > 0):
-					ce_x = current_element.x
-					ce_y = current_element.y - 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.y < array.size() - 1):
-					ce_x = current_element.x
-					ce_y = current_element.y + 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.x < array.size() - 1):
-					ce_x = current_element.x + 1
-					ce_y = current_element.y
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
+			if current_element.x % 2 == 1:
+				for i in range(6):
+					if (current_element.x + help_array_1[i][0] >= 0) && (current_element.x + help_array_1[i][0] < array.size()) && (current_element.y + help_array_1[i][1] >= 0) && (current_element.y + help_array_1[i][1] < array.size()):
+						var cep_x = current_element.x + help_array_1[i][0]
+						var cep_y = current_element.y + help_array_1[i][1]
+						if !Vector2i.is_in_array(checked,Vector2i.new(cep_x,cep_y)) && !Vector2i.is_in_array(to_check,Vector2i.new(cep_x,cep_y)):
+							assert(array[cep_x][cep_y] == 0)
+							array[cep_x][cep_y] = int(randi() % 100 < chance_to_terrain)
+							if array[cep_x][cep_y] == 1:
+								to_check.append(Vector2i.new(cep_x,cep_y))
+							else:
+								checked.append(Vector2i.new(cep_x,cep_y))
 			else:
-	#					array[i + 1][j - 1] == 1
-	#					array[i + 1][  j  ] == 1
-	#					array[i + 1][j + 1] == 1
-	#					array[  i  ][j - 1] == 1
-	#					array[  i  ][j + 1] == 1
-	#					array[i - 1][  j  ] == 1
-				if (current_element.x < array.size() - 1 && current_element.y > 0):
-					ce_x = current_element.x + 1
-					ce_y = current_element.y - 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.x < array.size() - 1):
-					ce_x = current_element.x + 1
-					ce_y = current_element.y
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.x < array.size() - 1 && current_element.y < array.size() - 1):
-					ce_x = current_element.x + 1
-					ce_y = current_element.y + 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.y > 0):
-					ce_x = current_element.x
-					ce_y = current_element.y - 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.y < array.size() - 1):
-					ce_x = current_element.x
-					ce_y = current_element.y + 1
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
-				if (current_element.x > 0):
-					ce_x = current_element.x - 1
-					ce_y = current_element.y
-					if !Vector2i.is_in_array(checked,Vector2i.new(ce_x,ce_y)):
-						array[ce_x][ce_y] = int(randi() % 100 < chance_to_terrain)
-						if array[ce_x][ce_y] == 1:
-							to_check.append(Vector2i.new(ce_x,ce_y))
-						else:
-							checked.append(Vector2i.new(ce_x,ce_y))
+				for i in range(6):
+					if (current_element.x + help_array_2[i][0] >= 0) && (current_element.x + help_array_2[i][0] < array.size()) && (current_element.y + help_array_2[i][1] >= 0) && (current_element.y + help_array_2[i][1] < array.size()):
+						var cep_x = current_element.x + help_array_2[i][0]
+						var cep_y = current_element.y + help_array_2[i][1]
+						if !Vector2i.is_in_array(checked,Vector2i.new(cep_x,cep_y)) && !Vector2i.is_in_array(to_check,Vector2i.new(cep_x,cep_y)):
+							assert(array[cep_x][cep_y] == 0)
+							array[cep_x][cep_y] = int(randi() % 100 < chance_to_terrain)
+							if array[cep_x][cep_y] == 1:
+								to_check.append(Vector2i.new(cep_x,cep_y))
+							else:
+								checked.append(Vector2i.new(cep_x,cep_y))
 				
+			print_map(array)
 			for i in to_check:
-				if array[i.x][i.y] == 0:
-					print("HUUH")
+				assert(array[i.x][i.y] == 1)
 
-			if Vector2i.is_in_array(checked,current_element):
-				print("Co do chuja")
+			assert(!Vector2i.is_in_array(checked,current_element))
+			
 			checked.append(current_element)
 			
-		# Jest niewielka szansa, że nie zostanie stworzony żaden hex, dlatego szansę tą zmniejszamy wielokrotnie
-		if checked.size() > 5:
-			break
-		elif hex_number.x * hex_number.y < 4:
+		# Jeśli wygenerowano stanowczo za mało hexów, to powtarzamy ich tworzenie
+		var number_of_real_hex : int = 0
+		for i in array:
+			for j in i:
+				number_of_real_hex += j
+		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
 			break
 			
 		to_check.clear()
 		checked.clear()
-		for i in array:
-			for j in i:
-				j = 0
-		array[0][first_element] = 1
 			
 
 	for i in hex_number.x:
@@ -279,6 +186,15 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 		printerr("Nie powiodła się próba zapisu mapy")
 	map.queue_free()
 
+func print_map(array : Array) -> void:
+	print("Printed array")
+	for i in range(array.size()):
+		var line : String = "" 
+		if i % 2 == 1:
+			line += " "
+		for j in range(array[i].size()):
+			line += str(array[i][j]) + " "
+		print(line)
 	
 func populate_random_map(var ant_chance : int = 100, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
 	assert(number_of_players > 0 && number_of_players <= GameSettings.MAX_TEAMS)
@@ -348,3 +264,18 @@ func populate_random_map(var ant_chance : int = 100, var number_of_players : int
 	
 	map.queue_free()
 	
+
+
+	#					array[i - 1][j - 1] == 1
+	#					array[i - 1][  j  ] == 1
+	#					array[i - 1][j + 1] == 1
+	#					array[  i  ][j - 1] == 1
+	#					array[  i  ][j + 1] == 1
+	#					array[i + 1][  j  ] == 1
+	
+	#					array[i + 1][j - 1] == 1
+	#					array[i + 1][  j  ] == 1
+	#					array[i + 1][j + 1] == 1
+	#					array[  i  ][j - 1] == 1
+	#					array[  i  ][j + 1] == 1
+	#					array[i - 1][  j  ] == 1
