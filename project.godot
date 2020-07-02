@@ -48,6 +48,10 @@ Options="*res://Autoloads/Options.gd"
 MapCreator="*res://Autoloads/MapCreator.gd"
 Tests="*res://Autoloads/Tests.gd"
 
+[display]
+
+window/stretch/aspect="expand"
+
 [editor_plugins]
 
 enabled=PoolStringArray(  )

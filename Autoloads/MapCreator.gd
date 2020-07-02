@@ -62,12 +62,12 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(chance_to_terrain >= 30 && chance_to_terrain < 101) # Aby zapobiec zbyt zbyt wielkiej rekurencji
 	
-	var START_POSITION : Vector3 = Vector3(SINGLE_HEX_DIMENSION.y / 2.0, 0.0 , SINGLE_HEX_DIMENSION.x / 2.0) # Początkowe przesuniecie, nie idealne, ale może być
+	var START_POSITION : Vector3 = Vector3(SINGLE_HEX_DIMENSION.x / 2.0, 0.0 , SINGLE_HEX_DIMENSION.y / 2.0) # Początkowe przesuniecie, nie idealne, ale może być
 	
 	var map : Spatial = Spatial.new()
 	map.set_name("Map")
-	map.set_translation(Vector3(-hex_number.x * SINGLE_HEX_DIMENSION.y / 2.0,0,-hex_number.y * SINGLE_HEX_DIMENSION.x / 2.0)) # Wyrównuje 
-
+	map.set_translation(Vector3(-hex_number.x * SINGLE_HEX_DIMENSION.x / 2.0,0,-hex_number.y * SINGLE_HEX_DIMENSION.y / 2.0)) # Wyrównuje 
+	
 	
 	var array : Array = []
 	for i in hex_number.y:
@@ -90,29 +90,16 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 		to_check.append(Vector2i.new(int(hex_number.x / 2),int(hex_number.y / 2)))
 		assert(array[int(hex_number.y / 2)][int(hex_number.x / 2)] == 1)
 		
-		print("Start Point = " + str(int(hex_number.x / 2)) + "x, " + str(int(hex_number.y / 2)) + "y")
-		print("Start Array")
-		print_map(array)
+		#print("Start Point = " + str(int(hex_number.x / 2)) + "x, " + str(int(hex_number.y / 2)) + "y")
+		#print("Start Array")
 		
 		while to_check.size() > 0:
 			current_element = to_check.pop_front()
-			print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
+			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
 			assert(array[current_element.y][current_element.x] == 1)
 			assert(current_element.x < hex_number.x && current_element.x >= 0)
 			assert(current_element.y < hex_number.y && current_element.y >= 0)
 			
-#			var help_array_1 = [[-1,-1],
-#								[-1, 0],
-#								[-1, 1],
-#								[ 0,-1],
-#								[ 0, 1],
-#								[ 1, 0]]
-#			var help_array_2 = [[ 1,-1],
-#								[ 1, 0],
-#								[ 1, 1],
-#								[ 0,-1],
-#								[ 0, 1],
-#								[-1, 0]]
 			var help_array_1 = [[ 0,-1],
 								[ 1,-1],
 								[-1, 0],
@@ -151,7 +138,7 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 							else:
 								checked.append(Vector2i.new(cep_x,cep_y))
 				
-			print_map(array)
+			#print_map(array)
 			for i in to_check:
 				assert(array[i.y][i.x] == 1)
 
@@ -171,22 +158,7 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 		checked.clear()
 		
 		print("Nie udało mi się stworzyć poprawnego algrotymu, sprawdzam ponownie")
-		print_map(array)
-			
-
-#	for i in hex_number.x:
-#		for j in hex_number.y:
-#			if array[j][i] == 1:
-#				var SH : MeshInstance = SingleHex.instance()
-#				SH.translation = START_POSITION + Vector3(j*SINGLE_HEX_DIMENSION.x,randf(),i*SINGLE_HEX_DIMENSION.y)
-#				if j%2 == 1:
-#					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x,0,0)
-#				SH.set_name(NODE_BASE_NAME + str(i * hex_number.y + j))
-#				var mat : SpatialMaterial = texture_base
-#
-#				SH.set_surface_material(0,mat)
-#				map.add_child(SH)
-#				SH.set_owner(map)
+#		print_map(array)
 
 	for i in hex_number.x:
 		for j in hex_number.y:
