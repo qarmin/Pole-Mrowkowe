@@ -60,7 +60,7 @@ func generate_full_map(var hex_number : Vector2) -> void:#, var number_of_player
 func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int) -> void:#, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
 	
 	assert(hex_number.x > 0 && hex_number.y > 0)
-	assert(chance_to_terrain >= 30 && chance_to_terrain < 101) # Aby zapobiec zbyt zbyt wielkiej rekurencji
+	assert(chance_to_terrain > 0 && chance_to_terrain < 101) 
 	
 	var START_POSITION : Vector3 = Vector3(SINGLE_HEX_DIMENSION.x / 2.0, 0.0 , SINGLE_HEX_DIMENSION.y / 2.0) # Początkowe przesuniecie, nie idealne, ale może być
 	
@@ -77,7 +77,7 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 				
 	var to_check : Array = []
 	var checked : Array = []
-	var current_element : Vector2i = Vector2i.new(0,0)
+	var current_element : Vector2j = Vector2j.new(0,0)
 	
 	while true:
 		# Resetowanie tablicy
@@ -87,7 +87,7 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 		
 		# Wybrany jeden ląd z samej góry
 		array[hex_number.y / 2][hex_number.x / 2] = 1
-		to_check.append(Vector2i.new(int(hex_number.x / 2),int(hex_number.y / 2)))
+		to_check.append(Vector2j.new(int(hex_number.x / 2),int(hex_number.y / 2)))
 		assert(array[int(hex_number.y / 2)][int(hex_number.x / 2)] == 1)
 		
 		#print("Start Point = " + str(int(hex_number.x / 2)) + "x, " + str(int(hex_number.y / 2)) + "y")
@@ -100,49 +100,41 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 			assert(current_element.x < hex_number.x && current_element.x >= 0)
 			assert(current_element.y < hex_number.y && current_element.y >= 0)
 			
-			var help_array_1 = [[ 0,-1],
+			var help_array = [
+								[[ 0,-1],
 								[ 1,-1],
 								[-1, 0],
 								[ 1, 0],
 								[ 0, 1],
-								[ 1, 1]]
-			var help_array_2 = [[-1,-1],
+								[ 1, 1]],
+								
+								[[-1,-1],
 								[ 0,-1],
 								[-1, 0],
 								[ 1, 0],
 								[-1, 1],
 								[ 0, 1]]
+								]
 								
-			if current_element.y % 2 == 1:
-				for i in range(6):
-					if (current_element.x + help_array_1[i][0] >= 0) && (current_element.x + help_array_1[i][0] < hex_number.x) && (current_element.y + help_array_1[i][1] >= 0) && (current_element.y + help_array_1[i][1] < hex_number.y):
-						var cep_x = current_element.x + help_array_1[i][0]
-						var cep_y = current_element.y + help_array_1[i][1]
-						if !Vector2i.is_in_array(checked,Vector2i.new(cep_x,cep_y)) && !Vector2i.is_in_array(to_check,Vector2i.new(cep_x,cep_y)):
-							assert(array[cep_y][cep_x] == 0)
-							array[cep_y][cep_x] = int(randi() % 100 < chance_to_terrain)
-							if array[cep_y][cep_x] == 1:
-								to_check.append(Vector2i.new(cep_x,cep_y))
-							else:
-								checked.append(Vector2i.new(cep_x,cep_y))
-			else:
-				for i in range(6):
-					if (current_element.x + help_array_2[i][0] >= 0) && (current_element.x + help_array_2[i][0] < hex_number.x) && (current_element.y + help_array_2[i][1] >= 0) && (current_element.y + help_array_2[i][1] < hex_number.y):
-						var cep_x = current_element.x + help_array_2[i][0]
-						var cep_y = current_element.y + help_array_2[i][1]
-						if !Vector2i.is_in_array(checked,Vector2i.new(cep_x,cep_y)) && !Vector2i.is_in_array(to_check,Vector2i.new(cep_x,cep_y)):
-							assert(array[cep_y][cep_x] == 0)
-							array[cep_y][cep_x] = int(randi() % 100 < chance_to_terrain)
-							if array[cep_y][cep_x] == 1:
-								to_check.append(Vector2i.new(cep_x,cep_y))
-							else:
-								checked.append(Vector2i.new(cep_x,cep_y))
+			for h in [0,1]:
+				if current_element.y % 2 == ((h + 1) % 2):
+					for i in range(6):
+						if (current_element.x + help_array[h][i][0] >= 0) && (current_element.x + help_array[h][i][0] < hex_number.x) && (current_element.y + help_array[h][i][1] >= 0) && (current_element.y + help_array[h][i][1] < hex_number.y):
+							var cep_x = current_element.x + help_array[h][i][0]
+							var cep_y = current_element.y + help_array[h][i][1]
+							if !Vector2j.is_in_array(checked,Vector2j.new(cep_x,cep_y)) && !Vector2j.is_in_array(to_check,Vector2j.new(cep_x,cep_y)):
+								assert(array[cep_y][cep_x] == 0)
+								array[cep_y][cep_x] = int(randi() % 100 < chance_to_terrain)
+								if array[cep_y][cep_x] == 1:
+									to_check.append(Vector2j.new(cep_x,cep_y))
+								else:
+									checked.append(Vector2j.new(cep_x,cep_y))
 				
 			#print_map(array)
 			for i in to_check:
 				assert(array[i.y][i.x] == 1)
 
-			assert(!Vector2i.is_in_array(checked,current_element))
+			assert(!Vector2j.is_in_array(checked,current_element))
 			
 			checked.append(current_element)
 			
@@ -151,8 +143,13 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 		for i in array:
 			for j in i:
 				number_of_real_hex += j
-		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
+				
+#		# Wystarczy tylko 66% wymaganych pól
+#		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
+#			break
+		if hex_number.x * hex_number.y * (chance_to_terrain * chance_to_terrain * 0.75 ) < 100 * 100 * number_of_real_hex:
 			break
+
 			
 		to_check.clear()
 		checked.clear()

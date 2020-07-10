@@ -20,14 +20,14 @@ _global_script_classes=[ {
 "path": "res://Terrain/SingleHex/SingleHex.gd"
 }, {
 "base": "Reference",
-"class": "Vector2i",
+"class": "Vector2j",
 "language": "GDScript",
-"path": "res://Classes/Vector2i.gd"
+"path": "res://Classes/Vector2j.gd"
 } ]
 _global_script_class_icons={
 "AntBase": "",
 "SingleHex": "",
-"Vector2i": ""
+"Vector2j": ""
 }
 
 [application]
