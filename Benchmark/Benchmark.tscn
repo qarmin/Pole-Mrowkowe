@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Benchmark/3x3full.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Benchmark/10x10full.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Benchmark/30x30full.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Benchmark/3x3Part.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Benchmark/10x10Part.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Benchmark/30x30Part.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Benchmark/Benchmark.gd" type="Script" id=4]
 [ext_resource path="res://Benchmark/LevelSettingsText.tres" type="DynamicFont" id=6]
 
@@ -218,7 +218,6 @@ __meta__ = {
 transform = Transform( 0.421552, -0.440265, 0.792756, -0.121515, 0.838919, 0.530518, -0.898626, -0.319973, 0.300149, 0, 5.3825, 0 )
 light_color = Color( 0.823529, 0.898039, 0.898039, 1 )
 light_energy = 0.8
-shadow_enabled = true
 directional_shadow_normal_bias = 0.03
 directional_shadow_bias_split_scale = 1.0
 [connection signal="animation_finished" from="CameraMovement" to="." method="_animation_finished"]

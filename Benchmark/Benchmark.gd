@@ -38,7 +38,7 @@ func test_started() -> void:
 	Options.benchmark_load_min_settings()
 	$WorldEnvironment.set_environment(null)
 	#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.8)
-	$DirectionalLight.set_shadow(false)
+	#$DirectionalLight.set_shadow(false) # Patrz niżej
 	
 	current_stage = 1
 	show_map(1)
@@ -117,7 +117,7 @@ func _animation_finished(anim_name: String) -> void:
 		$Settings.set_text("Configuring environment")
 		$WorldEnvironment.set_environment(load("res://default_env.tres"))
 		#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.0)
-		$DirectionalLight.set_shadow(true)
+		#$DirectionalLight.set_shadow(true) # TODO - Zrobić aby cienie były tylko w GLES 3 lub Vulkanie - GLES 2 ma bardzo kanciaste cienie
 		ready = false
 	elif anim_name == "CameraMovement4":
 		current_stage = 5

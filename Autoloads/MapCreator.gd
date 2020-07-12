@@ -11,7 +11,6 @@ var ant_base : SpatialMaterial
 var ant_array : Array = []
 
 
-
 func _ready() -> void:
 	
 	randomize() # Bez tego za każdym razem wychdzą takie same wyniki randi()
@@ -26,7 +25,7 @@ func _ready() -> void:
 		ant_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
 	
 	
-func generate_full_map(var hex_number : Vector2) -> void:#, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
+func generate_full_map(var hex_number : Vector2) -> Spatial:#, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
 	
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	
@@ -48,16 +47,10 @@ func generate_full_map(var hex_number : Vector2) -> void:#, var number_of_player
 			SH.set_surface_material(0,mat)
 			map.add_child(SH)
 			SH.set_owner(map)
-
 	
-	var packed_scene = PackedScene.new()
-	packed_scene.pack(map)
-#	if(ResourceSaver.save("user://GeneratedMap.tscn", packed_scene) != OK):
-	if(ResourceSaver.save("res://GeneratedMap.tscn", packed_scene,ResourceSaver.FLAG_REPLACE_SUBRESOURCE_PATHS) != OK):
-		printerr("Nie powiodła się próba zapisu mapy")
-	map.queue_free()
+	return map
 
-func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int) -> void:#, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
+func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int) -> Spatial:#, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
 	
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101) 
@@ -95,6 +88,7 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 		
 		while to_check.size() > 0:
 			current_element = to_check.pop_front()
+			
 			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
 			assert(array[current_element.y][current_element.x] == 1)
 			assert(current_element.x < hex_number.x && current_element.x >= 0)
@@ -171,12 +165,7 @@ func generate_partial_map(var hex_number : Vector2, var chance_to_terrain : int)
 				map.add_child(SH)
 				SH.set_owner(map)
 	
-	var packed_scene = PackedScene.new()
-	packed_scene.pack(map)
-#	if(ResourceSaver.save("user://GeneratedMap.tscn", packed_scene) != OK):
-	if(ResourceSaver.save("res://GeneratedMap.tscn", packed_scene,ResourceSaver.FLAG_REPLACE_SUBRESOURCE_PATHS) != OK):
-		printerr("Nie powiodła się próba zapisu mapy")
-	map.queue_free()
+	return map
 
 func print_map(array : Array) -> void:
 	print("Printed array")
@@ -188,11 +177,11 @@ func print_map(array : Array) -> void:
 			line += str(array[i][j]) + " "
 		print(line)
 	
-func populate_random_map(var ant_chance : int = 100, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
+func populate_random_map(var map : Spatial,var ant_chance : int = 100, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
 	assert(number_of_players > 0 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
 	
-	var map : Spatial = load("res://GeneratedMap.tscn").instance()
+	#var map : Spatial = load("res://GeneratedMap.tscn").instance()
 	var mat : SpatialMaterial
 	
 	var choosen_material : int
@@ -244,30 +233,28 @@ func populate_random_map(var ant_chance : int = 100, var number_of_players : int
 			helmet.set_owner(map)
 			body.set_owner(map)
 			
-			AN.queue_free()	
+			AN.queue_free()
 	
-			
+
+func save_map(var map : Spatial, var destroy : bool = false) -> void:
+
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(map)
-#	if(ResourceSaver.save("user://GeneratedMap.tscn", packed_scene) != OK):
-	
+
 	if(ResourceSaver.save("res://GeneratedMap.tscn", packed_scene) != OK):
 		printerr("Nie powiodła się próba zapisu mapy")
 	
-	map.queue_free()
+	if destroy == true:
+		map.queue_free()
 	
-
-
-	#					array[i - 1][j - 1] == 1
-	#					array[i - 1][  j  ] == 1
-	#					array[i - 1][j + 1] == 1
-	#					array[  i  ][j - 1] == 1
-	#					array[  i  ][j + 1] == 1
-	#					array[i + 1][  j  ] == 1
+			
+#	var packed_scene = PackedScene.new()
+#	packed_scene.pack(map)
+#	if(ResourceSaver.save("user://GeneratedMap.tscn", packed_scene) != OK):
 	
-	#					array[i + 1][j - 1] == 1
-	#					array[i + 1][  j  ] == 1
-	#					array[i + 1][j + 1] == 1
-	#					array[  i  ][j - 1] == 1
-	#					array[  i  ][j + 1] == 1
-	#					array[i - 1][  j  ] == 1
+#	if(ResourceSaver.save("res://GeneratedMap.tscn", packed_scene) != OK):
+#		printerr("Nie powiodła się próba zapisu mapy")
+#
+#	map.queue_free()
+	
+#	return map

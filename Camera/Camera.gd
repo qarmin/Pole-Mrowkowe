@@ -9,8 +9,8 @@ const SCROLL_SPEED : float = 1.0
 # Prędkość poruszania się za pomocą strzałek
 const MOVEMENT_SPEED : float = 10.0
 
-
-const MOVING_BOX : PoolVector3Array = PoolVector3Array([Vector3(0.0,0.0,0.0), Vector3(20.0,20.0,20.0)])# Wymiary paczki ograniczające gracza
+# Wymiary paczki ograniczające gracza
+const MOVING_BOX : PoolVector3Array = PoolVector3Array([Vector3(0.0,0.0,0.0), Vector3(20.0,20.0,20.0)])
 
 # Używane w obracaniu obrazem
 onready var rot_x : float = 0.0
