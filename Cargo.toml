@@ -1,0 +1,12 @@
+[package]
+name = "pole_mrowkowe"
+version = "0.1.0"
+authors = ["Rafał Mikrut"]
+publish = false
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+gdnative = { path = "../godot-rust/gdnative" }

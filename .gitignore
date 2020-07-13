@@ -11,3 +11,7 @@ logs/
 *.x86
 GeneratedMap.tscn
 NoGIT/
+
+
+# Rust 
+target/
