@@ -11,8 +11,9 @@
 ## W średnim terminie
 - Dodanie poruszania jednostek
 - Przejmowanie zasobów 
-
-
+- Dodać model domu
+- Obramówka wokół zaznaczonej jednostki
+- HUD - ilość zasobów etc.
 
 
 ## W odległej przyszłości
@@ -94,5 +95,53 @@
 - Kody
 - Freelook
 
-## 
+## Budynki
+- Budynek kultury
+- Spichlerz
+- Koszary
+- Szkółka leśnicza - strzelanie z łuku itp, odblokowuje w koszarach jednostki leśnicze
+
+
+
+## Inne
+- Im więcej mrówek tym większe prawdopodobieństwo, że zostanie przez ludzi wykonana pewna akcja np. demrówkozacja mająca na celu uszczupelenie mrówek(można zrobić wskaźnik podejrzliwości ludzi)
+- Efekty krótkotraweł , aktywowane np. przez wyoskie morale czy niskie podatki tj zwiększone wydobycie drewna
+- Walka - na specjalnej planszy 2D(coś w stylu ala Robin Hood legenda sharewwood) lub normalnie na planszy 3D
+
+
+2 typy jednostek 
+- Zwykły
+- Dstansowy
+
+3 poziomy ulepszeń (brąz, srebro złoto)
+
+4 podstawowe zasoby
+Złoto, żywność , drewno, woda, zasoby ludzkie
+
+Tłumaczenie ANG - PL
+
+Kataklizmy:
+- Jabłko spadło i pozabijało mrówki, ale plusem jest zwiększone "wydobycie" żywności
+- Bomba atomowa (usuwa wszystkie jednostki na mapie i zmniejsza przychód żywności)
+- Powódź i zamoczenie(śmierć) jednostek znajdujących się w poniżej pewnego poziomu
+- Deszcz zamacza część jednostek
+
+Parametry jednostek
+- Morale(np. jest zamoczona to ma zmniejszony tak/obronę)
+- Atak
+- Atak Dystansowy
+- Obrona
+- Obrona Dystansowa
+- Szczęście(chyba morale)
+
+Shader Wody/Ziemi
+
+Ataki zpecjalne 
+- Atak człowiekiem(nie wiem tylko jak mogłyby mrówki zmusić człowieka do wykonania danego polecenia)
+- Petardy
+
+Temperatura/ Pora Roku ma wpływ na dzietność jednostek, siłę jednostek dystansowych etc.
+
+
+- Morale(jeśli akurat jest np. zamoczona)
 
