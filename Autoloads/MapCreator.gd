@@ -26,9 +26,10 @@ func _ready() -> void:
 		ant_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
 
 
-func generate_full_map(map_array: Array, hex_number: Vector2) -> Spatial:  #, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
-	clear_map_array(map_array, hex_number)
-
+func generate_full_map(single_map : SingleMap, hex_number: Vector2) -> void:
+	single_map.set_size(hex_number)
+	single_map.initialize_full_fields()
+	
 	assert(hex_number.x > 0 && hex_number.y > 0)
 
 	var START_POSITION: Vector3 = Vector3(SINGLE_HEX_DIMENSION.x / 2.0, 0.0, SINGLE_HEX_DIMENSION.y / 2.0)  # Początkowe przesuniecie, nie idealne, ale może być
@@ -50,11 +51,12 @@ func generate_full_map(map_array: Array, hex_number: Vector2) -> Spatial:  #, va
 			map.add_child(SH)
 			SH.set_owner(map)
 
-	return map
+	single_map.set_map(map)
 
 
-func generate_partial_map(map_array: Array, hex_number: Vector2, chance_to_terrain: int) -> Spatial:  #, var number_of_players : int = GameSettings.MAX_TEAMS) -> void:
-	clear_map_array(map_array, hex_number)
+func generate_partial_map(single_map : SingleMap,  hex_number: Vector2, chance_to_terrain: int) -> void:
+	single_map.set_size(hex_number)
+	single_map.initialize_fields()
 
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
@@ -73,7 +75,7 @@ func generate_partial_map(map_array: Array, hex_number: Vector2, chance_to_terra
 
 	var to_check: Array = []
 	var checked: Array = []
-	var current_element: Vector2j = Vector2j.new(0, 0)
+	var current_element: Vector2j = Vector2j.new(0, 0) # GH40 - zmienić na Vector2i
 
 	while true:
 		# Resetowanie tablicy
@@ -118,7 +120,7 @@ func generate_partial_map(map_array: Array, hex_number: Vector2, chance_to_terra
 								else:
 									checked.append(Vector2j.new(cep_x, cep_y))
 
-			#print_map(array)
+			#SingleMap.print_map(array)
 			for i in to_check:
 				assert(array[i.y][i.x] == 1)
 
@@ -142,7 +144,9 @@ func generate_partial_map(map_array: Array, hex_number: Vector2, chance_to_terra
 		checked.clear()
 
 		print("Nie udało mi się stworzyć poprawnego algrotymu, sprawdzam ponownie")
-#		print_map(array)
+#		SingleMap.print_map(array)
+
+	single_map.set_fields(array)
 
 	for i in hex_number.x:
 		for j in hex_number.y:
@@ -157,46 +161,52 @@ func generate_partial_map(map_array: Array, hex_number: Vector2, chance_to_terra
 				SH.set_surface_material(0, mat)
 				map.add_child(SH)
 				SH.set_owner(map)
+				
+	single_map.set_map(map)
 
-	return map
-
-
-func print_map(array: Array) -> void:
-	print("Printed array")
-	for i in range(array.size()):
-		var line: String = ""
-		if i % 2 == 1:
-			line += " "
-		for j in range(array[i].size()):
-			line += str(array[i][j]) + " "
-		print(line)
-
-
-func populate_map(map_array: Array, map: Spatial, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
+func populate_map(single_map : SingleMap, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
 	push_warning("TODO - Tworzenie mapy")
 
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
-
-	# Racze powinno się to wywołać na mapie już przeznaczonej do 
-	var first_player: int = randi() % map.get_child_count()
-
+	assert(single_map.number_of_terrain > 2 * number_of_players)
+	
+	var temp_fields : Array
+	var curr : Vector2j = Vector2j.new(0,0)
+	var users_planted : int = 0
+	
+	# Wybieranie miejsca dla pierwszego gracza
+	var first_player: int = randi() % single_map.number_of_terrain
+	while(true):
+		curr.x = randi() % int(single_map.size.x)
+		curr.y = randi() % int(single_map.size.y)
+		if temp_fields[curr.y][curr.x] == 1:
+			single_map.players.append(curr)
+			
+			users_planted += 1
+			break
+	
+	while(single_map.players.size() != number_of_players):
+		temp_fields = recalculate_map(single_map.fields, single_map.players)
+		
+		
+		pass
+	
 	pass
-
-
-func clear_map_array(map_array: Array, map_size: Vector2) -> void:
-	map_array.clear()
-
-	for i in range(MAP_VALUES.MAX_MAP_VALUE):
-		map_array.append([])
-
-	for i in range(map_size.y):
-		map_array[MAP_VALUES.MAP].append(PoolIntArray())
-		for j in range(map_size.x):
-			map_array[MAP_VALUES.MAP][i].append(0)
+	
+func recalculate_map(var fields : Array, var players : Array) -> Array:
+	push_warning("TODO - Recalculate Map")
+	
+	
+	
+	return []
 	pass
+	
+func choose_one_of_closer_point() -> void:
+	push_warning("TODO - Recalculate Map")
+	pass
+	
 
-
-func serialize_map(map: Spatial) -> void:
+func serialize_map(_single_map : SingleMap) -> void:
 	push_warning("TODO - Serializacja mapy")
 
 
@@ -204,11 +214,11 @@ func deserialize_map() -> void:
 	push_warning("TODO - Wczytywanie mapy z pliku i jej tworzenie")
 
 
-func populate_map_buildings(map: Spatial) -> void:
+func populate_map_buildings(_single_map : SingleMap) -> void:
 	push_warning("TODO - Tworzenie głównej siedziby i być może jakichś podstawowych budynków, może być przydatne przy tworzeniu mapy")
 
 
-func populate_random_map(map_array: Array, map: Spatial, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
+func populate_random_map(single_map : SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
 
@@ -217,7 +227,7 @@ func populate_random_map(map_array: Array, map: Spatial, ant_chance: int = 100, 
 
 	var choosen_material: int
 
-	for i in map.get_children():
+	for i in single_map.map.get_children():
 		choosen_material = randi() % (number_of_players + 1)
 		if choosen_material == 0:  # Materiał dla hexa
 			mat = texture_base
@@ -258,23 +268,23 @@ func populate_random_map(map_array: Array, map: Spatial, ant_chance: int = 100, 
 
 			outfit.set_surface_material(0, mat)
 			i.add_child(new_ant)
-			new_ant.set_owner(map)
-			outfit.set_owner(map)
-			helmet.set_owner(map)
-			body.set_owner(map)
+			new_ant.set_owner(single_map.map)
+			outfit.set_owner(single_map.map)
+			helmet.set_owner(single_map.map)
+			body.set_owner(single_map.map)
 
 			AN.queue_free()
 
 
-func save_map(map_array: Array, map: Spatial, destroy: bool = false) -> void:
+func save_map(single_map : SingleMap, destroy: bool = false) -> void:
 	var packed_scene = PackedScene.new()
-	packed_scene.pack(map)
+	packed_scene.pack(single_map.map)
 
 	if ResourceSaver.save("res://GeneratedMap.tscn", packed_scene) != OK:
 		printerr("Nie powiodła się próba zapisu mapy")
 
 	if destroy == true:
-		map.queue_free()
+		single_map.map.queue_free()
 
 #	var packed_scene = PackedScene.new()
 #	packed_scene.pack(map)

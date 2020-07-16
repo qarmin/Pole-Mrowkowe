@@ -7,9 +7,9 @@ func _ready() -> void:
 
 
 func test_create_map():
-	var map: Spatial
-	var map_array: Array
-	map = MapCreator.generate_partial_map(map_array, Vector2(10, 10), 90)
-	MapCreator.populate_random_map(map_array, map, 80)
-	add_child(map)
-	MapCreator.save_map(map_array, map)
+	var single_map : SingleMap = SingleMap.new()
+
+	MapCreator.generate_partial_map(single_map, Vector2(10, 10), 90)
+	MapCreator.populate_random_map(single_map, 80)
+	add_child(single_map.map)
+	MapCreator.save_map(single_map)

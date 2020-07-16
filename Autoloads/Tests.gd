@@ -5,9 +5,9 @@ const PRINT_TESTS: bool = false
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-#	Vector2j_test()
-#	for i in range(1): # Stress test wykonać dla wartości > 5
-#		map_test()
+	Vector2j_test()
+	for _i in range(1): # Stress test wykonać dla wartości > 5
+		map_test()
 
 	print("Wykonano wszystkie testy")
 
@@ -45,24 +45,27 @@ func map_test() -> void:
 	if PRINT_TESTS:
 		print("Wykonuję test map")
 
-	var map: Spatial
-	var map_array: Array
+	var single_map : SingleMap = SingleMap.new()
 
-	map = MapCreator.generate_partial_map(map_array, Vector2(13, 13), 75)
-	assert(check_integration_of_map(map, 13, 13))
-	map.queue_free()
-	map = MapCreator.generate_partial_map(map_array, Vector2(9, 9), 75)
-	assert(check_integration_of_map(map, 9, 9))
-	map.queue_free()
-	map = MapCreator.generate_partial_map(map_array, Vector2(15, 3), 75)
-	assert(check_integration_of_map(map, 15, 3))
-	map.queue_free()
-	map = MapCreator.generate_full_map(map_array, Vector2(15, 3))
-	assert(check_integration_of_map(map, 15, 3))
-	map.queue_free()
-	map = MapCreator.generate_full_map(map_array, Vector2(13, 13))
-	assert(check_integration_of_map(map, 13, 13))
-	map.queue_free()
+	MapCreator.generate_partial_map(single_map, Vector2(13, 13), 75)
+	assert(check_integration_of_map(single_map.map, 13, 13))
+	single_map.reset()
+	MapCreator.generate_partial_map(single_map, Vector2(9, 9), 75)
+	assert(check_integration_of_map(single_map.map, 9, 9))
+	single_map.reset()
+	MapCreator.generate_partial_map(single_map, Vector2(15, 3), 75)
+	assert(check_integration_of_map(single_map.map, 15, 3))
+	single_map.reset()
+	MapCreator.generate_full_map(single_map, Vector2(15, 3))
+	assert(check_integration_of_map(single_map.map, 15, 3))
+	single_map.reset()
+	MapCreator.generate_full_map(single_map, Vector2(13, 13))
+	assert(check_integration_of_map(single_map.map, 13, 13))
+	single_map.reset()
+	MapCreator.generate_full_map(single_map, Vector2(20, 10))
+	MapCreator.populate_map(single_map,4)
+	assert(check_integration_of_map(single_map.map, 20, 10))
+	single_map.reset()
 
 
 # Sprawdza jedynie czy nie ma POJEDYNCZYCH odłączonych wysepek, nie jest to w 100% pewny test, ale przy wykorzystaniu dużych map lub testowaniu stresowym powinno wywalić błędy jeśli są

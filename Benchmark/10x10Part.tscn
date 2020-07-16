@@ -1,13 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Units/Outfit/OutfitBase.tres" type="Material" id=1]
 [ext_resource path="res://Units/Body/Body.tres" type="Material" id=2]
 [ext_resource path="res://Terrain/SingleHex/SingleHexBase.tres" type="Material" id=3]
 [ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Terrain/SingleHex/SingleHexMesh.tres" type="ArrayMesh" id=5]
 [ext_resource path="res://Units/Helmets/Bronze.tres" type="Material" id=6]
 [ext_resource path="res://Terrain/SingleHex/SingleHexTEAM1.tres" type="Material" id=7]
-[ext_resource path="res://Terrain/SingleHex/SingleHex.gd" type="Script" id=8]
 [ext_resource path="res://Units/Outfit/OutfitTEAM1.tres" type="Material" id=9]
 [ext_resource path="res://Terrain/SingleHex/SingleHexTEAM2.tres" type="Material" id=10]
 [ext_resource path="res://Units/Outfit/OutfitTEAM2.tres" type="Material" id=11]
@@ -27,17 +25,13 @@ material = ExtResource( 6 )
 [node name="Map" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.66, 0, -7.5 )
 
-[node name="SingleHex0" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex0" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.0580616, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
-[node name="SingleHex20" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex20" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.191081, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex20"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -56,11 +50,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex40" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex40" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.587764, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex40"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -79,29 +71,21 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex50" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex50" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.0995436, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex60" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex60" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.190087, 9.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
-[node name="SingleHex70" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex70" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.586317, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
-[node name="SingleHex80" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex80" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.690995, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex80"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -120,11 +104,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex90" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex90" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.891491, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex90"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -143,17 +125,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex1" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex1" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.691053, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex11" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex11" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.280222, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex11"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -172,11 +150,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex21" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex21" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.663498, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex21"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -195,11 +171,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex41" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex41" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.53592, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex41"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -218,17 +192,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex51" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex51" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.686655, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
-[node name="SingleHex61" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex61" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.0494459, 9.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex61"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -247,11 +217,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex71" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex71" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.270606, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex71"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -270,11 +238,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex81" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex81" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.917468, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex81"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -293,11 +259,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex91" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex91" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.86616, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex91"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -316,29 +280,21 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex2" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex2" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33, 0.349184, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex12" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex12" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.966187, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex22" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex22" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33, 0.974946, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
-[node name="SingleHex42" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex42" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33, 0.266796, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex42"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -357,17 +313,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex52" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex52" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.508317, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex72" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex72" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.265414, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex72"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -386,17 +338,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex82" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex82" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33, 0.736549, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex92" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex92" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.681652, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex92"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -415,11 +363,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex3" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex3" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.062, 0.565088, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex3"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -438,11 +384,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex13" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex13" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.983646, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex13"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -461,11 +405,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex33" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex33" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.340451, 5.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex33"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -484,17 +426,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex43" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex43" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.062, 0.214409, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex53" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex53" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.332893, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex53"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -513,11 +451,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex83" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex83" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.062, 0.758385, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex83"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -536,11 +472,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex93" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex93" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.214473, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex93"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -559,17 +493,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex4" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex4" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.459504, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex14" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex14" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.567139, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex14"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -588,11 +518,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex24" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex24" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.47401, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex24"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -611,17 +539,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex34" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex34" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.639804, 5.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex44" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex44" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.707581, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex44"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -640,11 +564,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex74" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex74" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.824598, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex74"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -663,17 +585,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex84" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex84" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.552824, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex94" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex94" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.446778, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex94"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -692,41 +610,29 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex5" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex5" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.500336, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex15" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex15" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.13357, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex25" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex25" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.594987, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex35" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex35" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.750608, 5.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
-[node name="SingleHex45" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex45" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.505651, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex55" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex55" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.680389, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex55"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -745,17 +651,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex65" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex65" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.394796, 9.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex75" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex75" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.846527, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex75"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -774,17 +676,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex85" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex85" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.715133, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
-[node name="SingleHex95" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex95" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.741706, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex95"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -803,11 +701,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex6" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex6" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.27542, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex6"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -826,23 +722,17 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex16" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex16" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.124, 0.906825, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex26" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex26" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.47472, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex46" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex46" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.579361, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex46"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -861,11 +751,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex56" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex56" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.124, 0.982195, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex56"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -884,17 +772,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex76" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex76" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.124, 0.328078, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex86" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex86" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.00415948, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex86"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -913,11 +797,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex96" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex96" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.124, 0.193143, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex96"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -936,11 +818,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex7" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex7" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.701403, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex7"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -959,17 +839,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex17" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex17" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.729734, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex27" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex27" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.713817, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex27"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -988,11 +864,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex37" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex37" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.426862, 5.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex37"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1011,17 +885,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex47" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex47" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.949993, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex57" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex57" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.665453, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex57"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1040,17 +910,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex67" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex67" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.539868, 9.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
-[node name="SingleHex77" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex77" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.672722, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex77"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1069,11 +935,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex87" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex87" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.56778, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex87"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1092,11 +956,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex97" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex97" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.378967, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex97"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1115,11 +977,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex8" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex8" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.741502, 0.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex8"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1138,11 +998,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex18" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex18" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.0855394, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex18"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1161,41 +1019,29 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex28" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex28" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.727572, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
-[node name="SingleHex38" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex38" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.405322, 5.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex48" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex48" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.859011, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex58" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex58" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.410684, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex68" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex68" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.926194, 9.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 12 )
-script = ExtResource( 8 )
 
-[node name="SingleHex78" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex78" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.00482701, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex78"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1214,23 +1060,17 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex98" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex98" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.322005, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 14 )
-script = ExtResource( 8 )
 
-[node name="SingleHex19" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex19" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.557003, 2.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
-[node name="SingleHex29" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex29" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.318128, 3.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex29"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1249,11 +1089,9 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex49" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex49" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.0534068, 6.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 7 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex49"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1272,17 +1110,13 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex59" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex59" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.573227, 8.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
-[node name="SingleHex69" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex69" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.786995, 9.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 10 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex69"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
@@ -1301,23 +1135,17 @@ material/0 = null
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[node name="SingleHex79" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex79" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.550597, 11.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex89" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex89" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.523391, 12.75 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
-[node name="SingleHex99" type="MeshInstance" parent="." instance=ExtResource( 4 )]
+[node name="SingleHex99" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.528094, 14.25 )
-mesh = ExtResource( 5 )
 material/0 = ExtResource( 3 )
-script = ExtResource( 8 )
 
 [node name="Ant" type="Spatial" parent="SingleHex99"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
