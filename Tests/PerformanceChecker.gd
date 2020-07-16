@@ -6,7 +6,6 @@ extends Spatial
 #Testowe dodawanie mrówek na mapie
 #export (PackedScene) var Ant
 
-
 #func _ready() -> void:
 # TODO - to nie jest już potrzebne, później należy to usunąć
 #	var Single_Hex_texture_array : Array = [load("res://Terrain/SingleHex/SingleHexTEAM1.tres"),
@@ -34,6 +33,6 @@ extends Spatial
 #					printerr("Nie powinno być mrówki na polu neutralnym")
 #				else:
 #					j.get_node("Outfit").set_surface_material(0,Ant_texture_array[SingleHexOwner[i]])
-	
+
 #	for i in range(0,hex_number): # Sprawdzanie przynależności Hexu do danego rodzaju
 #		print(str(i) + ". " + str(SingleHexOwner[i]))

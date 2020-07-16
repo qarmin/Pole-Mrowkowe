@@ -2,21 +2,20 @@ extends Node
 
 # Todo - zapisywanie ustawień do pliku jeśli nie jest to akurat zapisywanie ustawień przez benchmark
 
-var vsync : bool = 0
-var msaa : int = 0
-var default_environment : String = ""
-var framebuffer_allocation : int = 0
-var directional_shadow_size : int = 0
-var shadow_atlas_size : int = 0
-var filter_mode : int = 0
-var texture_array_reflections : bool = false
-var high_quality_ggx : bool = false
-var irradiance_max_size : int = 0
-var force_vertex_shading : bool = false
-var force_lambert_over_burley : bool = false
-var force_blinn_over_ggx : bool = false
-var use_nearest_mipmap_filter : bool = false
-
+var vsync: bool = 0
+var msaa: int = 0
+var default_environment: String = ""
+var framebuffer_allocation: int = 0
+var directional_shadow_size: int = 0
+var shadow_atlas_size: int = 0
+var filter_mode: int = 0
+var texture_array_reflections: bool = false
+var high_quality_ggx: bool = false
+var irradiance_max_size: int = 0
+var force_vertex_shading: bool = false
+var force_lambert_over_burley: bool = false
+var force_blinn_over_ggx: bool = false
+var use_nearest_mipmap_filter: bool = false
 
 
 func save_current_settings_state():
@@ -34,7 +33,7 @@ func save_current_settings_state():
 	force_lambert_over_burley = ProjectSettings.get_setting("rendering/quality/shading/force_lambert_over_burley")
 	force_blinn_over_ggx = ProjectSettings.get_setting("rendering/quality/shading/force_blinn_over_ggx")
 	use_nearest_mipmap_filter = ProjectSettings.get_setting("rendering/quality/filters/use_nearest_mipmap_filter")
-	
+
 
 func load_saved_settings_state():
 	ProjectSettings.set_setting("display/window/vsync/use_vsync", vsync)
@@ -51,7 +50,8 @@ func load_saved_settings_state():
 	ProjectSettings.set_setting("rendering/quality/shading/force_lambert_over_burley", force_lambert_over_burley)
 	ProjectSettings.set_setting("rendering/quality/shading/force_blinn_over_ggx", force_blinn_over_ggx)
 	ProjectSettings.set_setting("rendering/quality/filters/use_nearest_mipmap_filter", use_nearest_mipmap_filter)
-	
+
+
 func load_min_settings():
 	ProjectSettings.set_setting("display/window/vsync/use_vsync", true)
 	ProjectSettings.set_setting("rendering/quality/filters/msaa", Viewport.MSAA_DISABLED)
@@ -68,6 +68,7 @@ func load_min_settings():
 	ProjectSettings.set_setting("rendering/quality/shading/force_blinn_over_ggx", true)
 	ProjectSettings.set_setting("rendering/quality/filters/use_nearest_mipmap_filter", true)
 
+
 func load_max_settings():
 	ProjectSettings.set_setting("display/window/vsync/use_vsync", false)
 	ProjectSettings.set_setting("rendering/quality/filters/msaa", Viewport.MSAA_16X)
@@ -83,10 +84,11 @@ func load_max_settings():
 	ProjectSettings.set_setting("rendering/quality/shading/force_lambert_over_burley", false)
 	ProjectSettings.set_setting("rendering/quality/shading/force_blinn_over_ggx", false)
 	ProjectSettings.set_setting("rendering/quality/filters/use_nearest_mipmap_filter", false)
-	
+
+
 func benchmark_load_min_settings():
 	get_viewport().msaa = Viewport.MSAA_DISABLED
 
+
 func benchmark_load_max_settings():
 	get_viewport().msaa = Viewport.MSAA_16X
-
