@@ -62,7 +62,9 @@ static func print_map(array: Array) -> void:
 	for i in range(array.size()):
 		var line: String = ""
 		if i % 2 == 1:
-			line += " "
+			line += "  "
 		for j in range(array[i].size()):
-			line += str(array[i][j]) + " "
+			line += str(array[i][j]) + "  "
+			if array[i][j] < 10:
+				line += " "
 		print(line)

@@ -174,32 +174,77 @@ func populate_map(single_map : SingleMap, number_of_players: int = GameSettings.
 	var curr : Vector2j = Vector2j.new(0,0)
 	var users_planted : int = 0
 	
+	
 	# Wybieranie miejsca dla pierwszego gracza
-	var first_player: int = randi() % single_map.number_of_terrain
 	while(true):
 		curr.x = randi() % int(single_map.size.x)
 		curr.y = randi() % int(single_map.size.y)
-		if temp_fields[curr.y][curr.x] == 1:
+		if single_map.fields[curr.y][curr.x] == 1:
 			single_map.players.append(curr)
-			
 			users_planted += 1
 			break
 	
-	while(single_map.players.size() != number_of_players):
-		temp_fields = recalculate_map(single_map.fields, single_map.players)
-		
-		
-		pass
+	temp_fields = recalculate_map(single_map.fields, single_map.players)
 	
 	pass
 	
 func recalculate_map(var fields : Array, var players : Array) -> Array:
 	push_warning("TODO - Recalculate Map")
+	var smallest_array : Array = []
+	var current_element : Vector2j = Vector2j.new(0,0)
+	var current_value : int = 0
 	
+	for i in range(fields.size()):
+		smallest_array.append([])
+		for _j in range(fields[i].size()):
+			smallest_array[i].append(-1)
+			
+	var checked : Array = []
+	var to_check : Array = []
+	var to_check_value : Array = []
 	
-	
-	return []
-	pass
+	for r in players:
+		to_check.append(r)
+		to_check_value.append(0)
+		smallest_array[r.y][r.x] = 0
+ 
+		while to_check.size() > 0:
+			current_element = to_check.pop_front()
+			current_value = to_check_value.pop_front()
+
+			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
+
+			var help_array = [[[0, -1], [1, -1], [-1, 0], [1, 0], [0, 1], [1, 1]], [[-1, -1], [0, -1], [-1, 0], [1, 0], [-1, 1], [0, 1]]]
+
+			for h in [0, 1]:
+				if current_element.y % 2 == ((h + 1) % 2):
+					for i in range(6):
+						if (
+							(current_element.x + help_array[h][i][0] >= 0)
+							&& (current_element.x + help_array[h][i][0] < smallest_array[0].size())
+							&& (current_element.y + help_array[h][i][1] >= 0)
+							&& (current_element.y + help_array[h][i][1] < smallest_array.size())
+						):
+#							print("A")
+							var cep_x = current_element.x + help_array[h][i][0]
+							var cep_y = current_element.y + help_array[h][i][1]
+							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)): 
+								if fields[cep_y][cep_x] == 1:
+									if smallest_array[cep_y][cep_x] == -1 || smallest_array[cep_y][cep_x] > current_value:
+										smallest_array[cep_y][cep_x] = current_value
+										to_check.append(Vector2j.new(cep_x, cep_y))
+										to_check_value.append(current_value + 1)
+
+			assert(! Vector2j.is_in_array(checked, current_element))
+
+			checked.append(current_element)
+			
+	SingleMap.print_map(smallest_array)
+	# Do celów testowych, bo działa tylko przy pełnej mapie
+	for i in smallest_array: 
+		for j in i:
+			assert(j != -1)
+	return smallest_array
 	
 func choose_one_of_closer_point() -> void:
 	push_warning("TODO - Recalculate Map")
