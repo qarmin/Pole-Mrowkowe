@@ -185,11 +185,13 @@ func populate_map(single_map : SingleMap, number_of_players: int = GameSettings.
 			break
 	
 	temp_fields = recalculate_map(single_map.fields, single_map.players)
+	choose_one_of_closer_point(temp_fields)
+	SingleMap.print_map(temp_fields)
 	
 	pass
 	
 func recalculate_map(var fields : Array, var players : Array) -> Array:
-	push_warning("TODO - Recalculate Map")
+	#push_warning("TODO - Recalculate Map")
 	var smallest_array : Array = []
 	var current_element : Vector2j = Vector2j.new(0,0)
 	var current_value : int = 0
@@ -246,9 +248,30 @@ func recalculate_map(var fields : Array, var players : Array) -> Array:
 			assert(j != -1)
 	return smallest_array
 	
-func choose_one_of_closer_point() -> void:
+func choose_one_of_closer_point(var array : Array) -> Vector2j:
 	push_warning("TODO - Recalculate Map")
-	pass
+	var biggest_numbers : Array = []
+	var biggest_number : int
+	var biggest_vector : Vector2j
+	
+	for z in range(3):
+		biggest_vector = Vector2j.new(0,0)
+		biggest_number = -1000
+		for y in range(array.size()):
+			for x in range(array[y].size()):
+				if array[y][x] > biggest_number:
+					biggest_number = array[y][x] 
+					biggest_vector = Vector2j.new(x,y)
+		biggest_numbers.append(biggest_vector)
+		print("x: " + str(biggest_vector.x) +" y: " + str(biggest_vector.y))
+		print(biggest_number)
+		array[biggest_vector.y][biggest_vector.x] = -1
+		
+	
+	
+	
+	
+	return Vector2j.new(0,0)
 	
 
 func serialize_map(_single_map : SingleMap) -> void:
