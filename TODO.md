@@ -21,6 +21,9 @@
 - Dodać AI
 
 
+## Przy portowaniu do Godota 4
+- Zmienić wszystkie Vector2 na Vector2i(oczywiście gdzie to konieczne) i wszystkie Vector2j
+
 ## Nieporządkowane
 - Dodać UI
 - Dodać menu wyboru parametrów rozgrywki

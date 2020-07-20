@@ -26,10 +26,10 @@ func _ready() -> void:
 		ant_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
 
 
-func generate_full_map(single_map : SingleMap, hex_number: Vector2) -> void:
+func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
 	single_map.set_size(hex_number)
 	single_map.initialize_full_fields()
-	
+
 	assert(hex_number.x > 0 && hex_number.y > 0)
 
 	var START_POSITION: Vector3 = Vector3(SINGLE_HEX_DIMENSION.x / 2.0, 0.0, SINGLE_HEX_DIMENSION.y / 2.0)  # Początkowe przesuniecie, nie idealne, ale może być
@@ -54,7 +54,7 @@ func generate_full_map(single_map : SingleMap, hex_number: Vector2) -> void:
 	single_map.set_map(map)
 
 
-func generate_partial_map(single_map : SingleMap,  hex_number: Vector2, chance_to_terrain: int) -> void:
+func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_terrain: int) -> void:
 	single_map.set_size(hex_number)
 	single_map.initialize_fields()
 
@@ -75,7 +75,7 @@ func generate_partial_map(single_map : SingleMap,  hex_number: Vector2, chance_t
 
 	var to_check: Array = []
 	var checked: Array = []
-	var current_element: Vector2j = Vector2j.new(0, 0) # GH40 - zmienić na Vector2i
+	var current_element: Vector2j = Vector2j.new(0, 0)  # GH40 - zmienić na Vector2i
 
 	while true:
 		# Resetowanie tablicy
@@ -161,43 +161,43 @@ func generate_partial_map(single_map : SingleMap,  hex_number: Vector2, chance_t
 				SH.set_surface_material(0, mat)
 				map.add_child(SH)
 				SH.set_owner(map)
-				
+
 	single_map.set_map(map)
 
-func populate_map(single_map : SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains : int = 0) -> void:
 
+func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> void:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(single_map.number_of_terrain > 2 * number_of_players)
 	assert(max_number_of_additional_terrains >= 0)
-	
-	var temp_fields : Array
-	var curr : Vector2j = Vector2j.new(0,0)
-	
+
+	var temp_fields: Array
+	var curr: Vector2j = Vector2j.new(0, 0)
+
 	# Wybieranie miejsca dla pierwszego gracza
-	while(true):
+	while true:
 		curr.x = randi() % int(single_map.size.x)
 		curr.y = randi() % int(single_map.size.y)
 		if single_map.fields[curr.y][curr.x] == 1:
 			single_map.players.append(curr)
 			break
-	
+
 	# Wybieranie miejsc dla innych graczy
-	while(single_map.players.size() < number_of_players):
+	while single_map.players.size() < number_of_players:
 		temp_fields = recalculate_map(single_map.fields, single_map.players)
-		single_map.players.append(choose_one_of_closer_point(temp_fields,single_map.number_of_terrain, single_map.players.size()))
-	 
+		single_map.players.append(choose_one_of_closer_point(temp_fields, single_map.number_of_terrain, number_of_players))
+
 	# Narysowanie głównego miejsca dla każdego z osób/przeciwników
-	
-	var single_hex : Spatial
-	
+
+	var single_hex: Spatial
+
 	for i in range(single_map.players.size()):
 		single_hex = single_map.map.get_node(NODE_BASE_NAME + str(single_map.players[i].y * single_map.size.x + single_map.players[i].x))
 		single_hex.set_surface_material(0, texture_array[i])
-	
+
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
 #	var terrain_to_check : Array = []
 #	var terrain_checked : Array = []
-	push_warning("TODO - Dodać określoną liczbę początkową pól(nie wiem jak do końca to zaimplementować).")
+	push_warning("TODO - Dodać określoną liczbę początkową pól(nie wiem jak do końca to zaimplementować), póki co jest jedno pole dla każdego gracza.")
 #	while(max_number_of_additional_terrains > 0):
 #		for i in range(single_map.players.size()):
 #
@@ -205,8 +205,9 @@ func populate_map(single_map : SingleMap, number_of_players: int = GameSettings.
 #
 #			pass
 #		max_number_of_additional_terrains -= 1
-	
-	
+
+	push_warning("TODO - Dodać podstawowe budynki do mapy podczas tworzeni - np. główne mrowisko")
+
 #	## START PRINT MAP
 #	SingleMap.print_map(single_map.fields)
 #
@@ -216,26 +217,27 @@ func populate_map(single_map : SingleMap, number_of_players: int = GameSettings.
 	SingleMap.print_map(single_map.fields)
 #	## END PRINT MAP
 	return
-	
-func recalculate_map(var fields : Array, var players : Array) -> Array:
-	var smallest_array : Array = []
-	var current_element : Vector2j = Vector2j.new(0,0)
-	var current_value : int = 0
-	
+
+
+func recalculate_map(fields: Array, players: Array) -> Array:
+	var smallest_array: Array = []
+	var current_element: Vector2j = Vector2j.new(0, 0)
+	var current_value: int = 0
+
 	for i in range(fields.size()):
 		smallest_array.append([])
 		for _j in range(fields[i].size()):
 			smallest_array[i].append(-1)
-			
-	var checked : Array = []
-	var to_check : Array = []
-	var to_check_value : Array = []
-	
+
+	var checked: Array = []
+	var to_check: Array = []
+	var to_check_value: Array = []
+
 	for r in players:
 		to_check.append(r)
 		to_check_value.append(0)
 		smallest_array[r.y][r.x] = 0
- 
+
 		while to_check.size() > 0:
 			current_element = to_check.pop_front()
 			current_value = to_check_value.pop_front()
@@ -256,7 +258,7 @@ func recalculate_map(var fields : Array, var players : Array) -> Array:
 #							print("A")
 							var cep_x = current_element.x + help_array[h][i][0]
 							var cep_y = current_element.y + help_array[h][i][1]
-							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)): 
+							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
 								if fields[cep_y][cep_x] == 1:
 									if smallest_array[cep_y][cep_x] == -1 || smallest_array[cep_y][cep_x] > current_value:
 										smallest_array[cep_y][cep_x] = current_value + 1
@@ -269,44 +271,49 @@ func recalculate_map(var fields : Array, var players : Array) -> Array:
 		checked = []
 		to_check = []
 		to_check_value = []
-			
+
 	#SingleMap.print_map(smallest_array)
 	# Do celów testowych, bo działa tylko przy pełnej mapie
 #	for i in smallest_array: 
 #		for j in i:
 #			assert(j != -1)
 	return smallest_array
-	
-func choose_one_of_closer_point(var array : Array, var number_of_terrain : int, var number_of_players : int) -> Vector2j:
-	var biggest_numbers : Array = []
-	var biggest_number : int
-	var biggest_vector : Vector2j
-	
+
+
+func choose_one_of_closer_point(array: Array, number_of_terrain: int, number_of_players: int) -> Vector2j:
+	var biggest_numbers: Array = []
+	var biggest_number: int
+	var biggest_vector: Vector2j
+
 	#for _z in range(1):
 # warning-ignore:integer_division
-	for _z in range(max(3,int(number_of_terrain / (number_of_players + 1)))):
-		biggest_vector = Vector2j.new(-1,-1)
+	print("Wylosowana liczba " + str(int(number_of_terrain / (number_of_players + 1))))
+#	print("Liczba terenów " + str(number_of_terrain))
+#	print("Liczba graczy " + str(number_of_players))
+# warning-ignore:integer_division
+	for _z in range(0, int(number_of_terrain / (number_of_players + 1))):
+		biggest_vector = Vector2j.new(-1, -1)
 		biggest_number = -1
 		for y in range(array.size()):
 			for x in range(array[y].size()):
 				if array[y][x] > biggest_number:
-					biggest_number = array[y][x] 
-					biggest_vector = Vector2j.new(x,y)
+					biggest_number = array[y][x]
+					biggest_vector = Vector2j.new(x, y)
 		if biggest_number != 0:
+			print("AA")
 			biggest_numbers.append(biggest_vector)
-	#		print("x: " + str(biggest_vector.x) +" y: " + str(biggest_vector.y))
-	#		print(biggest_number)
 			array[biggest_vector.y][biggest_vector.x] = -1
 		else:
 			break
-	
+
 	if biggest_numbers.size() == 0:
 		assert(false)
-		return Vector2j.new(0,0)
-	
-	return biggest_numbers[randi() % biggest_numbers.size()]	
+		return Vector2j.new(0, 0)
 
-func serialize_map(_single_map : SingleMap) -> void:
+	return biggest_numbers[randi() % biggest_numbers.size()]
+
+
+func serialize_map(_single_map: SingleMap) -> void:
 	push_warning("TODO - Serializacja mapy")
 
 
@@ -314,11 +321,11 @@ func deserialize_map() -> void:
 	push_warning("TODO - Wczytywanie mapy z pliku i jej tworzenie")
 
 
-func populate_map_buildings(_single_map : SingleMap) -> void:
+func populate_map_buildings(_single_map: SingleMap) -> void:
 	push_warning("TODO - Tworzenie głównej siedziby i być może jakichś podstawowych budynków, może być przydatne przy tworzeniu mapy")
 
 
-func populate_random_map(single_map : SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
+func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
 
@@ -376,7 +383,7 @@ func populate_random_map(single_map : SingleMap, ant_chance: int = 100, number_o
 			AN.queue_free()
 
 
-func save_map(single_map : SingleMap, destroy: bool = false) -> void:
+func save_map(single_map: SingleMap, destroy: bool = false) -> void:
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(single_map.map)
 

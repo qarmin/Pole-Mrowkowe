@@ -45,35 +45,35 @@ func map_test() -> void:
 	if PRINT_TESTS:
 		print("Wykonuję test map")
 
-	var single_map : SingleMap = SingleMap.new()
+	var single_map: SingleMap = SingleMap.new()
 
 	MapCreator.generate_partial_map(single_map, Vector2(13, 13), 75)
 	assert(check_integration_of_map(single_map.map, 13, 13))
-	MapCreator.populate_map(single_map,4)
+	MapCreator.populate_map(single_map, 4)
 	single_map.reset()
-	
+
 	MapCreator.generate_partial_map(single_map, Vector2(9, 9), 75)
 	assert(check_integration_of_map(single_map.map, 9, 9))
-	MapCreator.populate_map(single_map,3)
+	MapCreator.populate_map(single_map, 3)
 	single_map.reset()
 
 	MapCreator.generate_partial_map(single_map, Vector2(15, 3), 75)
 	assert(check_integration_of_map(single_map.map, 15, 3))
-	MapCreator.populate_map(single_map,2)
+	MapCreator.populate_map(single_map, 2)
 	single_map.reset()
 
 	MapCreator.generate_full_map(single_map, Vector2(15, 3))
 	assert(check_integration_of_map(single_map.map, 15, 3))
-	MapCreator.populate_map(single_map,4)
+	MapCreator.populate_map(single_map, 4)
 	single_map.reset()
 
 	MapCreator.generate_full_map(single_map, Vector2(13, 13))
-	MapCreator.populate_map(single_map,2)
+	MapCreator.populate_map(single_map, 2)
 	assert(check_integration_of_map(single_map.map, 13, 13))
 	single_map.reset()
 
 	MapCreator.generate_full_map(single_map, Vector2(20, 10))
-	MapCreator.populate_map(single_map,4)
+	MapCreator.populate_map(single_map, 4)
 	assert(check_integration_of_map(single_map.map, 20, 10))
 	single_map.reset()
 

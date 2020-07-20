@@ -19,14 +19,23 @@ __meta__ = {
 [node name="3DBackground" parent="." instance=ExtResource( 4 )]
 
 [node name="MainMenu" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="MenuSkirmishNewGame" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="Viewport" parent="MenuSkirmishNewGame/HBoxContainer/MapPreview" index="0"]
+handle_input_locally = false
+render_target_update_mode = 0
 
 [node name="MenuOptions" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="MenuBenchmark" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="MenuCampaign" parent="." instance=ExtResource( 7 )]
+visible = false
 [connection signal="campaign_menu_show" from="MainMenu/Buttons/Campaign" to="." method="_campaign_menu_show"]
 [connection signal="skirmish_menu_show" from="MainMenu/Buttons/Single Game" to="." method="_skirmish_menu_show"]
 [connection signal="options_menu_show" from="MainMenu/Buttons/Options" to="." method="_options_menu_show"]
