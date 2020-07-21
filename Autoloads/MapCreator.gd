@@ -214,7 +214,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 	for i in single_map.players:
 		single_map.fields[i.y][i.x] = 88
 
-	SingleMap.print_map(single_map.fields)
+#	SingleMap.print_map(single_map.fields)
 #	## END PRINT MAP
 	return
 
@@ -287,7 +287,7 @@ func choose_one_of_closer_point(array: Array, number_of_terrain: int, number_of_
 
 	#for _z in range(1):
 # warning-ignore:integer_division
-	print("Wylosowana liczba " + str(int(number_of_terrain / (number_of_players + 1))))
+#	print("Wylosowana liczba " + str(int(number_of_terrain / (number_of_players + 1))))
 #	print("Liczba terenów " + str(number_of_terrain))
 #	print("Liczba graczy " + str(number_of_players))
 # warning-ignore:integer_division
@@ -300,7 +300,6 @@ func choose_one_of_closer_point(array: Array, number_of_terrain: int, number_of_
 					biggest_number = array[y][x]
 					biggest_vector = Vector2j.new(x, y)
 		if biggest_number != 0:
-			print("AA")
 			biggest_numbers.append(biggest_vector)
 			array[biggest_vector.y][biggest_vector.x] = -1
 		else:
