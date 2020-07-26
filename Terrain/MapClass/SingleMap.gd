@@ -24,10 +24,11 @@ func reset() -> void:
 
 ## Settery
 
-func set_size(new_size: Vector2) -> void:
+func set_size(new_size: Vector2, zero_terrains : bool = true) -> void:
 	size = new_size
 	number_of_all_possible_hexes = int(size.x) * int(size.y)  # GH40
-	number_of_terrain = 0
+	if zero_terrains:
+		number_of_terrain = 0
 
 
 func set_players(new_players: Array) -> void:
@@ -37,27 +38,27 @@ func set_players(new_players: Array) -> void:
 func set_map(new_map: Spatial) -> void:
 	assert(map == null)  # Nie wyczyszczono starej mapy poprawnie
 	map = new_map
-	calculate_real_size() # Usuwa niepotrzebne tereny 
+	shrink_map() # Usuwa niepotrzebne tereny 
 
 
 func set_fields(new_fields: Array) -> void:
 	fields = new_fields
 	assert(fields.size() == int(size.y))
-	
-	for i in range(size.y):
-		for j in range(size.x):
-			if fields[i][j] != MapCreator.FIELD_TYPE.NO_FIELD:
-				number_of_terrain += 1
-	
-	
-
+	assert(fields[0].size() == int(size.x))
 
 func set_number_of_terrain(new_number_of_terrain: int) -> void:
 	number_of_terrain = new_number_of_terrain
 
 ## Inne funkcje
 
-func calculate_real_size() -> void:
+func calculate_number_of_terrains():
+	number_of_terrain = 0
+	for i in range(size.y):
+		for j in range(size.x):
+			if fields[i][j] != MapCreator.FIELD_TYPE.NO_FIELD:
+				number_of_terrain += 1
+
+func shrink_map() -> void:
 	var real_min_x : int = -1
 	var real_max_x : int = -1
 	var real_min_y : int = -1
@@ -96,10 +97,24 @@ func calculate_real_size() -> void:
 		var base_offset : int = (real_min_y * int(size.x)) + real_min_x # Ile numerów należy usunąć przed 
 		var second_offset : int = (real_min_x) + (int(size.x) - real_max_x - 1)
 		# Zmiana nazw hexów
+		print("--- PRZED")
+		for i in map.get_children():
+			print(i.get_name())
+		print_map(fields)
+		
 		for i in map.get_children():
 			var number : int = i.get_name().trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
-			
-			print(i.get_name() + " :: " + str(number))
+			var y_hex :int = number / int(size.x) - real_min_y 
+			number -= base_offset + second_offset * y_hex
+			i.set_name(MapCreator.NODE_BASE_NAME + str(number))
+		
+		fields = new_fields
+		print("--- PO")
+		for i in map.get_children():
+			print(i.get_name())
+		print_map(fields)
+		
+		set_size(Vector2(new_fields[0].size(),new_fields.size()),false)
 		
 		if real_min_y % 2 == 1:
 			starts_with_offset = true
@@ -107,7 +122,6 @@ func calculate_real_size() -> void:
 			starts_with_offset = false
 	else:
 		print("INFO: Nie trzeba zmniejszać mapy")
-	print_map(fields)
 
 
 func initialize_fields() -> void:

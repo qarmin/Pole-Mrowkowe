@@ -50,7 +50,7 @@ func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
 			SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y)
 			if y % 2 == 1:
 				SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
-			SH.set_name(NODE_BASE_NAME + str(y * hex_number.y + x))
+			SH.set_name(NODE_BASE_NAME + str(y * hex_number.x + x))
 
 			SH.set_surface_material(0, texture_base)
 			map.add_child(SH)
@@ -64,6 +64,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 	single_map.initialize_fields()
 
 	assert(hex_number.x > 0 && hex_number.y > 0)
+	assert(int(hex_number.x) * int(hex_number.y) >= 2)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
 
 	var map: Spatial = Spatial.new()
@@ -144,6 +145,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 #			break
 		if hex_number.x * hex_number.y * (chance_to_terrain * chance_to_terrain * 0.75) < 100 * 100 * number_of_real_hex:
 			break
+		
 
 		to_check.clear()
 		checked.clear()
@@ -152,6 +154,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 #		SingleMap.print_map(array)
 
 	single_map.set_fields(array)
+	single_map.calculate_number_of_terrains()
 
 	for y in hex_number.y:
 		for x in hex_number.x:
@@ -160,7 +163,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y)
 				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
-				SH.set_name(NODE_BASE_NAME + str(y * hex_number.y + x))
+				SH.set_name(NODE_BASE_NAME + str(y * hex_number.x + x))
 	
 				SH.set_surface_material(0, texture_base)
 				map.add_child(SH)
@@ -195,7 +198,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 	var single_hex: Spatial
 
 	for i in range(single_map.players.size()):
-		single_hex = single_map.map.get_node(NODE_BASE_NAME + str(single_map.players[i].y * single_map.size.x + single_map.players[i].x))
+		single_hex = single_map.map.get_node(NODE_BASE_NAME + str(int(single_map.players[i].y) * int(single_map.size.x) + int(single_map.players[i].x)))
 		single_hex.set_surface_material(0, texture_array[i])
 
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
@@ -321,6 +324,8 @@ func populate_map_buildings(_single_map: SingleMap) -> void:
 func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
+	assert(int(single_map.size.x) * int(single_map.size.y) >= 2)
+	assert(single_map.size.x > 0 && single_map.size.y > 0)
 
 	var mat: SpatialMaterial
 

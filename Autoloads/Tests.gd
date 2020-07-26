@@ -5,10 +5,10 @@ const PRINT_TESTS: bool = false
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-#	Vector2j_test()
-#	for _i in range(1): # Stress test wykonać dla wartości > 5
-#		map_test()
-#	print("Wykonano wszystkie testy")
+	Vector2j_test()
+	for _i in range(1): # Stress test wykonać dla wartości > 5
+		map_test()
+	print("Wykonano wszystkie testy")
 	pass
 
 func Vector2j_test() -> void:
@@ -75,7 +75,38 @@ func map_test() -> void:
 	MapCreator.populate_map(single_map, 4)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
-
+	
+	## Small test
+	var temp_spatial : Spatial
+	single_map.map = Spatial.new()
+	temp_spatial = Spatial.new()
+	temp_spatial.set_name(MapCreator.NODE_BASE_NAME + "2")
+	single_map.map.add_child(temp_spatial)
+	temp_spatial = Spatial.new()
+	temp_spatial.set_name(MapCreator.NODE_BASE_NAME + "4")
+	single_map.map.add_child(temp_spatial)
+	temp_spatial = Spatial.new()
+	temp_spatial.set_name(MapCreator.NODE_BASE_NAME + "5")
+	single_map.map.add_child(temp_spatial)
+	
+	single_map.set_size(Vector2(3,3))
+	single_map.set_number_of_terrain(3)
+	single_map.set_fields([
+		[MapCreator.FIELD_TYPE.NO_FIELD,MapCreator.FIELD_TYPE.NO_FIELD,MapCreator.FIELD_TYPE.DEFAULT_FIELD],
+		[MapCreator.FIELD_TYPE.NO_FIELD,MapCreator.FIELD_TYPE.DEFAULT_FIELD,MapCreator.FIELD_TYPE.PLAYER_FIRST],
+		[MapCreator.FIELD_TYPE.NO_FIELD,MapCreator.FIELD_TYPE.NO_FIELD,MapCreator.FIELD_TYPE.NO_FIELD]])
+	
+	single_map.shrink_map()
+	
+	assert(single_map.number_of_terrain == 3)
+	assert(single_map.fields.size() == 2)
+	assert(single_map.fields[0].size() == 2)
+	
+	var expected_fields : Array = [
+		[MapCreator.FIELD_TYPE.NO_FIELD,MapCreator.FIELD_TYPE.DEFAULT_FIELD],
+		[MapCreator.FIELD_TYPE.DEFAULT_FIELD,MapCreator.FIELD_TYPE.PLAYER_FIRST]
+	]
+	
 
 # Sprawdza jedynie czy nie ma POJEDYNCZYCH odłączonych wysepek, nie jest to w 100% pewny test, ale przy wykorzystaniu dużych map lub testowaniu stresowym powinno wywalić błędy jeśli są
 func check_integration_of_map(single_map: SingleMap) -> bool:
