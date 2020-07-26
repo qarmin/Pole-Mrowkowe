@@ -5,12 +5,11 @@ const PRINT_TESTS: bool = false
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-	Vector2j_test()
-	for _i in range(1): # Stress test wykonać dla wartości > 5
-		map_test()
-
-	print("Wykonano wszystkie testy")
-
+#	Vector2j_test()
+#	for _i in range(1): # Stress test wykonać dla wartości > 5
+#		map_test()
+#	print("Wykonano wszystkie testy")
+	pass
 
 func Vector2j_test() -> void:
 	if PRINT_TESTS:
@@ -121,4 +120,4 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	
 	assert(checked.size() == single_map.number_of_terrain)
 	
-	return true
+	return checked.size() == single_map.number_of_terrain

@@ -1,11 +1,22 @@
 class_name SingleMap
 
+# Mapa
+## -1  - brak
+## 0   - pusty
+## 1-n - numer gracza
+
 var map: Spatial
 var size: Vector2  # GD40 Vector2i
 var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array
+## Real size of map
+var real_min_x : int = -1
+var real_max_x : int = -1
+var real_min_y : int = -1
+var real_max_y : int = -1
+var real_size : Vector2 = Vector2()
 
 
 func reset() -> void:
@@ -18,7 +29,15 @@ func reset() -> void:
 	number_of_terrain = 0
 	number_of_all_possible_hexes = 0
 	players.clear()
+	
+	
+	real_min_x = -1
+	real_max_x = -1
+	real_min_y = -1
+	real_max_y = -1
+	real_size = Vector2()
 
+## Settery
 
 func set_size(new_size: Vector2) -> void:
 	size = new_size
@@ -47,6 +66,20 @@ func set_fields(new_fields: Array) -> void:
 
 func set_number_of_terrain(new_number_of_terrain: int) -> void:
 	number_of_terrain = new_number_of_terrain
+
+## Inne funkcje
+
+func calculate_real_size() -> void:
+	for y in size.y:
+		for x in size.x:
+			if fields[y][x] != 0:
+				if real_min_x == -1:
+					pass
+				else:
+					pass
+			
+			pass
+	pass
 
 
 func initialize_fields() -> void:

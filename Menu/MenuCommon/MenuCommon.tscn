@@ -25,7 +25,6 @@ visible = false
 visible = false
 
 [node name="Viewport" parent="MenuSkirmishNewGame/HBoxContainer/MapPreview" index="0"]
-handle_input_locally = false
 render_target_update_mode = 0
 
 [node name="MenuOptions" parent="." instance=ExtResource( 5 )]

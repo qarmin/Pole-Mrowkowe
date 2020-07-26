@@ -166,6 +166,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer/MapPreview"]
+handle_input_locally = false
+render_target_update_mode = 3
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 anchor_left = 0.05
