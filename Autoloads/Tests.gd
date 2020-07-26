@@ -5,10 +5,10 @@ const PRINT_TESTS: bool = false
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-#	Vector2j_test()
-#	for _i in range(1): # Stress test wykonać dla wartości > 5
-#		map_test()
-#	print("Wykonano wszystkie testy")
+	Vector2j_test()
+	for _i in range(1): # Stress test wykonać dla wartości > 5
+		map_test()
+	print("Wykonano wszystkie testy")
 	pass
 
 func Vector2j_test() -> void:
@@ -89,7 +89,7 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	while true:
 		start_point.x = randi() % int(single_map.size.x)
 		start_point.y = randi() % int(single_map.size.y)
-		if single_map.fields[start_point.y][start_point.x] != 0:
+		if single_map.fields[start_point.y][start_point.x] != MapCreator.FIELD_TYPE.NO_FIELD:
 			to_check.append(start_point)
 			break
 	
@@ -111,7 +111,7 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 						var cep_x = current_element.x + help_array[h][i][0]
 						var cep_y = current_element.y + help_array[h][i][1]
 						if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
-							if single_map.fields[cep_y][cep_x] != 0:
+							if single_map.fields[cep_y][cep_x] != MapCreator.FIELD_TYPE.NO_FIELD:
 								to_check.append(Vector2j.new(cep_x, cep_y))
 
 		assert(! Vector2j.is_in_array(checked, current_element))

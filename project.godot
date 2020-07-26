@@ -78,6 +78,10 @@ game_exit={
 
 limits/message_queue/max_size_kb=131072
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=32768
+
 [physics]
 
 2d/thread_model=2

@@ -3,14 +3,18 @@ extends Node
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
 
+enum FIELD_TYPE { NO_FIELD = -100, DEFAULT_FIELD = -1, PLAYER_1 = 0 }
+
+#const NO_FIELD : int = -100
+#const DEFAULT_FIELD : int = -1
+#const FIRST_PLAYER : int = 0
+
 const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 1.5)
 const NODE_BASE_NAME: String = "SingleHex"
 var texture_base: SpatialMaterial
 var texture_array: Array = []
 var ant_base: SpatialMaterial
-var ant_array: Array = []
-
-enum MAP_VALUES { MAP, MAP_SIZE, MAX_MAP_VALUE }
+var ant_texture_array: Array = []
 
 
 func _ready() -> void:
@@ -23,7 +27,7 @@ func _ready() -> void:
 
 	for i in range(0, GameSettings.MAX_TEAMS):
 		texture_array.append(load("res://Terrain/SingleHex/SingleHexTEAM" + str(i + 1) + ".tres"))
-		ant_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
+		ant_texture_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
 
 
 func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
@@ -71,7 +75,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 	for i in hex_number.y:
 		array.append([])
 		for j in hex_number.x:
-			array[array.size() - 1].append(0)
+			array[array.size() - 1].append(FIELD_TYPE.NO_FIELD)
 
 	var to_check: Array = []
 	var checked: Array = []
@@ -81,21 +85,21 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 		# Resetowanie tablicy
 		for i in range(hex_number.x):
 			for j in range(hex_number.y):
-				array[j][i] = 0
+				array[j][i] = FIELD_TYPE.NO_FIELD
 
-		# Wybrany jeden ląd z samej góry
-		array[hex_number.y / 2][hex_number.x / 2] = 1
+		# Wybrany jeden ląd ze środka
+		array[int(hex_number.y / 2)][int(hex_number.x / 2)] = FIELD_TYPE.DEFAULT_FIELD
 		to_check.append(Vector2j.new(int(hex_number.x / 2), int(hex_number.y / 2)))
-		assert(array[int(hex_number.y / 2)][int(hex_number.x / 2)] == 1)
+		assert(array[int(hex_number.y / 2)][int(hex_number.x / 2)] == FIELD_TYPE.DEFAULT_FIELD)
 
 		#print("Start Point = " + str(int(hex_number.x / 2)) + "x, " + str(int(hex_number.y / 2)) + "y")
 		#print("Start Array")
-
+		#SingleMap.print_map(array)
 		while to_check.size() > 0:
 			current_element = to_check.pop_front()
 
 			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
-			assert(array[current_element.y][current_element.x] == 1)
+			assert(array[current_element.y][current_element.x] == FIELD_TYPE.DEFAULT_FIELD)
 			assert(current_element.x < hex_number.x && current_element.x >= 0)
 			assert(current_element.y < hex_number.y && current_element.y >= 0)
 
@@ -113,16 +117,18 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 							var cep_x = current_element.x + help_array[h][i][0]
 							var cep_y = current_element.y + help_array[h][i][1]
 							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
-								assert(array[cep_y][cep_x] == 0)
-								array[cep_y][cep_x] = int(randi() % 100 < chance_to_terrain)
-								if array[cep_y][cep_x] == 1:
+								assert(array[cep_y][cep_x] == FIELD_TYPE.NO_FIELD)
+								var is_terrain : bool = randi() % 100 < chance_to_terrain
+								if is_terrain:
+									array[cep_y][cep_x] = FIELD_TYPE.DEFAULT_FIELD
 									to_check.append(Vector2j.new(cep_x, cep_y))
 								else:
+									array[cep_y][cep_x] = FIELD_TYPE.NO_FIELD
 									checked.append(Vector2j.new(cep_x, cep_y))
 
 			#SingleMap.print_map(array)
 			for i in to_check:
-				assert(array[i.y][i.x] == 1)
+				assert(array[i.y][i.x] == FIELD_TYPE.DEFAULT_FIELD)
 
 			assert(! Vector2j.is_in_array(checked, current_element))
 
@@ -132,7 +138,8 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 		var number_of_real_hex: int = 0
 		for i in array:
 			for j in i:
-				number_of_real_hex += j
+				if j == FIELD_TYPE.DEFAULT_FIELD:
+					number_of_real_hex += 1
 
 #		# Wystarczy tylko 66% wymaganych pól
 #		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
@@ -150,7 +157,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 
 	for i in hex_number.x:
 		for j in hex_number.y:
-			if array[j][i] == 1:
+			if array[j][i] == FIELD_TYPE.DEFAULT_FIELD:
 				var SH: MeshInstance = SingleHex.instance()
 				SH.translation = START_POSITION + Vector3(i * SINGLE_HEX_DIMENSION.x, randf(), j * SINGLE_HEX_DIMENSION.y)
 				if j % 2 == 1:
@@ -177,7 +184,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 	while true:
 		curr.x = randi() % int(single_map.size.x)
 		curr.y = randi() % int(single_map.size.y)
-		if single_map.fields[curr.y][curr.x] == 1:
+		if single_map.fields[curr.y][curr.x] == FIELD_TYPE.DEFAULT_FIELD:
 			single_map.players.append(curr)
 			break
 
@@ -211,8 +218,8 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 #	## START PRINT MAP
 #	SingleMap.print_map(single_map.fields)
 #
-	for i in single_map.players:
-		single_map.fields[i.y][i.x] = 88
+#	for i in single_map.players:
+#		single_map.fields[i.y][i.x] = 88
 
 #	SingleMap.print_map(single_map.fields)
 #	## END PRINT MAP
@@ -220,7 +227,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 
 
 func recalculate_map(fields: Array, players: Array) -> Array:
-	var smallest_array: Array = []
+	var smallest_array: Array = [] # Tablica z najmniejszymi odległościami od 
 	var current_element: Vector2j = Vector2j.new(0, 0)
 	var current_value: int = 0
 
@@ -255,11 +262,10 @@ func recalculate_map(fields: Array, players: Array) -> Array:
 							&& (current_element.y + help_array[h][i][1] >= 0)
 							&& (current_element.y + help_array[h][i][1] < smallest_array.size())
 						):
-#							print("A")
 							var cep_x = current_element.x + help_array[h][i][0]
 							var cep_y = current_element.y + help_array[h][i][1]
 							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
-								if fields[cep_y][cep_x] == 1:
+								if fields[cep_y][cep_x] == FIELD_TYPE.DEFAULT_FIELD:
 									if smallest_array[cep_y][cep_x] == -1 || smallest_array[cep_y][cep_x] > current_value:
 										smallest_array[cep_y][cep_x] = current_value + 1
 										to_check.append(Vector2j.new(cep_x, cep_y))
@@ -272,11 +278,6 @@ func recalculate_map(fields: Array, players: Array) -> Array:
 		to_check = []
 		to_check_value = []
 
-	#SingleMap.print_map(smallest_array)
-	# Do celów testowych, bo działa tylko przy pełnej mapie
-#	for i in smallest_array: 
-#		for j in i:
-#			assert(j != -1)
 	return smallest_array
 
 
@@ -286,10 +287,6 @@ func choose_one_of_closer_point(array: Array, number_of_terrain: int, number_of_
 	var biggest_vector: Vector2j
 
 	#for _z in range(1):
-# warning-ignore:integer_division
-#	print("Wylosowana liczba " + str(int(number_of_terrain / (number_of_players + 1))))
-#	print("Liczba terenów " + str(number_of_terrain))
-#	print("Liczba graczy " + str(number_of_players))
 # warning-ignore:integer_division
 	for _z in range(0, int(number_of_terrain / (number_of_players + 1))):
 		biggest_vector = Vector2j.new(-1, -1)
@@ -328,7 +325,6 @@ func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
 
-	#var map : Spatial = load("res://GeneratedMap.tscn").instance()
 	var mat: SpatialMaterial
 
 	var choosen_material: int
@@ -344,7 +340,7 @@ func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of
 		if choosen_material == 0:  # Materiał dla mrówki
 			mat = ant_base
 		else:
-			mat = ant_array[choosen_material - 1]
+			mat = ant_texture_array[choosen_material - 1]
 
 		if randi() % 100 < ant_chance:
 			var AN: Spatial = Ant.instance()

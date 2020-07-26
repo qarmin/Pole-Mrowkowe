@@ -1,16 +1,12 @@
 class_name SingleMap
 
-# Mapa
-## -1  - brak
-## 0   - pusty
-## 1-n - numer gracza
-
 var map: Spatial
 var size: Vector2  # GD40 Vector2i
 var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array
+
 ## Real size of map
 var real_min_x : int = -1
 var real_max_x : int = -1
@@ -60,7 +56,7 @@ func set_fields(new_fields: Array) -> void:
 
 	for i in range(size.y):
 		for j in range(size.x):
-			if fields[i][j] == 1:
+			if fields[i][j] != MapCreator.FIELD_TYPE.NO_FIELD:
 				number_of_terrain += 1
 
 
@@ -72,7 +68,7 @@ func set_number_of_terrain(new_number_of_terrain: int) -> void:
 func calculate_real_size() -> void:
 	for y in size.y:
 		for x in size.x:
-			if fields[y][x] != 0:
+			if fields[y][x] != MapCreator.FIELD_TYPE.NO_FIELD:
 				if real_min_x == -1:
 					pass
 				else:
@@ -86,14 +82,14 @@ func initialize_fields() -> void:
 	for i in range(size.y):
 		fields.append([])
 		for _j in range(size.x):
-			fields[i].append(0)
+			fields[i].append(MapCreator.FIELD_TYPE.NO_FIELD)
 
 
 func initialize_full_fields() -> void:
 	for i in range(size.y):
 		fields.append([])
 		for _j in range(size.x):
-			fields[i].append(1)
+			fields[i].append(MapCreator.FIELD_TYPE.DEFAULT_FIELD)
 	number_of_terrain = number_of_all_possible_hexes
 
 
