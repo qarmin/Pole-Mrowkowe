@@ -3,7 +3,7 @@ extends Node
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
 
-enum FIELD_TYPE { NO_FIELD = -100, DEFAULT_FIELD = -1, PLAYER_1 = 0 }
+enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1 }
 
 #const NO_FIELD : int = -100
 #const DEFAULT_FIELD : int = -1
@@ -18,6 +18,11 @@ var ant_texture_array: Array = []
 
 
 func _ready() -> void:
+	# Logika jest ustawiona na to, że wartości są przedstawiane w odpowiedniej kolejności
+	assert(FIELD_TYPE.NO_FIELD < FIELD_TYPE.DEFAULT_FIELD)
+	assert(FIELD_TYPE.DEFAULT_FIELD < FIELD_TYPE.PLAYER_FIRST)
+	
+	
 	randomize()  # Bez tego za każdym razem wychdzą takie same wyniki randi()
 
 	assert(GameSettings.MAX_TEAMS == 4)  # Należy dodać więcej wyglądów
@@ -390,6 +395,6 @@ func save_map(single_map: SingleMap, destroy: bool = false) -> void:
 #	map.queue_free()
 
 #	return map
-func center_map(single_map : SingleMap) -> void:
+func center_map(_single_map : SingleMap) -> void:
 	
 	pass
