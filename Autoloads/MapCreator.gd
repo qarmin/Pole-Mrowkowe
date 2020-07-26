@@ -36,22 +36,18 @@ func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
 
 	assert(hex_number.x > 0 && hex_number.y > 0)
 
-	var START_POSITION: Vector3 = Vector3(SINGLE_HEX_DIMENSION.x / 2.0, 0.0, SINGLE_HEX_DIMENSION.y / 2.0)  # Początkowe przesuniecie, nie idealne, ale może być
-
 	var map: Spatial = Spatial.new()
 	map.set_name("Map")
-	map.set_translation(Vector3(-hex_number.y * SINGLE_HEX_DIMENSION.x / 2.0, 0, -hex_number.x * SINGLE_HEX_DIMENSION.y / 2.0))  # Wyrównuje 
 
-	for i in hex_number.x:
-		for j in hex_number.y:
+	for y in hex_number.y:
+		for x in hex_number.x:
 			var SH: MeshInstance = SingleHex.instance()
-			SH.translation = START_POSITION + Vector3(j * SINGLE_HEX_DIMENSION.x, randf(), i * SINGLE_HEX_DIMENSION.y)
-			if i % 2 == 1:
+			SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y)
+			if y % 2 == 1:
 				SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
-			SH.set_name(NODE_BASE_NAME + str(i * hex_number.y + j))
-			var mat: SpatialMaterial = texture_base
+			SH.set_name(NODE_BASE_NAME + str(y * hex_number.y + x))
 
-			SH.set_surface_material(0, mat)
+			SH.set_surface_material(0, texture_base)
 			map.add_child(SH)
 			SH.set_owner(map)
 
@@ -65,12 +61,9 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
 
-	var START_POSITION: Vector3 = Vector3(SINGLE_HEX_DIMENSION.x / 2.0, 0.0, SINGLE_HEX_DIMENSION.y / 2.0)  # Początkowe przesuniecie, nie idealne, ale może być
-
 	var map: Spatial = Spatial.new()
 	map.set_name("Map")
-	map.set_translation(Vector3(-hex_number.x * SINGLE_HEX_DIMENSION.x / 2.0, 0, -hex_number.y * SINGLE_HEX_DIMENSION.y / 2.0))  # Wyrównuje 
-
+	
 	var array: Array = []
 	for i in hex_number.y:
 		array.append([])
@@ -150,25 +143,24 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 		to_check.clear()
 		checked.clear()
 
-		print("Nie udało mi się stworzyć poprawnego algrotymu, sprawdzam ponownie")
+		print("Nie udało mi się stworzyć poprawnego algorytmu, sprawdzam ponownie")
 #		SingleMap.print_map(array)
 
 	single_map.set_fields(array)
 
-	for i in hex_number.x:
-		for j in hex_number.y:
-			if array[j][i] == FIELD_TYPE.DEFAULT_FIELD:
+	for y in hex_number.y:
+		for x in hex_number.x:
+			if array[y][x] == FIELD_TYPE.DEFAULT_FIELD:
 				var SH: MeshInstance = SingleHex.instance()
-				SH.translation = START_POSITION + Vector3(i * SINGLE_HEX_DIMENSION.x, randf(), j * SINGLE_HEX_DIMENSION.y)
-				if j % 2 == 1:
+				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y)
+				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
-				SH.set_name(NODE_BASE_NAME + str(j * hex_number.x + i))
-				var mat: SpatialMaterial = texture_base
-
-				SH.set_surface_material(0, mat)
+				SH.set_name(NODE_BASE_NAME + str(y * hex_number.y + x))
+	
+				SH.set_surface_material(0, texture_base)
 				map.add_child(SH)
 				SH.set_owner(map)
-
+			
 	single_map.set_map(map)
 
 
@@ -398,3 +390,6 @@ func save_map(single_map: SingleMap, destroy: bool = false) -> void:
 #	map.queue_free()
 
 #	return map
+func center_map(single_map : SingleMap) -> void:
+	
+	pass
