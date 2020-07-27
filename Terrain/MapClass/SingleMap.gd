@@ -91,6 +91,11 @@ func shrink_map() -> void:
 					if real_max_y < y:
 						real_max_y = y
 
+	if real_min_y % 2 == 1:
+		starts_with_offset = true
+	else:
+		starts_with_offset = false
+			
 	if (real_max_x - real_min_x + 1) != fields[0].size() || (real_max_y - real_min_y + 1) != fields.size():
 		print("TODO: Trzeba zmniejszyć mapę")
 		var new_fields: Array = []
@@ -99,8 +104,8 @@ func shrink_map() -> void:
 			for x in range(real_min_x, real_max_x + 1):
 				new_fields[y - real_min_y].append(fields[y][x])
 
-		var base_offset: int = (real_min_y * int(size.x)) + real_min_x  # Ile numerów należy usunąć przed 
-		var second_offset: int = (real_min_x) + (int(size.x) - real_max_x - 1)
+		var base_offset: int = (real_min_y * int(size.x)) + real_min_x  # Baza tego ile należy usunąć numerów
+		var second_offset: int = (real_min_x) + (int(size.x) - real_max_x - 1) # Ilość numerów do usunięcia wraz z każdym nowym poziomem
 		# Zmiana nazw hexów
 		print("--- PRZED")
 		for i in map.get_children():
@@ -109,8 +114,9 @@ func shrink_map() -> void:
 
 		for i in map.get_children():
 			var number: int = i.get_name().trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
-			var y_hex: int = number / int(size.x) - real_min_y
-			number -= base_offset + second_offset * y_hex
+# warning-ignore:integer_division
+			var dim_y: int = number / int(size.x) - real_min_y
+			number -= base_offset + second_offset * dim_y
 			i.set_name(MapCreator.NODE_BASE_NAME + str(number))
 
 		fields = new_fields
@@ -121,10 +127,6 @@ func shrink_map() -> void:
 
 		set_size(Vector2(new_fields[0].size(), new_fields.size()), false)
 
-		if real_min_y % 2 == 1:
-			starts_with_offset = true
-		else:
-			starts_with_offset = false
 	else:
 		print("INFO: Nie trzeba zmniejszać mapy")
 
@@ -144,11 +146,11 @@ func initialize_full_fields() -> void:
 	number_of_terrain = number_of_all_possible_hexes
 
 
-static func print_map(array: Array, starts_with_offset: bool = false) -> void:
+static func print_map(array: Array, using_offset: bool = false) -> void:
 	print("Printed map")
 	for i in range(array.size()):
 		var line: String = ""
-		if i % 2 == int(starts_with_offset):
+		if i % 2 == int(!using_offset):
 			line += "  "
 		for j in range(array[i].size()):
 			line += str(array[i][j]) + "  "
