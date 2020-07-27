@@ -10,7 +10,7 @@ func test_create_map():
 	var single_map: SingleMap = SingleMap.new()
 
 #	MapCreator.generate_full_map(single_map, Vector2(30, 30))
-	MapCreator.generate_partial_map(single_map, Vector2(4, 4), 20)
+	MapCreator.generate_partial_map(single_map, Vector2(10, 10), 90)
 	MapCreator.center_map(single_map)
 #	MapCreator.populate_map(single_map, 4)
 	MapCreator.populate_random_map(single_map, 50)

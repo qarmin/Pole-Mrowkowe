@@ -95,7 +95,7 @@ func shrink_map() -> void:
 		starts_with_offset = true
 	else:
 		starts_with_offset = false
-			
+	
 	if (real_max_x - real_min_x + 1) != fields[0].size() || (real_max_y - real_min_y + 1) != fields.size():
 		print("TODO: Trzeba zmniejszyć mapę")
 		var new_fields: Array = []
@@ -115,8 +115,13 @@ func shrink_map() -> void:
 		for i in map.get_children():
 			var number: int = i.get_name().trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 # warning-ignore:integer_division
-			var dim_y: int = number / int(size.x) - real_min_y
-			number -= base_offset + second_offset * dim_y
+			var old_y: int = number / int(size.x) # Numerowanie od 0
+# warning-ignore:integer_division
+			var new_y: int = number / int(size.x) - real_min_y
+# warning-ignore:integer_division
+			var old_x: int = number % int(size.x)
+			#var new_y : int = number / # Numerowanie od 0
+			number -= base_offset + second_offset * new_y
 			i.set_name(MapCreator.NODE_BASE_NAME + str(number))
 
 		fields = new_fields

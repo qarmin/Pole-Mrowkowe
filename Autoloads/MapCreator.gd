@@ -85,13 +85,14 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 			for j in range(hex_number.y):
 				array[j][i] = FIELD_TYPE.NO_FIELD
 
-		# Wybrany jeden ląd ze środka
-		array[int(hex_number.y / 2)][int(hex_number.x / 2)] = FIELD_TYPE.DEFAULT_FIELD
-		to_check.append(Vector2j.new(int(hex_number.x / 2), int(hex_number.y / 2)))
-		assert(array[int(hex_number.y / 2)][int(hex_number.x / 2)] == FIELD_TYPE.DEFAULT_FIELD)
+		## Wybrany ląd (0,0) - ma to wiele plusów
+		## Przy przycinaniu trzeba mieć na uwadzę jedynie max_x i max_y
+		## W przyszłości nie trzeba będzie brać pod uwagę możliwości, że hexy będą rozpoczynały się od linii parzystej
+		## przez co obliczenia będą uproszczone
+		array[0][0] = FIELD_TYPE.DEFAULT_FIELD
+		to_check.append(Vector2j.new(0, 0))
+		assert(array[0][0] == FIELD_TYPE.DEFAULT_FIELD)
 
-		#print("Start Point = " + str(int(hex_number.x / 2)) + "x, " + str(int(hex_number.y / 2)) + "y")
-		#print("Start Array")
 		#SingleMap.print_map(array)
 		while to_check.size() > 0:
 			current_element = to_check.pop_front()
@@ -145,11 +146,14 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 #		# Wystarczy tylko 66% wymaganych pól
 #		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
 #			break
-		if number_of_real_hex >= 2:
-			if hex_number.x * hex_number.y * (chance_to_terrain * chance_to_terrain * 0.75) < 100 * 100 * number_of_real_hex:
-				break
+		
+		var needed_hexes : int = max(2,hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0,3) * 0.75))
+		
+		if number_of_real_hex > needed_hexes:
+			break
+		
 
-		print("Nie udało mi się stworzyć poprawnego algorytmu, sprawdzam ponownie")
+		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(number_of_real_hex) + " a potrzebne było " + str(needed_hexes))
 #		SingleMap.print_map(array)
 
 	single_map.set_fields(array)
