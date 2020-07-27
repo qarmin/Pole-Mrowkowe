@@ -21,8 +21,7 @@ func _ready() -> void:
 	# Logika jest ustawiona na to, że wartości są przedstawiane w odpowiedniej kolejności
 	assert(FIELD_TYPE.NO_FIELD < FIELD_TYPE.DEFAULT_FIELD)
 	assert(FIELD_TYPE.DEFAULT_FIELD < FIELD_TYPE.PLAYER_FIRST)
-	
-	
+
 	randomize()  # Bez tego za każdym razem wychdzą takie same wyniki randi()
 
 	assert(GameSettings.MAX_TEAMS == 4)  # Należy dodać więcej wyglądów
@@ -69,7 +68,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 
 	var map: Spatial = Spatial.new()
 	map.set_name("Map")
-	
+
 	var array: Array = []
 	for i in hex_number.y:
 		array.append([])
@@ -117,7 +116,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 							var cep_y = current_element.y + help_array[h][i][1]
 							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
 								assert(array[cep_y][cep_x] == FIELD_TYPE.NO_FIELD)
-								var is_terrain : bool = randi() % 100 < chance_to_terrain
+								var is_terrain: bool = randi() % 100 < chance_to_terrain
 								if is_terrain:
 									array[cep_y][cep_x] = FIELD_TYPE.DEFAULT_FIELD
 									to_check.append(Vector2j.new(cep_x, cep_y))
@@ -142,8 +141,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 
 		to_check.clear()
 		checked.clear()
-		
-		
+
 #		# Wystarczy tylko 66% wymaganych pól
 #		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
 #			break
@@ -165,11 +163,11 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 				SH.set_name(NODE_BASE_NAME + str(y * hex_number.x + x))
-	
+
 				SH.set_surface_material(0, texture_base)
 				map.add_child(SH)
 				SH.set_owner(map)
-			
+
 	single_map.set_map(map)
 
 
@@ -228,7 +226,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 
 
 func recalculate_map(fields: Array, players: Array) -> Array:
-	var smallest_array: Array = [] # Tablica z najmniejszymi odległościami od 
+	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od 
 	var current_element: Vector2j = Vector2j.new(0, 0)
 	var current_value: int = 0
 
@@ -391,6 +389,7 @@ func save_map(single_map: SingleMap, destroy: bool = false) -> void:
 	if destroy == true:
 		single_map.map.queue_free()
 
+
 #	var packed_scene = PackedScene.new()
 #	packed_scene.pack(map)
 #	if(ResourceSaver.save("user://GeneratedMap.tscn", packed_scene) != OK):
@@ -400,7 +399,7 @@ func save_map(single_map: SingleMap, destroy: bool = false) -> void:
 #
 #	map.queue_free()
 
+
 #	return map
-func center_map(_single_map : SingleMap) -> void:
-	
+func center_map(_single_map: SingleMap) -> void:
 	pass
