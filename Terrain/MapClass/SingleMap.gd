@@ -112,7 +112,7 @@ func shrink_map() -> void:
 		print("--- PO")
 		for i in map.get_children():
 			print(i.get_name())
-		print_map(fields)
+		print_map(fields,starts_with_offset)
 		
 		set_size(Vector2(new_fields[0].size(),new_fields.size()),false)
 		
@@ -139,11 +139,11 @@ func initialize_full_fields() -> void:
 	number_of_terrain = number_of_all_possible_hexes
 
 
-static func print_map(array: Array) -> void:
+static func print_map(array: Array,starts_with_offset: bool = false) -> void:
 	print("Printed map")
 	for i in range(array.size()):
 		var line: String = ""
-		if i % 2 == 1:
+		if i % 2 == int(starts_with_offset):
 			line += "  "
 		for j in range(array[i].size()):
 			line += str(array[i][j]) + "  "

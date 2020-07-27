@@ -140,15 +140,16 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 				if j == FIELD_TYPE.DEFAULT_FIELD:
 					number_of_real_hex += 1
 
+		to_check.clear()
+		checked.clear()
+		
+		
 #		# Wystarczy tylko 66% wymaganych pól
 #		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
 #			break
-		if hex_number.x * hex_number.y * (chance_to_terrain * chance_to_terrain * 0.75) < 100 * 100 * number_of_real_hex:
-			break
-		
-
-		to_check.clear()
-		checked.clear()
+		if number_of_real_hex >= 2:
+			if hex_number.x * hex_number.y * (chance_to_terrain * chance_to_terrain * 0.75) < 100 * 100 * number_of_real_hex:
+				break
 
 		print("Nie udało mi się stworzyć poprawnego algorytmu, sprawdzam ponownie")
 #		SingleMap.print_map(array)
