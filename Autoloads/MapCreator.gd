@@ -9,7 +9,7 @@ enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1 }
 #const DEFAULT_FIELD : int = -1
 #const FIRST_PLAYER : int = 0
 
-const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 1.5)
+const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.7321, 2)
 const NODE_BASE_NAME: String = "SingleHex"
 var texture_base: SpatialMaterial
 var texture_array: Array = []
@@ -46,7 +46,7 @@ func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
 	for y in hex_number.y:
 		for x in hex_number.x:
 			var SH: MeshInstance = SingleHex.instance()
-			SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y)
+			SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
 			if y % 2 == 1:
 				SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 			SH.set_name(NODE_BASE_NAME + str(y * hex_number.x + x))
@@ -146,12 +146,12 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 #		# Wystarczy tylko 66% wymaganych pól
 #		if hex_number.x * hex_number.y * chance_to_terrain / 1.5 < 100 * number_of_real_hex:
 #			break
-		
-		var needed_hexes : int = max(2,hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0,3) * 0.75))
-		
-		if number_of_real_hex > needed_hexes:
+
+# warning-ignore:narrowing_conversion
+		var needed_hexes: int = max(2, hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0, 3) * 0.75))
+
+		if number_of_real_hex >= needed_hexes:
 			break
-		
 
 		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(number_of_real_hex) + " a potrzebne było " + str(needed_hexes))
 #		SingleMap.print_map(array)
@@ -163,7 +163,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 		for x in hex_number.x:
 			if array[y][x] == FIELD_TYPE.DEFAULT_FIELD:
 				var SH: MeshInstance = SingleHex.instance()
-				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y)
+				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
 				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 				SH.set_name(NODE_BASE_NAME + str(y * hex_number.x + x))
@@ -405,5 +405,18 @@ func save_map(single_map: SingleMap, destroy: bool = false) -> void:
 
 
 #	return map
-func center_map(_single_map: SingleMap) -> void:
-	pass
+func center_map(single_map: SingleMap) -> void:
+	var real_map_size: Vector2 = Vector2()
+
+	real_map_size.x = single_map.size.x * SINGLE_HEX_DIMENSION.x
+	## Gdy w parzystej linii na końcu jest obecny hex, to wtedy wymiary mapy są większe niż zazwyczaj
+	for y in range(1, single_map.size.y, 2):
+		if single_map.fields[y][single_map.size.x - 1] != FIELD_TYPE.NO_FIELD:
+			real_map_size.x += SINGLE_HEX_DIMENSION.x / 2.0
+			break
+
+	real_map_size.y = SINGLE_HEX_DIMENSION.y * 0.25 + single_map.size.y * (SINGLE_HEX_DIMENSION.y * 0.75)
+
+	# Mapa początkowo jest już przesunięta tak aby wskazywała na środek pierwszego hexa, dlatego należy to skoregować
+	single_map.map.translation.x -= (real_map_size.x - SINGLE_HEX_DIMENSION.x) / 2.0
+	single_map.map.translation.z -= (real_map_size.y - SINGLE_HEX_DIMENSION.y) / 2.0

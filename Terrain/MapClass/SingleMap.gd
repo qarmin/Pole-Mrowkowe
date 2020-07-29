@@ -8,6 +8,10 @@ var number_of_all_possible_hexes: int
 var players: Array
 var starts_with_offset: bool = false  #W przypadku jeśli dana mapa rozpoczyna się od przesuniętego linii parzystej(nie 1, może się to zdarzyć gdy mapa jest ucinana), to należy skorygować ułożenie mapy
 
+## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja
+var was_resetted: bool = false
+var was_shrinked: bool = false
+
 
 func reset() -> void:
 	if map != null:
@@ -21,6 +25,8 @@ func reset() -> void:
 	players.clear()
 
 	starts_with_offset = false
+
+	was_resetted = true
 
 
 ## Settery
@@ -82,8 +88,10 @@ func shrink_map() -> void:
 				else:
 					if real_max_y < y:
 						real_max_y = y
-	
+
 	if (real_max_x + 1) != fields[0].size() || (real_max_y + 1) != fields.size():
+		was_shrinked = true
+
 #		print("INFO: Trzeba przyciąć mapę")
 		var new_fields: Array = []
 		for y in range(real_max_y + 1):
@@ -99,9 +107,9 @@ func shrink_map() -> void:
 		for i in map.get_children():
 			var number: int = i.get_name().trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 # warning-ignore:integer_division
-			var old_y: int = number / int(size.x) 
+			var old_y: int = number / int(size.x)
 			#var old_x: int = number % int(size.x)
-			
+
 			number -= (int(size.x) - real_max_x - 1) * old_y
 			i.set_name(MapCreator.NODE_BASE_NAME + str(number))
 
@@ -112,6 +120,8 @@ func shrink_map() -> void:
 #		print_map(fields)
 
 		set_size(Vector2(new_fields[0].size(), new_fields.size()), false)
+		print_map(fields)
+
 
 #	else:
 #		print("INFO: Nie trzeba zmniejszać mapy")
@@ -133,7 +143,7 @@ func initialize_full_fields() -> void:
 
 
 static func print_map(array: Array) -> void:
-	print("Printed map")
+	print("Printed map - size(" + str(array[0].size()) + "," + str(array.size()) + ")")
 	for i in range(array.size()):
 		var line: String = ""
 		if i % 2 == 1:

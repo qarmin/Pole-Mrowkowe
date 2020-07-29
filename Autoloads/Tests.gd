@@ -110,6 +110,7 @@ func map_test() -> void:
 
 	assert(single_map.fields == expected_fields)
 
+
 # Sprawdza jedynie czy nie ma POJEDYNCZYCH odłączonych wysepek, nie jest to w 100% pewny test, ale przy wykorzystaniu dużych map lub testowaniu stresowym powinno wywalić błędy jeśli są
 func check_integration_of_map(single_map: SingleMap) -> bool:
 	var checked: Array = []

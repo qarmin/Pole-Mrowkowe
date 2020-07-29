@@ -56,6 +56,7 @@ Tests="*res://Autoloads/Tests.gd"
 
 [display]
 
+window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
 [editor_plugins]
@@ -90,6 +91,5 @@ limits/debugger_stdout/max_chars_per_second=32768
 
 quality/driver/driver_name="GLES2"
 threads/thread_model=2
-quality/shadows/filter_mode=2
 environment/default_clear_color=Color( 0.419608, 0.419608, 0.419608, 1 )
 quality/depth/hdr=false
