@@ -11,22 +11,39 @@ var colors : Array = [
 func generate_preview_image(single_map : SingleMap) -> void:
 	print("Wygenerowałem podgląd dla mapy (" + str(single_map.size.x) + "," + str(single_map.size.y) + ")")
 	var img : Image = Image.new()
-	img.create(int(single_map.size.x) * 2 + 1, int(single_map.size.y), false, Image.FORMAT_RGBA8)
 	
 	var current_color : Color
-	var offset : int
-	var offset_scale : Vector2j
-	var border_size : int = 2
 	
+	# Przesunięcie obrazu gdy nie jest kwadratem, realna wielkość i zmienna pomocnicza, tak aby na końcu mapa znalazła się po środku
+	var image_offset : Vector2j = Vector2j.new(0,0)
+	var real_size : Vector2j # Rzeczywista wielkość mapy(nie musi być kwadratem)
+	var max_number : int
+	
+	var odd_line_offset : int # Przesunięcie w liniach parzystych
+	var square_size : Vector2j # Wielkość danego kwadratu - aktualny rozmiar jest równy (square_size - border_size)
+	var border_size : int = 1 # Wielkość krawędzi
 	
 	
 	img.unlock()
-	offset_scale = Vector2j.new(10,10)
-	img.create(int(single_map.size.x) * offset_scale.x + offset_scale.x / 2 + 1, int(single_map.size.y) * offset_scale.y + 1, false, Image.FORMAT_RGBA8)
+	square_size = Vector2j.new(10,10)
+	
+	## Tworzenie mapy bez offsetu gdy nie jest kwadratem
+# warning-ignore:integer_division
+#	img.create(int(single_map.size.x) * square_size.x + square_size.x / 2 + border_size, int(single_map.size.y) * square_size.y + border_size, false, Image.FORMAT_RGBA8)
+
+	## Tworzenie mapy z offsetem
+	real_size = Vector2j.new(int(single_map.size.x) * square_size.x + square_size.x / 2 + border_size,int(single_map.size.y) * square_size.y + border_size)
+	max_number = int(max(real_size.x, real_size.y))
+	img.create(max_number, max_number, false, Image.FORMAT_RGBA8)
+	image_offset = Vector2j.new((max_number - real_size.x) / 2, (max_number - real_size.y)/2)
+	print(max_number)
+	print(str(image_offset.x) + " " + str(image_offset.y))
+	
 	img.lock()
+	
+	
 	for y in range(single_map.size.y):
 		for x in range(single_map.size.x):
-			
 			if single_map.fields[y][x] == MapCreator.FIELD_TYPE.NO_FIELD:
 				continue
 			if single_map.fields[y][x] == MapCreator.FIELD_TYPE.DEFAULT_FIELD:
@@ -35,35 +52,27 @@ func generate_preview_image(single_map : SingleMap) -> void:
 				current_color = colors[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST + 1]
 				
 			if y % 2 == 1:
-				offset = offset_scale.x / 2
+# warning-ignore:integer_division
+				odd_line_offset = square_size.x / 2
 			else:
-				offset = 0
+				odd_line_offset = 0
 			
 			# Nie można narysować grubszej krawędzi od szerokości boku
-			assert(border_size < offset_scale.y) 
-			assert(border_size < offset_scale.x)
+			assert(border_size >= 0)
+			assert(border_size < square_size.y) 
+			assert(border_size < square_size.x)
 			
-			for i_y in range(offset_scale.y + 1):
-				for i_x in range(offset_scale.x + 1):
-					if border_size == 0:
-						if i_x == 0 || i_y == 0 || i_x == offset_scale.x || i_y == offset_scale.y: # Rysuje lewą i górną krawędź
-							img.set_pixel(offset_scale.x * x + offset + i_x,offset_scale.y * y + i_y,Color.black)
-						else: # Wypełnia środek
-							img.set_pixel(offset_scale.x * x + offset + i_x,offset_scale.y * y + i_y,current_color)
-					else:
-						if i_x <= border_size || i_y <= border_size || i_x >= offset_scale.x - border_size || i_y >= offset_scale.y - border_size: # Rysuje lewą i górną krawędź
-							img.set_pixel(offset_scale.x * x + offset + i_x,offset_scale.y * y + i_y,Color.black)
-						else: # Wypełnia środek
-							img.set_pixel(offset_scale.x * x + offset + i_x,offset_scale.y * y + i_y,current_color)
-				
-				
+			## Wewnętrzne krawędzie, lewe i górne rysuje się wewnątrz kwadratu a dolne i po prawej na zewnątrz
+			for i_y in range(square_size.y + border_size):
+				for i_x in range(square_size.x + border_size):
+					if i_x < border_size || i_y < border_size || i_x > square_size.x - 1 || i_y > square_size.y - 1: # Rysuje krawędzie
+						img.set_pixel(square_size.x * x + odd_line_offset + i_x + image_offset.x,square_size.y * y + i_y + image_offset.y,Color.black)
+					else: # Wypełnia środek
+						img.set_pixel(square_size.x * x + odd_line_offset + i_x + image_offset.x,square_size.y * y + i_y + image_offset.y,current_color)
+						
 	img.unlock()
+	
+	img.resize(1024,1024,Image.INTERPOLATE_NEAREST)
 	
 	if img.save_png("res://GeneratedPreview.png") != OK:
 		push_error("Nastąpił błąd podczas zapisywania podglądu")
-	
-	
-	
-	
-	
-	pass
