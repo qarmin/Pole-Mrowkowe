@@ -153,3 +153,8 @@ static func print_map(array: Array) -> void:
 			if array[i][j] < 10 && array[i][j] >= 0:
 				line += " "
 		print(line)
+
+static func convert_name_to_coordinates(hex_name : String, map_size : Vector2) -> Vector2j: # Powinno zwrócić Vector2i
+	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
+	
+	return Vector2j.new( number % int(map_size.x),number / int(map_size.y))

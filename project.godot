@@ -53,6 +53,7 @@ Benchmark="*res://Autoloads/Benchmark.gd"
 Options="*res://Autoloads/Options.gd"
 MapCreator="*res://Autoloads/MapCreator.gd"
 Tests="*res://Autoloads/Tests.gd"
+PreviewGenerator="*res://Autoloads/PreviewGenerator.gd"
 
 [display]
 

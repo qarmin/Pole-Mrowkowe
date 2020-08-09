@@ -203,6 +203,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 	for i in range(single_map.players.size()):
 		single_hex = single_map.map.get_node(NODE_BASE_NAME + str(int(single_map.players[i].y) * int(single_map.size.x) + int(single_map.players[i].x)))
 		single_hex.set_surface_material(0, texture_array[i])
+		single_map.fields[single_map.players[i].y][single_map.players[i].x] = FIELD_TYPE.PLAYER_FIRST + i
 
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
 #	var terrain_to_check : Array = []
@@ -332,20 +333,30 @@ func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of
 
 	var mat: SpatialMaterial
 
-	var choosen_material: int
-
-	for i in single_map.map.get_children():
-		choosen_material = randi() % (number_of_players + 1)
-		if choosen_material == 0:  # Materiał dla hexa
+	var choosen_player: int
+	var current_hex : Spatial
+	var hex_position : Vector2j
+	
+	for i in range(single_map.map.get_child_count()):
+		current_hex = single_map.map.get_child(i)
+#	for i in single_map.map.get_children():
+		choosen_player = randi() % (number_of_players + 1)
+		
+		hex_position = SingleMap.convert_name_to_coordinates(current_hex.get_name(),single_map.size)
+		
+		if choosen_player == 0:  # Domyślny materiał dla hexa
 			mat = texture_base
+			single_map.fields[hex_position.y][hex_position.x] = FIELD_TYPE.DEFAULT_FIELD
 		else:
-			mat = texture_array[choosen_material - 1]
-		i.set_surface_material(0, mat)
+			mat = texture_array[choosen_player - 1]
+			single_map.fields[hex_position.y][hex_position.x] = FIELD_TYPE.PLAYER_FIRST + (choosen_player - 1)
+			
+		current_hex.set_surface_material(0, mat)
 
-		if choosen_material == 0:  # Materiał dla mrówki
+		if choosen_player == 0:  # Materiał dla mrówki
 			mat = ant_base
 		else:
-			mat = ant_texture_array[choosen_material - 1]
+			mat = ant_texture_array[choosen_player - 1]
 
 		if randi() % 100 < ant_chance:
 			var AN: Spatial = Ant.instance()
@@ -374,7 +385,7 @@ func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of
 			new_ant.add_child(body)
 
 			outfit.set_surface_material(0, mat)
-			i.add_child(new_ant)
+			current_hex.add_child(new_ant)
 			new_ant.set_owner(single_map.map)
 			outfit.set_owner(single_map.map)
 			helmet.set_owner(single_map.map)
