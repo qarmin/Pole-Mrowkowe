@@ -1,5 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://Menu/MenuSkirmishNewGame/MenuSkirmishNewGame.gd" type="Script" id=1]
+[ext_resource path="res://GeneratedPreview.png" type="Texture" id=2]
 [ext_resource path="res://Menu/MenuCommon/MenuEntries.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Menu/MenuCommon/SubmenuTitle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Menu/MenuBenchmark/BackToMenu.gd" type="Script" id=5]
@@ -7,39 +9,64 @@
 [node name="MenuSkirmishNewGame" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Control" type="Control" parent="."]
 anchor_left = 0.05
 anchor_top = 0.25
 anchor_right = 0.95
 anchor_bottom = 0.75
+
+[node name="TextureRect" type="ColorRect" parent="Control"]
+show_behind_parent = true
+margin_right = 921.0
+margin_bottom = 300.0
+color = Color( 0.211765, 0.211765, 0.211765, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 458.0
-margin_bottom = 300.0
+[node name="Margin" type="MarginContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Control/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 911.0
+margin_bottom = 290.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="Control/Margin/HBox"]
+margin_right = 329.0
+margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="MapWidth" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-margin_right = 458.0
+[node name="MapWidth" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
+margin_right = 329.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MapWidth"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/MapWidth"]
 margin_top = 5.0
 margin_right = 69.0
 margin_bottom = 19.0
 text = "Map Width"
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/VBoxContainer/MapWidth"]
+[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapWidth"]
 margin_left = 73.0
 margin_right = 147.0
 margin_bottom = 24.0
@@ -47,18 +74,18 @@ min_value = 3.0
 max_value = 150.0
 value = 3.0
 
-[node name="MapHeight" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="MapHeight" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
 margin_top = 28.0
-margin_right = 458.0
+margin_right = 329.0
 margin_bottom = 52.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MapHeight"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/MapHeight"]
 margin_top = 5.0
 margin_right = 73.0
 margin_bottom = 19.0
 text = "Map Height"
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/VBoxContainer/MapHeight"]
+[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapHeight"]
 margin_left = 77.0
 margin_right = 151.0
 margin_bottom = 24.0
@@ -66,72 +93,72 @@ min_value = 3.0
 max_value = 150.0
 value = 3.0
 
-[node name="RandomEvents" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="RandomEvents" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
 visible = false
 margin_top = 56.0
 margin_right = 458.0
 margin_bottom = 80.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/RandomEvents"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/RandomEvents"]
 margin_top = 5.0
 margin_right = 98.0
 margin_bottom = 19.0
 text = "Random Events"
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/VBoxContainer/RandomEvents"]
+[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/RandomEvents"]
 margin_left = 102.0
 margin_right = 176.0
 margin_bottom = 24.0
 max_value = 10.0
 
-[node name="ComputerLands" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="ComputerLands" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
 visible = false
 margin_top = 56.0
 margin_right = 458.0
 margin_bottom = 80.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/ComputerLands"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/ComputerLands"]
 margin_top = 5.0
 margin_right = 153.0
 margin_bottom = 19.0
 text = "Computer Lands at Start"
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/VBoxContainer/ComputerLands"]
+[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/ComputerLands"]
 margin_left = 157.0
 margin_right = 231.0
 margin_bottom = 24.0
 max_value = 10.0
 
-[node name="PlayerLands" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="PlayerLands" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
 visible = false
 margin_top = 56.0
 margin_right = 458.0
 margin_bottom = 80.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PlayerLands"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/PlayerLands"]
 margin_top = 5.0
 margin_right = 129.0
 margin_bottom = 19.0
 text = "Player Lands at Start"
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/VBoxContainer/PlayerLands"]
+[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/PlayerLands"]
 margin_left = 133.0
 margin_right = 207.0
 margin_bottom = 24.0
 max_value = 10.0
 
-[node name="CPUPlayers" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="CPUPlayers" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
 margin_top = 56.0
-margin_right = 458.0
+margin_right = 329.0
 margin_bottom = 80.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/CPUPlayers"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/CPUPlayers"]
 margin_top = 5.0
 margin_right = 76.0
 margin_bottom = 19.0
 text = "CPU Players"
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/VBoxContainer/CPUPlayers"]
+[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/CPUPlayers"]
 margin_left = 80.0
 margin_right = 154.0
 margin_bottom = 24.0
@@ -139,18 +166,18 @@ min_value = 1.0
 max_value = 3.0
 value = 1.0
 
-[node name="PlayerName" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
 margin_top = 84.0
-margin_right = 458.0
+margin_right = 329.0
 margin_bottom = 108.0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PlayerName"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/PlayerName"]
 margin_top = 5.0
 margin_right = 81.0
 margin_bottom = 19.0
 text = "Player Name"
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/PlayerName"]
+[node name="LineEdit" type="LineEdit" parent="Control/Margin/HBox/VBox/PlayerName"]
 margin_left = 85.0
 margin_right = 143.0
 margin_bottom = 24.0
@@ -158,16 +185,16 @@ max_length = 20
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="MapPreview" type="ViewportContainer" parent="HBoxContainer"]
-margin_left = 462.0
-margin_right = 921.0
-margin_bottom = 300.0
+[node name="TextureRect" type="TextureRect" parent="Control/Margin/HBox"]
+margin_left = 333.0
+margin_right = 901.0
+margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Viewport" type="Viewport" parent="HBoxContainer/MapPreview"]
-handle_input_locally = false
-render_target_update_mode = 3
+size_flags_stretch_ratio = 1.72
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 anchor_left = 0.05
@@ -191,7 +218,7 @@ margin_right = 364.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 180, 0 )
 custom_fonts/font = ExtResource( 3 )
-text = "Start skirmish"
+text = "Generate MAP"
 
 [node name="Label" type="Label" parent="Buttons"]
 margin_left = 368.0
@@ -215,4 +242,5 @@ margin_left = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
 text = "Skirmish"
+[connection signal="button_up" from="Buttons/Generate Map" to="." method="_on_Generate_Map_button_up"]
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

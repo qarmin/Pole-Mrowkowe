@@ -8,7 +8,7 @@ var colors : Array = [
 	Color8(0xda,0x53,0x3c)
 ]
 
-func generate_preview_image(single_map : SingleMap) -> void:
+func generate_preview_image(single_map : SingleMap, square_size : Vector2j = Vector2j.new(10,10), border_size : int = 1) -> void:
 	print("Wygenerowałem podgląd dla mapy (" + str(single_map.size.x) + "," + str(single_map.size.y) + ")")
 	var img : Image = Image.new()
 	
@@ -20,24 +20,25 @@ func generate_preview_image(single_map : SingleMap) -> void:
 	var max_number : int
 	
 	var odd_line_offset : int # Przesunięcie w liniach parzystych
-	var square_size : Vector2j # Wielkość danego kwadratu - aktualny rozmiar jest równy (square_size - border_size)
-	var border_size : int = 1 # Wielkość krawędzi
+#	var square_size : Vector2j # Wielkość danego kwadratu - aktualny rozmiar jest równy (square_size - border_size)
+#	var border_size : int = 1 # Wielkość krawędzi
 	
 	
 	img.unlock()
-	square_size = Vector2j.new(10,10)
-	
-	## Tworzenie mapy bez offsetu gdy nie jest kwadratem
+#	square_size = Vector2j.new(10,10)
+#	
+#	## Tworzenie mapy bez offsetu gdy nie jest kwadratem
 # warning-ignore:integer_division
 #	img.create(int(single_map.size.x) * square_size.x + square_size.x / 2 + border_size, int(single_map.size.y) * square_size.y + border_size, false, Image.FORMAT_RGBA8)
+#	image_offset = Vector2j.new(0,0)
 
 	## Tworzenie mapy z offsetem
 	real_size = Vector2j.new(int(single_map.size.x) * square_size.x + square_size.x / 2 + border_size,int(single_map.size.y) * square_size.y + border_size)
 	max_number = int(max(real_size.x, real_size.y))
 	img.create(max_number, max_number, false, Image.FORMAT_RGBA8)
+# warning-ignore:integer_division
+# warning-ignore:integer_division
 	image_offset = Vector2j.new((max_number - real_size.x) / 2, (max_number - real_size.y)/2)
-	print(max_number)
-	print(str(image_offset.x) + " " + str(image_offset.y))
 	
 	img.lock()
 	
@@ -74,5 +75,7 @@ func generate_preview_image(single_map : SingleMap) -> void:
 	
 	img.resize(1024,1024,Image.INTERPOLATE_NEAREST)
 	
-	if img.save_png("res://GeneratedPreview.png") != OK:
-		push_error("Nastąpił błąd podczas zapisywania podglądu")
+	single_map.set_preview(img)
+	
+#	if img.save_png("res://GeneratedPreview.png") != OK:
+#		push_error("Nastąpił błąd podczas zapisywania podglądu")

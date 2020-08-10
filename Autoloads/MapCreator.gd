@@ -9,7 +9,7 @@ enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1 }
 #const DEFAULT_FIELD : int = -1
 #const FIRST_PLAYER : int = 0
 
-const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.7321, 2)
+const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 2) # Dokładna wartość to (1.7321,2) ale czasami pomiędzy nimi migocze wolna przestrzeń, dlatego należy to nieco zmniejszyć
 const NODE_BASE_NAME: String = "SingleHex"
 var texture_base: SpatialMaterial
 var texture_array: Array = []
@@ -153,7 +153,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 		if number_of_real_hex >= needed_hexes:
 			break
 
-		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(number_of_real_hex) + " a potrzebne było " + str(needed_hexes))
+#		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(number_of_real_hex) + " a potrzebne było " + str(needed_hexes))
 #		SingleMap.print_map(array)
 
 	single_map.set_fields(array)
@@ -175,10 +175,15 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 	single_map.set_map(map)
 
 
-func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> void:
+func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(single_map.number_of_terrain > 2 * number_of_players)
 	assert(max_number_of_additional_terrains >= 0)
+	
+	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
+		return false
+	if not (single_map.number_of_terrain > 2 * number_of_players):
+		return false
 
 	var temp_fields: Array
 	var curr: Vector2j = Vector2j.new(0, 0)
@@ -208,7 +213,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
 #	var terrain_to_check : Array = []
 #	var terrain_checked : Array = []
-	push_warning("TODO - Dodać określoną liczbę początkową pól(nie wiem jak do końca to zaimplementować), póki co jest jedno pole dla każdego gracza.")
+	# TODO - Dodać określoną liczbę początkową pól(nie wiem jak do końca to zaimplementować), póki co jest jedno pole dla każdego gracza.
 #	while(max_number_of_additional_terrains > 0):
 #		for i in range(single_map.players.size()):
 #
@@ -216,8 +221,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 #
 #			pass
 #		max_number_of_additional_terrains -= 1
-
-	push_warning("TODO - Dodać podstawowe budynki do mapy podczas tworzeni - np. główne mrowisko")
+	# TODO - Dodać podstawowe budynki do mapy podczas tworzeni - np. główne mrowisko
 
 #	## START PRINT MAP
 #	SingleMap.print_map(single_map.fields)
@@ -227,7 +231,7 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 
 #	SingleMap.print_map(single_map.fields)
 #	## END PRINT MAP
-	return
+	return true
 
 
 func recalculate_map(fields: Array, players: Array) -> Array:
@@ -325,12 +329,21 @@ func populate_map_buildings(_single_map: SingleMap) -> void:
 	push_warning("TODO - Tworzenie głównej siedziby i być może jakichś podstawowych budynków, może być przydatne przy tworzeniu mapy")
 
 
-func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
+func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> bool:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
 	assert(int(single_map.size.x) * int(single_map.size.y) >= 2)
 	assert(single_map.size.x > 0 && single_map.size.y > 0)
 
+	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
+		return false
+	if not (ant_chance >= 0 && ant_chance < 101):
+		return false
+	if not (int(single_map.size.x) * int(single_map.size.y) >= 2):
+		return false
+	if not (single_map.size.x > 0 && single_map.size.y > 0):
+		return false
+		
 	var mat: SpatialMaterial
 
 	var choosen_player: int
@@ -392,6 +405,8 @@ func populate_random_map(single_map: SingleMap, ant_chance: int = 100, number_of
 			body.set_owner(single_map.map)
 
 			AN.queue_free()
+			
+	return true
 
 
 func save_map(single_map: SingleMap, destroy: bool = false) -> void:

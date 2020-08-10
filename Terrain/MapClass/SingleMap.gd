@@ -3,12 +3,13 @@ class_name SingleMap
 var map: Spatial
 var size: Vector2  # GD40 Vector2i
 var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
+var preview : Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array
 var starts_with_offset: bool = false  #W przypadku jeśli dana mapa rozpoczyna się od przesuniętego linii parzystej(nie 1, może się to zdarzyć gdy mapa jest ucinana), to należy skorygować ułożenie mapy
 
-## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja
+## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja, przydatne tylko do debugowania
 var was_resetted: bool = false
 var was_shrinked: bool = false
 
@@ -18,6 +19,7 @@ func reset() -> void:
 		map.queue_free()
 		map = null
 
+	preview = Image.new()
 	size = Vector2()
 	fields.clear()
 	number_of_terrain = 0
@@ -49,7 +51,7 @@ func set_map(new_map: Spatial) -> void:
 	shrink_map()  # Usuwa niepotrzebne tereny 
 
 
-func set_fields(new_fields: Array) -> void:
+func set_fields(new_fields: Array) -> void: # Przydatne w testach, ale nie w życiu
 	fields = new_fields
 	assert(fields.size() == int(size.y))
 	assert(fields[0].size() == int(size.x))
@@ -57,6 +59,9 @@ func set_fields(new_fields: Array) -> void:
 
 func set_number_of_terrain(new_number_of_terrain: int) -> void:
 	number_of_terrain = new_number_of_terrain
+	
+func set_preview(new_preview : Image) -> void:
+	preview = new_preview
 
 
 ## Inne funkcje
@@ -114,13 +119,14 @@ func shrink_map() -> void:
 			i.set_name(MapCreator.NODE_BASE_NAME + str(number))
 
 		fields = new_fields
+		
 #		print("--- PO")
 #		for i in map.get_children():
 #			print(i.get_name())
 #		print_map(fields)
 
 		set_size(Vector2(new_fields[0].size(), new_fields.size()), false)
-		print_map(fields)
+#		print_map(fields)
 
 
 #	else:
@@ -157,4 +163,4 @@ static func print_map(array: Array) -> void:
 static func convert_name_to_coordinates(hex_name : String, map_size : Vector2) -> Vector2j: # Powinno zwrócić Vector2i
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 	
-	return Vector2j.new( number % int(map_size.x),number / int(map_size.y))
+	return Vector2j.new( number % int(map_size.x),number / int(map_size.x))

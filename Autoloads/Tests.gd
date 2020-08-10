@@ -6,9 +6,9 @@ const PRINT_TESTS: bool = false
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
 #	Vector2j_test()
-#	for _i in range(1):  # Stress test wykonać dla wartości > 5
+#	for _i in range(3):  # Stress test wykonać dla wartości > 5
 #		map_test()
-	print("Wykonano wszystkie testy")
+#	print("Wykonano wszystkie testy")
 	pass
 
 
@@ -49,31 +49,53 @@ func map_test() -> void:
 
 	MapCreator.generate_partial_map(single_map, Vector2(13, 13), 75)
 	assert(check_integration_of_map(single_map))
+# warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 4)
 	single_map.reset()
 
 	MapCreator.generate_partial_map(single_map, Vector2(9, 9), 75)
 	assert(check_integration_of_map(single_map))
+# warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 3)
+	single_map.reset()
+
+	MapCreator.generate_partial_map(single_map, Vector2(4, 7), 75)
+	assert(check_integration_of_map(single_map))
+	MapCreator.populate_partial_map(single_map, 3)
 	single_map.reset()
 
 	MapCreator.generate_partial_map(single_map, Vector2(15, 3), 75)
 	assert(check_integration_of_map(single_map))
+# warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 2)
 	single_map.reset()
 
 	MapCreator.generate_full_map(single_map, Vector2(15, 3))
 	assert(check_integration_of_map(single_map))
+# warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 4)
 	single_map.reset()
 
 	MapCreator.generate_full_map(single_map, Vector2(13, 13))
+# warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 2)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
 	MapCreator.generate_full_map(single_map, Vector2(20, 10))
+# warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 4)
+	assert(check_integration_of_map(single_map))
+	single_map.reset()
+
+	MapCreator.generate_full_map(single_map, Vector2(10, 20))
+	MapCreator.populate_partial_map(single_map, 3)
+	assert(check_integration_of_map(single_map))
+	single_map.reset()
+
+	MapCreator.generate_full_map(single_map, Vector2(30, 6))
+# warning-ignore:return_value_discarded
+	MapCreator.populate_random_map(single_map, 4)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
@@ -92,10 +114,11 @@ func map_test() -> void:
 
 	single_map.set_size(Vector2(3, 3))
 	single_map.set_number_of_terrain(3)
+	# Trzeba pamiętać, że istnieje pole zawsze w punkcie (0,0)
 	single_map.set_fields(
 		[
-			[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD],
-			[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.PLAYER_FIRST],
+			[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
+			[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
 			[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD]
 		]
 	)
@@ -106,7 +129,7 @@ func map_test() -> void:
 	assert(single_map.fields.size() == 2)
 	assert(single_map.fields[0].size() == 2)
 
-	var expected_fields: Array = [[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD], [MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.PLAYER_FIRST]]
+	var expected_fields: Array = [[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD], [MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD]]
 
 	assert(single_map.fields == expected_fields)
 
