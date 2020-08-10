@@ -59,12 +59,12 @@ func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
 
 
 func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_terrain: int) -> void:
-	single_map.set_size(hex_number)
-	single_map.initialize_fields()
-
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(int(hex_number.x) * int(hex_number.y) >= 2)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
+	
+	single_map.set_size(hex_number)
+	single_map.initialize_fields()
 
 	var map: Spatial = Spatial.new()
 	map.set_name("Map")
@@ -176,13 +176,13 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 
 
 func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
-	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
-	assert(single_map.number_of_terrain > 2 * number_of_players)
+#	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
+#	assert(single_map.number_of_terrain > number_of_players)
 	assert(max_number_of_additional_terrains >= 0)
 	
 	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
 		return false
-	if not (single_map.number_of_terrain > 2 * number_of_players):
+	if not (single_map.number_of_terrain > number_of_players):
 		return false
 
 	var temp_fields: Array

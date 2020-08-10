@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Menu/MenuSkirmishNewGame/MenuSkirmishNewGame.gd" type="Script" id=1]
-[ext_resource path="res://GeneratedPreview.png" type="Texture" id=2]
 [ext_resource path="res://Menu/MenuCommon/MenuEntries.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Menu/MenuCommon/SubmenuTitle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Menu/MenuBenchmark/BackToMenu.gd" type="Script" id=5]
@@ -62,16 +61,16 @@ margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="Control/Margin/HBox/VBox/MapWidth"]
 margin_top = 5.0
-margin_right = 69.0
+margin_right = 110.0
 margin_bottom = 19.0
-text = "Map Width"
+text = "Map Width (2-30)"
 
 [node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapWidth"]
-margin_left = 73.0
-margin_right = 147.0
+margin_left = 114.0
+margin_right = 188.0
 margin_bottom = 24.0
-min_value = 3.0
-max_value = 150.0
+min_value = 2.0
+max_value = 30.0
 value = 3.0
 
 [node name="MapHeight" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
@@ -81,16 +80,16 @@ margin_bottom = 52.0
 
 [node name="Label" type="Label" parent="Control/Margin/HBox/VBox/MapHeight"]
 margin_top = 5.0
-margin_right = 73.0
+margin_right = 114.0
 margin_bottom = 19.0
-text = "Map Height"
+text = "Map Height (2-30)"
 
 [node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapHeight"]
-margin_left = 77.0
-margin_right = 151.0
+margin_left = 118.0
+margin_right = 192.0
 margin_bottom = 24.0
-min_value = 3.0
-max_value = 150.0
+min_value = 2.0
+max_value = 30.0
 value = 3.0
 
 [node name="RandomEvents" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
@@ -154,13 +153,13 @@ margin_bottom = 80.0
 
 [node name="Label" type="Label" parent="Control/Margin/HBox/VBox/CPUPlayers"]
 margin_top = 5.0
-margin_right = 76.0
+margin_right = 109.0
 margin_bottom = 19.0
-text = "CPU Players"
+text = "CPU Players (1-4)"
 
 [node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/CPUPlayers"]
-margin_left = 80.0
-margin_right = 154.0
+margin_left = 113.0
+margin_right = 187.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 3.0
@@ -185,6 +184,25 @@ max_length = 20
 caret_blink = true
 caret_blink_speed = 0.5
 
+[node name="ChanceOfTerrain" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
+margin_top = 112.0
+margin_right = 329.0
+margin_bottom = 136.0
+
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/ChanceOfTerrain"]
+margin_top = 5.0
+margin_right = 167.0
+margin_bottom = 19.0
+text = "Chance of Terrain (30-100)"
+
+[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/ChanceOfTerrain"]
+margin_left = 171.0
+margin_right = 245.0
+margin_bottom = 24.0
+min_value = 30.0
+max_value = 100.0
+value = 80.0
+
 [node name="TextureRect" type="TextureRect" parent="Control/Margin/HBox"]
 margin_left = 333.0
 margin_right = 901.0
@@ -192,7 +210,6 @@ margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.72
-texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 

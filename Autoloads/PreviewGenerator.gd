@@ -9,7 +9,7 @@ var colors : Array = [
 ]
 
 func generate_preview_image(single_map : SingleMap, square_size : Vector2j = Vector2j.new(10,10), border_size : int = 1) -> void:
-	print("Wygenerowałem podgląd dla mapy (" + str(single_map.size.x) + "," + str(single_map.size.y) + ")")
+#	print("Wygenerowałem podgląd dla mapy (" + str(single_map.size.x) + "," + str(single_map.size.y) + ")")
 	var img : Image = Image.new()
 	
 	var current_color : Color

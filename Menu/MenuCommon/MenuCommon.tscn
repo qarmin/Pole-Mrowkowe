@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Menu/MainMenu/MainMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menu/MenuCommon/MenuCommon.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Menu/MenuOptions/MenuOptions.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Menu/MenuBenchmark/MenuBenchmark.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Menu/MenuCampaign/MenuCampaign.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/MenuCampaignNew.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignLoad/MenuCampaignLoad.tscn" type="PackedScene" id=9]
 
 [node name="MenuCommon" type="Control"]
 anchor_right = 1.0
@@ -22,10 +24,6 @@ __meta__ = {
 visible = false
 
 [node name="MenuSkirmishNewGame" parent="." instance=ExtResource( 3 )]
-visible = false
-
-[node name="Viewport" parent="MenuSkirmishNewGame/HBoxContainer/MapPreview" index="0"]
-render_target_update_mode = 0
 
 [node name="MenuOptions" parent="." instance=ExtResource( 5 )]
 visible = false
@@ -34,6 +32,12 @@ visible = false
 visible = false
 
 [node name="MenuCampaign" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="MenuCampaignNew" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="MenuCampaignLoad" parent="." instance=ExtResource( 9 )]
 visible = false
 [connection signal="campaign_menu_show" from="MainMenu/Buttons/Campaign" to="." method="_campaign_menu_show"]
 [connection signal="skirmish_menu_show" from="MainMenu/Buttons/Single Game" to="." method="_skirmish_menu_show"]
