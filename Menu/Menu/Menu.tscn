@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Menu/MainMenu/MainMenu.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Menu/MenuCommon/MenuCommon.gd" type="Script" id=2]
-[ext_resource path="res://Menu/MenuSkirmishNewGame/MenuSkirmishNewGame.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Menu/Menu/Menu.gd" type="Script" id=2]
+[ext_resource path="res://Menu/MenuSkirmish/MenuSkirmishNewGame/MenuSkirmishNewGame.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Menu/3DBackground/3DBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Menu/MenuOptions/MenuOptions.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Menu/MenuBenchmark/MenuBenchmark.tscn" type="PackedScene" id=6]

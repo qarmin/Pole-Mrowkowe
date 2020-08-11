@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Menu/MenuCommon/MenuEntries.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Menu/MenuCommon/SubmenuTitle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Menu/MenuOptions/BackToMenu.gd" type="Script" id=3]
+
 
 [node name="MenuOptions" type="Control"]
 anchor_right = 1.0

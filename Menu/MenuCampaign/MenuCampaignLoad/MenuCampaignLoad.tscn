@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Menu/MenuCommon/MenuEntries.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Menu/MenuCommon/SubmenuTitle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=2]
 
 [node name="MenuCampaignLoad" type="Control"]
 anchor_right = 1.0
@@ -10,9 +10,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="VBoxContainer" parent="."]
-anchor_left = 0.683
-anchor_top = 0.781
+[node name="Buttons" type="HBoxContainer" parent="."]
+anchor_left = 0.059
+anchor_top = 0.75
 anchor_right = 0.95
 anchor_bottom = 0.9
 custom_constants/separation = 18
@@ -20,14 +20,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Load" type="Button" parent="Buttons"]
+margin_right = 447.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = "LOAD"
+
 [node name="Back" type="Button" parent="Buttons"]
-margin_right = 273.0
-margin_bottom = 71.0
+margin_left = 465.0
+margin_right = 912.0
+margin_bottom = 90.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Back"
 
 [node name="Options" parent="." instance=ExtResource( 2 )]
-text = "new campaign"
+text = "Load campaign"
+[connection signal="pressed" from="Buttons/Load" to="Buttons/Load" method="_on_BackToMenu_pressed"]
 [connection signal="pressed" from="Buttons/Back" to="Buttons/Back" method="_on_BackToMenu_pressed"]

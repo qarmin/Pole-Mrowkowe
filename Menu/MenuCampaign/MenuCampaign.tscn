@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Menu/MenuCommon/MenuEntries.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Menu/MenuCommon/SubmenuTitle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Menu/MenuCampaign/BackToMenu.gd" type="Script" id=4]
 [ext_resource path="res://Menu/MenuCampaign/MenuCampaignSaveText.tres" type="DynamicFont" id=5]
+
 
 [node name="MenuCampaign" type="Control"]
 anchor_right = 1.0
