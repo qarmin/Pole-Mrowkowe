@@ -3,7 +3,6 @@
 [ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=2]
 
-
 [node name="MenuCampaignNew" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -153,7 +153,7 @@ func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_
 		if number_of_real_hex >= needed_hexes:
 			break
 
-#		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(number_of_real_hex) + " a potrzebne było " + str(needed_hexes))
+		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(number_of_real_hex) + " a potrzebne było " + str(needed_hexes))
 #		SingleMap.print_map(array)
 
 	single_map.set_fields(array)
@@ -181,8 +181,10 @@ func populate_map(single_map: SingleMap, number_of_players: int = GameSettings.M
 	assert(max_number_of_additional_terrains >= 0)
 	
 	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
+		print("Nieprawidłowa liczba graczy - " + str(number_of_players))
 		return false
 	if not (single_map.number_of_terrain > number_of_players):
+		print("Liczba terenów " + str(single_map.number_of_terrain) + ", musi być większa niż liczba graczy - " + str(number_of_players))
 		return false
 
 	var temp_fields: Array
@@ -311,6 +313,7 @@ func choose_one_of_closer_point(array: Array, number_of_terrain: int, number_of_
 			break
 
 	if biggest_numbers.size() == 0:
+		# TODO - To może się zdarzyć gdy liczba graczy jest równa liczbie terenów
 		assert(false)
 		return Vector2j.new(0, 0)
 

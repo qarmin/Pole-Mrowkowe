@@ -5,8 +5,6 @@
 [ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Menu/MenuBenchmark/BackToMenu.gd" type="Script" id=5]
 
-
-
 [node name="MenuSkirmishNewGame" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,8 +21,8 @@ anchor_bottom = 0.75
 
 [node name="TextureRect" type="ColorRect" parent="Control"]
 show_behind_parent = true
-margin_right = 921.0
-margin_bottom = 300.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0.211765, 0.211765, 0.211765, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,6 +37,9 @@ custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBox" type="HBoxContainer" parent="Control/Margin"]
 margin_left = 10.0
@@ -65,14 +66,14 @@ margin_bottom = 24.0
 margin_top = 5.0
 margin_right = 110.0
 margin_bottom = 19.0
-text = "Map Width (2-30)"
+text = "Map Width (3-50)"
 
 [node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapWidth"]
 margin_left = 114.0
 margin_right = 188.0
 margin_bottom = 24.0
-min_value = 2.0
-max_value = 30.0
+min_value = 3.0
+max_value = 50.0
 value = 3.0
 
 [node name="MapHeight" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
@@ -84,14 +85,14 @@ margin_bottom = 52.0
 margin_top = 5.0
 margin_right = 114.0
 margin_bottom = 19.0
-text = "Map Height (2-30)"
+text = "Map Height (3-50)"
 
 [node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapHeight"]
 margin_left = 118.0
 margin_right = 192.0
 margin_bottom = 24.0
-min_value = 2.0
-max_value = 30.0
+min_value = 3.0
+max_value = 50.0
 value = 3.0
 
 [node name="RandomEvents" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
@@ -202,7 +203,6 @@ margin_left = 171.0
 margin_right = 245.0
 margin_bottom = 24.0
 min_value = 30.0
-max_value = 100.0
 value = 80.0
 
 [node name="TextureRect" type="TextureRect" parent="Control/Margin/HBox"]
