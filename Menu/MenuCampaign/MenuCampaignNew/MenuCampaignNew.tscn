@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/BackToMenuCampaign.gd" type="Script" id=3]
 
 [node name="MenuCampaignNew" type="Control"]
 anchor_right = 1.0
@@ -27,7 +28,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Back"
+script = ExtResource( 3 )
 
 [node name="Options" parent="." instance=ExtResource( 2 )]
 text = "new campaign"
-[connection signal="pressed" from="Buttons/Back" to="Buttons/Back" method="_on_BackToMenu_pressed"]
+[connection signal="pressed" from="Buttons/Back" to="Buttons/Back" method="_on_BackToMenuCampaign_pressed"]

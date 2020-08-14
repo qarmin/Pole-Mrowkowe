@@ -1,14 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Menu/MenuBenchmark/BackToMenu.gd" type="Script" id=1]
 [ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Menu/MenuSkirmish/MenuSkirmishNewGame/MenuSkirmishNewGame.gd" type="Script" id=3]
 [ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=4]
 
-[node name="MenuSkirmishNewGame" type="Control"]
+[node name="MenuSkirmishLoadGame" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -47,170 +45,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBox" type="VBoxContainer" parent="Control/Margin/HBox"]
-margin_right = 329.0
+margin_right = 901.0
 margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": true
 }
-
-[node name="MapWidth" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-margin_right = 329.0
-margin_bottom = 24.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/MapWidth"]
-margin_top = 5.0
-margin_right = 110.0
-margin_bottom = 19.0
-text = "Map Width (2-30)"
-
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapWidth"]
-margin_left = 114.0
-margin_right = 188.0
-margin_bottom = 24.0
-min_value = 2.0
-max_value = 30.0
-value = 3.0
-
-[node name="MapHeight" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-margin_top = 28.0
-margin_right = 329.0
-margin_bottom = 52.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/MapHeight"]
-margin_top = 5.0
-margin_right = 114.0
-margin_bottom = 19.0
-text = "Map Height (2-30)"
-
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/MapHeight"]
-margin_left = 118.0
-margin_right = 192.0
-margin_bottom = 24.0
-min_value = 2.0
-max_value = 30.0
-value = 3.0
-
-[node name="RandomEvents" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-visible = false
-margin_top = 56.0
-margin_right = 458.0
-margin_bottom = 80.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/RandomEvents"]
-margin_top = 5.0
-margin_right = 98.0
-margin_bottom = 19.0
-text = "Random Events"
-
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/RandomEvents"]
-margin_left = 102.0
-margin_right = 176.0
-margin_bottom = 24.0
-max_value = 10.0
-
-[node name="ComputerLands" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-visible = false
-margin_top = 56.0
-margin_right = 458.0
-margin_bottom = 80.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/ComputerLands"]
-margin_top = 5.0
-margin_right = 153.0
-margin_bottom = 19.0
-text = "Computer Lands at Start"
-
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/ComputerLands"]
-margin_left = 157.0
-margin_right = 231.0
-margin_bottom = 24.0
-max_value = 10.0
-
-[node name="PlayerLands" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-visible = false
-margin_top = 56.0
-margin_right = 458.0
-margin_bottom = 80.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/PlayerLands"]
-margin_top = 5.0
-margin_right = 129.0
-margin_bottom = 19.0
-text = "Player Lands at Start"
-
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/PlayerLands"]
-margin_left = 133.0
-margin_right = 207.0
-margin_bottom = 24.0
-max_value = 10.0
-
-[node name="CPUPlayers" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-margin_top = 56.0
-margin_right = 329.0
-margin_bottom = 80.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/CPUPlayers"]
-margin_top = 5.0
-margin_right = 109.0
-margin_bottom = 19.0
-text = "CPU Players (1-4)"
-
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/CPUPlayers"]
-margin_left = 113.0
-margin_right = 187.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 3.0
-value = 1.0
-
-[node name="PlayerName" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-margin_top = 84.0
-margin_right = 329.0
-margin_bottom = 108.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/PlayerName"]
-margin_top = 5.0
-margin_right = 81.0
-margin_bottom = 19.0
-text = "Player Name"
-
-[node name="LineEdit" type="LineEdit" parent="Control/Margin/HBox/VBox/PlayerName"]
-margin_left = 85.0
-margin_right = 143.0
-margin_bottom = 24.0
-max_length = 20
-caret_blink = true
-caret_blink_speed = 0.5
-
-[node name="ChanceOfTerrain" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-margin_top = 112.0
-margin_right = 329.0
-margin_bottom = 136.0
-
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/ChanceOfTerrain"]
-margin_top = 5.0
-margin_right = 167.0
-margin_bottom = 19.0
-text = "Chance of Terrain (30-100)"
-
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/ChanceOfTerrain"]
-margin_left = 171.0
-margin_right = 245.0
-margin_bottom = 24.0
-min_value = 30.0
-value = 80.0
-
-[node name="TextureRect" type="TextureRect" parent="Control/Margin/HBox"]
-margin_left = 333.0
-margin_right = 901.0
-margin_bottom = 280.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 1.72
-expand = true
-stretch_mode = 6
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 anchor_left = 0.05
@@ -221,23 +62,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartSkirmish" type="Button" parent="Buttons"]
+[node name="StartCampaign" type="Button" parent="Buttons"]
 margin_right = 180.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 180, 0 )
 custom_fonts/font = ExtResource( 2 )
 text = "Start skirmish"
 
-[node name="Generate Map" type="Button" parent="Buttons"]
-margin_left = 184.0
-margin_right = 364.0
-margin_bottom = 71.0
-rect_min_size = Vector2( 180, 0 )
-custom_fonts/font = ExtResource( 2 )
-text = "Generate MAP"
-
 [node name="Label" type="Label" parent="Buttons"]
-margin_left = 368.0
+margin_left = 184.0
 margin_right = 737.0
 margin_bottom = 71.0
 size_flags_horizontal = 3
@@ -253,10 +86,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "Back to menu"
 script = ExtResource( 1 )
 
-[node name="Skirmish" parent="." instance=ExtResource( 4 )]
+[node name="LoadSkirmish" parent="." instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
-text = "Skirmish"
-[connection signal="button_up" from="Buttons/Generate Map" to="." method="_on_Generate_Map_button_up"]
+text = "Load Skirmish"
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

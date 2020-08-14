@@ -19,11 +19,13 @@ __meta__ = {
 }
 
 [node name="3DBackground" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="MainMenu" parent="." instance=ExtResource( 1 )]
 visible = false
 
 [node name="MenuSkirmishNewGame" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="MenuOptions" parent="." instance=ExtResource( 5 )]
 visible = false
@@ -35,7 +37,6 @@ visible = false
 visible = false
 
 [node name="MenuCampaignNew" parent="." instance=ExtResource( 8 )]
-visible = false
 
 [node name="MenuCampaignLoad" parent="." instance=ExtResource( 9 )]
 visible = false
@@ -48,6 +49,8 @@ visible = false
 [connection signal="back_to_menu" from="MenuOptions/Buttons/BackToMenu" to="." method="_back_to_menu"]
 [connection signal="back_to_menu" from="MenuBenchmark/Buttons/BackToMenu" to="." method="_back_to_menu"]
 [connection signal="back_to_menu" from="MenuCampaign/Buttons/BackToMenu" to="." method="_back_to_menu"]
+[connection signal="back_to_menu_campaign" from="MenuCampaignNew/Buttons/Back" to="." method="_campaign_menu_show"]
+[connection signal="back_to_menu_campaign" from="MenuCampaignLoad/Buttons/Back" to="." method="_campaign_menu_show"]
 
 [editable path="MainMenu"]
 
@@ -58,3 +61,7 @@ visible = false
 [editable path="MenuBenchmark"]
 
 [editable path="MenuCampaign"]
+
+[editable path="MenuCampaignNew"]
+
+[editable path="MenuCampaignLoad"]

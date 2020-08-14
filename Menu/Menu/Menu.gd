@@ -2,6 +2,7 @@ extends Control
 
 
 func _ready() -> void:
+	$"3DBackground".show()
 	if Benchmark.benchmarks_waits_to_be_shown:
 		hide_all_except($MenuBenchmark)
 		$MenuBenchmark.show_benchmarks()
@@ -40,10 +41,20 @@ func hide_all_except(choosen_node: Node):
 	else:
 		$MenuCampaign.hide()
 
+	if choosen_node == $MenuCampaignLoad:
+		$MenuCampaignLoad.show()
+	else:
+		$MenuCampaignLoad.hide()
+
+	if choosen_node == $MenuCampaignNew:
+		$MenuCampaignNew.show()
+	else:
+		$MenuCampaignNew.hide()
+
 
 func _back_to_menu() -> void:
 	hide_all_except($MainMenu)
-
+	
 
 func _skirmish_menu_show() -> void:
 	hide_all_except($MenuSkirmishNewGame)
