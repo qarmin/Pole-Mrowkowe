@@ -34,7 +34,7 @@ func _ready() -> void:
 		ant_texture_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
 
 
-func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
+func generate_full_map(single_map: SingleMap, hex_number: Vector2j) -> void:
 	single_map.set_size(hex_number)
 	single_map.initialize_full_fields()
 
@@ -58,7 +58,7 @@ func generate_full_map(single_map: SingleMap, hex_number: Vector2) -> void:
 	single_map.set_map(map)
 
 
-func generate_partial_map(single_map: SingleMap, hex_number: Vector2, chance_to_terrain: int) -> void:
+func generate_partial_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: int) -> void:
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(int(hex_number.x) * int(hex_number.y) >= 2)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)

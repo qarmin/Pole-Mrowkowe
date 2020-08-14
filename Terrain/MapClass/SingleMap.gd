@@ -1,7 +1,7 @@
 class_name SingleMap
 
 var map: Spatial
-var size: Vector2  # GD40 Vector2i
+var size: Vector2j  # GD40 Vector2i
 var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
 var preview : Image = Image.new()
 var number_of_terrain: int
@@ -20,7 +20,7 @@ func reset() -> void:
 		map = null
 
 	preview = Image.new()
-	size = Vector2()
+	size = Vector2j.new(0,0)
 	fields.clear()
 	number_of_terrain = 0
 	number_of_all_possible_hexes = 0
@@ -34,7 +34,7 @@ func reset() -> void:
 ## Settery
 
 
-func set_size(new_size: Vector2, zero_terrains: bool = true) -> void:
+func set_size(new_size: Vector2j, zero_terrains: bool = true) -> void:
 	size = new_size
 	number_of_all_possible_hexes = int(size.x) * int(size.y)  # GH40
 	if zero_terrains:
@@ -125,7 +125,7 @@ func shrink_map() -> void:
 #			print(i.get_name())
 #		print_map(fields)
 
-		set_size(Vector2(new_fields[0].size(), new_fields.size()), false)
+		set_size(Vector2j.new(new_fields[0].size(), new_fields.size()), false)
 #		print_map(fields)
 
 
@@ -160,7 +160,7 @@ static func print_map(array: Array) -> void:
 				line += " "
 		print(line)
 
-static func convert_name_to_coordinates(hex_name : String, map_size : Vector2) -> Vector2j: # Powinno zwrócić Vector2i
+static func convert_name_to_coordinates(hex_name : String, map_size : Vector2j) -> Vector2j: # Powinno zwrócić Vector2i
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 	
 	return Vector2j.new( number % int(map_size.x),number / int(map_size.x))

@@ -47,53 +47,53 @@ func map_test() -> void:
 
 	var single_map: SingleMap = SingleMap.new()
 
-	MapCreator.generate_partial_map(single_map, Vector2(13, 13), 75)
+	MapCreator.generate_partial_map(single_map, Vector2j.new(13, 13), 75)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 4)
 	single_map.reset()
 
-	MapCreator.generate_partial_map(single_map, Vector2(9, 9), 75)
+	MapCreator.generate_partial_map(single_map, Vector2j.new(9, 9), 75)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 3)
 	single_map.reset()
 
-	MapCreator.generate_partial_map(single_map, Vector2(4, 7), 75)
+	MapCreator.generate_partial_map(single_map, Vector2j.new(4, 7), 75)
 	assert(check_integration_of_map(single_map))
 	MapCreator.populate_partial_map(single_map, 3)
 	single_map.reset()
 
-	MapCreator.generate_partial_map(single_map, Vector2(15, 3), 75)
+	MapCreator.generate_partial_map(single_map, Vector2j.new(15, 3), 75)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 2)
 	single_map.reset()
 
-	MapCreator.generate_full_map(single_map, Vector2(15, 3))
+	MapCreator.generate_full_map(single_map, Vector2j.new(15, 3))
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 4)
 	single_map.reset()
 
-	MapCreator.generate_full_map(single_map, Vector2(13, 13))
+	MapCreator.generate_full_map(single_map, Vector2j.new(13, 13))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 2)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
-	MapCreator.generate_full_map(single_map, Vector2(20, 10))
+	MapCreator.generate_full_map(single_map, Vector2j.new(20, 10))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map(single_map, 4)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
-	MapCreator.generate_full_map(single_map, Vector2(10, 20))
+	MapCreator.generate_full_map(single_map, Vector2j.new(10, 20))
 	MapCreator.populate_partial_map(single_map, 3)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
-	MapCreator.generate_full_map(single_map, Vector2(30, 6))
+	MapCreator.generate_full_map(single_map, Vector2j.new(30, 6))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_random_map(single_map, 4)
 	assert(check_integration_of_map(single_map))
@@ -112,7 +112,7 @@ func map_test() -> void:
 	temp_spatial.set_name(MapCreator.NODE_BASE_NAME + "5")
 	single_map.map.add_child(temp_spatial)
 
-	single_map.set_size(Vector2(3, 3))
+	single_map.set_size(Vector2j.new(3, 3))
 	single_map.set_number_of_terrain(3)
 	# Trzeba pamiętać, że istnieje pole zawsze w punkcie (0,0)
 	single_map.set_fields(
