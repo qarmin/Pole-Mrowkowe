@@ -1,8 +1,9 @@
 class_name SingleMap
 
-var map: Spatial
-var size: Vector2j  # GD40 Vector2i
+var map: Spatial = null
+var size: Vector2j 
 var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
+var units: Array
 var preview : Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
@@ -22,6 +23,7 @@ func reset() -> void:
 	preview = Image.new()
 	size = Vector2j.new(0,0)
 	fields.clear()
+	units.clear()
 	number_of_terrain = 0
 	number_of_all_possible_hexes = 0
 	players.clear()
@@ -34,11 +36,10 @@ func reset() -> void:
 ## Settery
 
 
-func set_size(new_size: Vector2j, zero_terrains: bool = true) -> void:
+func set_size(new_size: Vector2j) -> void:
 	size = new_size
-	number_of_all_possible_hexes = int(size.x) * int(size.y)  # GH40
-	if zero_terrains:
-		number_of_terrain = 0
+	
+	number_of_all_possible_hexes = size.x * size.y
 
 
 func set_players(new_players: Array) -> void:
@@ -50,22 +51,24 @@ func set_map(new_map: Spatial) -> void:
 	map = new_map
 	shrink_map()  # Usuwa niepotrzebne tereny 
 
-
-func set_fields(new_fields: Array) -> void: # Przydatne w testach, ale nie w życiu
-	fields = new_fields
-	assert(fields.size() == int(size.y))
-	assert(fields[0].size() == int(size.x))
-
-
 func set_number_of_terrain(new_number_of_terrain: int) -> void:
 	number_of_terrain = new_number_of_terrain
 	
 func set_preview(new_preview : Image) -> void:
 	preview = new_preview
 
-
 ## Inne funkcje
 
+func initialize_fields(type_of_field : int):
+	assert(type_of_field == MapCreator.FIELD_TYPE.DEFAULT_FIELD or type_of_field == MapCreator.FIELD_TYPE.NO_FIELD)
+	assert(fields.size() == 0)
+	fields.clear()
+	for y in range(size.y):
+		fields.append([])
+		units.append([])
+		for _x in range(size.x):
+			fields[y].append(type_of_field)
+			fields[y].append(type_of_field)
 
 func calculate_number_of_terrains():
 	number_of_terrain = 0
@@ -96,56 +99,35 @@ func shrink_map() -> void:
 
 	if (real_max_x + 1) != fields[0].size() || (real_max_y + 1) != fields.size():
 		was_shrinked = true
+		set_size(Vector2j.new(real_max_x + 1, real_max_y + 1))
 
-#		print("INFO: Trzeba przyciąć mapę")
-		var new_fields: Array = []
-		for y in range(real_max_y + 1):
-			new_fields.append([])
-			for x in range(real_max_x + 1):
-				new_fields[y].append(fields[y][x])
+		print("INFO: Trzeba przyciąć mapę")
+#		var new_fields: Array = []
+#		for y in range(real_max_y + 1):
+#			new_fields.append([])
+#			for x in range(real_max_x + 1):
+#				new_fields[y].append(fields[y][x])
 
 #		print("--- PRZED")
-#		for i in map.get_children():
-#			print(i.get_name())
 #		print_map(fields)
 
-		for i in map.get_children():
-			var number: int = i.get_name().trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
-# warning-ignore:integer_division
-			var old_y: int = number / int(size.x)
-			#var old_x: int = number % int(size.x)
+#		fields = new_fields
 
-			number -= (int(size.x) - real_max_x - 1) * old_y
-			i.set_name(MapCreator.NODE_BASE_NAME + str(number))
-
-		fields = new_fields
+		fields.resize(size.y)
+		units.resize(size.y)
+		for y in range(fields.size()):
+			fields[y].resize(size.x)
+			units.resize(size.x)
 		
 #		print("--- PO")
-#		for i in map.get_children():
-#			print(i.get_name())
 #		print_map(fields)
 
-		set_size(Vector2j.new(new_fields[0].size(), new_fields.size()), false)
+#		set_size(Vector2j.new(new_fields[0].size(), new_fields.size()), false)
 #		print_map(fields)
 
 
 #	else:
 #		print("INFO: Nie trzeba zmniejszać mapy")
-
-
-func initialize_fields() -> void:
-	for i in range(size.y):
-		fields.append([])
-		for _j in range(size.x):
-			fields[i].append(MapCreator.FIELD_TYPE.NO_FIELD)
-
-
-func initialize_full_fields() -> void:
-	for i in range(size.y):
-		fields.append([])
-		for _j in range(size.x):
-			fields[i].append(MapCreator.FIELD_TYPE.DEFAULT_FIELD)
-	number_of_terrain = number_of_all_possible_hexes
 
 
 static func print_map(array: Array) -> void:
@@ -163,4 +145,4 @@ static func print_map(array: Array) -> void:
 static func convert_name_to_coordinates(hex_name : String, map_size : Vector2j) -> Vector2j: # Powinno zwrócić Vector2i
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 	
-	return Vector2j.new( number % int(map_size.x),number / int(map_size.x))
+	return Vector2j.new( number % map_size.x,number / map_size.x)
