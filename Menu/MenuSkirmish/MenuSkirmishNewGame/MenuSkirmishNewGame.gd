@@ -18,7 +18,7 @@ func _on_Generate_Map_button_up() -> void:
 #	MapCreator.create_full_map(single_map,Vector2j.new(30,30))
 	while true:
 		MapCreator.create_map(single_map,Vector2j.new(size_of_map.x,size_of_map.y),chance_to_terrain)
-		if MapCreator.populate_map_realistically(single_map):
+		if MapCreator.populate_map_realistically(single_map,number_of_cpu_players + 1):
 			break
 		single_map.reset()
 	PreviewGenerator.generate_preview_image(single_map)

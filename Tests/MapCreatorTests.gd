@@ -17,3 +17,4 @@ func test_create_map():
 	add_child(single_map.map)
 	$Camera.set_size(single_map.size.y * MapCreator.SINGLE_HEX_DIMENSION.y * 0.75 + 0.25 * MapCreator.SINGLE_HEX_DIMENSION.y)
 	MapCreator.save_map_as_packed_scene(single_map)
+	MapCreator.save_map_as_text(single_map)

@@ -130,10 +130,10 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 	assert(max_number_of_additional_terrains >= 0)
 	
 	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
-		print("Nieprawidłowa liczba graczy - " + str(number_of_players))
+#		print("Nieprawidłowa liczba graczy - " + str(number_of_players))
 		return false
 	if not (single_map.number_of_terrain > number_of_players):
-		print("Liczba terenów " + str(single_map.number_of_terrain) + ", musi być większa niż liczba graczy - " + str(number_of_players))
+#		print("Liczba terenów " + str(single_map.number_of_terrain) + ", musi być większa niż liczba graczy - " + str(number_of_players))
 		return false
 
 	var temp_fields: Array
@@ -330,6 +330,20 @@ func save_map_as_packed_scene(single_map: SingleMap, destroy: bool = false) -> v
 #
 #	map.queue_free()
 
+func save_map_as_text(single_map : SingleMap) -> void:
+	var file_to_save : File = File.new()
+	if file_to_save.open("saved_slot1.txt",File.WRITE) != OK:
+		push_error("Nie udało się utworzyć pliku do zapisu")
+	
+	file_to_save.store_8(1) # Wersja savu, może być przydatna przy wczytywaniu
+	
+	file_to_save.store_var(single_map.size)
+	file_to_save.store_var(single_map.fields)
+	file_to_save.store_var(single_map.units)
+	
+	
+	file_to_save.close()
+	pass
 
 ## Tworzy mapę, którą można użyć w Scene Tree(Jest to zwykły Node)
 func create_3d_map(single_map : SingleMap) -> void:
