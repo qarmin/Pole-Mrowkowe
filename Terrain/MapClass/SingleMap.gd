@@ -1,10 +1,10 @@
 class_name SingleMap
 
 var map: Spatial = null
-var size: Vector2j 
+var size: Vector2j
 var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
 var units: Array
-var preview : Image = Image.new()
+var preview: Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array
@@ -21,7 +21,7 @@ func reset() -> void:
 		map = null
 
 	preview = Image.new()
-	size = Vector2j.new(0,0)
+	size = Vector2j.new(0, 0)
 	fields.clear()
 	units.clear()
 	number_of_terrain = 0
@@ -38,7 +38,7 @@ func reset() -> void:
 
 func set_size(new_size: Vector2j) -> void:
 	size = new_size
-	
+
 	number_of_all_possible_hexes = size.x * size.y
 
 
@@ -51,15 +51,19 @@ func set_map(new_map: Spatial) -> void:
 	map = new_map
 	shrink_map()  # Usuwa niepotrzebne tereny 
 
+
 func set_number_of_terrain(new_number_of_terrain: int) -> void:
 	number_of_terrain = new_number_of_terrain
-	
-func set_preview(new_preview : Image) -> void:
+
+
+func set_preview(new_preview: Image) -> void:
 	preview = new_preview
+
 
 ## Inne funkcje
 
-func initialize_fields(type_of_field : int):
+
+func initialize_fields(type_of_field: int):
 	assert(type_of_field == MapCreator.FIELD_TYPE.DEFAULT_FIELD or type_of_field == MapCreator.FIELD_TYPE.NO_FIELD)
 	assert(fields.size() == 0)
 	fields.clear()
@@ -70,6 +74,7 @@ func initialize_fields(type_of_field : int):
 		for _x in range(size.x):
 			fields[y].append(type_of_field)
 			units[y].append(type_of_field)
+
 
 func calculate_number_of_terrains():
 	number_of_terrain = 0
@@ -112,13 +117,13 @@ func shrink_map() -> void:
 		for y in range(fields.size()):
 			fields[y].resize(size.x)
 			units.resize(size.x)
-		
+
+
 #		print("--- PO")
 #		print_map(fields)
 
 #	else:
 #		print("INFO: Nie trzeba zmniejszać mapy")
-
 
 static func print_map(array: Array) -> void:
 	print("Printed map - size(" + str(array[0].size()) + "," + str(array.size()) + ")")
@@ -132,7 +137,7 @@ static func print_map(array: Array) -> void:
 				line += " "
 		print(line)
 
-static func convert_name_to_coordinates(hex_name : String, map_size : Vector2j) -> Vector2j:
+static func convert_name_to_coordinates(hex_name: String, map_size: Vector2j) -> Vector2j:
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
-	
-	return Vector2j.new( number % map_size.x,number / map_size.x)
+
+	return Vector2j.new(number % map_size.x, number / map_size.x)

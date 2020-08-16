@@ -11,12 +11,13 @@ enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1, PLAYER_LAS
 #const DEFAULT_FIELD : int = -1
 #const FIRST_PLAYER : int = 0
 
-const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 2) # Dokładna wartość to (1.7321,2) ale czasami pomiędzy nimi migocze wolna przestrzeń, dlatego należy to nieco zmniejszyć
+const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 2)  # Dokładna wartość to (1.7321,2) ale czasami pomiędzy nimi migocze wolna przestrzeń, dlatego należy to nieco zmniejszyć
 const NODE_BASE_NAME: String = "SingleHex"
 var texture_base: SpatialMaterial
 var texture_array: Array = []
 var ant_base: SpatialMaterial
 var ant_texture_array: Array = []
+
 
 ## Należy na początku zainicjalizować wszystkie potrzebne zmienne
 func _ready() -> void:
@@ -35,24 +36,25 @@ func _ready() -> void:
 		texture_array.append(load("res://Terrain/SingleHex/SingleHexTEAM" + str(i + 1) + ".tres"))
 		ant_texture_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
 
+
 ## Tworzy mapę i zapisuje ją do tablicy single_map.fields z listą wszystkich pól
 func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: int) -> void:
-	assert(!is_instance_valid(single_map.map))
+	assert(! is_instance_valid(single_map.map))
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(hex_number.x * hex_number.y >= 4)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
-	
+
 	single_map.set_size(hex_number)
-	if chance_to_terrain == 100: # Tworzy pełną mapę
+	if chance_to_terrain == 100:  # Tworzy pełną mapę
 		single_map.initialize_fields(MapCreator.FIELD_TYPE.DEFAULT_FIELD)
 		single_map.calculate_number_of_terrains()
 		return
-		
+
 	single_map.initialize_fields(MapCreator.FIELD_TYPE.NO_FIELD)
 
 	var to_check: Array = []
 	var checked: Array = []
-	var current_element: Vector2j = Vector2j.new(0, 0) 
+	var current_element: Vector2j = Vector2j.new(0, 0)
 
 	while true:
 		# Resetowanie tablicy
@@ -117,18 +119,19 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 			break
 
 #		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(single_map.number_of_terrain) + " a potrzebne było " + str(needed_hexes))
-	#	SingleMap.print_map(array)
+		#	SingleMap.print_map(array)
 		to_check.clear()
 		checked.clear()
-		
+
 	single_map.shrink_map()
 	return
+
 
 func populate_map_realistically(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
 #	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 #	assert(single_map.number_of_terrain > number_of_players)
 	assert(max_number_of_additional_terrains >= 0)
-	
+
 	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
 #		print("Nieprawidłowa liczba graczy - " + str(number_of_players))
 		return false
@@ -179,8 +182,8 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 #	SingleMap.print_map(single_map.fields)
 #	## END PRINT MAP
 	return true
-	
-	
+
+
 ## Dowolnie wypełnia pola mrówkami oraz kolorami
 func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> bool:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
@@ -198,19 +201,20 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 		return false
 
 	var choosen_player: int
-	
+
 	for y in range(single_map.size.y):
 		for x in range(single_map.size.x):
 			if single_map.fields[y][x] == MapCreator.FIELD_TYPE.DEFAULT_FIELD:
 				choosen_player = randi() % (number_of_players + 1) - 1
-				
-				if choosen_player != -1: 
+
+				if choosen_player != -1:
 					single_map.fields[y][x] = MapCreator.FIELD_TYPE.PLAYER_FIRST + choosen_player
-				
+
 				if randi() % 100 < ant_chance:
 					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN) + Units.TYPES_OF_ANTS.ANT_MIN
-			
+
 	return true
+
 
 func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
 	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od 
@@ -310,7 +314,7 @@ func populate_map_buildings(_single_map: SingleMap) -> void:
 
 ## Zapisuje mapę do pliku jako PackedScene
 ## Dostępne jest to tylko do celów testowych
-func save_map_as_packed_scene(single_map: SingleMap, destroy: bool = false) -> void: 
+func save_map_as_packed_scene(single_map: SingleMap, destroy: bool = false) -> void:
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(single_map.map)
 
@@ -330,23 +334,24 @@ func save_map_as_packed_scene(single_map: SingleMap, destroy: bool = false) -> v
 #
 #	map.queue_free()
 
-func save_map_as_text(single_map : SingleMap) -> void:
-	var file_to_save : File = File.new()
-	if file_to_save.open("saved_slot1.txt",File.WRITE) != OK:
+
+func save_map_as_text(single_map: SingleMap) -> void:
+	var file_to_save: File = File.new()
+	if file_to_save.open("saved_slot1.txt", File.WRITE) != OK:
 		push_error("Nie udało się utworzyć pliku do zapisu")
-	
-	file_to_save.store_8(1) # Wersja savu, może być przydatna przy wczytywaniu
-	
+
+	file_to_save.store_8(1)  # Wersja savu, może być przydatna przy wczytywaniu
+
 	file_to_save.store_var(single_map.size)
 	file_to_save.store_var(single_map.fields)
 	file_to_save.store_var(single_map.units)
-	
-	
+
 	file_to_save.close()
 	pass
 
+
 ## Tworzy mapę, którą można użyć w Scene Tree(Jest to zwykły Node)
-func create_3d_map(single_map : SingleMap) -> void:
+func create_3d_map(single_map: SingleMap) -> void:
 	var map: Spatial = Spatial.new()
 	map.set_name("Map")
 
@@ -357,8 +362,8 @@ func create_3d_map(single_map : SingleMap) -> void:
 				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
 				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
-				SH.set_name(NODE_BASE_NAME + str(y * single_map.size.x+ x))
-				
+				SH.set_name(NODE_BASE_NAME + str(y * single_map.size.x + x))
+
 				if single_map.fields[y][x] == FIELD_TYPE.DEFAULT_FIELD:
 					SH.set_surface_material(0, texture_base)
 				else:
@@ -367,7 +372,7 @@ func create_3d_map(single_map : SingleMap) -> void:
 				SH.set_owner(map)
 
 	single_map.set_map(map)
-	
+
 	# Po wygenerowaniu mapy ładnie ją wycentrowujemy
 	center_map(single_map)
 	pass

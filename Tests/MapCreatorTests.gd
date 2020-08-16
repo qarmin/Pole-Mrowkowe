@@ -9,7 +9,7 @@ func _ready() -> void:
 func test_create_map():
 	var single_map: SingleMap = SingleMap.new()
 
-	MapCreator.create_map(single_map, Vector2j.new(20,20), 100)
+	MapCreator.create_map(single_map, Vector2j.new(20, 20), 100)
 	var _s = MapCreator.populate_map_realistically(single_map, 4)
 #	MapCreator.populate_map_randomly(single_map, 50)
 	MapCreator.create_3d_map(single_map)

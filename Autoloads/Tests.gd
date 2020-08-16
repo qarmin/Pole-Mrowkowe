@@ -71,31 +71,31 @@ func map_test() -> void:
 	MapCreator.populate_map_realistically(single_map, 2)
 	single_map.reset()
 
-	MapCreator.create_map(single_map, Vector2j.new(15, 3),100)
+	MapCreator.create_map(single_map, Vector2j.new(15, 3), 100)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
 	single_map.reset()
 
-	MapCreator.create_map(single_map, Vector2j.new(13, 13),100)
+	MapCreator.create_map(single_map, Vector2j.new(13, 13), 100)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 2)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
-	MapCreator.create_map(single_map, Vector2j.new(20, 10),100)
+	MapCreator.create_map(single_map, Vector2j.new(20, 10), 100)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
-	MapCreator.create_map(single_map, Vector2j.new(10, 20),100)
+	MapCreator.create_map(single_map, Vector2j.new(10, 20), 100)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 3)
 	assert(check_integration_of_map(single_map))
 	single_map.reset()
 
-	MapCreator.create_map(single_map, Vector2j.new(30, 6),100)
+	MapCreator.create_map(single_map, Vector2j.new(30, 6), 100)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 4)
 	assert(check_integration_of_map(single_map))
@@ -118,10 +118,10 @@ func map_test() -> void:
 	single_map.set_number_of_terrain(3)
 	# Trzeba pamiętać, że istnieje pole zawsze w punkcie (0,0)
 	single_map.fields = [
-			[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
-			[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
-			[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD]
-		]
+		[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
+		[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
+		[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD]
+	]
 
 	single_map.shrink_map()
 
@@ -132,7 +132,7 @@ func map_test() -> void:
 	var expected_fields: Array = [[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD], [MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD]]
 
 	assert(single_map.fields == expected_fields)
-	
+
 	single_map.map.queue_free()
 
 
@@ -141,9 +141,9 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	var checked: Array = []
 	var to_check: Array = []
 	var current_element: Vector2j = Vector2j.new(0, 0)
-	
+
 	# Pewny punkt startowy to 0,0
-	to_check.append(Vector2j.new(0,0))
+	to_check.append(Vector2j.new(0, 0))
 
 	# Sprawdza z iloma wszystkimi hexami jest dany hex połączony pośrednio i bezpośrednio, keśli różni się od liczby wszystkich hexów, to znaczy, że istnieją oderwane hexy
 	while to_check.size() > 0:
