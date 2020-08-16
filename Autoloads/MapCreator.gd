@@ -5,7 +5,7 @@ extends Node
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
 
-enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1 }
+enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1, PLAYER_LAST = 4 }
 
 #const NO_FIELD : int = -100
 #const DEFAULT_FIELD : int = -1
@@ -115,7 +115,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 		if single_map.number_of_terrain >= needed_hexes:
 			break
 
-		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(single_map.number_of_terrain) + " a potrzebne było " + str(needed_hexes))
+#		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(single_map.number_of_terrain) + " a potrzebne było " + str(needed_hexes))
 	#	SingleMap.print_map(array)
 		to_check.clear()
 		checked.clear()
@@ -123,7 +123,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	single_map.shrink_map()
 	return
 
-func populate_map_fully(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
+func populate_map_realistically(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
 #	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 #	assert(single_map.number_of_terrain > number_of_players)
 	assert(max_number_of_additional_terrains >= 0)
@@ -140,24 +140,20 @@ func populate_map_fully(single_map: SingleMap, number_of_players: int = GameSett
 
 	# Wybieranie miejsca dla pierwszego gracza
 	while true:
-		curr.x = randi() % int(single_map.size.x)
-		curr.y = randi() % int(single_map.size.y)
+		curr.x = randi() % single_map.size.x
+		curr.y = randi() % single_map.size.y
 		if single_map.fields[curr.y][curr.x] == FIELD_TYPE.DEFAULT_FIELD:
 			single_map.players.append(curr)
 			break
 
 	# Wybieranie miejsc dla innych graczy
 	while single_map.players.size() < number_of_players:
-		temp_fields = recalculate_map(single_map.fields, single_map.players)
-		single_map.players.append(choose_one_of_closer_point(temp_fields, single_map.number_of_terrain, number_of_players))
+		temp_fields = pm_fully_create_distance_array(single_map.fields, single_map.players)
+		single_map.players.append(pm_fully_choose_point_from_distance_array(temp_fields, single_map.number_of_terrain, number_of_players))
 
 	# Narysowanie głównego miejsca dla każdego z osób/przeciwników
 
-	var single_hex: Spatial
-
 	for i in range(single_map.players.size()):
-		single_hex = single_map.map.get_node(NODE_BASE_NAME + str(int(single_map.players[i].y) * int(single_map.size.x) + int(single_map.players[i].x)))
-		single_hex.set_surface_material(0, texture_array[i])
 		single_map.fields[single_map.players[i].y][single_map.players[i].x] = FIELD_TYPE.PLAYER_FIRST + i
 
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
@@ -182,6 +178,8 @@ func populate_map_fully(single_map: SingleMap, number_of_players: int = GameSett
 #	SingleMap.print_map(single_map.fields)
 #	## END PRINT MAP
 	return true
+	
+	
 ## Dowolnie wypełnia pola mrówkami oraz kolorami
 func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> bool:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
@@ -197,52 +195,23 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 		return false
 	if not (single_map.size.x > 0 && single_map.size.y > 0):
 		return false
-		
-	var mat: SpatialMaterial
 
 	var choosen_player: int
-	var current_hex : Spatial
-	var hex_position : Vector2j
 	
 	for y in range(single_map.size.y):
 		for x in range(single_map.size.x):
 			if single_map.fields[y][x] == MapCreator.FIELD_TYPE.DEFAULT_FIELD:
-				choosen_player = randi() % (number_of_players + 1)
+				choosen_player = randi() % (number_of_players + 1) - 1
 				
-				if choosen_player == 0:  # Domyślny materiał dla hexa
-					single_map.fields[y][x] = MapCreator.FIELD_TYPE.DEFAULT_FIELD
-				else:
-					single_map.fields[y][x] = MapCreator.FIELD_TYPE.NO_FIELD
-					
-					
-					
-	for i in range(single_map.map.get_child_count()):
-		current_hex = single_map.map.get_child(i)
-#	for i in single_map.map.get_children():
-		choosen_player = randi() % (number_of_players + 1)
-		
-		hex_position = SingleMap.convert_name_to_coordinates(current_hex.get_name(),single_map.size)
-		
-		if choosen_player == 0: 
-			mat = texture_base
-			single_map.fields[hex_position.y][hex_position.x] = FIELD_TYPE.DEFAULT_FIELD
-		else:
-			mat = texture_array[choosen_player - 1]
-			single_map.fields[hex_position.y][hex_position.x] = FIELD_TYPE.PLAYER_FIRST + (choosen_player - 1)
-			
-		current_hex.set_surface_material(0, mat)
-
-		if choosen_player == 0:  # Materiał dla mrówki
-			mat = ant_base
-		else:
-			mat = ant_texture_array[choosen_player - 1]
-
-		if randi() % 100 < ant_chance:
-			single_map.units[hex_position.y][hex_position.x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN) + Units.TYPES_OF_ANTS.ANT_MIN
+				if choosen_player != -1: 
+					single_map.fields[y][x] = MapCreator.FIELD_TYPE.PLAYER_FIRST + choosen_player
+				
+				if randi() % 100 < ant_chance:
+					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN) + Units.TYPES_OF_ANTS.ANT_MIN
 			
 	return true
 
-func recalculate_map(fields: Array, players: Array) -> Array:
+func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
 	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od 
 	var current_element: Vector2j = Vector2j.new(0, 0)
 	var current_value: int = 0
@@ -297,7 +266,7 @@ func recalculate_map(fields: Array, players: Array) -> Array:
 	return smallest_array
 
 
-func choose_one_of_closer_point(array: Array, number_of_terrain: int, number_of_players: int) -> Vector2j:
+func pm_fully_choose_point_from_distance_array(array: Array, number_of_terrain: int, number_of_players: int) -> Vector2j:
 	var biggest_numbers: Array = []
 	var biggest_number: int
 	var biggest_vector: Vector2j
@@ -338,10 +307,9 @@ func populate_map_buildings(_single_map: SingleMap) -> void:
 	push_warning("TODO - Tworzenie głównej siedziby i być może jakichś podstawowych budynków, może być przydatne przy tworzeniu mapy")
 
 
-
 ## Zapisuje mapę do pliku jako PackedScene
 ## Dostępne jest to tylko do celów testowych
-func save_map(single_map: SingleMap, destroy: bool = false) -> void: 
+func save_map_as_packed_scene(single_map: SingleMap, destroy: bool = false) -> void: 
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(single_map.map)
 
@@ -369,14 +337,17 @@ func create_3d_map(single_map : SingleMap) -> void:
 
 	for y in single_map.size.y:
 		for x in single_map.size.x:
-			if single_map.fields[y][x] == FIELD_TYPE.DEFAULT_FIELD:
+			if single_map.fields[y][x] != FIELD_TYPE.NO_FIELD:
 				var SH: MeshInstance = SingleHex.instance()
 				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
 				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 				SH.set_name(NODE_BASE_NAME + str(y * single_map.size.x+ x))
-
-				SH.set_surface_material(0, texture_base)
+				
+				if single_map.fields[y][x] == FIELD_TYPE.DEFAULT_FIELD:
+					SH.set_surface_material(0, texture_base)
+				else:
+					SH.set_surface_material(0, texture_array[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST])
 				map.add_child(SH)
 				SH.set_owner(map)
 

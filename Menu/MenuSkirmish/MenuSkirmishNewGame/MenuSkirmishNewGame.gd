@@ -17,11 +17,8 @@ func _on_Generate_Map_button_up() -> void:
 	var image_texture : ImageTexture = ImageTexture.new()
 #	MapCreator.create_full_map(single_map,Vector2j.new(30,30))
 	while true:
-		if chance_to_terrain == 100:
-			MapCreator.create_full_map(single_map,Vector2j.new(size_of_map.x,size_of_map.y))
-		else:
-			MapCreator.create_partial_map(single_map,Vector2j.new(size_of_map.x,size_of_map.y),chance_to_terrain)
-		if MapCreator.populate_map_fully(single_map):
+		MapCreator.create_map(single_map,Vector2j.new(size_of_map.x,size_of_map.y),chance_to_terrain)
+		if MapCreator.populate_map_realistically(single_map):
 			break
 		single_map.reset()
 	PreviewGenerator.generate_preview_image(single_map)

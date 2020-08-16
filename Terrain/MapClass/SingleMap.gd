@@ -63,18 +63,19 @@ func initialize_fields(type_of_field : int):
 	assert(type_of_field == MapCreator.FIELD_TYPE.DEFAULT_FIELD or type_of_field == MapCreator.FIELD_TYPE.NO_FIELD)
 	assert(fields.size() == 0)
 	fields.clear()
+	units.clear()
 	for y in range(size.y):
 		fields.append([])
 		units.append([])
 		for _x in range(size.x):
 			fields[y].append(type_of_field)
-			fields[y].append(type_of_field)
+			units[y].append(type_of_field)
 
 func calculate_number_of_terrains():
 	number_of_terrain = 0
-	for i in range(size.y):
-		for j in range(size.x):
-			if fields[i][j] != MapCreator.FIELD_TYPE.NO_FIELD:
+	for y in range(size.y):
+		for x in range(size.x):
+			if fields[y][x] != MapCreator.FIELD_TYPE.NO_FIELD:
 				number_of_terrain += 1
 
 
@@ -101,17 +102,10 @@ func shrink_map() -> void:
 		was_shrinked = true
 		set_size(Vector2j.new(real_max_x + 1, real_max_y + 1))
 
-		print("INFO: Trzeba przyciąć mapę")
-#		var new_fields: Array = []
-#		for y in range(real_max_y + 1):
-#			new_fields.append([])
-#			for x in range(real_max_x + 1):
-#				new_fields[y].append(fields[y][x])
+#		print("INFO: Trzeba przyciąć mapę")
 
 #		print("--- PRZED")
 #		print_map(fields)
-
-#		fields = new_fields
 
 		fields.resize(size.y)
 		units.resize(size.y)
@@ -121,10 +115,6 @@ func shrink_map() -> void:
 		
 #		print("--- PO")
 #		print_map(fields)
-
-#		set_size(Vector2j.new(new_fields[0].size(), new_fields.size()), false)
-#		print_map(fields)
-
 
 #	else:
 #		print("INFO: Nie trzeba zmniejszać mapy")
