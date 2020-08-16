@@ -70,3 +70,11 @@ func _benchmark_menu_show() -> void:
 
 func _campaign_menu_show() -> void:
 	hide_all_except($MenuCampaign)
+
+
+func _load_campaign_menu_show() -> void:
+	hide_all_except($MenuCampaignLoad)
+	
+	
+func _new_campaign_menu_show() -> void:
+	hide_all_except($MenuCampaignNew)

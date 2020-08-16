@@ -7,7 +7,6 @@
 [ext_resource path="res://Menu/MenuBenchmark/StartBenchmark.gd" type="Script" id=5]
 [ext_resource path="res://Menu/MenuBenchmark/Results.tres" type="DynamicFont" id=6]
 
-
 [node name="MenuBenchmark" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

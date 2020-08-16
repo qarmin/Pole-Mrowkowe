@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Menu/Menu/MenuTitle.tres" type="DynamicFont" id=1]
 
-
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.0243902, 0.0243902, 0.0243902, 1, 1, 1, 1, 1 )
 
