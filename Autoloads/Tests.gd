@@ -6,7 +6,7 @@ const PRINT_TESTS: bool = false
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
 	Vector2j_test()
-	for _i in range(3):  # Stress test wykonać dla wartości > 5
+	for _i in range(1):  # Stress test wykonać dla wartości > 5
 		map_test()
 	print("Wykonano wszystkie testy")
 	pass
@@ -132,6 +132,8 @@ func map_test() -> void:
 	var expected_fields: Array = [[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD], [MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD]]
 
 	assert(single_map.fields == expected_fields)
+	
+	single_map.map.queue_free()
 
 
 # Sprawdza jedynie czy nie ma POJEDYNCZYCH odłączonych wysepek, nie jest to w 100% pewny test, ale przy wykorzystaniu dużych map lub testowaniu stresowym powinno wywalić błędy jeśli są

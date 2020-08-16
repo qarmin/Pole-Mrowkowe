@@ -37,6 +37,7 @@ func _ready() -> void:
 
 ## Tworzy mapę i zapisuje ją do tablicy single_map.fields z listą wszystkich pól
 func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: int) -> void:
+	assert(!is_instance_valid(single_map.map))
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(hex_number.x * hex_number.y >= 4)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)

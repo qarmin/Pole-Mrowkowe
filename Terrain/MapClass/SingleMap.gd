@@ -132,7 +132,7 @@ static func print_map(array: Array) -> void:
 				line += " "
 		print(line)
 
-static func convert_name_to_coordinates(hex_name : String, map_size : Vector2j) -> Vector2j: # Powinno zwrócić Vector2i
+static func convert_name_to_coordinates(hex_name : String, map_size : Vector2j) -> Vector2j:
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 	
 	return Vector2j.new( number % map_size.x,number / map_size.x)
