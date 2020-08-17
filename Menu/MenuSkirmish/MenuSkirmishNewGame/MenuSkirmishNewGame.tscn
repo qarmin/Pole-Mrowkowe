@@ -181,7 +181,7 @@ text = "Player Name"
 
 [node name="LineEdit" type="LineEdit" parent="Control/Margin/HBox/VBox/PlayerName"]
 margin_left = 85.0
-margin_right = 143.0
+margin_right = 205.0
 margin_bottom = 24.0
 max_length = 20
 caret_blink = true
