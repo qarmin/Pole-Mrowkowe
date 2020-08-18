@@ -8,7 +8,6 @@ var preview: Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array
-var starts_with_offset: bool = false  #W przypadku jeśli dana mapa rozpoczyna się od przesuniętego linii parzystej(nie 1, może się to zdarzyć gdy mapa jest ucinana), to należy skorygować ułożenie mapy
 
 ## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja, przydatne tylko do debugowania
 var was_resetted: bool = false
@@ -28,7 +27,6 @@ func reset() -> void:
 	number_of_all_possible_hexes = 0
 	players.clear()
 
-	starts_with_offset = false
 
 	was_resetted = true
 
