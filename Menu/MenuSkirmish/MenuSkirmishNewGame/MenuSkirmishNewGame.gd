@@ -7,12 +7,12 @@ var size_of_map : Vector2j = Vector2j.new(0,0)
 var number_of_cpu_players : int
 var chance_to_terrain : int
 
-
+## Generacja mapy po naciśnięciu przycisku, najpierw wczytywane są dane a potem do skutku generowane mapy.
+## Następnie generowany jest podgląd, 
 func _on_Generate_Map_button_up() -> void:
 	read_values()
 	
 	
-	# TODO - pobierz wartości 
 	var single_map: SingleMap = SingleMap.new()
 	var image_texture : ImageTexture = ImageTexture.new()
 #	MapCreator.create_full_map(single_map,Vector2j.new(30,30))
@@ -27,10 +27,7 @@ func _on_Generate_Map_button_up() -> void:
 	
 	$Control/Margin/HBox/TextureRect.set_texture(image_texture)
 	
-	single_map.reset() # TODO - powinno coś robić z tą mapą, bo póki co zalega mi w OrphanNode i muszę ją usuwać za każdym razem
-#	created_map.reset()
-#	created_map = single_map
-
+## Odczytuje wartości wprowadzone przez gracza
 func read_values() -> void:
 	# TODO - zmienić find_node na może get_node
 	size_of_map.x = find_node("MapWidth").get_node("SpinBox").get_value()

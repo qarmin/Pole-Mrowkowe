@@ -183,6 +183,7 @@ text = "Player Name"
 margin_left = 85.0
 margin_right = 205.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 120, 0 )
 max_length = 20
 caret_blink = true
 caret_blink_speed = 0.5

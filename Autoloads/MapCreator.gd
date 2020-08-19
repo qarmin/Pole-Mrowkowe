@@ -37,7 +37,7 @@ func _ready() -> void:
 		ant_texture_array.append(load("res://Units/Outfit/OutfitTEAM" + str(i + 1) + ".tres"))
 
 
-## Tworzy mapę i zapisuje ją do tablicy single_map.fields z listą wszystkich pól
+## Tworzy mapę i zapisuje ją do tablicy single_map.fields z listą wszystkich pól, na końcu ją przycina  jeśli potrzeba
 func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: int) -> void:
 	assert(! is_instance_valid(single_map.map))
 	assert(hex_number.x > 0 && hex_number.y > 0)
@@ -126,7 +126,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	single_map.shrink_map()
 	return
 
-
+## Wypełnia mapy w przydatny, określony z góry sposób który jest zwykle używany w grach
 func populate_map_realistically(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
 #	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 #	assert(single_map.number_of_terrain > number_of_players)
@@ -151,12 +151,12 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 			break
 
 	# Wybieranie miejsc dla innych graczy
+	# TODO Sprawdzić, czy można to zaimplementować lepiej bez każdorazowej regeneracji tablicy
 	while single_map.players.size() < number_of_players:
 		temp_fields = pm_fully_create_distance_array(single_map.fields, single_map.players)
 		single_map.players.append(pm_fully_choose_point_from_distance_array(temp_fields, single_map.number_of_terrain, number_of_players))
 
-	# Narysowanie głównego miejsca dla każdego z osób/przeciwników
-
+	# Dorysowanie do mapy miejsc w których znajdują się bazy graczy
 	for i in range(single_map.players.size()):
 		single_map.fields[single_map.players[i].y][single_map.players[i].x] = FIELD_TYPE.PLAYER_FIRST + i
 
@@ -184,7 +184,7 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 	return true
 
 
-## Dowolnie wypełnia pola mrówkami oraz kolorami
+## Dowolnie wypełnia pola mrówkami, kolorami oraz budynkami
 func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> bool:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
@@ -211,11 +211,13 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.fields[y][x] = MapCreator.FIELD_TYPE.PLAYER_FIRST + choosen_player
 
 				if randi() % 100 < ant_chance:
-					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN) + Units.TYPES_OF_ANTS.ANT_MIN
+					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
+				
+				# TODO Generacja losowa budynków
 
 	return true
 
-
+## Tworzy tablicę odległości danych pól od graczy
 func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
 	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od 
 	var current_element: Vector2j = Vector2j.new(0, 0)
@@ -270,7 +272,7 @@ func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
 
 	return smallest_array
 
-
+## Wybiera jeden z najdalszych punktów z tablicy odległości, tak aby poszczególni gracze znajdowali się daleko od siebie, ale nie zawsze na granicy mapy
 func pm_fully_choose_point_from_distance_array(array: Array, number_of_terrain: int, number_of_players: int) -> Vector2j:
 	var biggest_numbers: Array = []
 	var biggest_number: int
@@ -300,27 +302,19 @@ func pm_fully_choose_point_from_distance_array(array: Array, number_of_terrain: 
 	return biggest_numbers[randi() % biggest_numbers.size()]
 
 
-func serialize_map(_single_map: SingleMap) -> void:
-	push_warning("TODO - Serializacja mapy")
-
-
-func deserialize_map() -> void:
-	push_warning("TODO - Wczytywanie mapy z pliku i jej tworzenie")
-
-
+## TODO Dodawanie budynków tj mrowisko itp.
 func populate_map_buildings(_single_map: SingleMap) -> void:
 	push_warning("TODO - Tworzenie głównej siedziby i być może jakichś podstawowych budynków, może być przydatne przy tworzeniu mapy")
 
 
-
-
-## Tworzy mapę, którą można użyć w Scene Tree(Jest to zwykły Node)
+## Tworzy mapę 3D, którą można użyć w Scene Tree(Jest to zwykły Node)
 func create_3d_map(single_map: SingleMap) -> void:
 	var map: Spatial = Spatial.new()
 	map.set_name("Map")
 
 	for y in single_map.size.y:
 		for x in single_map.size.x:
+			## Fields
 			if single_map.fields[y][x] != FIELD_TYPE.NO_FIELD:
 				var SH: MeshInstance = SingleHex.instance()
 				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
@@ -334,6 +328,20 @@ func create_3d_map(single_map: SingleMap) -> void:
 					SH.set_surface_material(0, texture_array[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST])
 				map.add_child(SH)
 				SH.set_owner(map)
+				
+				## Units
+				if single_map.units[y][x] != Units.TYPES_OF_ANTS.NO_UNIT:
+					# TODO Dodać więcej typów mrówek
+					var ant : Spatial = Ant.instance()
+					ant.translation = Vector3(0,1.192,0)
+					
+					if single_map.fields[y][x] == FIELD_TYPE.DEFAULT_FIELD:
+						ant.get_node("Outfit").set_surface_material(0, ant_base)
+					else:
+						ant.get_node("Outfit").set_surface_material(0, ant_texture_array[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST])
+					SH.add_child(ant)
+					ant.set_owner(map)
+					pass
 
 	single_map.set_map(map)
 

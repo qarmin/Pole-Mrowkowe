@@ -12,6 +12,7 @@ logs/
 GeneratedMap.tscn
 NoGIT/
 GeneratedPreview.png
+save_slot*
 
 # Rust 
 target/

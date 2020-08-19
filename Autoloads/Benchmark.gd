@@ -12,7 +12,7 @@ var benchmarks_waits_to_be_shown: bool = false
 
 var time_frame: Array = []
 
-
+## Czyści wyniki
 func clear_results():
 	for i in range(STAGES):
 		stages_frames[i] = 0
@@ -22,7 +22,7 @@ func clear_results():
 	for _i in range(STAGES):
 		time_frame.append([])
 
-
+## Należy znormalizować wyniki jeśli były uruchomione z inną niż bazową prędkością
 func normalize_results():
 	for i in range(STAGES):
 		stages_frames[i] = int(stages_frames[i] * speed_scale)

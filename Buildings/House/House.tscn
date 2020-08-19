@@ -8,7 +8,7 @@
 [sub_resource type="PrismMesh" id=2]
 
 [node name="House" type="Spatial"]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.09564, 0.714693 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
 
 [node name="Base" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

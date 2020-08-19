@@ -7,7 +7,8 @@ var units: Array
 var preview: Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
-var players: Array
+var players: Array # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
+var buildings: Array # Tablica z budynkami
 
 ## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja, przydatne tylko do debugowania
 var was_resetted: bool = false
@@ -60,20 +61,24 @@ func set_preview(new_preview: Image) -> void:
 
 ## Inne funkcje
 
-
+## Inicjalizacja terenów, jednostek na nich i budynków
 func initialize_fields(type_of_field: int):
 	assert(type_of_field == MapCreator.FIELD_TYPE.DEFAULT_FIELD or type_of_field == MapCreator.FIELD_TYPE.NO_FIELD)
 	assert(fields.size() == 0)
 	fields.clear()
 	units.clear()
+	buildings.clear()
 	for y in range(size.y):
 		fields.append([])
 		units.append([])
+		buildings.append([])
 		for _x in range(size.x):
 			fields[y].append(type_of_field)
-			units[y].append(type_of_field)
+			units[y].append(Units.TYPES_OF_ANTS.NO_UNIT)
+			buildings[y].append(Buildings.TYPES_OF_BUILDINGS.NO_BUILDING)
 
-
+## Oblicza liczbę terenów na mapie
+## Należy ją wykonać po ustawieniu tablicy fields
 func calculate_number_of_terrains():
 	number_of_terrain = 0
 	for y in range(size.y):
@@ -82,6 +87,7 @@ func calculate_number_of_terrains():
 				number_of_terrain += 1
 
 
+## Odpowiada za przycięcie mapy jeśli nie została nie ma wymiarów zakładanych przez gracza
 func shrink_map() -> void:
 	var real_max_x: int = -1
 	var real_max_y: int = -1

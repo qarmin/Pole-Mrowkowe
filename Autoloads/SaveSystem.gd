@@ -22,7 +22,7 @@ func save_map_as_text(single_map: SingleMap, slot : int = 0) -> void:
 	assert(slot == 0 || slot == 100) # 100 to wartość do debugowania
 	
 	var file_to_save: File = File.new()
-	if file_to_save.open("res://saved_slot" +str(slot) + ".txt", File.WRITE) != OK:
+	if file_to_save.open("res://save_slot" +str(slot) + ".txt", File.WRITE) != OK:
 		push_error("Nie udało się utworzyć pliku do zapisu")
 		return
 
@@ -33,6 +33,7 @@ func save_map_as_text(single_map: SingleMap, slot : int = 0) -> void:
 #	file_to_save.store_var(single_map.size,true)
 	file_to_save.store_var(single_map.fields,true)
 	file_to_save.store_var(single_map.units,true)
+	file_to_save.store_var(single_map.buildings,true)
 
 	file_to_save.close()
 	pass
@@ -42,7 +43,7 @@ func load_map_from_text(slot : int =0) -> SingleMap:
 	assert(slot == 0 || slot == 100) # 100 to wartość do debugowania
 	
 	var file_to_save: File = File.new()
-	if file_to_save.open("res://saved_slot" +str(slot) + ".txt", File.READ) != OK:
+	if file_to_save.open("res://save_slot" +str(slot) + ".txt", File.READ) != OK:
 		push_error("Nie udało się utworzyć pliku do zapisu")
 		assert(false)
 		return single_map
@@ -56,13 +57,12 @@ func load_map_from_text(slot : int =0) -> SingleMap:
 	#	var size : Vector2j = file_to_save.get_var()
 		var fields : Array = file_to_save.get_var()
 		var units : Array = file_to_save.get_var()
+		var buildings : Array = file_to_save.get_var()
 		
 		single_map.set_size(Vector2j.new(size_x,size_y))
 		single_map.fields = fields
 		single_map.units = units
-	
-	
-	
+		single_map.buildings = buildings
 	
 	file_to_save.close()
 	
