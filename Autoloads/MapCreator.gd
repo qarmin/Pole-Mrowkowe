@@ -312,12 +312,20 @@ func create_3d_map(single_map: SingleMap) -> void:
 	var map: Spatial = Spatial.new()
 	map.set_name("Map")
 
+	single_map.set_map(map)
+
+	# Przed wygenerowaniem mapy ładnie ją centruje, ponieważ chcę aby mapa miała współrzędne (0,0)
+	var move_translation : Vector3 = center_map(single_map)
+	
 	for y in single_map.size.y:
 		for x in single_map.size.x:
 			## Fields
 			if single_map.fields[y][x] != FIELD_TYPE.NO_FIELD:
 				var SH: MeshInstance = SingleHex.instance()
 				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
+				# Przesunięcie względem mapy
+				SH.translation += move_translation
+				
 				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 				SH.set_name(NODE_BASE_NAME + str(y * single_map.size.x + x))
@@ -343,27 +351,27 @@ func create_3d_map(single_map: SingleMap) -> void:
 					ant.set_owner(map)
 					pass
 
-	single_map.set_map(map)
-
-	# Po wygenerowaniu mapy ładnie ją wycentrowujemy
-	center_map(single_map)
 	pass
 
 
 ## Dokładnie centruje mapę
-func center_map(single_map: SingleMap) -> void:
+func center_map(single_map: SingleMap) -> Vector3:
 	assert(single_map.size.x > 0 && single_map.size.y > 0)
-	var real_map_size: Vector2 = Vector2()
+	var translation: Vector3 = Vector3()
 
-	real_map_size.x = single_map.size.x * SINGLE_HEX_DIMENSION.x
+	single_map.real_map_size.x = single_map.size.x * SINGLE_HEX_DIMENSION.x
 	## Gdy w parzystej linii na końcu jest obecny hex, to wtedy wymiary mapy są większe niż zazwyczaj
 	for y in range(1, single_map.size.y, 2):
 		if single_map.fields[y][single_map.size.x - 1] != FIELD_TYPE.NO_FIELD:
-			real_map_size.x += SINGLE_HEX_DIMENSION.x / 2.0
+			single_map.real_map_size.x += SINGLE_HEX_DIMENSION.x / 2.0
 			break
 
-	real_map_size.y = SINGLE_HEX_DIMENSION.y * 0.25 + single_map.size.y * (SINGLE_HEX_DIMENSION.y * 0.75)
+	single_map.real_map_size.y = SINGLE_HEX_DIMENSION.y * 0.25 + single_map.size.y * (SINGLE_HEX_DIMENSION.y * 0.75)
+
 
 	# Mapa początkowo jest już przesunięta tak aby wskazywała na środek pierwszego hexa, dlatego należy to skoregować
-	single_map.map.translation.x -= (real_map_size.x - SINGLE_HEX_DIMENSION.x) / 2.0
-	single_map.map.translation.z -= (real_map_size.y - SINGLE_HEX_DIMENSION.y) / 2.0
+	translation.x -= (single_map.real_map_size.x - SINGLE_HEX_DIMENSION.x) / 2.0
+	translation.z -= (single_map.real_map_size.y - SINGLE_HEX_DIMENSION.y) / 2.0
+	
+	# Zwraca przesunięcie, które trzeba wykonać na każdym z elementów
+	return translation

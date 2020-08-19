@@ -5,11 +5,11 @@ const PRINT_TESTS: bool = false
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-	Vector2j_test()
-	for _i in range(1):  # Stress test wykonać dla wartości > 5
-		map_test()
-	save_load_test()
-	print("Wykonano wszystkie testy")
+#	Vector2j_test()
+#	for _i in range(1):  # Stress test wykonać dla wartości > 5
+#		map_test()
+#	save_load_test()
+#	print("Wykonano wszystkie testy")
 	pass
 
 
@@ -129,6 +129,7 @@ func map_test() -> void:
 	assert(single_map.number_of_terrain == 3)
 	assert(single_map.fields.size() == 2)
 	assert(single_map.fields[0].size() == 2)
+	assert(single_map.fields[1].size() == 2)
 
 	var expected_fields: Array = [[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD], [MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD]]
 

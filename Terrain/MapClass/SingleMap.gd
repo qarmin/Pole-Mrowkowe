@@ -9,6 +9,7 @@ var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
 var buildings: Array # Tablica z budynkami
+var real_map_size: Vector3 # Rzeczywista wielkość mapy
 
 ## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja, przydatne tylko do debugowania
 var was_resetted: bool = false
@@ -27,6 +28,8 @@ func reset() -> void:
 	number_of_terrain = 0
 	number_of_all_possible_hexes = 0
 	players.clear()
+	buildings.clear()
+	real_map_size = Vector3()
 
 
 	was_resetted = true
