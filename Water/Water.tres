@@ -54,14 +54,14 @@ void fragment() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/amplitude = Vector2( 0.056, 0 )
-shader_param/frequency = Vector2( 0.004, 1.689 )
-shader_param/time_factor = Vector2( 1, 1 )
+shader_param/amplitude = Vector2( 0.103, 0.003 )
+shader_param/frequency = Vector2( 0, 0 )
+shader_param/time_factor = Vector2( 2, 3 )
 shader_param/uv_offset_scale = Vector2( 3, 3 )
-shader_param/uv_offset_time_scale = 0.007
-shader_param/uv_offset_amplitude = 0.235
-shader_param/texture_scale = Vector2( 0.261, 1 )
-shader_param/refraction = 0.05
+shader_param/uv_offset_time_scale = 0.001
+shader_param/uv_offset_amplitude = 0.2
+shader_param/texture_scale = Vector2( 1, 1 )
+shader_param/refraction = 0.053
 shader_param/beer_factor = 1.0
 shader_param/uv_offset_texture = ExtResource( 3 )
 shader_param/texturemap = ExtResource( 2 )
