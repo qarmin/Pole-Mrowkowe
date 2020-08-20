@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Menu/3DBackground/Environment.tres" type="Environment" id=1]
+[ext_resource path="res://default_env.tres" type="Environment" id=1]
 [ext_resource path="res://Menu/3DBackground/3DBackgroundMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Menu/3DBackground/3DBackground.gd" type="Script" id=3]
+[ext_resource path="res://Water/Water.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BasicCameraMovement"
@@ -36,6 +37,7 @@ script = ExtResource( 3 )
 environment = ExtResource( 1 )
 
 [node name="Map" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.66, -0.758, -7.5 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -0.60804, -0.525517, 0.595079, -4.47035e-07, 0.749559, 0.661938, -0.793906, 0.402485, -0.455762, 7.39996, 5.62791, -4.30465 )
@@ -50,3 +52,6 @@ directional_shadow_bias_split_scale = 0.21
 
 [node name="AnimationPlayerLight" type="AnimationPlayer" parent="."]
 anims/LightMovement = SubResource( 2 )
+
+[node name="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, 0, 0 )
