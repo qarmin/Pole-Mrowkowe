@@ -113,7 +113,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 		single_map.calculate_number_of_terrains()
 
 # warning-ignore:narrowing_conversion
-		var needed_hexes: int = max(2, hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0, 3) * 0.75))
+		var needed_hexes: int = max(2, hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0, 5) * 0.75))
 
 		if single_map.number_of_terrain >= needed_hexes:
 			break

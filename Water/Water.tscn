@@ -8,6 +8,6 @@ size = Vector2( 1, 1 )
 subdivide_width = 9
 subdivide_depth = 9
 
-[node name="MeshInstance" type="MeshInstance"]
+[node name="Water" type="MeshInstance"]
 mesh = SubResource( 1 )
 material/0 = null
