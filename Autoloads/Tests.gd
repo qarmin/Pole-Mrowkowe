@@ -1,13 +1,14 @@
 extends Node
 
-const PRINT_TESTS: bool = false
+const PRINT_TESTS: bool = true
 
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
 	Vector2j_test()
-	for _i in range(0):  # Stress test wykonać dla wartości > 5
+	for _i in range(1):  # Stress test wykonać dla wartości > 5
 		map_test()
+	shrink_map()
 #	save_load_test()
 	print("Wykonano wszystkie testy")
 	pass
@@ -40,7 +41,6 @@ func Vector2j_test() -> void:
 	assert(! Vector2j.is_in_array(array, Vector2j.new(42, 25)))
 	assert(! Vector2j.is_in_array(array, Vector2j.new(25, 3)))
 	assert(Vector2j.is_in_array_reversed(array, Vector2j.new(31, 25)))
-
 
 func map_test() -> void:
 	if PRINT_TESTS:
@@ -102,10 +102,12 @@ func map_test() -> void:
 	MapCreator.populate_map_randomly(single_map, 4)
 	assert(check_integration_of_map(single_map))
 
+func shrink_map():
+	if PRINT_TESTS:
+		print("Wykonuję test przycinania mapy")
 
-
-	## Small test
-	single_map.reset()
+	var single_map: SingleMap = SingleMap.new()
+	## Test map shrinking
 	var temp_spatial: Spatial
 	single_map.map = Spatial.new()
 	temp_spatial = Spatial.new()
@@ -142,7 +144,7 @@ func map_test() -> void:
 	single_map.map.queue_free()
 
 
-# Sprawdza jedynie czy nie ma POJEDYNCZYCH odłączonych wysepek, nie jest to w 100% pewny test, ale przy wykorzystaniu dużych map lub testowaniu stresowym powinno wywalić błędy jeśli są
+# Sprawdza jedynie czy nie ma POJEDYNCZYCH odłączonych wysepek
 func check_integration_of_map(single_map: SingleMap) -> bool:
 	var checked: Array = []
 	var to_check: Array = []
@@ -151,7 +153,7 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	# Pewny punkt startowy to 0,0
 	to_check.append(Vector2j.new(0, 0))
 
-	# Sprawdza z iloma wszystkimi hexami jest dany hex połączony pośrednio i bezpośrednio, keśli różni się od liczby wszystkich hexów, to znaczy, że istnieją oderwane hexy
+	# Sprawdza do ilu hexów jest dostęp z hexa (0,0), jeśli różni się od liczby wszystkich hexów, to znaczy, że znaczy istnieją oderwane hexy
 	while to_check.size() > 0:
 		current_element = to_check.pop_front()
 

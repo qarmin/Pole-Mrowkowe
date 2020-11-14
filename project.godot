@@ -55,6 +55,7 @@ MapCreator="*res://Autoloads/MapCreator.gd"
 Tests="*res://Autoloads/Tests.gd"
 PreviewGenerator="*res://Autoloads/PreviewGenerator.gd"
 Buildings="*res://Autoloads/Buildings.gd"
+HexNature="*res://Autoloads/HexNature.gd"
 
 [debug]
 

@@ -4,6 +4,7 @@ var map: Spatial = null
 var size: Vector2j
 var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
 var units: Array
+var nature: Array
 var preview: Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
@@ -25,6 +26,7 @@ func reset() -> void:
 	size = Vector2j.new(0, 0)
 	fields.clear()
 	units.clear()
+	nature.clear()
 	number_of_terrain = 0
 	number_of_all_possible_hexes = 0
 	players.clear()
@@ -71,14 +73,17 @@ func initialize_fields(type_of_field: int):
 	fields.clear()
 	units.clear()
 	buildings.clear()
+	nature.clear()
 	for y in range(size.y):
 		fields.append([])
 		units.append([])
 		buildings.append([])
+		nature.append([])
 		for _x in range(size.x):
 			fields[y].append(type_of_field)
 			units[y].append(Units.TYPES_OF_ANTS.NO_UNIT)
 			buildings[y].append(Buildings.TYPES_OF_BUILDINGS.NO_BUILDING)
+			nature[y].append(HexNature.TYPES_OF_HEX.NOTHING)
 	assert(fields.size() == units.size())
 	assert(fields.size() == buildings.size())
 
@@ -124,11 +129,13 @@ func shrink_map() -> void:
 		fields.resize(size.y)
 		units.resize(size.y)
 		buildings.resize(size.y)
+		nature.resize(size.y)
 		for y in range(fields.size()):
 			fields[y].resize(size.x)
 			units[y].resize(size.x)
 			buildings[y].resize(size.x)
-
+			nature[y].resize(size.x)
+	validate_sizes_of_arrays(self) # Needs to be validate, because it may happens that some array have different size after resiszing
 
 #		print("--- PO")
 #		print_map(fields)
@@ -143,6 +150,9 @@ static func validate_sizes_of_arrays(single_map : SingleMap):
 	assert(single_map.fields.size() == single_map.buildings.size())
 	for i in range(single_map.fields.size()):
 		assert(single_map.fields[i].size() == single_map.buildings[i].size())
+	assert(single_map.fields.size() == single_map.nature.size())
+	for i in range(single_map.fields.size()):
+		assert(single_map.fields[i].size() == single_map.nature[i].size())
 	return true
 
 static func print_map(array: Array) -> void:
