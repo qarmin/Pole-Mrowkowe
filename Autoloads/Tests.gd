@@ -5,11 +5,13 @@ const PRINT_TESTS: bool = true
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
+	if true:
+		return
 	Vector2j_test()
 	for _i in range(1):  # Stress test wykonać dla wartości > 5
 		map_test()
-	shrink_map()
-#	save_load_test()
+		shrink_map()
+		save_load_test()
 	print("Wykonano wszystkie testy")
 	pass
 
@@ -183,6 +185,9 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	return checked.size() == single_map.number_of_terrain
 	
 func save_load_test() -> void:
+	if PRINT_TESTS:
+		print("Wykonuję test zapisywania")
+		
 	var single_map: SingleMap = SingleMap.new()
 	var loaded_single_map: SingleMap = SingleMap.new()
 
@@ -210,5 +215,17 @@ func save_load_test() -> void:
 		assert(loaded_single_map.fields[i].size() == single_map.fields[i].size())
 		for j in range(loaded_single_map.fields[0].size()):
 			assert(loaded_single_map.fields[i][j] == single_map.fields[i][j])
+	## Buildings
+	assert(loaded_single_map.buildings.size() == single_map.buildings.size())
+	for i in range(loaded_single_map.buildings.size()):
+		assert(loaded_single_map.buildings[i].size() == single_map.buildings[i].size())
+		for j in range(loaded_single_map.buildings[0].size()):
+			assert(loaded_single_map.buildings[i][j] == single_map.buildings[i][j])
+	## Nature
+	assert(loaded_single_map.nature.size() == single_map.nature.size())
+	for i in range(loaded_single_map.nature.size()):
+		assert(loaded_single_map.nature[i].size() == single_map.nature[i].size())
+		for j in range(loaded_single_map.nature[0].size()):
+			assert(loaded_single_map.nature[i][j] == single_map.nature[i][j])
 	
-	pass
+	return

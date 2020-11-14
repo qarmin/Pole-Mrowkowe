@@ -34,6 +34,7 @@ func save_map_as_text(single_map: SingleMap, slot : int = 0) -> void:
 	file_to_save.store_var(single_map.fields,true)
 	file_to_save.store_var(single_map.units,true)
 	file_to_save.store_var(single_map.buildings,true)
+	file_to_save.store_var(single_map.nature,true)
 
 	file_to_save.close()
 	pass
@@ -58,11 +59,13 @@ func load_map_from_text(slot : int =0) -> SingleMap:
 		var fields : Array = file_to_save.get_var()
 		var units : Array = file_to_save.get_var()
 		var buildings : Array = file_to_save.get_var()
+		var nature : Array = file_to_save.get_var()
 		
 		single_map.set_size(Vector2j.new(size_x,size_y))
 		single_map.fields = fields
 		single_map.units = units
 		single_map.buildings = buildings
+		single_map.nature = nature
 	
 	file_to_save.close()
 	
