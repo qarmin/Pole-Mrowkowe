@@ -5,11 +5,11 @@ const PRINT_TESTS: bool = false
 
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-#	Vector2j_test()
-#	for _i in range(1):  # Stress test wykonać dla wartości > 5
-#		map_test()
+	Vector2j_test()
+	for _i in range(0):  # Stress test wykonać dla wartości > 5
+		map_test()
 #	save_load_test()
-#	print("Wykonano wszystkie testy")
+	print("Wykonano wszystkie testy")
 	pass
 
 
@@ -49,60 +49,63 @@ func map_test() -> void:
 	var single_map: SingleMap = SingleMap.new()
 
 	MapCreator.create_map(single_map, Vector2j.new(13, 13), 75)
+	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(9, 9), 75)
+	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 3)
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(4, 7), 75)
+	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 3)
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(15, 3), 75)
+	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 2)
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(15, 3), 100)
+	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(13, 13), 100)
+	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 2)
 	assert(check_integration_of_map(single_map))
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(20, 10), 100)
+	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
 	assert(check_integration_of_map(single_map))
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(10, 20), 100)
+	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 3)
 	assert(check_integration_of_map(single_map))
-	single_map.reset()
 
 	MapCreator.create_map(single_map, Vector2j.new(30, 6), 100)
+	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 4)
 	assert(check_integration_of_map(single_map))
-	single_map.reset()
+
+
 
 	## Small test
+	single_map.reset()
 	var temp_spatial: Spatial
 	single_map.map = Spatial.new()
 	temp_spatial = Spatial.new()
@@ -116,6 +119,7 @@ func map_test() -> void:
 	single_map.map.add_child(temp_spatial)
 
 	single_map.set_size(Vector2j.new(3, 3))
+	single_map.initialize_fields(MapCreator.FIELD_TYPE.DEFAULT_FIELD)
 	single_map.set_number_of_terrain(3)
 	# Trzeba pamiętać, że istnieje pole zawsze w punkcie (0,0)
 	single_map.fields = [
@@ -175,7 +179,7 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	assert(checked.size() == single_map.number_of_terrain)
 
 	return checked.size() == single_map.number_of_terrain
-
+	
 func save_load_test() -> void:
 	var single_map: SingleMap = SingleMap.new()
 	var loaded_single_map: SingleMap = SingleMap.new()

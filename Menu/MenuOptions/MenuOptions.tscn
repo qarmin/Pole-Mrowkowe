@@ -31,4 +31,5 @@ text = "Back to menu"
 script = ExtResource( 3 )
 
 [node name="Options" parent="." instance=ExtResource( 2 )]
+
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

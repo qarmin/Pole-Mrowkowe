@@ -43,7 +43,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(hex_number.x * hex_number.y >= 4)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
-
+	single_map.reset()
 	single_map.set_size(hex_number)
 	if chance_to_terrain == 100:  # Tworzy pełną mapę
 		single_map.initialize_fields(MapCreator.FIELD_TYPE.DEFAULT_FIELD)
@@ -190,6 +190,7 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 	assert(ant_chance >= 0 && ant_chance < 101)
 	assert(single_map.size.x * single_map.size.y >= 4)
 	assert(single_map.size.x > 0 && single_map.size.y > 0)
+	SingleMap.validate_sizes_of_arrays(single_map)
 
 	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
 		return false
