@@ -5,6 +5,7 @@ func _ready() -> void:
 	test_create_map()
 	pass
 
+
 ## Tworzy testowo mapę i wyświetla ją i zapisuje
 func test_create_map():
 	var single_map: SingleMap = SingleMap.new()

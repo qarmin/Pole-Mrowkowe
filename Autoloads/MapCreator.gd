@@ -126,6 +126,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	single_map.shrink_map()
 	return
 
+
 ## Wypełnia mapy w przydatny, określony z góry sposób który jest zwykle używany w grach
 func populate_map_realistically(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
 #	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
@@ -213,10 +214,11 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 
 				if randi() % 100 < ant_chance:
 					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
-				
+
 				# TODO Generacja losowa budynków
 
 	return true
+
 
 ## Tworzy tablicę odległości danych pól od graczy
 func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
@@ -273,6 +275,7 @@ func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
 
 	return smallest_array
 
+
 ## Wybiera jeden z najdalszych punktów z tablicy odległości, tak aby poszczególni gracze znajdowali się daleko od siebie, ale nie zawsze na granicy mapy
 func pm_fully_choose_point_from_distance_array(array: Array, number_of_terrain: int, number_of_players: int) -> Vector2j:
 	var biggest_numbers: Array = []
@@ -316,8 +319,8 @@ func create_3d_map(single_map: SingleMap) -> void:
 	single_map.set_map(map)
 
 	# Przed wygenerowaniem mapy ładnie ją centruje, ponieważ chcę aby mapa miała współrzędne (0,0)
-	var move_translation : Vector3 = center_map(single_map)
-	
+	var move_translation: Vector3 = center_map(single_map)
+
 	for y in single_map.size.y:
 		for x in single_map.size.x:
 			## Fields
@@ -326,7 +329,7 @@ func create_3d_map(single_map: SingleMap) -> void:
 				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
 				# Przesunięcie względem mapy
 				SH.translation += move_translation
-				
+
 				if y % 2 == 1:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 				SH.set_name(NODE_BASE_NAME + str(y * single_map.size.x + x))
@@ -337,13 +340,13 @@ func create_3d_map(single_map: SingleMap) -> void:
 					SH.set_surface_material(0, texture_array[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST])
 				map.add_child(SH)
 				SH.set_owner(map)
-				
+
 				## Units
 				if single_map.units[y][x] != Units.TYPES_OF_ANTS.NO_UNIT:
 					# TODO Dodać więcej typów mrówek
-					var ant : Spatial = Ant.instance()
-					ant.translation = Vector3(0,1.192,0)
-					
+					var ant: Spatial = Ant.instance()
+					ant.translation = Vector3(0, 1.192, 0)
+
 					if single_map.fields[y][x] == FIELD_TYPE.DEFAULT_FIELD:
 						ant.get_node("Outfit").set_surface_material(0, ant_base)
 					else:
@@ -369,10 +372,9 @@ func center_map(single_map: SingleMap) -> Vector3:
 
 	single_map.real_map_size.y = SINGLE_HEX_DIMENSION.y * 0.25 + single_map.size.y * (SINGLE_HEX_DIMENSION.y * 0.75)
 
-
 	# Mapa początkowo jest już przesunięta tak aby wskazywała na środek pierwszego hexa, dlatego należy to skoregować
 	translation.x -= (single_map.real_map_size.x - SINGLE_HEX_DIMENSION.x) / 2.0
 	translation.z -= (single_map.real_map_size.y - SINGLE_HEX_DIMENSION.y) / 2.0
-	
+
 	# Zwraca przesunięcie, które trzeba wykonać na każdym z elementów
 	return translation

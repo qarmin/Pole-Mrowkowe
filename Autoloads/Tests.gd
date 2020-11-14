@@ -44,6 +44,7 @@ func Vector2j_test() -> void:
 	assert(! Vector2j.is_in_array(array, Vector2j.new(25, 3)))
 	assert(Vector2j.is_in_array_reversed(array, Vector2j.new(31, 25)))
 
+
 func map_test() -> void:
 	if PRINT_TESTS:
 		print("Wykonuję test map")
@@ -103,6 +104,7 @@ func map_test() -> void:
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 4)
 	assert(check_integration_of_map(single_map))
+
 
 func shrink_map():
 	if PRINT_TESTS:
@@ -183,23 +185,24 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	assert(checked.size() == single_map.number_of_terrain)
 
 	return checked.size() == single_map.number_of_terrain
-	
+
+
 func save_load_test() -> void:
 	if PRINT_TESTS:
 		print("Wykonuję test zapisywania")
-		
+
 	var single_map: SingleMap = SingleMap.new()
 	var loaded_single_map: SingleMap = SingleMap.new()
 
 	MapCreator.create_map(single_map, Vector2j.new(7, 13), 75)
 	assert(check_integration_of_map(single_map))
-	if !MapCreator.populate_map_realistically(single_map, 4):
+	if ! MapCreator.populate_map_realistically(single_map, 4):
 		push_error("Nie powiodła się próba mapy")
 		assert(false)
-	
-	SaveSystem.save_map_as_text(single_map,100)
+
+	SaveSystem.save_map_as_text(single_map, 100)
 	loaded_single_map = SaveSystem.load_map_from_text(100)
-	
+
 	## Size
 	assert(single_map.size.x == loaded_single_map.size.x)
 	assert(single_map.size.y == loaded_single_map.size.y)
@@ -227,5 +230,5 @@ func save_load_test() -> void:
 		assert(loaded_single_map.nature[i].size() == single_map.nature[i].size())
 		for j in range(loaded_single_map.nature[0].size()):
 			assert(loaded_single_map.nature[i][j] == single_map.nature[i][j])
-	
+
 	return

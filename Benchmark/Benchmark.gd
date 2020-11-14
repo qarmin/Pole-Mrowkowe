@@ -8,6 +8,7 @@ var middle_wait_time: float = 1.0
 var benchmark_ended: bool = false
 var benchmark_started: bool = false
 
+
 ## Umożliwia przerwanie testu za pomocą przyisku ESCAPE
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -24,6 +25,7 @@ func _ready():
 
 	Benchmark.clear_results()
 
+
 ## Wyświetla określoną mapę i chowa inne
 func show_map(map_number: int) -> void:
 	var map_array: Array = [false, false, false]
@@ -35,6 +37,7 @@ func show_map(map_number: int) -> void:
 			get_node("Map" + str(i + 1)).show()
 		else:
 			get_node("Map" + str(i + 1)).hide()
+
 
 ## Ładuje mapy z niskimi ustawieniami
 func test_started() -> void:
@@ -68,6 +71,7 @@ func test_middle() -> void:
 
 	ready = true
 
+
 ## Na zakończenie wypisuje wyniki i ładuje scene z benchmarkiem
 func test_ended() -> void:
 	benchmark_ended = true
@@ -91,6 +95,7 @@ func test_ended() -> void:
 	if get_tree().change_scene("res://Menu/Menu/Menu.tscn") != OK:
 		assert(false)
 
+
 ## Dodaje co każdą klatkę do wyniku 1 punkt i sprawdza czy dany test się nie zakończył
 func _process(delta: float) -> void:
 	if ! benchmark_ended:
@@ -107,6 +112,7 @@ func _process(delta: float) -> void:
 				middle_wait_time -= delta
 				if middle_wait_time < 0:
 					test_middle()
+
 
 ## Ładuje poszczególne etapy
 func _animation_finished(anim_name: String) -> void:

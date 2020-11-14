@@ -13,9 +13,8 @@ func _on_LoadCampaign_pressed() -> void:
 
 
 func _on_TextureButton_focus_entered():
-	
-	pass # Replace with function body.
+	pass  # Replace with function body.
 
 
 func _on_TextureButton_focus_exited():
-	pass # Replace with function body.
+	pass  # Replace with function body.

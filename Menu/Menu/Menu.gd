@@ -54,7 +54,7 @@ func hide_all_except(choosen_node: Node):
 
 func _back_to_menu() -> void:
 	hide_all_except($MainMenu)
-	
+
 
 func _skirmish_menu_show() -> void:
 	hide_all_except($MenuSkirmishNewGame)
@@ -74,7 +74,7 @@ func _campaign_menu_show() -> void:
 
 func _load_campaign_menu_show() -> void:
 	hide_all_except($MenuCampaignLoad)
-	
-	
+
+
 func _new_campaign_menu_show() -> void:
 	hide_all_except($MenuCampaignNew)

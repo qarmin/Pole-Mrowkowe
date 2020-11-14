@@ -1,32 +1,33 @@
 extends Control
 
-var created_map : SingleMap = SingleMap.new()
+var created_map: SingleMap = SingleMap.new()
 
-var player_name : String = ""
-var size_of_map : Vector2j = Vector2j.new(0,0)
-var number_of_cpu_players : int
-var chance_to_terrain : int
+var player_name: String = ""
+var size_of_map: Vector2j = Vector2j.new(0, 0)
+var number_of_cpu_players: int
+var chance_to_terrain: int
+
 
 ## Generacja mapy po naciśnięciu przycisku, najpierw wczytywane są dane a potem do skutku generowane mapy.
 ## Następnie generowany jest podgląd, 
 func _on_Generate_Map_button_up() -> void:
 	read_values()
-	
-	
+
 	var single_map: SingleMap = SingleMap.new()
-	var image_texture : ImageTexture = ImageTexture.new()
+	var image_texture: ImageTexture = ImageTexture.new()
 #	MapCreator.create_full_map(single_map,Vector2j.new(30,30))
 	while true:
-		MapCreator.create_map(single_map,Vector2j.new(size_of_map.x,size_of_map.y),chance_to_terrain)
-		if MapCreator.populate_map_realistically(single_map,number_of_cpu_players + 1):
+		MapCreator.create_map(single_map, Vector2j.new(size_of_map.x, size_of_map.y), chance_to_terrain)
+		if MapCreator.populate_map_realistically(single_map, number_of_cpu_players + 1):
 			break
 		single_map.reset()
 	PreviewGenerator.generate_preview_image(single_map)
-	
-	image_texture.create_from_image(single_map.preview,0) # Filtrowanie - flaga 4 - tworzy na krańcach dziwne "cienie"
-	
+
+	image_texture.create_from_image(single_map.preview, 0)  # Filtrowanie - flaga 4 - tworzy na krańcach dziwne "cienie"
+
 	$Control/Margin/HBox/TextureRect.set_texture(image_texture)
-	
+
+
 ## Odczytuje wartości wprowadzone przez gracza
 func read_values() -> void:
 	# TODO - zmienić find_node na może get_node
@@ -35,5 +36,5 @@ func read_values() -> void:
 	number_of_cpu_players = find_node("CPUPlayers").get_node("SpinBox").get_value()
 	player_name = find_node("PlayerName").get_node("LineEdit").get_text()
 	chance_to_terrain = find_node("ChanceOfTerrain").get_node("SpinBox").get_value()
-	
+
 	pass

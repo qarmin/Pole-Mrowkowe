@@ -8,9 +8,9 @@ var nature: Array
 var preview: Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
-var players: Array # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
-var buildings: Array # Tablica z budynkami
-var real_map_size: Vector3 # Rzeczywista wielkość mapy
+var players: Array  # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
+var buildings: Array  # Tablica z budynkami
+var real_map_size: Vector3  # Rzeczywista wielkość mapy
 
 ## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja, przydatne tylko do debugowania
 var was_resetted: bool = false
@@ -32,7 +32,6 @@ func reset() -> void:
 	players.clear()
 	buildings.clear()
 	real_map_size = Vector3()
-
 
 	was_resetted = true
 
@@ -66,6 +65,7 @@ func set_preview(new_preview: Image) -> void:
 
 ## Inne funkcje
 
+
 ## Inicjalizacja terenów, jednostek na nich i budynków
 func initialize_fields(type_of_field: int):
 	assert(type_of_field == MapCreator.FIELD_TYPE.DEFAULT_FIELD or type_of_field == MapCreator.FIELD_TYPE.NO_FIELD)
@@ -86,6 +86,7 @@ func initialize_fields(type_of_field: int):
 			nature[y].append(HexNature.TYPES_OF_HEX.NOTHING)
 	assert(fields.size() == units.size())
 	assert(fields.size() == buildings.size())
+
 
 ## Oblicza liczbę terenów na mapie
 ## Należy ją wykonać po ustawieniu tablicy fields
@@ -135,7 +136,8 @@ func shrink_map() -> void:
 			units[y].resize(size.x)
 			buildings[y].resize(size.x)
 			nature[y].resize(size.x)
-	validate_sizes_of_arrays(self) # Needs to be validate, because it may happens that some array have different size after resiszing
+	validate_sizes_of_arrays(self)  # Needs to be validate, because it may happens that some array have different size after resiszing
+
 
 #		print("--- PO")
 #		print_map(fields)
@@ -143,7 +145,7 @@ func shrink_map() -> void:
 #	else:
 #		print("INFO: Nie trzeba zmniejszać mapy")
 
-static func validate_sizes_of_arrays(single_map : SingleMap):
+static func validate_sizes_of_arrays(single_map: SingleMap):
 	assert(single_map.fields.size() == single_map.units.size())
 	for i in range(single_map.fields.size()):
 		assert(single_map.fields[i].size() == single_map.units[i].size())

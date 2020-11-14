@@ -2,9 +2,11 @@ extends VBoxContainer
 
 const NUMBER_OF_ALL_MONITORS: int = 18
 
+
 func _ready() -> void:
 	for _i in range(NUMBER_OF_ALL_MONITORS):
 		add_child(load("res://Menu/Performance/SinglePerf.tscn").instance())
+
 
 func _process(_delta) -> void:
 	var i = 0

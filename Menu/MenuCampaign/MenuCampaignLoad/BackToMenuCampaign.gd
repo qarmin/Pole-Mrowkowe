@@ -2,6 +2,7 @@ extends Button
 
 signal back_to_menu_campaign
 
+
 func _on_BackToMenuCampaign_pressed():
 	print("Wracam do menu kampanii")
 	if get_signal_connection_list("back_to_menu_campaign").size() == 0:
