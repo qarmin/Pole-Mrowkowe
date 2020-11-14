@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+
+uniform float speed = 1.0;
+
+void vertex() {
+	VERTEX.y = abs(sin(TIME));
+	// TODO ulepszyć bo jakoś słabo wygląda
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/speed = 1.0
+
+[node name="UnitOverlay" type="CSGTorus"]
+inner_radius = 1.779
+sides = 3
+ring_sides = 3
+material = SubResource( 2 )
