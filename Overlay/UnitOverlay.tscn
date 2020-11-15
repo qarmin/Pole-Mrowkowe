@@ -1,22 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type spatial;
+[ext_resource path="res://Overlay/UnitOverlay.gd" type="Script" id=1]
 
-uniform float speed = 1.0;
-
-void vertex() {
-	VERTEX.y = abs(sin(TIME));
-	// TODO ulepszyć bo jakoś słabo wygląda
-}
-"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/speed = 1.0
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.290196, 0.937255, 0.968627, 1 )
 
 [node name="UnitOverlay" type="CSGTorus"]
-inner_radius = 1.779
-sides = 3
-ring_sides = 3
-material = SubResource( 2 )
+transform = Transform( 1, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0, 0 )
+sides = 4
+ring_sides = 4
+material = SubResource( 1 )
+script = ExtResource( 1 )

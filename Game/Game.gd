@@ -1,17 +1,26 @@
 extends Spatial
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
+func _ready() -> void:
+	connect_signals()
+	pass
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	# 
+func connect_signals() -> void:
+	# Łączenie każdego pola oraz mrówki na mapie z funkcją wyświelającą 
+	for single_hex in $Map.get_children():
+		assert(single_hex.get_name().begins_with("SingleHex"))
+		assert(single_hex.connect("hex_clicked", self, "hex_clicked") == OK)
+		for thing in single_hex.get_children():
+			if ! thing.get_name().begins_with("Ant"):
+				continue
+			print(thing)
+			assert(thing.connect("ant_clicked", self, "ant_clicked") == OK)
 
-	# Add Map
-	pass  # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func ant_clicked(ant: AntBase) -> void:
+	print("Ant " + ant.get_name() + " was clicked and this was handled!")
+
+
+func hex_clicked(hex: SingleHex) -> void:
+	print("Hex " + hex.get_name() + " was clicked and this was handled!")

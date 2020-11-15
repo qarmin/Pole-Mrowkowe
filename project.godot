@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Pole Mrowkowe"
-run/main_scene="res://Start.tscn"
+run/main_scene="res://Game/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -99,6 +99,6 @@ limits/debugger_stdout/max_chars_per_second=32768
 quality/driver/driver_name="GLES2"
 threads/thread_model=2
 environment/default_clear_color=Color( 0.419608, 0.419608, 0.419608, 1 )
-quality/filters/msaa=4
+quality/filters/msaa=2
 quality/depth/hdr=false
 environment/default_environment="res://standard_environment.tres"
