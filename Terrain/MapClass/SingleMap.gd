@@ -145,7 +145,7 @@ func shrink_map() -> void:
 #	else:
 #		print("INFO: Nie trzeba zmniejszać mapy")
 
-static func validate_sizes_of_arrays(single_map: SingleMap):
+static func validate_sizes_of_arrays(single_map):#: SingleMap):
 	assert(single_map.fields.size() == single_map.units.size())
 	for i in range(single_map.fields.size()):
 		assert(single_map.fields[i].size() == single_map.units[i].size())

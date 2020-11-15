@@ -7,11 +7,11 @@ func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
 	if true:
 		return
-	Vector2j_test()
-	for _i in range(1):  # Stress test wykonać dla wartości > 5
-		map_test()
-		shrink_map()
-		save_load_test()
+#	Vector2j_test()
+#	for _i in range(1):  # Stress test wykonać dla wartości > 5
+#		map_test()
+#		shrink_map()
+#		save_load_test()
 	print("Wykonano wszystkie testy")
 	pass
 
@@ -104,6 +104,8 @@ func map_test() -> void:
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 4)
 	assert(check_integration_of_map(single_map))
+	
+	single_map.reset() 
 
 
 func shrink_map():
@@ -145,7 +147,7 @@ func shrink_map():
 
 	assert(single_map.fields == expected_fields)
 
-	single_map.map.queue_free()
+	single_map.reset()
 
 
 # Sprawdza jedynie czy nie ma POJEDYNCZYCH odłączonych wysepek
