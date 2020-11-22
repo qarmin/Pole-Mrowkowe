@@ -9,20 +9,26 @@ var selected_hex : Node = null
 var terrain_overlay_node : Node = preload("res://Overlay/TerrainOverlay.tscn").instance()
 var unit_overlay_node : Node = preload("res://Overlay/UnitOverlay.tscn").instance()
 
-var current_
+var single_map : SingleMap
 
 func _ready() -> void:
+	single_map = SingleMap.new()
+	MapCreator.create_map(single_map,Vector2j.new(4,4),100)
+	assert(MapCreator.populate_map_randomly(single_map, 50))
+	MapCreator.create_3d_map(single_map)
+	add_child(single_map.map)
+
 	$Overlays.add_child(terrain_overlay_node)
 	$Overlays.add_child(unit_overlay_node)
 	for i in $Overlays.get_children():
 		i.hide()
-	
+
 	connect_clickable_signals()
 	pass
 
 
 func connect_clickable_signals() -> void:
-	# Łączenie każdego pola oraz mrówki na mapie z funkcją wyświelającą 
+	# Łączenie każdego pola oraz mrówki na mapie z funkcją wyświelającą
 	for single_hex in $Map.get_children():
 		assert(single_hex.get_name().begins_with("SingleHex"))
 		assert(single_hex.connect("hex_clicked", self, "hex_clicked") == OK)
@@ -44,7 +50,7 @@ func ant_clicked(ant: AntBase) -> void:
 	terrain_overlay_node.stop()
 	current_terrain_overlay_hex_name = ""
 	selected_hex = null
-		
+
 	unit_overlay_node.set_translation(ant.get_translation() + ant.get_parent().get_translation())
 	unit_overlay_node.set_scale(ant.get_scale())
 	unit_overlay_node.reset()
@@ -64,7 +70,7 @@ func hex_clicked(hex: SingleHex) -> void:
 	unit_overlay_node.stop()
 	current_unit_overlay_hex_name = ""
 	selected_ant = null
-		
+
 	terrain_overlay_node.set_translation(hex.get_translation())
 	terrain_overlay_node.set_scale(hex.get_scale())
 	terrain_overlay_node.reset()
