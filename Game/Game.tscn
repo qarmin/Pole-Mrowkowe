@@ -40,3 +40,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.834522, 0, 1.53067 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.912918, 0, 1.53067 )
 
 [node name="Overlays" type="Spatial" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
