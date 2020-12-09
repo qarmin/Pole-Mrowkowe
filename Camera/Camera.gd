@@ -22,8 +22,8 @@ enum CAMERA_MOVEMENT {BACK_SCROLL = 1 << 0,FORWARD_SCROLL = 1 << 1,LEFT = 1 << 2
 
 var movement_keys_pressed : int = 0
 
-var camera_min_position : Vector3 =  Vector3(-20,3,-20)
-var camera_max_position : Vector3 =  Vector3(20,10,20)
+var camera_min_position : Vector3 =  Vector3(-10,3,-10)
+var camera_max_position : Vector3 =  Vector3(10,10,10)
 	
 func _ready() -> void:
 	# Ustawia zmienne na pozycję kamery na tą ustawioną w edytorze
@@ -127,17 +127,31 @@ func move_camera(roman : int, delta : float = -1) -> void:
 		translate(move_vec_local * delta)
 		print( get_global_transform().origin.y)
 		# Skala jaką należy zaaplikować do prędkości aby nie wypaść poza obręb mapy
-		var move_scale : float = 1.0
+		var move_scale : float = 1
+#		var move_scale : Vector3 = Vector3(1,1,1)
+		
 		if get_global_transform().origin.y > camera_max_position.y:
 				move_scale = 0.0
 		elif get_global_transform().origin.y < camera_min_position.y:
 			move_scale = 0.0
+		if get_global_transform().origin.z > camera_max_position.z:
+				move_scale = 0.0
+		elif get_global_transform().origin.z < camera_min_position.z:
+			move_scale= 0.0
+		if get_global_transform().origin.x > camera_max_position.x:
+				move_scale = 0.0
+		elif get_global_transform().origin.x < camera_min_position.x:
+			move_scale= 0.0
+			
 		transform = current_transform
 
 		translate(move_vec_local * delta * move_scale)
 			
 	if move_vec_global != Vector3():
+		
 		global_translate(move_vec_global * delta )
+		translation.z = clamp(translation.z,camera_min_position.z,camera_max_position.z)
+		translation.x = clamp(translation.x,camera_min_position.x,camera_max_position.x) 
 		pass
 		
 
