@@ -101,8 +101,6 @@ func move_camera(roman : int, delta : float = -1) -> void:
 	var move_vec_local : Vector3 = Vector3()
 	var move_vec_global : Vector3 = Vector3()
 	
-	var local_translation_before : Vector3 = get_translation()
-	
 	if roman & CAMERA_MOVEMENT.BACK_SCROLL == CAMERA_MOVEMENT.BACK_SCROLL:
 		move_vec_local.z += SCROLL_SPEED
 	elif roman & CAMERA_MOVEMENT.FORWARD_SCROLL == CAMERA_MOVEMENT.FORWARD_SCROLL:
@@ -118,41 +116,30 @@ func move_camera(roman : int, delta : float = -1) -> void:
 	elif roman & CAMERA_MOVEMENT.RIGHT == CAMERA_MOVEMENT.RIGHT:
 		move_vec_local.x += MOVEMENT_SPEED
 	#move_vec = move_vec.rotated(Vector3(0,1,0),rotation_degrees.y)
-#	if move_vec_local != Vector3():
-#		translate(move_vec_local * delta)
+	
+	if move_vec_local != Vector3():
+		# Jeśli jest ruch, to najpierw testujemy czy przypadkiem nie wyjdzie poza dopuszczalny obszar
+		# Jeśli nie wyjdzie to pozwalamy mu się poruszać z pełną prędkością po mapie,
+		# Jeśli wyjdzie to wtedy skalujemy ruch, tak aby oś y zatrzymała się równo na granicy
+
+		var current_transform : Transform = get_transform()
+		print( get_global_transform().origin.y)
+		translate(move_vec_local * delta)
+		print( get_global_transform().origin.y)
+		# Skala jaką należy zaaplikować do prędkości aby nie wypaść poza obręb mapy
+		var move_scale : float = 1.0
+		if get_global_transform().origin.y > camera_max_position.y:
+				move_scale = 0.0
+		elif get_global_transform().origin.y < camera_min_position.y:
+			move_scale = 0.0
+		transform = current_transform
+
+		translate(move_vec_local * delta * move_scale)
+			
 	if move_vec_global != Vector3():
-		# Jeśli jest ruch, to najpierw tworzymy testowy obiekt który poruszamy, a następnie skalujemy wymaganą prędkość do parametrów 
-		# TODO Sprawdzić czy może da się to zrobić optymalniej
-		if move_vec_global.y > camera_min_position.y - 0.001 || move_vec_global.y < camera_max_position.y - 0.001:
-			var temp_spatial : Spatial = Spatial.new()
-			temp_spatial.set_transform( get_transform())
-			temp_spatial.global_translate(move_vec_global * delta)
-			
-			# Skala jaką należy zaaplikować do prędkości aby nie wypaść poza obręb mapy
-			var move_scale : float = 1.0
-			if temp_spatial.get_global_transform().basis.x.y == 0.0:
-				pass
-			elif temp_spatial.get_global_transform().basis.x.y > camera_max_position.y:
-				move_scale = 0.0
-			elif temp_spatial.get_global_transform().basis.x.y < camera_min_position.y:
-				move_scale = 0.0
-			
-			temp_spatial.queue_free()
-			
-			global_translate(move_vec_global * delta * move_scale)
+		global_translate(move_vec_global * delta )
 		pass
 		
-		
-	# Jeśli gracz wykroczył poza legalny obszar to trzeba poprawić jego pozycję
-	if translation.x > camera_max_position.x || translation.x < camera_min_position.x || translation.y > camera_max_position.y || translation.y < camera_min_position.y || translation.z > camera_max_position.z || translation.z < camera_min_position.z:
-		
-		
-		pass
-	# TODO # Clamp pozycje gracza aby nie wychodził poza określony obszar
-	#global_translate(move_vec * MOVE_SPEED)
-#	3 - 2 = 1
-#	var ratio : float = local_translation_before.y /
-	translation.y = clamp(translation.y,3,10)
 
 func _process(delta : float) -> void:
 	
