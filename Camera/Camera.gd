@@ -22,6 +22,9 @@ enum CAMERA_MOVEMENT {BACK_SCROLL = 1 << 0,FORWARD_SCROLL = 1 << 1,LEFT = 1 << 2
 
 var movement_keys_pressed : int = 0
 
+var camera_min_position : Vector3 =  Vector3(-20,3,-20)
+var camera_max_position : Vector3 =  Vector3(20,10,20)
+	
 func _ready() -> void:
 	# Ustawia zmienne na pozycję kamery na tą ustawioną w edytorze
 	rot_x = get_rotation().y
@@ -98,6 +101,8 @@ func move_camera(roman : int, delta : float = -1) -> void:
 	var move_vec_local : Vector3 = Vector3()
 	var move_vec_global : Vector3 = Vector3()
 	
+	var local_translation_before : Vector3 = get_translation()
+	
 	if roman & CAMERA_MOVEMENT.BACK_SCROLL == CAMERA_MOVEMENT.BACK_SCROLL:
 		move_vec_local.z += SCROLL_SPEED
 	elif roman & CAMERA_MOVEMENT.FORWARD_SCROLL == CAMERA_MOVEMENT.FORWARD_SCROLL:
@@ -113,13 +118,41 @@ func move_camera(roman : int, delta : float = -1) -> void:
 	elif roman & CAMERA_MOVEMENT.RIGHT == CAMERA_MOVEMENT.RIGHT:
 		move_vec_local.x += MOVEMENT_SPEED
 	#move_vec = move_vec.rotated(Vector3(0,1,0),rotation_degrees.y)
-	if move_vec_local != Vector3():
-		translate(move_vec_local * delta)
+#	if move_vec_local != Vector3():
+#		translate(move_vec_local * delta)
 	if move_vec_global != Vector3():
-		global_translate(move_vec_global * delta)
+		# Jeśli jest ruch, to najpierw tworzymy testowy obiekt który poruszamy, a następnie skalujemy wymaganą prędkość do parametrów 
+		# TODO Sprawdzić czy może da się to zrobić optymalniej
+		if move_vec_global.y > camera_min_position.y - 0.001 || move_vec_global.y < camera_max_position.y - 0.001:
+			var temp_spatial : Spatial = Spatial.new()
+			temp_spatial.set_transform( get_transform())
+			temp_spatial.global_translate(move_vec_global * delta)
+			
+			# Skala jaką należy zaaplikować do prędkości aby nie wypaść poza obręb mapy
+			var move_scale : float = 1.0
+			if temp_spatial.get_global_transform().basis.x.y == 0.0:
+				pass
+			elif temp_spatial.get_global_transform().basis.x.y > camera_max_position.y:
+				move_scale = 0.0
+			elif temp_spatial.get_global_transform().basis.x.y < camera_min_position.y:
+				move_scale = 0.0
+			
+			temp_spatial.queue_free()
+			
+			global_translate(move_vec_global * delta * move_scale)
+		pass
+		
+		
+	# Jeśli gracz wykroczył poza legalny obszar to trzeba poprawić jego pozycję
+	if translation.x > camera_max_position.x || translation.x < camera_min_position.x || translation.y > camera_max_position.y || translation.y < camera_min_position.y || translation.z > camera_max_position.z || translation.z < camera_min_position.z:
+		
+		
 		pass
 	# TODO # Clamp pozycje gracza aby nie wychodził poza określony obszar
 	#global_translate(move_vec * MOVE_SPEED)
+#	3 - 2 = 1
+#	var ratio : float = local_translation_before.y /
+	translation.y = clamp(translation.y,3,10)
 
 func _process(delta : float) -> void:
 	
