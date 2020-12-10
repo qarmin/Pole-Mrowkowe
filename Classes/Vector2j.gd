@@ -24,3 +24,6 @@ static func is_in_array_reversed(array: Array, vector) -> bool:  # : Vector2j) -
 			if i.y == vector.x:
 				return true
 	return false
+	
+func to_string() -> String:
+	return "X:" + str(x) + " " + "Y:" + str(y)

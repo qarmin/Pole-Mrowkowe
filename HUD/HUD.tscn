@@ -1,7 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
+[ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/RoundsCircle.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://HUD/wood.png" type="Texture" id=4]
+[ext_resource path="res://HUD/water.png" type="Texture" id=5]
+[ext_resource path="res://HUD/food.png" type="Texture" id=6]
+[ext_resource path="res://HUD/gold.png" type="Texture" id=7]
+[ext_resource path="res://HUD/iron.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=2]
+size = 21
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 120
@@ -10,13 +23,16 @@ font_data = ExtResource( 3 )
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -0.667419
+margin_bottom = -0.667419
 mouse_filter = 2
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Resources" type="Control" parent="."]
-anchor_right = 0.8
+anchor_right = 0.6
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -26,22 +42,171 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
-color = Color( 0.529412, 0.34902, 0, 1 )
+color = Color( 0, 0.168627, 0.341176, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBox" type="HBoxContainer" parent="Resources"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gold" type="Control" parent="Resources/HBox"]
-margin_right = 40.0
+[node name="Gold" type="HBoxContainer" parent="Resources/HBox"]
+margin_right = 118.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Gold"]
+margin_right = 57.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Resources/HBox/Gold"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "5000"
+valign = 1
+
+[node name="Wood" type="HBoxContainer" parent="Resources/HBox"]
+margin_left = 123.0
+margin_right = 242.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Wood"]
+margin_right = 57.0
+margin_bottom = 40.0
+size_flags_horizontal = 11
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Resources/HBox/Wood"]
+margin_left = 61.0
+margin_right = 119.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "5000"
+valign = 1
+
+[node name="Water" type="HBoxContainer" parent="Resources/HBox"]
+margin_left = 247.0
+margin_right = 366.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Water"]
+margin_right = 57.0
+margin_bottom = 40.0
+size_flags_horizontal = 11
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Resources/HBox/Water"]
+margin_left = 61.0
+margin_right = 119.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "5000"
+valign = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Food" type="HBoxContainer" parent="Resources/HBox"]
+margin_left = 371.0
+margin_right = 490.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Food"]
+margin_right = 57.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Resources/HBox/Food"]
+margin_left = 61.0
+margin_right = 119.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "5000"
+valign = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Iron" type="HBoxContainer" parent="Resources/HBox"]
+margin_left = 495.0
+margin_right = 614.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Iron"]
+margin_right = 57.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Resources/HBox/Iron"]
+margin_left = 61.0
+margin_right = 119.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "5000"
+valign = 1
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Buildings" type="Control" parent="."]
 anchor_top = 0.8
@@ -60,16 +225,79 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBox" type="HBoxContainer" parent="Buildings"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="VBox" type="VBoxContainer" parent="Buildings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gold" type="Control" parent="Buildings/HBox"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Label" type="Label" parent="Buildings/VBox"]
+margin_right = 809.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 3 )
+text = "building menu - on field aa x bb"
+
+[node name="HBox" type="HBoxContainer" parent="Buildings/VBox"]
+margin_top = 24.0
+margin_right = 809.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gold" type="Control" parent="Buildings/VBox/HBox"]
+margin_right = 809.0
+size_flags_horizontal = 3
+
+[node name="Units" type="Control" parent="."]
+anchor_top = 0.8
+anchor_right = 0.8
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Units"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+color = Color( 0, 0.529412, 0.478431, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Units"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Units/VBox"]
+margin_right = 809.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 3 )
+text = "unit menu - unit XYZ on field aa x bb"
+
+[node name="HBox" type="HBoxContainer" parent="Units/VBox"]
+margin_top = 24.0
+margin_right = 809.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gold" type="Control" parent="Units/VBox/HBox"]
+margin_right = 809.0
 size_flags_horizontal = 3
 
 [node name="Rounds" type="TextureRect" parent="."]

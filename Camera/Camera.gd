@@ -123,9 +123,7 @@ func move_camera(roman : int, delta : float = -1) -> void:
 		# Jeśli wyjdzie to wtedy skalujemy ruch, tak aby oś y zatrzymała się równo na granicy
 
 		var current_transform : Transform = get_transform()
-		print( get_global_transform().origin.y)
 		translate(move_vec_local * delta)
-		print( get_global_transform().origin.y)
 		# Skala jaką należy zaaplikować do prędkości aby nie wypaść poza obręb mapy
 		var move_scale : float = 1
 #		var move_scale : Vector3 = Vector3(1,1,1)

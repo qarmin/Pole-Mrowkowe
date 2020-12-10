@@ -45,6 +45,7 @@ func ant_clicked(ant: AntBase) -> void:
 		unit_overlay_node.stop()
 		current_unit_overlay_hex_name = ""
 		selected_ant = null
+		hide_menus()
 		return
 	# Hide terrain overlay
 	terrain_overlay_node.stop()
@@ -57,6 +58,8 @@ func ant_clicked(ant: AntBase) -> void:
 	unit_overlay_node.start()
 	current_unit_overlay_hex_name = parent_name
 	selected_ant = ant
+	show_units_menu()
+	$HUD/HUD/Units/VBox/Label.set_text("unit menu - field " )
 
 
 func hex_clicked(hex: SingleHex) -> void:
@@ -65,6 +68,7 @@ func hex_clicked(hex: SingleHex) -> void:
 		terrain_overlay_node.stop()
 		current_terrain_overlay_hex_name = ""
 		selected_hex = null
+		hide_menus()
 		return
 	# Hide unit overlay
 	unit_overlay_node.stop()
@@ -77,3 +81,18 @@ func hex_clicked(hex: SingleHex) -> void:
 	terrain_overlay_node.start()
 	current_terrain_overlay_hex_name = hex.get_name()
 	selected_hex = hex
+	show_buildings_menu()
+	$HUD/HUD/Buildings/VBox/Label.set_text("hex menu - field " +str( SingleMap.convert_name_to_coordinates(hex.get_name(),single_map.size).to_string()))
+
+func show_buildings_menu():
+	$HUD/HUD/Buildings.show()
+	$HUD/HUD/Units.hide()
+	
+func show_units_menu():
+	$HUD/HUD/Units.show()
+	$HUD/HUD/Buildings.hide()
+	
+func hide_menus():
+	$HUD/HUD/Buildings.hide()
+	$HUD/HUD/Units.hide()
+	

@@ -170,6 +170,7 @@ static func print_map(array: Array) -> void:
 		print(line)
 
 static func convert_name_to_coordinates(hex_name: String, map_size: Vector2j) -> Vector2j:
+	assert(hex_name.begins_with(MapCreator.NODE_BASE_NAME))
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 
 	return Vector2j.new(number % map_size.x, number / map_size.x)
