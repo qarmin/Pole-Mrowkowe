@@ -36,6 +36,9 @@ func _input(event) -> void:
 		if event.is_pressed():
 			if event.get_scancode() == KEY_R: # Reset Kamery
 				set_translation(Vector3(-0.443,7.127,5.624))
+				look_at(Vector3(0,0,0),Vector3(0,1,0))
+				rot_x = get_rotation().y
+				rot_y = get_rotation().x
 			if event.get_scancode() == KEY_P: # Zmiana projekcji
 				if !projection_changed:
 					if get_projection() == Camera.PROJECTION_PERSPECTIVE:
