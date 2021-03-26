@@ -1,5 +1,12 @@
 extends Spatial
 
+var cpu_vs_cpu : bool = false # Allow to have fully automated game
+
+var number_of_players : int = -1 # Number of all players
+var active_players : int = -1 # How many players still play
+var current_player : int = -1 # Actual player
+var players_activite : Array = [true, true, false, false]
+
 var current_terrain_overlay_hex_name : String = ""
 var current_unit_overlay_hex_name : String = ""
 
@@ -9,10 +16,9 @@ var selected_hex : Node = null
 var terrain_overlay_node : Node = preload("res://Overlay/TerrainOverlay.tscn").instance()
 var unit_overlay_node : Node = preload("res://Overlay/UnitOverlay.tscn").instance()
 
-var single_map : SingleMap
+onready var single_map : SingleMap = SingleMap.new()
 
 func _ready() -> void:
-	single_map = SingleMap.new()
 	MapCreator.create_map(single_map,Vector2j.new(4,4),100)
 	assert(MapCreator.populate_map_randomly(single_map, 50))
 	MapCreator.create_3d_map(single_map)
@@ -63,6 +69,7 @@ func ant_clicked(ant: AntBase) -> void:
 
 
 func hex_clicked(hex: SingleHex) -> void:
+	# TODO checkif players
 #	print("Hex " + hex.get_name() + " was clicked and this was handled!")
 	if hex.get_name() == current_terrain_overlay_hex_name:
 		terrain_overlay_node.stop()

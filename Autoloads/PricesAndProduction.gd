@@ -1,7 +1,7 @@
 extends Node
 ## Nie przydatne surowcne - Złoto(Gold) 
-## Drewno(Wood), Kamień(Stone), Żelazo(Iron), Pożywienie(Food), Punkty Akcji(Action Points)
-enum TYPE_OF_RESOURCE { WOOD, STONE, IRON, FOOD, ACTION_POINTS }
+## Drewno(Wood), Kamień(Stone), Pożywienie(Food), Punkty Akcji(Action Points)
+enum TYPE_OF_RESOURCE { WOOD, STONE, FOOD, ACTION_POINTS }
 
 ## Maksymalne poziomy nie muszą być wpisywane, lecz poprawiają czytelność(mam taką nadzieję)
 const BUILDINGS_TYPES: PoolStringArray = PoolStringArray(["Home", "Barracks"])

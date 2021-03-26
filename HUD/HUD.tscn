@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/RoundsCircle.png" type="Texture" id=2]
@@ -7,16 +7,15 @@
 [ext_resource path="res://HUD/water.png" type="Texture" id=5]
 [ext_resource path="res://HUD/food.png" type="Texture" id=6]
 [ext_resource path="res://HUD/gold.png" type="Texture" id=7]
-[ext_resource path="res://HUD/iron.png" type="Texture" id=8]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 21
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 120
 font_data = ExtResource( 3 )
 
@@ -56,7 +55,7 @@ __meta__ = {
 }
 
 [node name="Gold" type="HBoxContainer" parent="Resources/HBox"]
-margin_right = 118.0
+margin_right = 149.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -65,7 +64,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Gold"]
-margin_right = 57.0
+margin_right = 72.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -74,18 +73,18 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Gold"]
-margin_left = 61.0
-margin_right = 118.0
+margin_left = 76.0
+margin_right = 149.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "5000"
 valign = 1
 
 [node name="Wood" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 123.0
-margin_right = 242.0
+margin_left = 154.0
+margin_right = 304.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -94,7 +93,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Wood"]
-margin_right = 57.0
+margin_right = 73.0
 margin_bottom = 40.0
 size_flags_horizontal = 11
 size_flags_vertical = 3
@@ -103,18 +102,18 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Wood"]
-margin_left = 61.0
-margin_right = 119.0
+margin_left = 77.0
+margin_right = 150.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "5000"
 valign = 1
 
 [node name="Water" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 247.0
-margin_right = 366.0
+margin_left = 309.0
+margin_right = 459.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -123,7 +122,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Water"]
-margin_right = 57.0
+margin_right = 73.0
 margin_bottom = 40.0
 size_flags_horizontal = 11
 size_flags_vertical = 3
@@ -132,12 +131,12 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Water"]
-margin_left = 61.0
-margin_right = 119.0
+margin_left = 77.0
+margin_right = 150.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "5000"
 valign = 1
 __meta__ = {
@@ -145,39 +144,7 @@ __meta__ = {
 }
 
 [node name="Food" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 371.0
-margin_right = 490.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Food"]
-margin_right = 57.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="Resources/HBox/Food"]
-margin_left = 61.0
-margin_right = 119.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
-text = "5000"
-valign = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Iron" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 495.0
+margin_left = 464.0
 margin_right = 614.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
@@ -186,22 +153,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Iron"]
-margin_right = 57.0
+[node name="TextureRect" type="TextureRect" parent="Resources/HBox/Food"]
+margin_right = 73.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 8 )
+texture = ExtResource( 6 )
 expand = true
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="Resources/HBox/Iron"]
-margin_left = 61.0
-margin_right = 119.0
+[node name="Label" type="Label" parent="Resources/HBox/Food"]
+margin_left = 77.0
+margin_right = 150.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "5000"
 valign = 1
 __meta__ = {
@@ -239,7 +206,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="Buildings/VBox"]
 margin_right = 809.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "building menu - on field aa x bb"
 
 [node name="HBox" type="HBoxContainer" parent="Buildings/VBox"]
@@ -285,7 +252,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="Units/VBox"]
 margin_right = 809.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "unit menu - unit XYZ on field aa x bb"
 
 [node name="HBox" type="HBoxContainer" parent="Units/VBox"]
@@ -300,7 +267,7 @@ __meta__ = {
 margin_right = 809.0
 size_flags_horizontal = 3
 
-[node name="Rounds" type="TextureRect" parent="."]
+[node name="Turns" type="TextureRect" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -181.0
@@ -313,11 +280,11 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Label" type="Label" parent="Rounds"]
+[node name="Label" type="Label" parent="Turns"]
 anchor_left = 0.15
 anchor_right = 1.0
 anchor_bottom = 0.85
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "10"
 align = 1
