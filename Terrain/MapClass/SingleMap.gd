@@ -83,7 +83,7 @@ func initialize_fields(type_of_field: int):
 			fields[y].append(type_of_field)
 			units[y].append(Units.TYPES_OF_ANTS.NO_UNIT)
 			buildings[y].append(Buildings.TYPES_OF_BUILDINGS.NO_BUILDING)
-			nature[y].append(HexNature.TYPES_OF_HEX.NOTHING)
+			nature[y].append(Terrain.TYPES_OF_HEX.NORMAL)
 	assert(fields.size() == units.size())
 	assert(fields.size() == buildings.size())
 

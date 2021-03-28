@@ -7,13 +7,13 @@ var all_buildings: Array = []
 
 # Koszty budowy to L1 -> L2 a później ulepszania L2 -> L3 etc.
 func _ready() -> void:
-	var default: Dictionary = {"wood": 0, "water": 0, "gold": 0, "grain": 0,}
+	var default: Dictionary = {"wood": 0, "water": 0, "gold": 0, "food": 0,}
 	add_building(
 		"capitol",
 		3,
 		default,
-		{"wood": 100, "water": 0, "gold": 0, "grain": 0},
-		{"wood": 200, "water": 0, "gold": 0, "grain": 0}
+		{"wood": 100, "water": 0, "gold": 0, "food": 0},
+		{"wood": 200, "water": 0, "gold": 0, "food": 0}
 	)  # Always have at least 1 level and cannot be built
 
 
@@ -30,7 +30,8 @@ func add_building(name: String, levels: int, to_build_level_1: Dictionary, to_bu
 	}
 
 	for i in [to_build_level_1, to_build_level_2, to_build_level_3]:
-		assert(i.has_all(["wood", "water", "gold", "grain"]))
+		assert(i.size() == Resources.resources.size())
+		assert(i.has_all(Resources.resources))
 
 	all_buildings.append(building_info)
 

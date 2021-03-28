@@ -46,16 +46,16 @@ config/icon="res://icon.png"
 
 Shortcuts="*res://Autoloads/Shortcuts.gd"
 GameSettings="*res://Autoloads/GameSettings.gd"
-PricesAndProduction="*res://Autoloads/PricesAndProduction.gd"
 SaveSystem="*res://Autoloads/SaveSystem.gd"
-Units="*res://Autoloads/Units.gd"
+Units="*res://Autoloads/StatsUnits.gd"
 Benchmark="*res://Autoloads/Benchmark.gd"
 Options="*res://Autoloads/Options.gd"
 MapCreator="*res://Autoloads/MapCreator.gd"
 Tests="*res://Autoloads/Tests.gd"
 PreviewGenerator="*res://Autoloads/PreviewGenerator.gd"
-Buildings="*res://Autoloads/Buildings.gd"
-HexNature="*res://Autoloads/HexNature.gd"
+Buildings="*res://Autoloads/StatsBuildings.gd"
+Terrain="*res://Autoloads/StatsTerrain.gd"
+Resources="*res://Autoloads/StatsResources.gd"
 
 [debug]
 
