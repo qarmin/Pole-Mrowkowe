@@ -46,16 +46,16 @@ config/icon="res://icon.png"
 
 Shortcuts="*res://Autoloads/Shortcuts.gd"
 GameSettings="*res://Autoloads/GameSettings.gd"
-PricesAndProduction="*res://Autoloads/PricesAndProduction.gd"
 SaveSystem="*res://Autoloads/SaveSystem.gd"
-Units="*res://Autoloads/Units.gd"
+Units="*res://Autoloads/StatsUnits.gd"
 Benchmark="*res://Autoloads/Benchmark.gd"
 Options="*res://Autoloads/Options.gd"
 MapCreator="*res://Autoloads/MapCreator.gd"
 Tests="*res://Autoloads/Tests.gd"
 PreviewGenerator="*res://Autoloads/PreviewGenerator.gd"
-Buildings="*res://Autoloads/Buildings.gd"
-HexNature="*res://Autoloads/HexNature.gd"
+Buildings="*res://Autoloads/StatsBuildings.gd"
+Terrain="*res://Autoloads/StatsTerrain.gd"
+Resources="*res://Autoloads/StatsResources.gd"
 
 [debug]
 
@@ -79,6 +79,26 @@ import/open_asset_import/use_fbx=false
 game_exit={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_w={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_a={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_d={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_s={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 
