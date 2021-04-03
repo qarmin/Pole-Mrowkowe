@@ -2,7 +2,7 @@ extends Spatial
 
 var cpu_vs_cpu : bool = false # Allow to have fully automated game
 
-var number_of_players : int = -1 # Number of all players
+var number_of_start_players : int = -1 # Number of all players
 var active_players : int = -1 # How many players still play
 var current_player : int = -1 # Actual player
 var players_activite : Array = [true, true, false, false]
@@ -10,8 +10,16 @@ var players_activite : Array = [true, true, false, false]
 var current_terrain_overlay_hex_name : String = ""
 var current_unit_overlay_hex_name : String = ""
 
+
+# Selection 
 var selected_ant : Node = null
 var selected_hex : Node = null
+
+var selection_ant_color_own : String = "#555555"
+var selection_ant_color_enemy : String = "#ffffff"
+
+var selection_hex_color_own: Color = Color(1,1,1,1)
+var selection_hex_color_enemy : Color = Color(0.5,0.5,0.5,0.5)
 
 var terrain_overlay_node : Node = preload("res://Overlay/TerrainOverlay.tscn").instance()
 var unit_overlay_node : Node = preload("res://Overlay/UnitOverlay.tscn").instance()
@@ -19,7 +27,7 @@ var unit_overlay_node : Node = preload("res://Overlay/UnitOverlay.tscn").instanc
 onready var single_map : SingleMap = SingleMap.new()
 
 func _ready() -> void:
-	MapCreator.create_map(single_map,Vector2j.new(4,4),100)
+	MapCreator.create_map(single_map,Vector2j.new(6,6),100)
 	assert(MapCreator.populate_map_randomly(single_map, 50))
 	MapCreator.create_3d_map(single_map)
 	add_child(single_map.map)

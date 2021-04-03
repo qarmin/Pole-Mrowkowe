@@ -46,25 +46,25 @@ func _input(event) -> void:
 					else:
 						set_projection(Camera.PROJECTION_PERSPECTIVE)
 					projection_changed = true
-			if event.get_scancode() == KEY_UP:
+			if event.get_scancode() == KEY_UP || event.get_scancode() == KEY_W:
 				movement_keys_pressed |= CAMERA_MOVEMENT.UP
-			elif event.get_scancode() == KEY_DOWN:
+			elif event.get_scancode() == KEY_DOWN || event.get_scancode() == KEY_S:
 				movement_keys_pressed |= CAMERA_MOVEMENT.DOWN
-			if event.get_scancode() == KEY_LEFT:
+			if event.get_scancode() == KEY_LEFT || event.get_scancode() == KEY_A:
 				movement_keys_pressed |= CAMERA_MOVEMENT.LEFT
-			elif event.get_scancode() == KEY_RIGHT:
+			elif event.get_scancode() == KEY_RIGHT || event.get_scancode() == KEY_D:
 				movement_keys_pressed |= CAMERA_MOVEMENT.RIGHT
 			
 		else:
 			if event.get_scancode() == KEY_P:
 				projection_changed = false
-			if event.get_scancode() == KEY_UP:
+			if event.get_scancode() == KEY_UP || event.get_scancode() == KEY_W:
 				movement_keys_pressed &= ~CAMERA_MOVEMENT.UP
-			if event.get_scancode() == KEY_DOWN:
+			if event.get_scancode() == KEY_DOWN || event.get_scancode() == KEY_S:
 				movement_keys_pressed &= ~CAMERA_MOVEMENT.DOWN
-			if event.get_scancode()  == KEY_LEFT:
+			if event.get_scancode()  == KEY_LEFT || event.get_scancode() == KEY_A:
 				movement_keys_pressed &= ~CAMERA_MOVEMENT.LEFT
-			if event.get_scancode() == KEY_RIGHT:
+			if event.get_scancode() == KEY_RIGHT || event.get_scancode() == KEY_D:
 				movement_keys_pressed &= ~CAMERA_MOVEMENT.RIGHT
 	
 	# Mysz - kliknięcie
