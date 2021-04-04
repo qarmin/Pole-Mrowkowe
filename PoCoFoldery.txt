@@ -1,0 +1,13 @@
+Autoloads - zawiera wszystkie automatycznie ładowane do pamięci skrypty, które powinny być dostępne z każdego miejsca
+Benchmark - folder z elementami - skryptami, sceną testową - potrzebnymi do benchmarku
+Blend Files - zawiera nieuporządkowane pliki z blendera .blend
+Building - Zawiera tylko modele budynków - pomyśleć nad przesunięciem tego do osobnego folderu models
+Camera - Sterowanie kamerą - być może gdzieś przenieść?
+HUD - HUD w grze, pomyśleć nad przesunięciem tego do folderu Game
+Menu - Skrypty i sceny menu
+NoGIT - ignorowany przez gita folder do różnych testów
+Overlay - To jest obramówka do terenu, powinna przejść do folderu terrain
+Terrain - Zawiera funkcje  dotyczące pojedynczych hexów jak i całego terenu
+Tests - Folder z testami - raczej zbytnio nie używany
+Units - modele jednostek i ich uzbroenia
+Water - shader wody używany w grze
