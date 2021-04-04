@@ -2,7 +2,7 @@ extends Node
 
 const PRINT_TESTS: bool = true
 
-
+# Używane tylko przy zmianach kodu dlatego, że spowalnia działanie gry
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
 	if true:
