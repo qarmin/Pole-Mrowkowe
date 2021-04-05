@@ -9,7 +9,7 @@ var chance_to_terrain: int
 
 
 ## Generacja mapy po naciśnięciu przycisku, najpierw wczytywane są dane a potem do skutku generowane mapy.
-## Następnie generowany jest podgląd, 
+## Następnie generowany jest podgląd,
 func _on_Generate_Map_button_up() -> void:
 	read_values()
 

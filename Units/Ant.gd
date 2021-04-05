@@ -4,7 +4,7 @@ class_name AntBase
 
 signal ant_clicked
 
-var owner_id: int = -1  # no_owner for now 
+var owner_id: int = -1  # no_owner for now
 
 
 func _on_StaticBody_input_event(_camera, event, _click_position, _click_normal, _shape_idx):

@@ -1,3 +1,3 @@
 extends Node
 
-var resources : Array = ["wood", "water", "gold", "food"]
+var resources: Array = ["wood", "water", "gold", "food"]

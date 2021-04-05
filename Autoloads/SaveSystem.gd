@@ -18,8 +18,9 @@ func save_map_as_packed_scene(single_map: SingleMap) -> void:
 
 
 # Punkt zapisu # TODO zapisać
-# Całą Mapę - kolor poszczególnych kolumn, informacje o budynkach, informacje o 
-# 
+# Całą Mapę - kolor poszczególnych kolumn, informacje o budynkach, informacje o
+#
+
 
 func save_map_as_text(single_map: SingleMap, slot: int = 0) -> void:
 	assert(slot == 0 || slot == 100)  # 100 to wartość do debugowania

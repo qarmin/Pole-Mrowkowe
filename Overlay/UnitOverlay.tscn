@@ -3,7 +3,9 @@
 [ext_resource path="res://Overlay/UnitOverlay.gd" type="Script" id=1]
 
 [sub_resource type="SpatialMaterial" id=1]
+params_cull_mode = 2
 albedo_color = Color( 0.290196, 0.937255, 0.968627, 1 )
+metallic_specular = 0.0
 
 [node name="UnitOverlay" type="CSGTorus"]
 transform = Transform( 1, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0, 0 )

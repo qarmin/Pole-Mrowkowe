@@ -6,8 +6,6 @@ var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
 var Anthill: PackedScene = load("res://Buildings/Anthill/Anthill.tscn")
 
-enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1, PLAYER_LAST = 4 }
-
 #const NO_FIELD : int = -100
 #const DEFAULT_FIELD : int = -1
 #const FIRST_PLAYER : int = 0
@@ -23,8 +21,8 @@ var ant_texture_array: Array = []
 ## Należy na początku zainicjalizować wszystkie potrzebne zmienne
 func _ready() -> void:
 	# Logika jest ustawiona na to, że wartości są przedstawiane w odpowiedniej kolejności
-	assert(FIELD_TYPE.NO_FIELD < FIELD_TYPE.DEFAULT_FIELD)
-	assert(FIELD_TYPE.DEFAULT_FIELD < FIELD_TYPE.PLAYER_FIRST)
+	assert(SingleMap.FIELD_TYPE.NO_FIELD < SingleMap.FIELD_TYPE.DEFAULT_FIELD)
+	assert(SingleMap.FIELD_TYPE.DEFAULT_FIELD < SingleMap.FIELD_TYPE.PLAYER_FIRST)
 
 	randomize()  # Bez tego za każdym razem wychdzą takie same wyniki randi()
 
@@ -40,18 +38,18 @@ func _ready() -> void:
 
 ## Tworzy mapę i zapisuje ją do tablicy single_map.fields z listą wszystkich pól, na końcu ją przycina  jeśli potrzeba
 func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: int) -> void:
-	assert(! is_instance_valid(single_map.map))
+	assert(!is_instance_valid(single_map.map))
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(hex_number.x * hex_number.y >= 4)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
 	single_map.reset()
 	single_map.set_size(hex_number)
 	if chance_to_terrain == 100:  # Tworzy pełną mapę
-		single_map.initialize_fields(MapCreator.FIELD_TYPE.DEFAULT_FIELD)
+		single_map.initialize_fields(SingleMap.FIELD_TYPE.DEFAULT_FIELD)
 		single_map.calculate_number_of_terrains()
 		return
 
-	single_map.initialize_fields(MapCreator.FIELD_TYPE.NO_FIELD)
+	single_map.initialize_fields(SingleMap.FIELD_TYPE.NO_FIELD)
 
 	var to_check: Array = []
 	var checked: Array = []
@@ -61,13 +59,13 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 		# Resetowanie tablicy
 		for x in range(hex_number.x):
 			for y in range(hex_number.y):
-				single_map.fields[y][x] = MapCreator.FIELD_TYPE.NO_FIELD
+				single_map.fields[y][x] = SingleMap.FIELD_TYPE.NO_FIELD
 
 		## Wybrany ląd (0,0) - ma to wiele plusów
 		## Przy przycinaniu trzeba mieć na uwadzę jedynie maksymalny x oraz y
 		## W przyszłości nie trzeba będzie brać pod uwagę możliwości, że hexy będą rozpoczynały się od linii parzystej
 		## przez co obliczenia będą uproszczone
-		single_map.fields[0][0] = FIELD_TYPE.DEFAULT_FIELD
+		single_map.fields[0][0] = SingleMap.FIELD_TYPE.DEFAULT_FIELD
 		to_check.append(Vector2j.new(0, 0))
 
 		#SingleMap.print_map(single_map.fields)
@@ -75,7 +73,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 			current_element = to_check.pop_front()
 
 			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
-			assert(single_map.fields[current_element.y][current_element.x] == MapCreator.FIELD_TYPE.DEFAULT_FIELD)
+			assert(single_map.fields[current_element.y][current_element.x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD)
 			assert(current_element.x < hex_number.x && current_element.x >= 0)
 			assert(current_element.y < hex_number.y && current_element.y >= 0)
 
@@ -92,21 +90,21 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 						):
 							var cep_x = current_element.x + help_array[h][i][0]
 							var cep_y = current_element.y + help_array[h][i][1]
-							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
-								assert(single_map.fields[cep_y][cep_x] == MapCreator.FIELD_TYPE.NO_FIELD)
+							if !Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && !Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
+								assert(single_map.fields[cep_y][cep_x] == SingleMap.FIELD_TYPE.NO_FIELD)
 								var is_terrain: bool = randi() % 100 < chance_to_terrain
 								if is_terrain:
-									single_map.fields[cep_y][cep_x] = MapCreator.FIELD_TYPE.DEFAULT_FIELD
+									single_map.fields[cep_y][cep_x] = SingleMap.FIELD_TYPE.DEFAULT_FIELD
 									to_check.append(Vector2j.new(cep_x, cep_y))
 								else:
-									single_map.fields[cep_y][cep_x] = MapCreator.FIELD_TYPE.NO_FIELD
+									single_map.fields[cep_y][cep_x] = SingleMap.FIELD_TYPE.NO_FIELD
 									checked.append(Vector2j.new(cep_x, cep_y))
 
 			#SingleMap.print_map(single_map.fields)
 			for i in to_check:
-				assert(single_map.fields[i.y][i.x] == MapCreator.FIELD_TYPE.DEFAULT_FIELD)
+				assert(single_map.fields[i.y][i.x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD)
 
-			assert(! Vector2j.is_in_array(checked, current_element))
+			assert(!Vector2j.is_in_array(checked, current_element))
 
 			checked.append(current_element)
 
@@ -148,7 +146,7 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 	while true:
 		curr.x = randi() % single_map.size.x
 		curr.y = randi() % single_map.size.y
-		if single_map.fields[curr.y][curr.x] == FIELD_TYPE.DEFAULT_FIELD:
+		if single_map.fields[curr.y][curr.x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 			single_map.players.append(curr)
 			break
 
@@ -160,7 +158,7 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 
 	# Dorysowanie do mapy miejsc w których znajdują się bazy graczy
 	for i in range(single_map.players.size()):
-		single_map.fields[single_map.players[i].y][single_map.players[i].x] = FIELD_TYPE.PLAYER_FIRST + i
+		single_map.fields[single_map.players[i].y][single_map.players[i].x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + i
 
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
 #	var terrain_to_check : Array = []
@@ -207,15 +205,15 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 
 	for y in range(single_map.size.y):
 		for x in range(single_map.size.x):
-			if single_map.fields[y][x] == MapCreator.FIELD_TYPE.DEFAULT_FIELD:
+			if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 				choosen_player = randi() % (number_of_players + 1) - 1
 
 				if choosen_player != -1:
-					single_map.fields[y][x] = MapCreator.FIELD_TYPE.PLAYER_FIRST + choosen_player
+					single_map.fields[y][x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + choosen_player
 
 				if randi() % 100 < ant_chance:
 					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
-					
+
 				if randi() % 2 == 0:
 					single_map.buildings[y][x] = Buildings.TYPES_OF_BUILDINGS.ANTHILL
 				# TODO Generacja losowa budynków
@@ -225,7 +223,7 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 
 ## Tworzy tablicę odległości danych pól od graczy
 func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
-	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od 
+	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od
 	var current_element: Vector2j = Vector2j.new(0, 0)
 	var current_value: int = 0
 
@@ -262,14 +260,14 @@ func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
 						):
 							var cep_x = current_element.x + help_array[h][i][0]
 							var cep_y = current_element.y + help_array[h][i][1]
-							if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
-								if fields[cep_y][cep_x] == FIELD_TYPE.DEFAULT_FIELD:
+							if !Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && !Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
+								if fields[cep_y][cep_x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 									if smallest_array[cep_y][cep_x] == -1 || smallest_array[cep_y][cep_x] > current_value:
 										smallest_array[cep_y][cep_x] = current_value + 1
 										to_check.append(Vector2j.new(cep_x, cep_y))
 										to_check_value.append(current_value + 1)
 
-			assert(! Vector2j.is_in_array(checked, current_element))
+			assert(!Vector2j.is_in_array(checked, current_element))
 
 			checked.append(current_element)
 		checked = []
@@ -327,7 +325,7 @@ func create_3d_map(single_map: SingleMap) -> void:
 	for y in single_map.size.y:
 		for x in single_map.size.x:
 			## Fields
-			if single_map.fields[y][x] != FIELD_TYPE.NO_FIELD:
+			if single_map.fields[y][x] != SingleMap.FIELD_TYPE.NO_FIELD:
 				var SH: MeshInstance = SingleHex.instance()
 				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
 				# Przesunięcie względem mapy
@@ -337,10 +335,10 @@ func create_3d_map(single_map: SingleMap) -> void:
 					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 				SH.set_name(NODE_BASE_NAME + str(y * single_map.size.x + x))
 
-				if single_map.fields[y][x] == FIELD_TYPE.DEFAULT_FIELD:
+				if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 					SH.set_surface_material(0, texture_base)
 				else:
-					SH.set_surface_material(0, texture_array[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST])
+					SH.set_surface_material(0, texture_array[single_map.fields[y][x] - SingleMap.FIELD_TYPE.PLAYER_FIRST])
 				map.add_child(SH)
 				SH.set_owner(map)
 
@@ -350,18 +348,18 @@ func create_3d_map(single_map: SingleMap) -> void:
 					var ant: Spatial = Ant.instance()
 					ant.translation = Vector3(0, 1.192, 0)
 
-					if single_map.fields[y][x] == FIELD_TYPE.DEFAULT_FIELD:
+					if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 						ant.get_node("Outfit").set_surface_material(0, ant_base)
 					else:
-						ant.get_node("Outfit").set_surface_material(0, ant_texture_array[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST])
+						ant.get_node("Outfit").set_surface_material(0, ant_texture_array[single_map.fields[y][x] - SingleMap.FIELD_TYPE.PLAYER_FIRST])
 					SH.add_child(ant)
 					ant.set_owner(map)
 					pass
 				## Buildings - TODO
 				if single_map.buildings[y][x] == Buildings.TYPES_OF_BUILDINGS.ANTHILL:
 					var anthill = Anthill.instance()
-					anthill.translation  = Vector3(0, 0.981, -0.522)
-					
+					anthill.translation = Vector3(0, 0.981, -0.522)
+
 					SH.add_child(anthill)
 					anthill.set_owner(map)
 					pass
@@ -377,7 +375,7 @@ func center_map(single_map: SingleMap) -> Vector3:
 	single_map.real_map_size.x = single_map.size.x * SINGLE_HEX_DIMENSION.x
 	## Gdy w parzystej linii na końcu jest obecny hex, to wtedy wymiary mapy są większe niż zazwyczaj
 	for y in range(1, single_map.size.y, 2):
-		if single_map.fields[y][single_map.size.x - 1] != FIELD_TYPE.NO_FIELD:
+		if single_map.fields[y][single_map.size.x - 1] != SingleMap.FIELD_TYPE.NO_FIELD:
 			single_map.real_map_size.x += SINGLE_HEX_DIMENSION.x / 2.0
 			break
 

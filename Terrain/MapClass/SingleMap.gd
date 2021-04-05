@@ -16,6 +16,7 @@ var real_map_size: Vector3  # Rzeczywista wielkość mapy
 var was_resetted: bool = false
 var was_shrinked: bool = false
 
+enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = -1, PLAYER_FIRST = 0, PLAYER_LAST = 3 }
 
 func reset() -> void:
 	if map != null:
@@ -68,7 +69,7 @@ func set_preview(new_preview: Image) -> void:
 
 ## Inicjalizacja terenów, jednostek na nich i budynków
 func initialize_fields(type_of_field: int):
-	assert(type_of_field == MapCreator.FIELD_TYPE.DEFAULT_FIELD or type_of_field == MapCreator.FIELD_TYPE.NO_FIELD)
+	assert(type_of_field == FIELD_TYPE.DEFAULT_FIELD or type_of_field == FIELD_TYPE.NO_FIELD)
 	assert(fields.size() == 0)
 	fields.clear()
 	units.clear()
@@ -94,7 +95,7 @@ func calculate_number_of_terrains():
 	number_of_terrain = 0
 	for y in range(size.y):
 		for x in range(size.x):
-			if fields[y][x] != MapCreator.FIELD_TYPE.NO_FIELD:
+			if fields[y][x] != FIELD_TYPE.NO_FIELD:
 				number_of_terrain += 1
 
 
@@ -106,7 +107,7 @@ func shrink_map() -> void:
 #	print_map(fields)
 	for y in size.y:
 		for x in size.x:
-			if fields[y][x] != MapCreator.FIELD_TYPE.NO_FIELD:
+			if fields[y][x] != FIELD_TYPE.NO_FIELD:
 				if real_max_x == -1:
 					real_max_x = x
 				else:
@@ -145,6 +146,7 @@ func shrink_map() -> void:
 #	else:
 #		print("INFO: Nie trzeba zmniejszać mapy")
 
+# Po prostu sprawdza wymiary tablic, potrzebne tylko do debugowania
 static func validate_sizes_of_arrays(single_map):#: SingleMap):
 	assert(single_map.fields.size() == single_map.units.size())
 	for i in range(single_map.fields.size()):
@@ -174,3 +176,7 @@ static func convert_name_to_coordinates(hex_name: String, map_size: Vector2j) ->
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 
 	return Vector2j.new(number % map_size.x, number / map_size.x)
+
+# Return owner of specific field
+func get_field_owner(coordinates : Vector2j) -> int:
+	return fields[coordinates.y][coordinates.x]

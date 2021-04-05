@@ -20,7 +20,7 @@ func generate_preview_image(single_map: SingleMap, square_size: Vector2j = Vecto
 
 	img.unlock()
 #	square_size = Vector2j.new(10,10)
-#	
+#
 #	## Tworzenie mapy bez offsetu gdy nie jest kwadratem
 # warning-ignore:integer_division
 #	img.create(int(single_map.size.x) * square_size.x + square_size.x / 2 + border_size, int(single_map.size.y) * square_size.y + border_size, false, Image.FORMAT_RGBA8)
@@ -38,12 +38,12 @@ func generate_preview_image(single_map: SingleMap, square_size: Vector2j = Vecto
 
 	for y in range(single_map.size.y):
 		for x in range(single_map.size.x):
-			if single_map.fields[y][x] == MapCreator.FIELD_TYPE.NO_FIELD:
+			if single_map.fields[y][x] == SingleMap.FIELD_TYPE.NO_FIELD:
 				continue
-			if single_map.fields[y][x] == MapCreator.FIELD_TYPE.DEFAULT_FIELD:
+			if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 				current_color = colors[0]
 			else:
-				current_color = colors[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST + 1]
+				current_color = colors[single_map.fields[y][x] - SingleMap.FIELD_TYPE.PLAYER_FIRST + 1]
 
 			if y % 2 == 1:
 # warning-ignore:integer_division

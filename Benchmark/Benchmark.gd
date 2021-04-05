@@ -98,7 +98,7 @@ func test_ended() -> void:
 
 ## Dodaje co każdą klatkę do wyniku 1 punkt i sprawdza czy dany test się nie zakończył
 func _process(delta: float) -> void:
-	if ! benchmark_ended:
+	if !benchmark_ended:
 		if ready:
 			Benchmark.stages_frames[current_stage - 1] += 1
 			Benchmark.points += 1

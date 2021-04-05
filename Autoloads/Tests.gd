@@ -2,6 +2,7 @@ extends Node
 
 const PRINT_TESTS: bool = true
 
+
 # Używane tylko przy zmianach kodu dlatego, że spowalnia działanie gry
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
@@ -34,14 +35,14 @@ func Vector2j_test() -> void:
 	array.append(Vector2j.new(25, 31))
 
 	assert(Vector2j.is_in_array(array, vec_1))
-	assert(! Vector2j.is_in_array(array, vec_2))
-	assert(! Vector2j.is_in_array(array, vec_3))
-	assert(! Vector2j.is_in_array(array, vec_4))
+	assert(!Vector2j.is_in_array(array, vec_2))
+	assert(!Vector2j.is_in_array(array, vec_3))
+	assert(!Vector2j.is_in_array(array, vec_4))
 	assert(Vector2j.is_in_array_reversed(array, vec_5))
 	assert(Vector2j.is_in_array(array, Vector2j.new(1, 3)))
-	assert(! Vector2j.is_in_array(array, Vector2j.new(125, 13)))
-	assert(! Vector2j.is_in_array(array, Vector2j.new(42, 25)))
-	assert(! Vector2j.is_in_array(array, Vector2j.new(25, 3)))
+	assert(!Vector2j.is_in_array(array, Vector2j.new(125, 13)))
+	assert(!Vector2j.is_in_array(array, Vector2j.new(42, 25)))
+	assert(!Vector2j.is_in_array(array, Vector2j.new(25, 3)))
 	assert(Vector2j.is_in_array_reversed(array, Vector2j.new(31, 25)))
 
 
@@ -104,8 +105,8 @@ func map_test() -> void:
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 4)
 	assert(check_integration_of_map(single_map))
-	
-	single_map.reset() 
+
+	single_map.reset()
 
 
 func shrink_map():
@@ -127,13 +128,13 @@ func shrink_map():
 	single_map.map.add_child(temp_spatial)
 
 	single_map.set_size(Vector2j.new(3, 3))
-	single_map.initialize_fields(MapCreator.FIELD_TYPE.DEFAULT_FIELD)
+	single_map.initialize_fields(SingleMap.FIELD_TYPE.DEFAULT_FIELD)
 	single_map.set_number_of_terrain(3)
 	# Trzeba pamiętać, że istnieje pole zawsze w punkcie (0,0)
 	single_map.fields = [
-		[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
-		[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD, MapCreator.FIELD_TYPE.NO_FIELD],
-		[MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.NO_FIELD]
+		[SingleMap.FIELD_TYPE.PLAYER_FIRST, SingleMap.FIELD_TYPE.DEFAULT_FIELD, SingleMap.FIELD_TYPE.NO_FIELD],
+		[SingleMap.FIELD_TYPE.NO_FIELD, SingleMap.FIELD_TYPE.DEFAULT_FIELD, SingleMap.FIELD_TYPE.NO_FIELD],
+		[SingleMap.FIELD_TYPE.NO_FIELD, SingleMap.FIELD_TYPE.NO_FIELD, SingleMap.FIELD_TYPE.NO_FIELD]
 	]
 
 	single_map.shrink_map()
@@ -143,7 +144,7 @@ func shrink_map():
 	assert(single_map.fields[0].size() == 2)
 	assert(single_map.fields[1].size() == 2)
 
-	var expected_fields: Array = [[MapCreator.FIELD_TYPE.PLAYER_FIRST, MapCreator.FIELD_TYPE.DEFAULT_FIELD], [MapCreator.FIELD_TYPE.NO_FIELD, MapCreator.FIELD_TYPE.DEFAULT_FIELD]]
+	var expected_fields: Array = [[SingleMap.FIELD_TYPE.PLAYER_FIRST, SingleMap.FIELD_TYPE.DEFAULT_FIELD], [SingleMap.FIELD_TYPE.NO_FIELD, SingleMap.FIELD_TYPE.DEFAULT_FIELD]]
 
 	assert(single_map.fields == expected_fields)
 
@@ -176,11 +177,11 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 					):
 						var cep_x = current_element.x + help_array[h][i][0]
 						var cep_y = current_element.y + help_array[h][i][1]
-						if ! Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && ! Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
-							if single_map.fields[cep_y][cep_x] != MapCreator.FIELD_TYPE.NO_FIELD:
+						if !Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && !Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
+							if single_map.fields[cep_y][cep_x] != SingleMap.FIELD_TYPE.NO_FIELD:
 								to_check.append(Vector2j.new(cep_x, cep_y))
 
-		assert(! Vector2j.is_in_array(checked, current_element))
+		assert(!Vector2j.is_in_array(checked, current_element))
 
 		checked.append(current_element)
 
@@ -198,7 +199,7 @@ func save_load_test() -> void:
 
 	MapCreator.create_map(single_map, Vector2j.new(7, 13), 75)
 	assert(check_integration_of_map(single_map))
-	if ! MapCreator.populate_map_realistically(single_map, 4):
+	if !MapCreator.populate_map_realistically(single_map, 4):
 		push_error("Nie powiodła się próba mapy")
 		assert(false)
 
