@@ -40,6 +40,7 @@ visible = false
 
 [node name="MenuCampaignLoad" parent="." instance=ExtResource( 9 )]
 visible = false
+
 [connection signal="campaign_menu_show" from="MainMenu/Buttons/Campaign" to="." method="_campaign_menu_show"]
 [connection signal="skirmish_menu_show" from="MainMenu/Buttons/Single Game" to="." method="_skirmish_menu_show"]
 [connection signal="options_menu_show" from="MainMenu/Buttons/Options" to="." method="_options_menu_show"]
@@ -53,15 +54,9 @@ visible = false
 [connection signal="back_to_menu_campaign" from="MenuCampaignLoad/Buttons/Back" to="." method="_campaign_menu_show"]
 
 [editable path="MainMenu"]
-
 [editable path="MenuSkirmishNewGame"]
-
 [editable path="MenuOptions"]
-
 [editable path="MenuBenchmark"]
-
 [editable path="MenuCampaign"]
-
 [editable path="MenuCampaignNew"]
-
 [editable path="MenuCampaignLoad"]

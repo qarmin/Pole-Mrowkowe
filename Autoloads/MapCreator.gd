@@ -4,6 +4,7 @@ extends Node
 
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
+var Anthill: PackedScene = load("res://Buildings/Anthill/Anthill.tscn")
 
 enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = 0, PLAYER_FIRST = 1, PLAYER_LAST = 4 }
 
@@ -214,7 +215,9 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 
 				if randi() % 100 < ant_chance:
 					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
-
+					
+				if randi() % 2 == 0:
+					single_map.buildings[y][x] = Buildings.TYPES_OF_BUILDINGS.ANTHILL
 				# TODO Generacja losowa budynków
 
 	return true
@@ -353,6 +356,14 @@ func create_3d_map(single_map: SingleMap) -> void:
 						ant.get_node("Outfit").set_surface_material(0, ant_texture_array[single_map.fields[y][x] - MapCreator.FIELD_TYPE.PLAYER_FIRST])
 					SH.add_child(ant)
 					ant.set_owner(map)
+					pass
+				## Buildings - TODO
+				if single_map.buildings[y][x] == Buildings.TYPES_OF_BUILDINGS.ANTHILL:
+					var anthill = Anthill.instance()
+					anthill.translation  = Vector3(0, 0.981, -0.522)
+					
+					SH.add_child(anthill)
+					anthill.set_owner(map)
 					pass
 
 	pass

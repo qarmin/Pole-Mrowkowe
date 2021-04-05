@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/anthill.glb-e47d09cfa938cd574d550971ddc58aa5.scn"
+path="res://.import/Anthill.glb-3b4a0082439651304bb0c9c32711b69e.scn"
 
 [deps]
 
-source_file="res://Buildings/Anthill/anthill.glb"
-dest_files=[ "res://.import/anthill.glb-e47d09cfa938cd574d550971ddc58aa5.scn" ]
+source_file="res://Buildings/Anthill/Anthill.glb"
+dest_files=[ "res://.import/Anthill.glb-3b4a0082439651304bb0c9c32711b69e.scn" ]
 
 [params]
 

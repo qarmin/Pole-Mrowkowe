@@ -136,5 +136,6 @@ default_color = Color( 0.709804, 0, 0.45098, 1 )
 [node name="FrameTime6" type="Line2D" parent="Viewport"]
 width = 5.0
 default_color = Color( 0.709804, 0.2, 0, 1 )
+
 [connection signal="pressed" from="Buttons/StartBenchmark" to="Buttons/StartBenchmark" method="_on_StartBenchmark_pressed"]
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

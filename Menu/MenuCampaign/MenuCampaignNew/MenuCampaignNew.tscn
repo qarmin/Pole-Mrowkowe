@@ -32,4 +32,5 @@ script = ExtResource( 3 )
 
 [node name="Options" parent="." instance=ExtResource( 2 )]
 text = "new campaign"
+
 [connection signal="pressed" from="Buttons/Back" to="Buttons/Back" method="_on_BackToMenuCampaign_pressed"]

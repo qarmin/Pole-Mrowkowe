@@ -94,4 +94,5 @@ margin_left = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
 text = "Load Skirmish"
+
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

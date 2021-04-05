@@ -104,6 +104,7 @@ anchor_right = 1.0
 anchor_bottom = 0.9
 texture = SubResource( 2 )
 expand = true
+
 [connection signal="pressed" from="Buttons/Campaign" to="Buttons/Campaign" method="_on_Campaign_pressed"]
 [connection signal="pressed" from="Buttons/Single Game" to="Buttons/Single Game" method="_on_Single_Game_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="Buttons/Options" method="_on_Options_pressed"]

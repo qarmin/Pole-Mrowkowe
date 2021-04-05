@@ -225,4 +225,5 @@ directional_shadow_bias_split_scale = 1.0
 
 [node name="Water" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, 0.408529, 0 )
+
 [connection signal="animation_finished" from="CameraMovement" to="." method="_animation_finished"]
