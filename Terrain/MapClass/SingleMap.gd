@@ -9,7 +9,7 @@ var preview: Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array  # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
-var buildings: Array  # Tablica z budynkami
+var buildings: Array  # Tablica z budynkami [y][x]{z} 
 var real_map_size: Vector3  # Rzeczywista wielkość mapy
 
 ## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja, przydatne tylko do debugowania
@@ -83,7 +83,7 @@ func initialize_fields(type_of_field: int):
 		for _x in range(size.x):
 			fields[y].append(type_of_field)
 			units[y].append(Units.TYPES_OF_ANTS.NO_UNIT)
-			buildings[y].append(Buildings.TYPES_OF_BUILDINGS.NO_BUILDING)
+			buildings[y].append({})
 			nature[y].append(Terrain.TYPES_OF_HEX.NORMAL)
 	assert(fields.size() == units.size())
 	assert(fields.size() == buildings.size())
@@ -180,3 +180,15 @@ static func convert_name_to_coordinates(hex_name: String, map_size: Vector2j) ->
 # Return owner of specific field
 func get_field_owner(coordinates : Vector2j) -> int:
 	return fields[coordinates.y][coordinates.x]
+
+func add_building(coordinates : Vector2j, building : int , level : int = 1) -> void:
+	Buildings.validate_building(building)
+	assert(!buildings[coordinates.y][coordinates.x].has(building)) # Budynek nie może istnieć
+	
+	buildings[coordinates.y][coordinates.x][building] = level
+	
+func remove_building(coordinates : Vector2j, building : int , level : int = 1) -> void:
+	Buildings.validate_building(building)
+	assert(buildings[coordinates.y][coordinates.x].has(building)) # Budynek musi istnieć
+	
+	buildings[coordinates.y][coordinates.x][building] = level

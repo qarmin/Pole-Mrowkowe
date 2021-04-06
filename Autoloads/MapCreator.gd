@@ -215,7 +215,7 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
 
 				if randi() % 2 == 0:
-					single_map.buildings[y][x] = Buildings.TYPES_OF_BUILDINGS.ANTHILL
+					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
 				# TODO Generacja losowa budynków
 
 	return true
@@ -355,8 +355,8 @@ func create_3d_map(single_map: SingleMap) -> void:
 					SH.add_child(ant)
 					ant.set_owner(map)
 					pass
-				## Buildings - TODO
-				if single_map.buildings[y][x] == Buildings.TYPES_OF_BUILDINGS.ANTHILL:
+				## Buildings - Zrobić aby budowały się same
+				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
 					var anthill = Anthill.instance()
 					anthill.translation = Vector3(0, 0.981, -0.522)
 

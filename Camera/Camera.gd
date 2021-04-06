@@ -91,6 +91,7 @@ func _input(event) -> void:
 			rot_x -= event.relative.x * LOOKAROUND_SPEED
 			rot_y -= event.relative.y * LOOKAROUND_SPEED
 
+			# Tylko 
 			#rot_x = clamp(rot_x,-0.6,-0.3)
 			rot_y = clamp(rot_y, -0.9, -0.5)
 
@@ -160,10 +161,3 @@ func move_camera(roman: int, delta: float = -1) -> void:
 func _process(delta: float) -> void:
 	if movement_keys_pressed != 0:
 		move_camera(movement_keys_pressed, delta)
-
-#func _ready() -> void:
-#	pass
-#
-#	trans_speed = TRANSLATE_SPEED  * delta
-#	if Input.is_action_pressed("ui_camera_up"):
-#		translate(Vector3(0,0,-trans_speed))

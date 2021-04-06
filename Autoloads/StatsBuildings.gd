@@ -1,6 +1,6 @@
 extends Node
 
-enum TYPES_OF_BUILDINGS { NO_BUILDING = 0, ANTHILL = 1, HOUSE = 2, ANT_MAX = 4 }
+enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, BUILDING_MAX = 1 }
 
 var all_buildings: Array = []
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 		"food": 0,
 	}
 	add_building(
-		"capitol",
+		"anthill",
 		3,
 		[
 			default,
@@ -50,3 +50,6 @@ func add_building(name: String, levels: int, to_build: Array, production: Array)
 	all_buildings.append(building_info)
 
 	pass
+
+func validate_building(building : int) -> void:
+	assert(building > TYPES_OF_BUILDINGS.BUILDING_MIN && building < TYPES_OF_BUILDINGS.BUILDING_MAX)
