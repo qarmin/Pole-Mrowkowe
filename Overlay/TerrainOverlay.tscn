@@ -5,7 +5,8 @@
 [sub_resource type="SpatialMaterial" id=1]
 
 [node name="TerrainOverlay" type="CSGTorus"]
-inner_radius = 0.75
+generate_lightmap = false
+inner_radius = 0.7
 outer_radius = 1.35
 sides = 6
 ring_sides = 3

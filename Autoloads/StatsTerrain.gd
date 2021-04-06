@@ -8,13 +8,6 @@ var fields: Array = []
 
 
 func _ready() -> void:
-	var default: Dictionary = {
-		"wood": 0,
-		"water": 0,
-		"gold": 0,
-		"food": 0,
-	}
-
 	add_field(
 		{
 			"name": "normal",

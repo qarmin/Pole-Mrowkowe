@@ -2,10 +2,19 @@ extends Spatial
 
 var cpu_vs_cpu: bool = false  # Allow to have fully automated game
 
-var number_of_start_players: int = -1  # Number of all players
-var active_players: int = -1  # How many players still play
+enum PLAYERS_TYPE {NO_TYPE, HUMAN, CPU}
+
+# TODO to ma być ustawiane 
+
+var number_of_start_players: int = 4  # Number of all players
+var active_players: int = 3  # How many players still play
 var current_player: int = 0  # Actual player
-var players_activite: Array = [true, true, true, true]  # Stan aktualny w graczach, czy ciągle żyją
+var players_activite: Array = [true, true, false, true]  # Stan aktualny w graczach, czy ciągle żyją
+var players_type: Array = [PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.CPU, PLAYERS_TYPE.CPU]
+# TODO Maybe players name?
+
+onready var round_node = $HUD/HUD/Round
+onready var round_label = $HUD/HUD/Round/Label
 
 # Selection
 var current_terrain_overlay_hex_name: String = ""
@@ -51,7 +60,9 @@ func connect_clickable_signals() -> void:
 			if !thing.get_name().begins_with("Ant"):
 				continue
 			assert(thing.connect("ant_clicked", self, "ant_clicked") == OK)
-
+	
+	round_node.connect("end_turn_clicked",self,"end_turn")
+	
 
 func ant_clicked(ant: AntBase) -> void:
 	var parent_name: String = ant.get_parent().get_name()
@@ -107,7 +118,7 @@ func hex_clicked(hex: SingleHex) -> void:
 		terrain_overlay_node.get_material().albedo_color = selection_hex_color_enemy
 
 	terrain_overlay_node.set_translation(hex.get_translation())
-	terrain_overlay_node.set_scale(hex.get_scale())
+	terrain_overlay_node.set_scale(hex.get_scale() * Vector3(1,0.5,1))
 	terrain_overlay_node.reset()
 	terrain_overlay_node.start()
 	current_terrain_overlay_hex_name = hex.get_name()
@@ -130,3 +141,45 @@ func show_units_menu():
 func hide_menus():
 	$HUD/HUD/Buildings.hide()
 	$HUD/HUD/Units.hide()
+
+func get_active_players() -> int:
+	var count : int = 0 
+	for i in players_activite:
+		count += 1
+	
+	return count
+
+func end_turn():
+	# TODO Jeśli to jest tura gracza to może to kliknąć, w przeciwnym wypadku nie wyjść z funkcji
+	print("Koniec tury")
+	
+	var new_turn : bool = false
+	var curr : int = current_player
+	# TODO tutaj powinny gdzieś być obliczenia co muszą zrobić gracze CPU
+	while true:
+		if  get_active_players() == 1:
+			print("Wygrana") # TODO, dodać okno z wygraną czy porażką czy coś takiego
+			return
+		
+		curr = (curr + 1) % number_of_start_players
+		if curr == 0:
+			new_turn = true
+		assert(curr != current_player) # To by znaczyło że nie znaleziono żadnego gracza innego od aktualnego
+		if players_activite[curr]:
+			current_player = curr
+			if players_type[curr] == PLAYERS_TYPE.CPU:
+				# TODO wykonać tury dla użytkownika CPU
+				pass
+			elif players_type[curr] == PLAYERS_TYPE.HUMAN:
+				break # Tura gracza
+	
+	print("Current player " + str(current_player))
+	if new_turn:
+		round_label.set_text(str(int(round_label.get_text()) + 1))
+	
+	# TODO Update resources
+	hide_menus()
+	terrain_overlay_node.stop()
+	unit_overlay_node.stop()
+	current_unit_overlay_hex_name = ""
+	current_terrain_overlay_hex_name = ""
