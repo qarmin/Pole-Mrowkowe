@@ -6,4 +6,4 @@
 transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, 0 )
 
 [node name="Cube" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.97225, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 0 )

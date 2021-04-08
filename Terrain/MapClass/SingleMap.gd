@@ -181,11 +181,25 @@ static func convert_name_to_coordinates(hex_name: String, map_size: Vector2j) ->
 func get_field_owner(coordinates : Vector2j) -> int:
 	return fields[coordinates.y][coordinates.x]
 
+func have_place_for_build(coordinates : Vector2j) -> int:
+	# TODO Test this
+	var buildings : Dictionary = buildings[coordinates.y][coordinates.x]
+	var available_places : Array = [0,1,2,3]
+	for building in buildings:
+		available_places.erase(building["place"])
+	if available_places.size() > 0:
+		available_places[0]
+	return -1
+
+# TODO Dodać funkcję/lub zmienić np. add_building aby zwracała koordynaty budynku(Transform albo Vector3) w zależności od położenia
+
 func add_building(coordinates : Vector2j, building : int , level : int = 1) -> void:
 	Buildings.validate_building(building)
 	assert(!buildings[coordinates.y][coordinates.x].has(building)) # Budynek nie może istnieć
-	
-	buildings[coordinates.y][coordinates.x][building] = level
+	var place : int = have_place_for_build(coordinates)
+	assert(place != -1) # Musi mieć miejsce na budowę
+
+	buildings[coordinates.y][coordinates.x][building] = {"level" : level, "place" : place}
 	
 func remove_building(coordinates : Vector2j, building : int , level : int = 1) -> void:
 	Buildings.validate_building(building)

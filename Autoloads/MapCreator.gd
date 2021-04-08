@@ -358,7 +358,7 @@ func create_3d_map(single_map: SingleMap) -> void:
 				## Buildings - Zrobić aby budowały się same
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
 					var anthill = Anthill.instance()
-					anthill.translation = Vector3(0, 0.981, -0.522)
+					anthill.translation = Vector3(0, 0, -0.522) # TODO - dodać funkcję do dodawania budynków do danego hexa
 
 					SH.add_child(anthill)
 					anthill.set_owner(map)
