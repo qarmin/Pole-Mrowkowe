@@ -4,9 +4,12 @@ extends Node
 
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
+
+# Buildings
 var Anthill: PackedScene = load("res://Models/Buildings/Anthill/Anthill.tscn")
 var Farm: PackedScene = load("res://Models/Buildings/Farm/Farm.tscn") 
 var Sawmill: PackedScene = load("res://Models/Buildings/Sawmill/Sawmill.tscn")
+var Barracks: PackedScene = load("res://Models/Buildings/Barracks/Barracks.tscn")
 
 const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 2)  # Dokładna wartość to (1.7321,2) ale czasami pomiędzy nimi migocze wolna przestrzeń, dlatego należy to nieco zmniejszyć
 const NODE_BASE_NAME: String = "SingleHex"
@@ -218,6 +221,8 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM,2)
 				if randi() % 2 == 0:
 					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL,3)
+				if randi() % 2 == 0:
+					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS,3)
 
 	return true
 
@@ -377,6 +382,13 @@ func create_3d_map(single_map: SingleMap) -> void:
 
 					SH.add_child(sawmill)
 					sawmill.set_owner(map)
+					
+				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.BARRACKS):
+					var barracks = Barracks.instance()
+					barracks.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS)
+
+					SH.add_child(barracks)
+					barracks.set_owner(map)
 				
 
 	pass

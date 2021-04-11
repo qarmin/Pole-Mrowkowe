@@ -1,6 +1,6 @@
 extends Node
 
-enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, SAWMILL=2, BUILDING_MAX = 3 }
+enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, SAWMILL=2, BARRACKS=3, BUILDING_MAX = 4 }
 
 var all_buildings: Array = []
 
@@ -46,6 +46,21 @@ func _ready() -> void:
 	add_building(
 		"sawmill",
 		TYPES_OF_BUILDINGS.SAWMILL,
+		3,
+		[
+			{"wood": 100, "water": 20, "gold": 1, "food": 3},
+			{"wood": 100, "water": 40, "gold": 2, "food": 4},
+			{"wood": 200, "water": 60, "gold": 3, "food": 5},
+		],
+		[
+			{"wood": 2, "water": 2, "gold": 0, "food": 25},
+			{"wood": 5, "water": 5, "gold": 0, "food": 40},
+			{"wood": 5, "water": 10, "gold": 1, "food": 70},
+		]
+	)  
+	add_building(
+		"sawmill",
+		TYPES_OF_BUILDINGS.BARRACKS,
 		3,
 		[
 			{"wood": 100, "water": 20, "gold": 1, "food": 3},

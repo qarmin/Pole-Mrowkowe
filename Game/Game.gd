@@ -36,7 +36,7 @@ var unit_overlay_node: CSGTorus = preload("res://Overlay/UnitOverlay.tscn").inst
 onready var single_map: SingleMap = SingleMap.new()
 
 
-func _ready() -> void:
+func _ready() -> void:	
 	# TODO, generacja nie powinna tu być, lecz zależeć od wcześniejszych wyborów gracza
 	MapCreator.create_map(single_map, Vector2j.new(6, 6), 80)
 	assert(MapCreator.populate_map_randomly(single_map, 50))
@@ -45,6 +45,9 @@ func _ready() -> void:
 	
 	# Ustawianie tutaj wielkości dozwolonego przez kamerę obszaru
 	$Camera.set_camera_max_positions(single_map.size)
+		
+	# Aktualizacja koloru gracz na mapie
+	$HUD/HUD.update_current_player_text_color(current_player)
 		
 	# Start Resources
 	player_resources.resize(number_of_start_players)
@@ -187,6 +190,7 @@ func end_turn():
 		curr = (curr + 1) % number_of_start_players
 		if curr == 0:
 			new_turn = true
+	
 		assert(curr != current_player) # To by znaczyło że nie znaleziono żadnego gracza innego od aktualnego
 		if players_activite[curr]:
 			current_player = curr
@@ -196,6 +200,8 @@ func end_turn():
 			elif players_type[curr] == PLAYERS_TYPE.HUMAN:
 				break # Tura gracza
 	
+	# Aktualizacja koloru gracz na mapie
+	$HUD/HUD.update_current_player_text_color(current_player)
 	print("Current player " + str(current_player))
 	if new_turn:
 		round_label.set_text(str(int(round_label.get_text()) + 1))

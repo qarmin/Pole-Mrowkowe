@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/RoundsCircle.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://HUD/HexUnitMenu/Anthill.png" type="Texture" id=10]
 [ext_resource path="res://HUD/ConfirmationDialog/ConfirmationDialog.gd" type="Script" id=11]
 [ext_resource path="res://HUD/Resources/Resources.gd" type="Script" id=12]
+[ext_resource path="res://Units/Outfit/SingleHexTEAM3.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 21
@@ -22,6 +23,10 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 120
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 26
 font_data = ExtResource( 3 )
 
 [node name="HUD" type="Control"]
@@ -592,5 +597,34 @@ script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CurrentPlayer" type="Control" parent="."]
+anchor_left = 0.435
+anchor_right = 0.565
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CurrentPlayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CurrentPlayer/TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+text = "Current Player"
+align = 1
+valign = 1
 
 [connection signal="gui_input" from="Round" to="Round" method="_on_Round_gui_input"]
