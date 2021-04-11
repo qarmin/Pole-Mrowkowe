@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/House.png-419af8d8c91ac53543a67069b4ac697c.stex"
+path="res://.import/Anthill.png-f067d785dffdfaadca2fa3133b2418c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Buildings/House.png"
-dest_files=[ "res://.import/House.png-419af8d8c91ac53543a67069b4ac697c.stex" ]
+source_file="res://HUD/HexUnitMenu/Anthill.png"
+dest_files=[ "res://.import/Anthill.png-f067d785dffdfaadca2fa3133b2418c5.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Anthill.glb-3b4a0082439651304bb0c9c32711b69e.scn"
+path="res://.import/Sawmill.glb-2b7a953d80f4f2776cc5e5d8fc094964.scn"
 
 [deps]
 
-source_file="res://Buildings/Anthill/Anthill.glb"
-dest_files=[ "res://.import/Anthill.glb-3b4a0082439651304bb0c9c32711b69e.scn" ]
+source_file="res://Models/Buildings/Sawmill/Sawmill.glb"
+dest_files=[ "res://.import/Sawmill.glb-2b7a953d80f4f2776cc5e5d8fc094964.scn" ]
 
 [params]
 
@@ -19,19 +19,19 @@ nodes/storage=0
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
-meshes/compress=true
-meshes/ensure_tangents=true
+meshes/compress=false
+meshes/ensure_tangents=false
 meshes/storage=0
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.1
-skins/use_named_skins=true
+skins/use_named_skins=false
 external_files/store_in_subdir=false
-animation/import=true
+animation/import=false
 animation/fps=15
 animation/filter_script=""
 animation/storage=false
 animation/keep_custom_tracks=false
-animation/optimizer/enabled=true
+animation/optimizer/enabled=false
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01
 animation/optimizer/max_angle=22

@@ -3,14 +3,14 @@
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/RoundsCircle.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://HUD/wood.png" type="Texture" id=4]
-[ext_resource path="res://HUD/water.png" type="Texture" id=5]
-[ext_resource path="res://HUD/food.png" type="Texture" id=6]
-[ext_resource path="res://HUD/gold.png" type="Texture" id=7]
-[ext_resource path="res://HUD/AccessPoint.png" type="Texture" id=8]
+[ext_resource path="res://HUD/Resources/wood.png" type="Texture" id=4]
+[ext_resource path="res://HUD/Resources/water.png" type="Texture" id=5]
+[ext_resource path="res://HUD/Resources/food.png" type="Texture" id=6]
+[ext_resource path="res://HUD/Resources/gold.png" type="Texture" id=7]
+[ext_resource path="res://HUD/Resources/AccessPoint.png" type="Texture" id=8]
 [ext_resource path="res://HUD/Round.gd" type="Script" id=9]
-[ext_resource path="res://HUD/Icons/Anthill.png" type="Texture" id=10]
-[ext_resource path="res://HUD/ConfirmationDialog.gd" type="Script" id=11]
+[ext_resource path="res://HUD/HexUnitMenu/Anthill.png" type="Texture" id=10]
+[ext_resource path="res://HUD/ConfirmationDialog/ConfirmationDialog.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 21
@@ -57,7 +57,7 @@ __meta__ = {
 }
 
 [node name="Gold" type="HBoxContainer" parent="Resources/HBox"]
-margin_right = 118.0
+margin_right = 149.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -66,7 +66,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Gold"]
-margin_right = 57.0
+margin_right = 72.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -75,8 +75,8 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Gold"]
-margin_left = 61.0
-margin_right = 118.0
+margin_left = 76.0
+margin_right = 149.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -85,8 +85,8 @@ text = "5000"
 valign = 1
 
 [node name="Wood" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 123.0
-margin_right = 242.0
+margin_left = 154.0
+margin_right = 304.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -95,7 +95,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Wood"]
-margin_right = 57.0
+margin_right = 73.0
 margin_bottom = 40.0
 size_flags_horizontal = 11
 size_flags_vertical = 3
@@ -104,8 +104,8 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Wood"]
-margin_left = 61.0
-margin_right = 119.0
+margin_left = 77.0
+margin_right = 150.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -114,6 +114,7 @@ text = "5000"
 valign = 1
 
 [node name="Water" type="HBoxContainer" parent="Resources/HBox"]
+visible = false
 margin_left = 247.0
 margin_right = 366.0
 margin_bottom = 40.0
@@ -146,8 +147,8 @@ __meta__ = {
 }
 
 [node name="Food" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 371.0
-margin_right = 490.0
+margin_left = 309.0
+margin_right = 459.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -156,7 +157,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Food"]
-margin_right = 57.0
+margin_right = 73.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -165,8 +166,8 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Food"]
-margin_left = 61.0
-margin_right = 119.0
+margin_left = 77.0
+margin_right = 150.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -178,7 +179,7 @@ __meta__ = {
 }
 
 [node name="AccessPoints" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 495.0
+margin_left = 464.0
 margin_right = 614.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
@@ -188,7 +189,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/AccessPoints"]
-margin_right = 57.0
+margin_right = 73.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -197,8 +198,8 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/AccessPoints"]
-margin_left = 61.0
-margin_right = 119.0
+margin_left = 77.0
+margin_right = 150.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/food.png-7960daeeadb82649c213b357692ad6be.stex"
+path="res://.import/Water2.png-e3f6aa43b1258818917e876a571c6e7d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/food.png"
-dest_files=[ "res://.import/food.png-7960daeeadb82649c213b357692ad6be.stex" ]
+source_file="res://Terrain/Water/Water2.png"
+dest_files=[ "res://.import/Water2.png-e3f6aa43b1258818917e876a571c6e7d.stex" ]
 
 [params]
 

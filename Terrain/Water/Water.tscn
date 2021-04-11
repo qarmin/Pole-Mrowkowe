@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Water/Water.png" type="Texture" id=1]
-[ext_resource path="res://Water/NoisyTexture.tres" type="Texture" id=2]
+[ext_resource path="res://Terrain/Water/NoisyTexture.tres" type="Texture" id=1]
+[ext_resource path="res://Terrain/Water/Water.png" type="Texture" id=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
@@ -63,9 +63,9 @@ shader_param/uv_offset_amplitude = 0.208
 shader_param/texture_scale = Vector2( 20, 20 )
 shader_param/refraction = 0.04
 shader_param/beer_factor = 1.0
-shader_param/uv_offset_texture = ExtResource( 2 )
-shader_param/texturemap = ExtResource( 1 )
-shader_param/normalmap = ExtResource( 2 )
+shader_param/uv_offset_texture = ExtResource( 1 )
+shader_param/texturemap = ExtResource( 2 )
+shader_param/normalmap = ExtResource( 1 )
 
 [sub_resource type="PlaneMesh" id=3]
 material = SubResource( 2 )

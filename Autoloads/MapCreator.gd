@@ -4,8 +4,9 @@ extends Node
 
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
-var Anthill: PackedScene = load("res://Buildings/Anthill/Anthill.tscn")
-var Farm: PackedScene = load("res://Buildings/Tree/Tree.tscn") # TODO - Change this to farm
+var Anthill: PackedScene = load("res://Models/Buildings/Anthill/Anthill.tscn")
+var Farm: PackedScene = load("res://Models/Buildings/Farm/Farm.tscn") 
+var Sawmill: PackedScene = load("res://Models/Buildings/Sawmill/Sawmill.tscn")
 
 #const NO_FIELD : int = -100
 #const DEFAULT_FIELD : int = -1
@@ -219,6 +220,8 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
 				if randi() % 2 == 0:
 					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM,2)
+				if randi() % 2 == 0:
+					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL,3)
 
 	return true
 
@@ -371,6 +374,13 @@ func create_3d_map(single_map: SingleMap) -> void:
 
 					SH.add_child(farm)
 					farm.set_owner(map)
+					
+				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.SAWMILL):
+					var sawmill = Sawmill.instance()
+					sawmill.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL)
+
+					SH.add_child(sawmill)
+					sawmill.set_owner(map)
 				
 
 	pass

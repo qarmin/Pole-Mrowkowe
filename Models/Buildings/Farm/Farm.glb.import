@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Farm.glb-008e2c2ae5f908f46c1852f290929886.scn"
+path="res://.import/Farm.glb-aea587e8b2d274cd3276b0ab24292b28.scn"
 
 [deps]
 
-source_file="res://Buildings/Farm/Farm.glb"
-dest_files=[ "res://.import/Farm.glb-008e2c2ae5f908f46c1852f290929886.scn" ]
+source_file="res://Models/Buildings/Farm/Farm.glb"
+dest_files=[ "res://.import/Farm.glb-aea587e8b2d274cd3276b0ab24292b28.scn" ]
 
 [params]
 

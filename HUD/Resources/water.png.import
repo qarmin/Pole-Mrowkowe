@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wood.png-eb649fb01f933f43f63d228c614cdf4e.stex"
+path="res://.import/water.png-4a558daf69beb9f23e162d1c0f86c5fc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/wood.png"
-dest_files=[ "res://.import/wood.png-eb649fb01f933f43f63d228c614cdf4e.stex" ]
+source_file="res://HUD/Resources/water.png"
+dest_files=[ "res://.import/water.png-4a558daf69beb9f23e162d1c0f86c5fc.stex" ]
 
 [params]
 

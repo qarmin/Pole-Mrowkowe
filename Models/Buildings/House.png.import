@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Water2.png-40128dee06ff7b2ede28289aae95f6c0.stex"
+path="res://.import/House.png-49981d023a79afdf2b2ef900cabaf533.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Water/Water2.png"
-dest_files=[ "res://.import/Water2.png-40128dee06ff7b2ede28289aae95f6c0.stex" ]
+source_file="res://Models/Buildings/House.png"
+dest_files=[ "res://.import/House.png-49981d023a79afdf2b2ef900cabaf533.stex" ]
 
 [params]
 

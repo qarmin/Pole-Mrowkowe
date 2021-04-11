@@ -4,7 +4,7 @@
 [ext_resource path="res://Benchmark/10x10Part.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Benchmark/30x30Part.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Benchmark/Benchmark.gd" type="Script" id=4]
-[ext_resource path="res://Water/Water.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Terrain/Water/Water.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Benchmark/LevelSettingsText.tres" type="DynamicFont" id=6]
 
 [sub_resource type="Animation" id=1]

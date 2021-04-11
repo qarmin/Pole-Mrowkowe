@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AccessPoint.png-8d66eac6e3d7d3851b02e49dbd728235.stex"
+path="res://.import/AccessPoint.png-4469c4b7a60da31e499eb468d950ab11.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/AccessPoint.png"
-dest_files=[ "res://.import/AccessPoint.png-8d66eac6e3d7d3851b02e49dbd728235.stex" ]
+source_file="res://HUD/Resources/AccessPoint.png"
+dest_files=[ "res://.import/AccessPoint.png-4469c4b7a60da31e499eb468d950ab11.stex" ]
 
 [params]
 

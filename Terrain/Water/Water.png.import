@@ -2,33 +2,33 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Anthill.png-6ff518c5215675d0a622dbb2e3493cdf.stex"
+path="res://.import/Water.png-d015be5015eb1477cba30ed9c797faae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/Icons/Anthill.png"
-dest_files=[ "res://.import/Anthill.png-6ff518c5215675d0a622dbb2e3493cdf.stex" ]
+source_file="res://Terrain/Water/Water.png"
+dest_files=[ "res://.import/Water.png-d015be5015eb1477cba30ed9c797faae.stex" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
+compress/mode=1
+compress/lossy_quality=1.0
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=0
-flags/repeat=0
-flags/filter=true
+compress/normal_map=2
+flags/repeat=2
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

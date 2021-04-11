@@ -6,8 +6,8 @@ const PRINT_TESTS: bool = true
 # Używane tylko przy zmianach kodu dlatego, że spowalnia działanie gry
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-#	if true:
-#		return
+	if true:
+		return
 	Vector2j_test()
 	for _i in range(1):  # Stress test wykonać dla wartości > 5
 		map_test()
@@ -26,6 +26,9 @@ func building_test() -> void:
 	single_map.add_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM,1)
 	assert(single_map.buildings[0][9].size() == 2)
 	single_map.remove_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM)
+	assert(single_map.buildings[0][9].size() == 1)
+	single_map.add_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+	assert(single_map.buildings[0][9].size() == 0)
 	pass
 
 func Vector2j_test() -> void:

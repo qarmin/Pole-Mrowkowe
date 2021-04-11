@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Tree.glb-173cdf4c8ee48f29219ee524d7ef7e5c.scn"
+path="res://.import/Piles.glb-12cf6f1a08caaaa9bb2d939d5c7d4c5c.scn"
 
 [deps]
 
-source_file="res://Buildings/Tree/Tree.glb"
-dest_files=[ "res://.import/Tree.glb-173cdf4c8ee48f29219ee524d7ef7e5c.scn" ]
+source_file="res://Models/Buildings/Piles/Piles.glb"
+dest_files=[ "res://.import/Piles.glb-12cf6f1a08caaaa9bb2d939d5c7d4c5c.scn" ]
 
 [params]
 
@@ -19,19 +19,19 @@ nodes/storage=0
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
-meshes/compress=false
-meshes/ensure_tangents=false
+meshes/compress=true
+meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.1
-skins/use_named_skins=false
+skins/use_named_skins=true
 external_files/store_in_subdir=false
-animation/import=false
+animation/import=true
 animation/fps=15
 animation/filter_script=""
 animation/storage=false
 animation/keep_custom_tracks=false
-animation/optimizer/enabled=false
+animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01
 animation/optimizer/max_angle=22

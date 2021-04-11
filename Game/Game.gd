@@ -36,11 +36,16 @@ onready var single_map: SingleMap = SingleMap.new()
 
 
 func _ready() -> void:
-	# TODO, generacja nie powinna tu być, lecz zależeć od
-	MapCreator.create_map(single_map, Vector2j.new(6, 6), 100)
+	# TODO, generacja nie powinna tu być, lecz zależeć od wcześniejszych wyborów gracza
+	MapCreator.create_map(single_map, Vector2j.new(6, 6), 80)
 	assert(MapCreator.populate_map_randomly(single_map, 50))
 	MapCreator.create_3d_map(single_map)
 	add_child(single_map.map)
+	
+	var water : Spatial = load("res://Terrain/Water/Water.tscn").instance()
+	water.set_scale(Vector3(1000,1,1000))
+	add_child(water)
+	
 
 	$Overlays.add_child(terrain_overlay_node)
 	$Overlays.add_child(unit_overlay_node)
