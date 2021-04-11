@@ -9,6 +9,7 @@ var preview: Image = Image.new()
 var number_of_terrain: int
 var number_of_all_possible_hexes: int
 var players: Array  # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
+var PLAAAYERS : Array
 var buildings: Array  # Tablica z budynkami [y][x]{z} 
 var real_map_size: Vector3  # Rzeczywista wielkość mapy
 
@@ -220,3 +221,30 @@ func remove_building(coordinates : Vector2j, building : int , level : int = 1) -
 	assert(buildings[coordinates.y][coordinates.x].has(building)) # Budynek musi istnieć
 	
 	buildings[coordinates.y][coordinates.x][building] = level
+	
+func calculate_user_resources(player_number) -> Dictionary:
+	# TODO Not tested
+	var dict = Resources.get_resources()
+	
+	# Buildings
+	for y in range(size.y):
+		for x in range(size.x):
+			if fields[y][x] == player_number:
+				print(buildings[y][x])
+				
+	
+	return dict
+
+# Return true if happened underflow of resources
+func add_resources(base_dict : Dictionary, to_add_dict : Dictionary) -> bool:
+	var underflow : bool = false
+	
+	for key in base_dict.keys():
+		base_dict[key] += to_add_dict[key]
+		
+		if base_dict[key] < 0:
+			base_dict[key] = 0
+			underflow = true
+			 
+	
+	return underflow
