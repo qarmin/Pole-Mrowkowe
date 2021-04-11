@@ -626,5 +626,8 @@ custom_fonts/font = SubResource( 4 )
 text = "Current Player"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="gui_input" from="Round" to="Round" method="_on_Round_gui_input"]
