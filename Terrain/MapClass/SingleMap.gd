@@ -222,7 +222,8 @@ func remove_building(coordinates : Vector2j, building : int , level : int = 1) -
 	
 	buildings[coordinates.y][coordinates.x][building] = level
 	
-func calculate_user_resources(player_number) -> Dictionary:
+# Used to calculate end turn resources change
+func calculate_end_turn_resources_change(player_number) -> Dictionary:
 	# TODO Not tested
 	var dict = Resources.get_resources()
 	
@@ -230,21 +231,23 @@ func calculate_user_resources(player_number) -> Dictionary:
 	for y in range(size.y):
 		for x in range(size.x):
 			if fields[y][x] == player_number:
-				print(buildings[y][x])
-				
+				# TODO Add basic field resource adder
+				for i in buildings[y][x].keys():
+					var _none = add_resources(dict,Buildings.get_building_to_build(i,buildings[y][x][i]["level"]))
+					# TODO Remove resources when used by Units, Buildings etc
 	
 	return dict
 
-# Return true if happened underflow of resources
-func add_resources(base_dict : Dictionary, to_add_dict : Dictionary) -> bool:
-	var underflow : bool = false
+# HMMM... this is not needed for now -> Return true if happened underflow of resources
+func add_resources(base_dict : Dictionary, to_add_dict : Dictionary) -> void: #-> bool:
+#	var underflow : bool = false
 	
 	for key in base_dict.keys():
 		base_dict[key] += to_add_dict[key]
 		
 		if base_dict[key] < 0:
 			base_dict[key] = 0
-			underflow = true
+#			underflow = true
 			 
 	
-	return underflow
+#	return underflow

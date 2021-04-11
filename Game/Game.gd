@@ -12,6 +12,7 @@ var current_player: int = 0  # Actual player
 var players_activite: Array = [true, true, false, true]  # Stan aktualny w graczach, czy ciągle żyją
 var players_type: Array = [PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.CPU, PLAYERS_TYPE.CPU]
 # TODO Maybe players name?
+var player_resources : Array = []
 
 onready var round_node = $HUD/HUD/Round
 onready var round_label = $HUD/HUD/Round/Label
@@ -42,6 +43,12 @@ func _ready() -> void:
 	MapCreator.create_3d_map(single_map)
 	add_child(single_map.map)
 	
+	# Start Resources
+	player_resources.resize(number_of_start_players)
+	for i in range(number_of_start_players):
+		player_resources[i] = {"wood": (i+2)* 100, "water" : (i+2)* 100, "gold" : (i+2)*100, "food" : (i+2)*100}
+	
+	# Water
 	var water : Spatial = load("res://Terrain/Water/Water.tscn").instance()
 	water.set_scale(Vector3(1000,1,1000))
 	add_child(water)
@@ -55,6 +62,9 @@ func _ready() -> void:
 	connect_clickable_signals()
 	pass
 
+func _process(_delta : float) -> void:
+	# TODO Add logic to CPU movement
+	pass
 
 func connect_clickable_signals() -> void:
 	# Łączenie każdego pola oraz mrówki na mapie z funkcją wyświelającą
@@ -160,11 +170,16 @@ func end_turn():
 	
 	var new_turn : bool = false
 	var curr : int = current_player
-	# TODO tutaj powinny gdzieś być obliczenia co muszą zrobić gracze CPU
+	# TODO Usunąć pętlę while_true, ponieważ na chwilę obecną funkcje
 	while true:
 		if  get_active_players() == 1:
 			print("Wygrana") # TODO, dodać okno z wygraną czy porażką czy coś takiego
 			return
+		
+		
+		# TODO Here update resources
+		single_map.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
+		$HUD/HUD/Resources.update_resources(player_resources[curr])
 		
 		curr = (curr + 1) % number_of_start_players
 		if curr == 0:

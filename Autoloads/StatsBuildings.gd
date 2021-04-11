@@ -19,8 +19,8 @@ func _ready() -> void:
 		3,
 		[
 			default, # Always have at least 1 level and cannot be built
-			{"wood": 100, "water": 0, "gold": 0, "food": 0},
-			{"wood": 200, "water": 0, "gold": 0, "food": 0},
+			{"wood": 100, "water": 40, "gold": 60, "food": 80},
+			{"wood": 200, "water": 20, "gold": 70, "food": 40},
 		],
 		[
 			{"wood": 12, "water": 20, "gold": 10, "food": 5},
@@ -33,9 +33,9 @@ func _ready() -> void:
 		TYPES_OF_BUILDINGS.FARM,
 		3,
 		[
-			{"wood": 100, "water": 20, "gold": 0, "food": 0},
-			{"wood": 100, "water": 40, "gold": 0, "food": 0},
-			{"wood": 200, "water": 60, "gold": 0, "food": 0},
+			{"wood": 100, "water": 20, "gold": 5, "food": 80},
+			{"wood": 100, "water": 40, "gold": 70, "food": 90},
+			{"wood": 200, "water": 60, "gold": 80, "food": 20},
 		],
 		[
 			{"wood": 2, "water": 2, "gold": 0, "food": 25},
@@ -48,9 +48,9 @@ func _ready() -> void:
 		TYPES_OF_BUILDINGS.SAWMILL,
 		3,
 		[
-			{"wood": 100, "water": 20, "gold": 0, "food": 0},
-			{"wood": 100, "water": 40, "gold": 0, "food": 0},
-			{"wood": 200, "water": 60, "gold": 0, "food": 0},
+			{"wood": 100, "water": 20, "gold": 1, "food": 3},
+			{"wood": 100, "water": 40, "gold": 2, "food": 4},
+			{"wood": 200, "water": 60, "gold": 3, "food": 5},
 		],
 		[
 			{"wood": 2, "water": 2, "gold": 0, "food": 25},
@@ -59,6 +59,13 @@ func _ready() -> void:
 		]
 	)  
 
+func get_building_to_build(type : int, level : int) -> Dictionary:
+	validate_building(type)
+	for single_building in all_buildings:
+		if single_building["type"] == type:
+			return single_building["to_build"][level -1]
+	assert(false, "Failed to find")
+	return {}
 
 func add_building(name: String,type : int, levels: int, to_build: Array, production: Array):
 	assert(levels > 1 && levels < 4)  # Pomiędzy 1 a 3 są dostępne poziomy budynków
