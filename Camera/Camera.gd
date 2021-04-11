@@ -9,9 +9,6 @@ const SCROLL_SPEED: float = 1.0
 # Prędkość poruszania się za pomocą strzałek
 const MOVEMENT_SPEED: float = 10.0
 
-# Wymiary paczki ograniczające gracza
-const MOVING_BOX: PoolVector3Array = PoolVector3Array([Vector3(0.0, 0.0, 0.0), Vector3(20.0, 20.0, 20.0)])
-
 # Używane w obracaniu obrazem
 onready var rot_x: float = 0.0
 onready var rot_y: float = 0.0
@@ -22,6 +19,7 @@ enum CAMERA_MOVEMENT { BACK_SCROLL = 1 << 0, FORWARD_SCROLL = 1 << 1, LEFT = 1 <
 
 var movement_keys_pressed: int = 0
 
+# Max and minimum camera positions
 var camera_min_position: Vector3 = Vector3(-10, 3, -10)
 var camera_max_position: Vector3 = Vector3(10, 10, 10)
 
@@ -30,6 +28,18 @@ func _ready() -> void:
 	# Ustawia zmienne na pozycję kamery na tą ustawioną w edytorze
 	rot_x = get_rotation().y
 	rot_y = get_rotation().x
+
+func set_camera_max_positions(size : Vector2j) -> void:
+	var x_dimension : float = size.x * MapCreator.SINGLE_HEX_DIMENSION.x
+	var z_dimension : float = (size.y *0.75 + 0.25) * MapCreator.SINGLE_HEX_DIMENSION.y # No, z is no typo
+	
+	# On small maps allow to use cameras more freely
+	x_dimension = max(x_dimension, 20)
+	z_dimension = max(z_dimension, 20)
+	
+	var scalar : float = 0.8
+	camera_max_position = Vector3(x_dimension * scalar,10,z_dimension * scalar)
+	camera_min_position = Vector3(-x_dimension * scalar,3,-z_dimension * scalar)
 
 
 func _input(event) -> void:

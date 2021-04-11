@@ -17,7 +17,7 @@ var real_map_size: Vector3  # Rzeczywista wielkość mapy
 var was_resetted: bool = false
 var was_shrinked: bool = false
 
-enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = -1, PLAYER_FIRST = 0, PLAYER_LAST = 3 }
+enum FIELD_TYPE { NO_FIELD = -9, DEFAULT_FIELD = -1, PLAYER_FIRST = 0, PLAYER_LAST = 3 } # PLAYER_FIRST ma być zawsze równy 0, bo zależy od tego wiele różnych rzeczy, które nie są opisane
 
 func reset() -> void:
 	if map != null:
@@ -233,7 +233,7 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 			if fields[y][x] == player_number:
 				# TODO Add basic field resource adder
 				for i in buildings[y][x].keys():
-					var _none = add_resources(dict,Buildings.get_building_to_build(i,buildings[y][x][i]["level"]))
+					add_resources(dict,Buildings.get_building_to_build(i,buildings[y][x][i]["level"]))
 					# TODO Remove resources when used by Units, Buildings etc
 	
 	return dict

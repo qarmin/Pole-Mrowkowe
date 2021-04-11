@@ -43,6 +43,9 @@ func _ready() -> void:
 	MapCreator.create_3d_map(single_map)
 	add_child(single_map.map)
 	
+	# Ustawianie tutaj wielkości dozwolonego przez kamerę obszaru
+	$Camera.set_camera_max_positions(single_map.size)
+		
 	# Start Resources
 	player_resources.resize(number_of_start_players)
 	for i in range(number_of_start_players):

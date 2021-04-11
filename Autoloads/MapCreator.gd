@@ -8,10 +8,6 @@ var Anthill: PackedScene = load("res://Models/Buildings/Anthill/Anthill.tscn")
 var Farm: PackedScene = load("res://Models/Buildings/Farm/Farm.tscn") 
 var Sawmill: PackedScene = load("res://Models/Buildings/Sawmill/Sawmill.tscn")
 
-#const NO_FIELD : int = -100
-#const DEFAULT_FIELD : int = -1
-#const FIRST_PLAYER : int = 0
-
 const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 2)  # Dokładna wartość to (1.7321,2) ale czasami pomiędzy nimi migocze wolna przestrzeń, dlatego należy to nieco zmniejszyć
 const NODE_BASE_NAME: String = "SingleHex"
 var texture_base: SpatialMaterial
@@ -28,7 +24,7 @@ func _ready() -> void:
 
 	randomize()  # Bez tego za każdym razem wychdzą takie same wyniki randi()
 
-	assert(GameSettings.MAX_TEAMS == 4)  # Należy dodać więcej wyglądów
+	assert(GameSettings.MAX_TEAMS == 4)  # Należy dodać więcej wyglądów jeśli liczba jest inna
 
 	texture_base = load("res://Terrain/SingleHex/SingleHexBase.tres")
 	ant_base = load("res://Units/Outfit/OutfitBase.tres")
