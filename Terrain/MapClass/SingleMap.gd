@@ -181,10 +181,10 @@ static func convert_name_to_coordinates(hex_name: String, map_size: Vector2j) ->
 func get_field_owner(coordinates : Vector2j) -> int:
 	return fields[coordinates.y][coordinates.x]
 
-func have_place_for_build(coordinates : Vector2j) -> int:
+func get_place_for_build(coordinates : Vector2j) -> int:
 	var builds : Dictionary = buildings[coordinates.y][coordinates.x]
 	var available_places : Array = [0,1,2,3]
-	for building in builds:
+	for building in builds.values():
 		available_places.erase(building["place"])
 	if available_places.size() > 0:
 		return available_places[0]
@@ -192,10 +192,25 @@ func have_place_for_build(coordinates : Vector2j) -> int:
 
 # TODO Dodać funkcję/lub zmienić np. add_building aby zwracała koordynaty budynku(Transform albo Vector3) w zależności od położenia
 
+func get_place_where_is_building(coordinates : Vector2j, building : int) -> Vector3:
+	Buildings.validate_building(building)
+	assert(buildings[coordinates.y][coordinates.x].has(building)) # Budynek musi istnieć
+	
+	var place : int = buildings[coordinates.y][coordinates.x][building]["place"]
+	
+	if place == 0:
+		return Vector3(0,0,-0.522)
+	elif place == 1:
+		return Vector3(-0.522,0,0)
+	elif place == 2:
+		return Vector3(0,0,0.522)
+	else:
+		return Vector3(0.522,0,0)
+
 func add_building(coordinates : Vector2j, building : int , level : int = 1) -> void:
 	Buildings.validate_building(building)
 	assert(!buildings[coordinates.y][coordinates.x].has(building)) # Budynek nie może istnieć
-	var place : int = have_place_for_build(coordinates)
+	var place : int = get_place_for_build(coordinates)
 	assert(place != -1) # Musi mieć miejsce na budowę, tę funkcję można tylko wywołać gdy jesteśmy pewni że coś tu może powstać
 
 	buildings[coordinates.y][coordinates.x][building] = {"level" : level, "place" : place}

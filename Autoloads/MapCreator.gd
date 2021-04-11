@@ -5,6 +5,7 @@ extends Node
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
 var Ant: PackedScene = load("res://Units/Ant.tscn")
 var Anthill: PackedScene = load("res://Buildings/Anthill/Anthill.tscn")
+var Farm: PackedScene = load("res://Buildings/Tree/Tree.tscn") # TODO - Change this to farm
 
 #const NO_FIELD : int = -100
 #const DEFAULT_FIELD : int = -1
@@ -216,7 +217,8 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 
 				if randi() % 2 == 0:
 					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
-				# TODO Generacja losowa budynków
+				if randi() % 2 == 0:
+					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM,2)
 
 	return true
 
@@ -355,14 +357,21 @@ func create_3d_map(single_map: SingleMap) -> void:
 					SH.add_child(ant)
 					ant.set_owner(map)
 					pass
-				## Buildings - Zrobić aby budowały się same
+				## Buildings
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
 					var anthill = Anthill.instance()
-					anthill.translation = Vector3(0, 0, -0.522) # TODO - dodać funkcję do dodawania budynków do danego hexa
+					anthill.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
 
 					SH.add_child(anthill)
 					anthill.set_owner(map)
-					pass
+					
+				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.FARM):
+					var farm = Farm.instance()
+					farm.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM)
+
+					SH.add_child(farm)
+					farm.set_owner(map)
+				
 
 	pass
 

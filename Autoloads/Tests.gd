@@ -6,16 +6,27 @@ const PRINT_TESTS: bool = true
 # Używane tylko przy zmianach kodu dlatego, że spowalnia działanie gry
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-	if true:
-		return
-#	Vector2j_test()
-#	for _i in range(1):  # Stress test wykonać dla wartości > 5
-#		map_test()
-#		shrink_map()
-#		save_load_test()
+#	if true:
+#		return
+	Vector2j_test()
+	for _i in range(1):  # Stress test wykonać dla wartości > 5
+		map_test()
+		shrink_map()
+#		save_load_test() # TODO
+		building_test()
 	print("Wykonano wszystkie testy")
 	pass
 
+func building_test() -> void:
+	if PRINT_TESTS:
+		print("Wykonuję test Budowania")
+	var single_map : SingleMap = SingleMap.new()
+	MapCreator.create_map(single_map, Vector2j.new(10, 1), 100)
+	single_map.add_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
+	single_map.add_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM,1)
+	assert(single_map.buildings[0][9].size() == 2)
+	single_map.remove_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM)
+	pass
 
 func Vector2j_test() -> void:
 	if PRINT_TESTS:
@@ -190,48 +201,48 @@ func check_integration_of_map(single_map: SingleMap) -> bool:
 	return checked.size() == single_map.number_of_terrain
 
 
-func save_load_test() -> void:
-	if PRINT_TESTS:
-		print("Wykonuję test zapisywania")
-
-	var single_map: SingleMap = SingleMap.new()
-	var loaded_single_map: SingleMap = SingleMap.new()
-
-	MapCreator.create_map(single_map, Vector2j.new(7, 13), 75)
-	assert(check_integration_of_map(single_map))
-	if !MapCreator.populate_map_realistically(single_map, 4):
-		push_error("Nie powiodła się próba mapy")
-		assert(false)
-
-	SaveSystem.save_map_as_text(single_map, 100)
-	loaded_single_map = SaveSystem.load_map_from_text(100)
-
-	## Size
-	assert(single_map.size.x == loaded_single_map.size.x)
-	assert(single_map.size.y == loaded_single_map.size.y)
-	## Units
-	assert(loaded_single_map.units.size() == single_map.units.size())
-	for i in range(loaded_single_map.units.size()):
-		assert(loaded_single_map.units[i].size() == single_map.units[i].size())
-		for j in range(loaded_single_map.units[0].size()):
-			assert(loaded_single_map.units[i][j] == single_map.units[i][j])
-	## Fields
-	assert(loaded_single_map.fields.size() == single_map.fields.size())
-	for i in range(loaded_single_map.fields.size()):
-		assert(loaded_single_map.fields[i].size() == single_map.fields[i].size())
-		for j in range(loaded_single_map.fields[0].size()):
-			assert(loaded_single_map.fields[i][j] == single_map.fields[i][j])
-	## Buildings
-	assert(loaded_single_map.buildings.size() == single_map.buildings.size())
-	for i in range(loaded_single_map.buildings.size()):
-		assert(loaded_single_map.buildings[i].size() == single_map.buildings[i].size())
-		for j in range(loaded_single_map.buildings[0].size()):
-			assert(loaded_single_map.buildings[i][j] == single_map.buildings[i][j])
-	## Nature
-	assert(loaded_single_map.nature.size() == single_map.nature.size())
-	for i in range(loaded_single_map.nature.size()):
-		assert(loaded_single_map.nature[i].size() == single_map.nature[i].size())
-		for j in range(loaded_single_map.nature[0].size()):
-			assert(loaded_single_map.nature[i][j] == single_map.nature[i][j])
-
-	return
+#func save_load_test() -> void:
+#	if PRINT_TESTS:
+#		print("Wykonuję test zapisywania")
+#
+#	var single_map: SingleMap = SingleMap.new()
+#	var loaded_single_map: SingleMap = SingleMap.new()
+#
+#	MapCreator.create_map(single_map, Vector2j.new(7, 13), 75)
+#	assert(check_integration_of_map(single_map))
+#	if !MapCreator.populate_map_realistically(single_map, 4):
+#		push_error("Nie powiodła się próba mapy")
+#		assert(false)
+#
+#	SaveSystem.save_map_as_text(single_map, 100)
+#	loaded_single_map = SaveSystem.load_map_from_text(100)
+#
+#	## Size
+#	assert(single_map.size.x == loaded_single_map.size.x)
+#	assert(single_map.size.y == loaded_single_map.size.y)
+#	## Units
+#	assert(loaded_single_map.units.size() == single_map.units.size())
+#	for i in range(loaded_single_map.units.size()):
+#		assert(loaded_single_map.units[i].size() == single_map.units[i].size())
+#		for j in range(loaded_single_map.units[0].size()):
+#			assert(loaded_single_map.units[i][j] == single_map.units[i][j])
+#	## Fields
+#	assert(loaded_single_map.fields.size() == single_map.fields.size())
+#	for i in range(loaded_single_map.fields.size()):
+#		assert(loaded_single_map.fields[i].size() == single_map.fields[i].size())
+#		for j in range(loaded_single_map.fields[0].size()):
+#			assert(loaded_single_map.fields[i][j] == single_map.fields[i][j])
+#	## Buildings
+#	assert(loaded_single_map.buildings.size() == single_map.buildings.size())
+#	for i in range(loaded_single_map.buildings.size()):
+#		assert(loaded_single_map.buildings[i].size() == single_map.buildings[i].size())
+#		for j in range(loaded_single_map.buildings[0].size()):
+#			assert(loaded_single_map.buildings[i][j] == single_map.buildings[i][j])
+#	## Nature
+#	assert(loaded_single_map.nature.size() == single_map.nature.size())
+#	for i in range(loaded_single_map.nature.size()):
+#		assert(loaded_single_map.nature[i].size() == single_map.nature[i].size())
+#		for j in range(loaded_single_map.nature[0].size()):
+#			assert(loaded_single_map.nature[i][j] == single_map.nature[i][j])
+#
+#	return

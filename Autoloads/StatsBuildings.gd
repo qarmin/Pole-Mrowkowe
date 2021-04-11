@@ -1,6 +1,6 @@
 extends Node
 
-enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, BUILDING_MAX = 1 }
+enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, BUILDING_MAX = 2 }
 
 var all_buildings: Array = []
 
@@ -15,9 +15,10 @@ func _ready() -> void:
 	}
 	add_building(
 		"anthill",
+		TYPES_OF_BUILDINGS.ANTHILL,
 		3,
 		[
-			default,
+			default, # Always have at least 1 level and cannot be built
 			{"wood": 100, "water": 0, "gold": 0, "food": 0},
 			{"wood": 200, "water": 0, "gold": 0, "food": 0},
 		],
@@ -26,10 +27,25 @@ func _ready() -> void:
 			{"wood": 24, "water": 20, "gold": 20, "food": 20},
 			{"wood": 36, "water": 36, "gold": 20, "food": 20},
 		]
-	)  # Always have at least 1 level and cannot be built
+	)  
+	add_building(
+		"farm",
+		TYPES_OF_BUILDINGS.FARM,
+		3,
+		[
+			{"wood": 100, "water": 20, "gold": 0, "food": 0},
+			{"wood": 100, "water": 40, "gold": 0, "food": 0},
+			{"wood": 200, "water": 60, "gold": 0, "food": 0},
+		],
+		[
+			{"wood": 2, "water": 2, "gold": 0, "food": 25},
+			{"wood": 5, "water": 5, "gold": 0, "food": 40},
+			{"wood": 5, "water": 10, "gold": 1, "food": 70},
+		]
+	)  
 
 
-func add_building(name: String, levels: int, to_build: Array, production: Array):
+func add_building(name: String,type : int, levels: int, to_build: Array, production: Array):
 	assert(levels > 1 && levels < 4)  # Pomiędzy 1 a 3 są dostępne poziomy budynków
 
 	assert(to_build.size() == levels)
@@ -41,6 +57,7 @@ func add_building(name: String, levels: int, to_build: Array, production: Array)
 
 	var building_info: Dictionary = {
 		"name": name,
+		"type" : type,
 		"use_each_turn": {},
 		"levels": levels,
 		"to_build": to_build,

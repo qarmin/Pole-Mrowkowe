@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/RoundsCircle.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://HUD/gold.png" type="Texture" id=7]
 [ext_resource path="res://HUD/AccessPoint.png" type="Texture" id=8]
 [ext_resource path="res://HUD/Round.gd" type="Script" id=9]
+[ext_resource path="res://HUD/Icons/Anthill.png" type="Texture" id=10]
+[ext_resource path="res://HUD/ConfirmationDialog.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 21
@@ -24,8 +26,6 @@ font_data = ExtResource( 3 )
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -0.667419
-margin_bottom = -0.667419
 mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
@@ -210,7 +210,7 @@ __meta__ = {
 }
 
 [node name="Buildings" type="Control" parent="."]
-anchor_top = 0.8
+anchor_top = 0.7
 anchor_right = 0.8
 anchor_bottom = 1.0
 __meta__ = {
@@ -246,17 +246,267 @@ text = "building menu - on field aa x bb"
 [node name="HBox" type="HBoxContainer" parent="Buildings/VBox"]
 margin_top = 24.0
 margin_right = 809.0
-margin_bottom = 24.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gold" type="Control" parent="Buildings/VBox/HBox"]
-margin_right = 809.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Buildings/VBox/HBox"]
+margin_right = 112.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer"]
+margin_right = 112.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer"]
+margin_top = 50.0
+margin_right = 112.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer"]
+margin_top = 100.0
+margin_right = 112.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Buildings/VBox/HBox"]
+margin_left = 116.0
+margin_right = 228.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer2"]
+margin_right = 112.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer2"]
+margin_top = 50.0
+margin_right = 112.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer2"]
+margin_top = 100.0
+margin_right = 112.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Buildings/VBox/HBox"]
+margin_left = 232.0
+margin_right = 344.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer3"]
+margin_right = 112.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer3"]
+margin_top = 50.0
+margin_right = 112.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer3"]
+margin_top = 100.0
+margin_right = 112.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Buildings/VBox/HBox"]
+margin_left = 348.0
+margin_right = 460.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer4"]
+margin_right = 112.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer4"]
+margin_top = 50.0
+margin_right = 112.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer4"]
+margin_top = 100.0
+margin_right = 112.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="Buildings/VBox/HBox"]
+margin_left = 464.0
+margin_right = 576.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer5"]
+margin_right = 112.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer5"]
+margin_top = 50.0
+margin_right = 112.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer5"]
+margin_top = 100.0
+margin_right = 112.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="Buildings/VBox/HBox"]
+margin_left = 580.0
+margin_right = 692.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer6"]
+margin_right = 112.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer6"]
+margin_top = 50.0
+margin_right = 112.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer6"]
+margin_top = 100.0
+margin_right = 112.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer7" type="VBoxContainer" parent="Buildings/VBox/HBox"]
+margin_left = 696.0
+margin_right = 809.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer7"]
+margin_right = 113.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer7"]
+margin_top = 50.0
+margin_right = 113.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Buildings/VBox/HBox/VBoxContainer7"]
+margin_top = 100.0
+margin_right = 113.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
 
 [node name="Units" type="Control" parent="."]
-anchor_top = 0.8
+visible = false
+anchor_top = 0.7
 anchor_right = 0.8
 anchor_bottom = 1.0
 __meta__ = {
@@ -324,6 +574,18 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "1"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+visible = true
+margin_left = 306.0
+margin_top = 222.0
+margin_right = 639.0
+margin_bottom = 314.0
+dialog_text = "Are you sure that you want to do this?"
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
