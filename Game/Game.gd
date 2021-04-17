@@ -16,6 +16,7 @@ var player_resources : Array = []
 
 onready var round_node = $HUD/HUD/Round
 onready var round_label = $HUD/HUD/Round/Label
+onready var confirmation_dialog = $HUD/HUD/ConfirmationDialog
 
 # Selection
 var current_terrain_overlay_hex_name: String = ""
@@ -36,7 +37,7 @@ var unit_overlay_node: CSGTorus = preload("res://Overlay/UnitOverlay.tscn").inst
 onready var single_map: SingleMap = SingleMap.new()
 
 
-func _ready() -> void:	
+func _ready() -> void:
 	# TODO, generacja nie powinna tu być, lecz zależeć od wcześniejszych wyborów gracza
 	MapCreator.create_map(single_map, Vector2j.new(6, 6), 80)
 	assert(MapCreator.populate_map_randomly(single_map, 50))
@@ -82,7 +83,12 @@ func connect_clickable_signals() -> void:
 				continue
 			assert(thing.connect("ant_clicked", self, "ant_clicked") == OK)
 	
-	round_node.connect("end_turn_clicked",self,"end_turn")
+	
+	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
+#	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
+	round_node.connect("end_turn",self,"try_to_end_turn")
+	
+	confirmation_dialog.connect("confirmed", self, "end_turn")
 	
 
 func ant_clicked(ant: AntBase) -> void:
@@ -170,7 +176,11 @@ func get_active_players() -> int:
 	
 	return count
 
-func end_turn():
+func try_to_end_turn() -> void:
+	confirmation_dialog.popup()
+	
+
+func end_turn() -> void:
 	# TODO Jeśli to jest tura gracza to może to kliknąć, w przeciwnym wypadku nie wyjść z funkcji
 	print("Koniec tury")
 	
