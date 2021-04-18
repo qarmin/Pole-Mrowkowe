@@ -86,7 +86,7 @@ func connect_clickable_signals() -> void:
 	
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
-	round_node.connect("end_turn",self,"try_to_end_turn")
+	round_node.connect("try_to_end_turn_clicked",self,"end_turn")
 	
 	confirmation_dialog.connect("confirmed", self, "end_turn")
 	
