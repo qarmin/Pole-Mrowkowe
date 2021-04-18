@@ -34,8 +34,8 @@ func set_camera_max_positions(size : Vector2j) -> void:
 	var z_dimension : float = (size.y *0.75 + 0.25) * MapCreator.SINGLE_HEX_DIMENSION.y # No, z is no typo
 	
 	# On small maps allow to use cameras more freely
-	x_dimension = max(x_dimension, 20)
-	z_dimension = max(z_dimension, 20)
+	x_dimension = max(x_dimension, 15)
+	z_dimension = max(z_dimension, 15)
 	
 	var scalar : float = 0.8
 	camera_max_position = Vector3(x_dimension * scalar,10,z_dimension * scalar)

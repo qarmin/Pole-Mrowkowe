@@ -2,7 +2,7 @@
 
 [sub_resource type="ProceduralSky" id=1]
 radiance_size = 0
-ground_horizon_color = Color( 0.780392, 0.909804, 0.913725, 1 )
+ground_horizon_color = Color( 0.839216, 0.917647, 0.980392, 1 )
 ground_curve = 0.242515
 ground_energy = 1.04
 texture_size = 0

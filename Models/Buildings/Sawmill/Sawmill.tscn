@@ -6,7 +6,7 @@
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
 
 [node name="Liscie" parent="." index="0"]
-transform = Transform( 0.461691, 0, 0, 0, 0.819527, 0, 0, 0, 0.461691, 0, 5.05, 0 )
+transform = Transform( 0.461691, 0, 0, 0, 0.819527, 0, 0, 0, 0.461691, 0, 4.6692, 0 )
 
 [node name="Pien" parent="." index="1"]
-transform = Transform( 0.162809, 0, 0, 0, 0.37849, 0, 0, 0, 0.162809, 0, 4.05, 0 )
+transform = Transform( 0.162809, 0, 0, 0, 0.37849, 0, 0, 0, 0.162809, 0, 3.696, 0 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Anthill.png-f067d785dffdfaadca2fa3133b2418c5.stex"
+path="res://.import/gold32.png-2f93d2aab889bae7d5a993d46dba1b16.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/HexUnitMenu/Anthill.png"
-dest_files=[ "res://.import/Anthill.png-f067d785dffdfaadca2fa3133b2418c5.stex" ]
+source_file="res://HUD/Resources/gold32.png"
+dest_files=[ "res://.import/gold32.png-2f93d2aab889bae7d5a993d46dba1b16.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -114,27 +114,27 @@ size = Vector2( 2048, 512 )
 usage = 0
 
 [node name="FrameTime1" type="Line2D" parent="Viewport"]
-width = 5.0
+width = 4.0
 default_color = Color( 0.729412, 0.772549, 0, 1 )
 
 [node name="FrameTime2" type="Line2D" parent="Viewport"]
-width = 5.0
+width = 4.0
 default_color = Color( 0.129412, 0.811765, 0.556863, 1 )
 
 [node name="FrameTime3" type="Line2D" parent="Viewport"]
-width = 5.0
+width = 4.0
 default_color = Color( 0, 0.694118, 0.709804, 1 )
 
 [node name="FrameTime4" type="Line2D" parent="Viewport"]
-width = 5.0
+width = 4.0
 default_color = Color( 0.121569, 0, 0.709804, 1 )
 
 [node name="FrameTime5" type="Line2D" parent="Viewport"]
-width = 5.0
+width = 4.0
 default_color = Color( 0.709804, 0, 0.45098, 1 )
 
 [node name="FrameTime6" type="Line2D" parent="Viewport"]
-width = 5.0
+width = 4.0
 default_color = Color( 0.709804, 0.2, 0, 1 )
 
 [connection signal="pressed" from="Buttons/StartBenchmark" to="Buttons/StartBenchmark" method="_on_StartBenchmark_pressed"]
