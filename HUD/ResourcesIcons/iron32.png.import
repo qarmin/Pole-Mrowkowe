@@ -2,20 +2,20 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AccessPoint.png-4469c4b7a60da31e499eb468d950ab11.stex"
+path="res://.import/iron32.png-a41fd6c09ed48b0a4f6175485e456ac6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/Resources/AccessPoint.png"
-dest_files=[ "res://.import/AccessPoint.png-4469c4b7a60da31e499eb468d950ab11.stex" ]
+source_file="res://HUD/ResourcesIcons/iron32.png"
+dest_files=[ "res://.import/iron32.png-a41fd6c09ed48b0a4f6175485e456ac6.stex" ]
 
 [params]
 
-compress/mode=1
-compress/lossy_quality=0.0
+compress/mode=0
+compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/water.png-4a558daf69beb9f23e162d1c0f86c5fc.stex"
+path="res://.import/water32.png-724d7546c238e705cccec61515a19449.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/Resources/water.png"
-dest_files=[ "res://.import/water.png-4a558daf69beb9f23e162d1c0f86c5fc.stex" ]
+source_file="res://HUD/ResourcesIcons/water32.png"
+dest_files=[ "res://.import/water32.png-724d7546c238e705cccec61515a19449.stex" ]
 
 [params]
 

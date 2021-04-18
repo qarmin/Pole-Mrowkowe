@@ -2,20 +2,20 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/food.png-8a6b4832c358110673439f038b0a79c4.stex"
+path="res://.import/AccessPoint.png-3360880db9a6f3a9c9fd83f7236cc330.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/Resources/food.png"
-dest_files=[ "res://.import/food.png-8a6b4832c358110673439f038b0a79c4.stex" ]
+source_file="res://HUD/ResourcesIcons/AccessPoint.png"
+dest_files=[ "res://.import/AccessPoint.png-3360880db9a6f3a9c9fd83f7236cc330.stex" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
+compress/mode=1
+compress/lossy_quality=0.0
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

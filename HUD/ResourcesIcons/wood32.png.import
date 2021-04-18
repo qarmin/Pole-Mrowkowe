@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gold.png-f838221cd2789717202b4b7389046309.stex"
+path="res://.import/wood32.png-b313a33a7f041b07d497b78773583a4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/Resources/gold.png"
-dest_files=[ "res://.import/gold.png-f838221cd2789717202b4b7389046309.stex" ]
+source_file="res://HUD/ResourcesIcons/wood32.png"
+dest_files=[ "res://.import/wood32.png-b313a33a7f041b07d497b78773583a4d.stex" ]
 
 [params]
 

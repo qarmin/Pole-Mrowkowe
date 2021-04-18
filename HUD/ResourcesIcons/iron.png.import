@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iron32.png-909064da5e1145afd2b59d7f7c6e2916.stex"
+path="res://.import/iron.png-ee86ccc14125dbc74fad80d212ce3a2c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/Resources/iron32.png"
-dest_files=[ "res://.import/iron32.png-909064da5e1145afd2b59d7f7c6e2916.stex" ]
+source_file="res://HUD/ResourcesIcons/iron.png"
+dest_files=[ "res://.import/iron.png-ee86ccc14125dbc74fad80d212ce3a2c.stex" ]
 
 [params]
 

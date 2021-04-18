@@ -3,29 +3,27 @@
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/RoundsCircle.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://HUD/Resources/wood.png" type="Texture" id=4]
-[ext_resource path="res://HUD/Resources/water.png" type="Texture" id=5]
-[ext_resource path="res://HUD/Resources/food.png" type="Texture" id=6]
-[ext_resource path="res://HUD/Resources/gold.png" type="Texture" id=7]
-[ext_resource path="res://HUD/Resources/AccessPoint.png" type="Texture" id=8]
+[ext_resource path="res://HUD/ResourcesIcons/wood.png" type="Texture" id=4]
+[ext_resource path="res://HUD/ResourcesIcons/water.png" type="Texture" id=5]
+[ext_resource path="res://HUD/ResourcesIcons/food.png" type="Texture" id=6]
+[ext_resource path="res://HUD/ResourcesIcons/gold.png" type="Texture" id=7]
+[ext_resource path="res://HUD/ResourcesIcons/AccessPoint.png" type="Texture" id=8]
 [ext_resource path="res://HUD/Round.gd" type="Script" id=9]
 [ext_resource path="res://HUD/BuildingMenu/Buildings.tscn" type="PackedScene" id=10]
 [ext_resource path="res://HUD/ConfirmationDialog/ConfirmationDialog.gd" type="Script" id=11]
-[ext_resource path="res://HUD/Resources/Resources.gd" type="Script" id=12]
+[ext_resource path="res://HUD/ResourcesIcons/Resources.gd" type="Script" id=12]
 [ext_resource path="res://Units/Outfit/SingleHexTEAM3.png" type="Texture" id=13]
+[ext_resource path="res://HUD/UnitMenu/UnitMenu.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 21
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=3]
 size = 120
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 26
 font_data = ExtResource( 3 )
 
@@ -220,51 +218,7 @@ __meta__ = {
 [node name="Buildings" parent="." instance=ExtResource( 10 )]
 visible = false
 
-[node name="Units" type="Control" parent="."]
-anchor_top = 0.7
-anchor_right = 0.8
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Units"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-color = Color( 0, 0.529412, 0.478431, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBox" type="VBoxContainer" parent="Units"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 5.0
-margin_right = -5.0
-margin_bottom = -5.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Units/VBox"]
-margin_right = 809.0
-margin_bottom = 20.0
-custom_fonts/font = SubResource( 2 )
-text = "unit menu - unit XYZ on field aa x bb"
-
-[node name="HBox" type="HBoxContainer" parent="Units/VBox"]
-margin_top = 24.0
-margin_right = 809.0
-margin_bottom = 24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Gold" type="Control" parent="Units/VBox/HBox"]
-margin_right = 809.0
-size_flags_horizontal = 3
+[node name="Units" parent="." instance=ExtResource( 14 )]
 
 [node name="Round" type="TextureRect" parent="."]
 anchor_left = 1.0
@@ -284,7 +238,7 @@ __meta__ = {
 anchor_left = 0.15
 anchor_right = 1.0
 anchor_bottom = 0.85
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "1"
 align = 1
@@ -329,7 +283,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "Current Player"
 align = 1
 valign = 1
