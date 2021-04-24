@@ -9,9 +9,33 @@ func show_benchmarks() -> void:
 	var x_offset: float = GRAPH_SIZE_X / Benchmark.STAGES
 	var step_y: float = 0
 
+	# Wynik 99% - Usuwa ~1% zbyt dużych/małych wyników, póki co nie potrzebuje bo raczej nie działa poprawnie
+	for i in range(Benchmark.STAGES):
+		if Benchmark.time_frame[i].size() < 10: # Nie chcę zbyt dużo obcinać wyników
+			continue
+
+		for _j in range(Benchmark.time_frame[i].size() / 100 + 2):
+			var smallest_index : int = -1
+			var smallest_value : float = 10000
+
+			for k in range(Benchmark.time_frame[i].size()):
+				if Benchmark.time_frame[i][k] < smallest_value:
+					smallest_index = k
+					smallest_value = Benchmark.time_frame[i][k]
+			Benchmark.time_frame[i].remove(smallest_index)
+
+			var biggest_index : int = -1
+			var biggest_value : float = -1
+
+			for k in range(Benchmark.time_frame[i].size()):
+				if Benchmark.time_frame[i][k] > biggest_value:
+					biggest_index = k
+					biggest_value = Benchmark.time_frame[i][k]
+			Benchmark.time_frame[i].remove(biggest_index)
+			
 	# Zminiejsza ilość pomiarów na < 1000
 	for i in range(Benchmark.STAGES):
-		while Benchmark.time_frame[i].size() > 500:
+		while Benchmark.time_frame[i].size() > 700:
 			var temp_array: Array = []
 			var current_index: int = 0
 			while current_index + 1 < Benchmark.time_frame[i].size():
@@ -19,29 +43,6 @@ func show_benchmarks() -> void:
 				current_index += 2
 			Benchmark.time_frame[i] = temp_array
 
-#	# Wynik 98% - Usuwa 2% zbyt dużych/małych wyników, póki co nie potrzebuje bo raczej nie działa poprawnie
-#	for i in range(Benchmark.STAGES):
-#		if Benchmark.time_frame[i].size() < 10: # Nie chcę zbyt dużo obcinać wyników
-#			continue
-#
-#		for j in range(Benchmark.time_frame[i].size() / 20 + 1):
-#			var smallest_index : int = -1
-#			var smallest_value : float = 10000
-#
-#			for k in Benchmark.time_frame[i]:
-#				if Benchmark.time_frame[i][k] < smallest_value:
-#					smallest_index = k
-#					smallest_value = Benchmark.time_frame[i][k]
-#			Benchmark.time_frame[i].remove(smallest_index)
-#
-#			var biggest_index : int = -1
-#			var biggest_value : float = -1
-#
-#			for k in Benchmark.time_frame[i]:
-#				if Benchmark.time_frame[i][k] > biggest_value:
-#					biggest_index = k
-#					biggest_value = Benchmark.time_frame[i][k]
-#			Benchmark.time_frame[i].remove(biggest_index)
 
 	# Ustala jaka najodpowidniejsza będzie dla grafu skala, póki co używam stałej
 	for i in range(Benchmark.STAGES):

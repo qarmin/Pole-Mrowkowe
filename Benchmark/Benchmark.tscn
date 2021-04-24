@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Benchmark/3x3Part.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Benchmark/10x10Part.tscn" type="PackedScene" id=2]
@@ -169,14 +169,6 @@ tracks/2/keys = {
 "values": [ 25.0 ]
 }
 
-[sub_resource type="ProceduralSky" id=7]
-sky_energy = 0.24
-
-[sub_resource type="Environment" id=8]
-background_mode = 2
-background_sky = SubResource( 7 )
-background_energy = 1.45
-
 [node name="Benchmark" type="Spatial"]
 script = ExtResource( 4 )
 
@@ -203,7 +195,6 @@ anims/CameraMovement5 = SubResource( 5 )
 anims/CameraMovement6 = SubResource( 6 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 8 )
 
 [node name="Settings" type="Label" parent="."]
 anchor_left = 0.045

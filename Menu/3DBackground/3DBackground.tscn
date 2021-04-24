@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://default_env.tres" type="Environment" id=1]
+[ext_resource path="res://standard_environment.tres" type="Environment" id=1]
 [ext_resource path="res://Menu/3DBackground/3DBackgroundMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Menu/3DBackground/3DBackground.gd" type="Script" id=3]
 [ext_resource path="res://Terrain/Water/Water.tscn" type="PackedScene" id=4]

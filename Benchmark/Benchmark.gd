@@ -47,6 +47,7 @@ func test_started() -> void:
 	$WorldEnvironment.set_environment(null)
 	#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.8)
 	#$DirectionalLight.set_shadow(false) # Patrz niżej
+	$Water.hide()
 
 	current_stage = 1
 	show_map(1)
@@ -62,6 +63,8 @@ func test_middle() -> void:
 	benchmark_started = true
 
 	Options.benchmark_load_max_settings()
+	$WorldEnvironment.set_environment(load("res://standard_environment.tres"))
+	$Water.show()
 
 	current_stage = 4
 	show_map(1)
@@ -130,7 +133,6 @@ func _animation_finished(anim_name: String) -> void:
 		$Settings.set_text("Minimal Settings(3/6)\nMap 30x30")
 	elif anim_name == "CameraMovement3":
 		$Settings.set_text("Configuring environment")
-		$WorldEnvironment.set_environment(load("res://default_env.tres"))
 		#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.0)
 		#$DirectionalLight.set_shadow(true) # TODO - Zrobić aby cienie były tylko w GLES 3 lub Vulkanie - GLES 2 ma bardzo kanciaste cienie
 		ready = false

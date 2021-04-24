@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Units/Ant.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://standard_environment.tres" type="Environment" id=6]
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 1 )
@@ -45,3 +46,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.912918, 0, 1.53067 )
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="HUD" instance=ExtResource( 5 )]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 6 )
