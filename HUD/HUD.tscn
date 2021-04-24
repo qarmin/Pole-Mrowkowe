@@ -73,6 +73,7 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Gold"]
 margin_right = 51.0
 margin_bottom = 40.0
+hint_tooltip = "Gold, ants always want more power and gold"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 7 )
@@ -102,6 +103,7 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Wood"]
 margin_right = 52.0
 margin_bottom = 40.0
+hint_tooltip = "Ants looks at people and trying to build advanced building from wood"
 size_flags_horizontal = 11
 size_flags_vertical = 3
 texture = ExtResource( 4 )
@@ -164,6 +166,7 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Food"]
 margin_right = 51.0
 margin_bottom = 40.0
+hint_tooltip = "Ant want eat, ant need to eat, and eats food"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 6 )

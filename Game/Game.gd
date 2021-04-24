@@ -179,6 +179,11 @@ func get_active_players() -> int:
 func try_to_end_turn() -> void:
 	confirmation_dialog.popup()
 	
+func show_all_possible_ant_position() -> void:
+	
+	
+	pass
+
 
 func end_turn() -> void:
 	# TODO Jeśli to jest tura gracza to może to kliknąć, w przeciwnym wypadku nie wyjść z funkcji

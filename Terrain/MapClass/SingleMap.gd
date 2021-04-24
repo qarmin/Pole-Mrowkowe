@@ -251,3 +251,24 @@ func add_resources(base_dict : Dictionary, to_add_dict : Dictionary) -> void: #-
 			 
 	
 #	return underflow
+
+func add_unit(coordinates: Vector2j, unit : int, level : int) -> void:
+	Units.validate_building(unit)
+	assert(units[coordinates.y][coordinates.x].empty()) # Jednostka nie może istnieć
+	assert(level >= 1 && level <= 3)
+	var get_unit_usage : Dictionary  = Units.get_unit_usage(unit)
+	
+	units[coordinates.y][coordinates.x] = {"type" : unit, "level" : level, "usage" : get_unit_usage }
+
+func remove_unit(coordinates: Vector2j) -> void:
+	assert(!units[coordinates.y][coordinates.x].empty()) # Jednostka musi istnieć
+	units[coordinates.y][coordinates.x] = {}
+	
+func has_unit(coordinates: Vector2j) -> bool:
+	return !units[coordinates.y][coordinates.x].empty()
+	
+func move_unit(from : Vector2j, to : Vector2j) -> void:
+	assert(!units[from.y][from.x].empty())
+	assert(units[to.y][to.x].empty())
+	units[to.y][to.x] = units[from.y][from.x]
+	units[from.y][from.x] = {}
