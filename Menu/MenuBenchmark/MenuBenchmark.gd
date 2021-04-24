@@ -1,6 +1,6 @@
 extends Control
 
-const MAX_FPS: float = 60.0
+var MAX_FPS: float = 60.0
 const GRAPH_SIZE_X: float = 2048.0
 const GRAPH_SIZE_Y: float = 512.0
 
@@ -11,11 +11,11 @@ func show_benchmarks() -> void:
 
 	# Zminiejsza ilość pomiarów na < 1000
 	for i in range(Benchmark.STAGES):
-		while Benchmark.time_frame[i].size() > 1000:
+		while Benchmark.time_frame[i].size() > 500:
 			var temp_array: Array = []
 			var current_index: int = 0
 			while current_index + 1 < Benchmark.time_frame[i].size():
-				temp_array.append(Benchmark.time_frame[i][current_index] + Benchmark.time_frame[i][current_index + 1])
+				temp_array.append((Benchmark.time_frame[i][current_index] + Benchmark.time_frame[i][current_index + 1]) / 2.0)
 				current_index += 2
 			Benchmark.time_frame[i] = temp_array
 
@@ -43,11 +43,11 @@ func show_benchmarks() -> void:
 #					biggest_value = Benchmark.time_frame[i][k]
 #			Benchmark.time_frame[i].remove(biggest_index)
 
-#	# Ustala jaka najodpowidniejsza będzie dla grafu skala, póki co używam stałej
-#	for i in range(Benchmark.STAGES):
-#		if Benchmark.time_frame[i].size() > 0:
-#			if (GRAPH_SIZE_Y / max(1.0 / max(Benchmark.time_frame[i].min(),0.001), MAX_FPS)) > step_y:
-#				step_y = GRAPH_SIZE_Y / max(1.0 / max(Benchmark.time_frame[i].min(),0.001), MAX_FPS)
+	# Ustala jaka najodpowidniejsza będzie dla grafu skala, póki co używam stałej
+	for i in range(Benchmark.STAGES):
+		if Benchmark.time_frame[i].size() > 0:
+			if (GRAPH_SIZE_Y / max(1.0 / max(Benchmark.time_frame[i].min(),0.001), MAX_FPS)) > step_y:
+				MAX_FPS = max(1.0 / max(Benchmark.time_frame[i].min(),0.001), MAX_FPS)
 	step_y = GRAPH_SIZE_Y / MAX_FPS
 
 	# Czyści wszystkie linie
