@@ -7,7 +7,7 @@ enum TYPES_OF_ARMOR { ARMOR_MIN = 0, BRONZE, SILVER, GOLD }
 const HELMETS_DEFENSE: PoolIntArray = PoolIntArray([2, 4, 6])
 
 var ants: Array = []
-var helmets: Array = []
+var armors: Array = []
 
 
 func _ready() -> void:
@@ -53,6 +53,9 @@ func _ready() -> void:
 		}
 	)
 
+func add_armor(_data: Dictionary) -> void:
+	#TODO
+	pass
 
 func add_ant(data: Dictionary) -> void:
 	assert(data["production"].size() == Resources.resources.size())

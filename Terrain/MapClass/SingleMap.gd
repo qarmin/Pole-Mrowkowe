@@ -222,35 +222,31 @@ func remove_building(coordinates : Vector2j, building : int , level : int = 1) -
 	
 	buildings[coordinates.y][coordinates.x][building] = level
 	
-# Used to calculate end turn resources change
+# Used to calculate end turn resources change, it don't change 
 func calculate_end_turn_resources_change(player_number) -> Dictionary:
-	# TODO Not tested
 	var dict = Resources.get_resources()
 	
-	# Buildings
 	for y in range(size.y):
 		for x in range(size.x):
 			if fields[y][x] == player_number:
-				# TODO Add basic field resource adder
+				# Adds basic fields 
+				add_resources(dict, Buildings.BASIC_RESOURCES_PER_FIELD)
+				
+				# Buildings
 				for i in buildings[y][x].keys():
-					add_resources(dict,Buildings.get_building_to_build(i,buildings[y][x][i]["level"]))
-					# TODO Remove resources when used by Units, Buildings etc
+					add_resources(dict,Buildings.get_building_production(i,buildings[y][x][i]["level"]))
+					add_resources(dict,Buildings.get_building_usage(i,buildings[y][x][i]["level"]))
+#				for i in units[y][x]:
+#					add_resources()
+	
 	
 	return dict
 
-# HMMM... this is not needed for now -> Return true if happened underflow of resources
-func add_resources(base_dict : Dictionary, to_add_dict : Dictionary) -> void: #-> bool:
-#	var underflow : bool = false
-	
+# Adds resources from one to another dictionary
+# It does't clamp negative numbers to zero
+func add_resources(base_dict : Dictionary, to_add_dict : Dictionary) -> void:
 	for key in base_dict.keys():
 		base_dict[key] += to_add_dict[key]
-		
-		if base_dict[key] < 0:
-			base_dict[key] = 0
-#			underflow = true
-			 
-	
-#	return underflow
 
 func add_unit(coordinates: Vector2j, unit : int, level : int) -> void:
 	Units.validate_building(unit)

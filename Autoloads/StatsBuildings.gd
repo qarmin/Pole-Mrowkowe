@@ -4,6 +4,12 @@ enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, SAWMILL=2, B
 
 var all_buildings: Array = []
 
+const BASIC_RESOURCES_PER_FIELD : Dictionary = {
+		"wood": 3,
+		"water": 4,
+		"gold": 2,
+		"food": 5,
+}
 
 # Koszty budowy to L1 -> L2 a później ulepszania L2 -> L3 etc.
 func _ready() -> void:
@@ -26,6 +32,11 @@ func _ready() -> void:
 			{"wood": 12, "water": 20, "gold": 10, "food": 5},
 			{"wood": 24, "water": 20, "gold": 20, "food": 20},
 			{"wood": 36, "water": 36, "gold": 20, "food": 20},
+		],
+		[
+			default,
+			default,
+			default
 		]
 	)  
 	add_building(
@@ -41,6 +52,11 @@ func _ready() -> void:
 			{"wood": 2, "water": 2, "gold": 0, "food": 25},
 			{"wood": 5, "water": 5, "gold": 0, "food": 40},
 			{"wood": 5, "water": 10, "gold": 1, "food": 70},
+		],
+		[
+			default,
+			default,
+			default
 		]
 	)  
 	add_building(
@@ -56,6 +72,11 @@ func _ready() -> void:
 			{"wood": 2, "water": 2, "gold": 0, "food": 25},
 			{"wood": 5, "water": 5, "gold": 0, "food": 40},
 			{"wood": 5, "water": 10, "gold": 1, "food": 70},
+		],
+		[
+			default,
+			default,
+			default
 		]
 	)  
 	add_building(
@@ -71,18 +92,40 @@ func _ready() -> void:
 			{"wood": 2, "water": 2, "gold": 0, "food": 25},
 			{"wood": 5, "water": 5, "gold": 0, "food": 40},
 			{"wood": 5, "water": 10, "gold": 1, "food": 70},
+		],
+		[
+			default,
+			default,
+			default
 		]
 	)  
 
+# Returns resources how much needs to build
 func get_building_to_build(type : int, level : int) -> Dictionary:
 	validate_building(type)
 	for single_building in all_buildings:
 		if single_building["type"] == type:
-			return single_building["to_build"][level -1]
-	assert(false, "Failed to find")
+			return single_building["to_build"][level - 1]
+	assert(false, "Failed to find building of type " + str(type))
+	return {}
+	
+func get_building_production(type : int, level : int) -> Dictionary:
+	validate_building(type)
+	for single_building in all_buildings:
+		if single_building["type"] == type:
+			return single_building["production"][level - 1]
+	assert(false, "Failed to find building of type " + str(type))
+	return {}
+	
+func get_building_usage(type : int, level : int) -> Dictionary:
+	validate_building(type)
+	for single_building in all_buildings:
+		if single_building["type"] == type:
+			return single_building["usage"][level - 1]
+	assert(false, "Failed to find building of type " + str(type))
 	return {}
 
-func add_building(name: String,type : int, levels: int, to_build: Array, production: Array):
+func add_building(name: String,type : int, levels: int, to_build: Array, production: Array, usage:Array):
 	assert(levels > 1 && levels < 4)  # Pomiędzy 1 a 3 są dostępne poziomy budynków
 
 	assert(to_build.size() == levels)
@@ -99,6 +142,7 @@ func add_building(name: String,type : int, levels: int, to_build: Array, product
 		"levels": levels,
 		"to_build": to_build,
 		"production": production,
+		"usage": usage,
 	}
 
 	all_buildings.append(building_info)

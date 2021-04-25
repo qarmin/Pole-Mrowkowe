@@ -116,6 +116,7 @@ limits/debugger_stdout/max_chars_per_second=32768
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 threads/thread_model=2
 environment/default_clear_color=Color( 0.419608, 0.419608, 0.419608, 1 )
 quality/filters/msaa=2
