@@ -36,8 +36,16 @@ var unit_overlay_node: CSGTorus = preload("res://Overlay/UnitOverlay.tscn").inst
 
 onready var single_map: SingleMap = SingleMap.new()
 
+var ant_movement : Array = []
+var ant_movement_overlay = preload("res://Overlay/PossiblePath/PossiblePathOverlay.tscn")
 
 func _ready() -> void:
+	for _i in range(6):
+		var node : Spatial = ant_movement_overlay.instance()
+		add_child(node)
+		node.hide()
+		ant_movement.append(node)
+	
 	# TODO, generacja nie powinna tu być, lecz zależeć od wcześniejszych wyborów gracza
 	MapCreator.create_map(single_map, Vector2j.new(6, 6), 80)
 	assert(MapCreator.populate_map_randomly(single_map, 50))
@@ -101,6 +109,7 @@ func ant_clicked(ant: AntBase) -> void:
 		current_unit_overlay_hex_name = ""
 		selected_ant = null
 		hide_menus()
+		possible_ant_movements()
 		return
 
 	# Na wszelki wypadek odznaczamy zaznaczenie na terenie
@@ -108,11 +117,16 @@ func ant_clicked(ant: AntBase) -> void:
 	current_terrain_overlay_hex_name = ""
 	selected_hex = null
 
+	var coordinates : Vector2j = SingleMap.convert_name_to_coordinates(parent_name, single_map.size)
+	var neighbourhood : Array = single_map.get_neighbourhoods(coordinates,current_player)
+	
 	# Sprawdzenie czy aktualny gracz klika na wroga czy na siebie i dopasowuje do tego kolor
-	if single_map.get_field_owner(SingleMap.convert_name_to_coordinates(parent_name, single_map.size)) == current_player:
+	if single_map.get_field_owner(coordinates) == current_player:
 		unit_overlay_node.get_material().albedo_color = selection_ant_color_own
+		possible_ant_movements(neighbourhood, false)
 	else:
 		unit_overlay_node.get_material().albedo_color = selection_ant_color_enemy
+		possible_ant_movements()
 
 	unit_overlay_node.set_translation(ant.get_translation() + ant.get_parent().get_translation())
 	unit_overlay_node.set_scale(ant.get_scale())
@@ -121,10 +135,35 @@ func ant_clicked(ant: AntBase) -> void:
 	current_unit_overlay_hex_name = parent_name
 	selected_ant = ant
 	show_units_menu()
-	$HUD/HUD/Units/VBox/Label.set_text("unit menu - field ")
+	$HUD/HUD/Units/VBox/Label.set_text("unit menu - field " + coordinates.to_string())
 
+# TODO - tylko powinno być to widoczne gdy gracz naciśnie na przycisk przemieszczania się
+func possible_ant_movements(array_of_coordinates : Array = [], hide : bool = true) -> void:
+	if hide:
+		for i in ant_movement:
+			i.hide()
+		return
+		
+	for i in range(6):
+		if i < array_of_coordinates.size():
+			ant_movement[i].show()
+			
+			ant_movement[i].get_parent().remove_child(ant_movement[i])
+			
+			get_node("Map").get_node(SingleMap.convert_coordinates_to_name(array_of_coordinates[i], single_map.size)).add_child(ant_movement[i])
+			ant_movement[i].show()
+			
+			print("Possible ant movements " + array_of_coordinates[i].to_string())
+			print(SingleMap.convert_coordinates_to_name(array_of_coordinates[i], single_map.size))
+		else:
+			ant_movement[i].hide()
+	for coordinates in array_of_coordinates.size():
+		pass
+	pass
 
 func hex_clicked(hex: SingleHex) -> void:
+	possible_ant_movements()
+	
 	# TODO checkif players
 #	print("Hex " + hex.get_name() + " was clicked and this was handled!")
 	if hex.get_name() == current_terrain_overlay_hex_name:
@@ -138,8 +177,10 @@ func hex_clicked(hex: SingleHex) -> void:
 	current_unit_overlay_hex_name = ""
 	selected_ant = null
 
+	var coordinates : Vector2j = SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size)
+
 	# Sprawdzenie czy aktualny gracz klika na wrogie terytorium czy na siebie i dopasowuje do tego kolor
-	if single_map.get_field_owner(SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size)) == current_player:
+	if single_map.get_field_owner(coordinates) == current_player:
 		terrain_overlay_node.get_material().albedo_color = selection_hex_color_own
 	else:
 		terrain_overlay_node.get_material().albedo_color = selection_hex_color_enemy
@@ -151,7 +192,7 @@ func hex_clicked(hex: SingleHex) -> void:
 	current_terrain_overlay_hex_name = hex.get_name()
 	selected_hex = hex
 	show_buildings_menu()
-	$HUD/HUD/Buildings/VBox/Label.set_text("hex menu - field " + str(SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size).to_string()))
+	$HUD/HUD/Buildings/VBox/Label.set_text("hex menu - field " + coordinates.to_string())
 
 
 # TODO może dodać tutaj info czy jest to menu gracza czy wroga?
@@ -180,7 +221,6 @@ func try_to_end_turn() -> void:
 	confirmation_dialog.popup()
 	
 func show_all_possible_ant_position() -> void:
-	
 	
 	pass
 

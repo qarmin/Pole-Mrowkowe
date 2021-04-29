@@ -6,7 +6,7 @@
 [sub_resource type="CubeMesh" id=1]
 
 [node name="Spatial" type="Spatial"]
-transform = Transform( -0.345608, 0, -0.721523, 0, 0.8, 0, 0.721523, 0, -0.345608, 0, 1, 0 )
+transform = Transform( 0.70822, 0, -0.372117, 0, 0.8, 0, 0.372117, 0, 0.70822, 0, 1, 0 )
 script = ExtResource( 2 )
 
 [node name="Spatial" type="Spatial" parent="."]

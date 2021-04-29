@@ -9,6 +9,7 @@ func _ready() -> void:
 	if true:
 		return
 	Vector2j_test()
+#	single_map_tests()
 	for _i in range(1):  # Stress test wykonać dla wartości > 5
 		map_test()
 		shrink_map()
@@ -17,6 +18,14 @@ func _ready() -> void:
 	print("Wykonano wszystkie testy")
 	pass
 
+# TODO write tests
+#func single_map_tests() -> void:
+#	var single_map : SingleMap = SingleMap.new()
+#	MapCreator.create_map(single_map, Vector2j.new(3, 3), 100)
+#	single_map.fields = [[SingleMap.FIELD_TYPE.DEFAULT_FIELD,1,1],[1,1,0],[1,1,1]]
+	
+	
+	
 func building_test() -> void:
 	if PRINT_TESTS:
 		print("Wykonuję test Budowania")

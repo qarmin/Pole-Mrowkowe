@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Units/Ant.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://standard_environment.tres" type="Environment" id=6]
 
@@ -11,35 +9,6 @@
 script = ExtResource( 1 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-
-[node name="Map2" type="Spatial" parent="."]
-visible = false
-
-[node name="SingleHex" parent="Map2" instance=ExtResource( 4 )]
-
-[node name="Ant" parent="Map2/SingleHex" instance=ExtResource( 3 )]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.26694, 0 )
-
-[node name="SingleHex2" parent="Map2" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74768, 0, 0 )
-
-[node name="Ant" parent="Map2/SingleHex2" instance=ExtResource( 3 )]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.24427, 0 )
-
-[node name="SingleHex3" parent="Map2" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48268, 0, 0.0157719 )
-
-[node name="Ant" parent="Map2/SingleHex3" instance=ExtResource( 3 )]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.19489, 0 )
-
-[node name="SingleHex4" parent="Map2" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5779, 0, 1.53067 )
-
-[node name="SingleHex5" parent="Map2" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.834522, 0, 1.53067 )
-
-[node name="SingleHex6" parent="Map2" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.912918, 0, 1.53067 )
 
 [node name="Overlays" type="Spatial" parent="."]
 

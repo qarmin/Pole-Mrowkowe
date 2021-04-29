@@ -177,6 +177,9 @@ static func convert_name_to_coordinates(hex_name: String, map_size: Vector2j) ->
 	var number = hex_name.trim_prefix(MapCreator.NODE_BASE_NAME).to_int()
 
 	return Vector2j.new(number % map_size.x, number / map_size.x)
+	
+static func convert_coordinates_to_name(coordinates : Vector2j, map_size: Vector2j) -> String:
+	return MapCreator.NODE_BASE_NAME + str(coordinates.y * map_size.x + coordinates.x)
 
 # Return owner of specific field
 func get_field_owner(coordinates : Vector2j) -> int:
@@ -268,3 +271,50 @@ func move_unit(from : Vector2j, to : Vector2j) -> void:
 	assert(units[to.y][to.x].empty())
 	units[to.y][to.x] = units[from.y][from.x]
 	units[from.y][from.x] = {}
+	
+	
+
+func get_neighbourhoods(coordinates : Vector2j, player_number : int, _ignore_player_ants : bool = false) -> Array:
+	var neighbour : Array = []
+	
+	if coordinates.x > 0: # Left
+		if fields[coordinates.y][coordinates.x - 1] != FIELD_TYPE.NO_FIELD:
+			neighbour.append(Vector2j.new(coordinates.x - 1, coordinates.y))
+	if coordinates.x < size.x -1 : # Right
+		if fields[coordinates.y][coordinates.x + 1] != FIELD_TYPE.NO_FIELD:
+			neighbour.append(Vector2j.new(coordinates.x + 1, coordinates.y))
+			
+	if coordinates.y % 2 == 0:
+		if coordinates.x > 0 && coordinates.y > 0: # Left Upper
+			if fields[coordinates.y-1][coordinates.x - 1] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x - 1, coordinates.y - 1))
+		if coordinates.x > 0 && coordinates.y < size.y - 1: # Left Down
+			if fields[coordinates.y+1][coordinates.x - 1] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x - 1, coordinates.y + 1))
+				
+		if coordinates.y > 0: # Right Upper 
+			if fields[coordinates.y-1][coordinates.x] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x, coordinates.y - 1))
+		if coordinates.y < size.y - 1: # Right Down
+			if fields[coordinates.y+1][coordinates.x] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x, coordinates.y + 1))
+	else: 
+		if coordinates.y > 0: # Left Upper
+			if fields[coordinates.y-1][coordinates.x] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x, coordinates.y - 1))
+		if coordinates.y < size.y - 1: # Left Down
+			if fields[coordinates.y+1][coordinates.x] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x, coordinates.y + 1))
+				
+		if coordinates.x < size.x -1 && coordinates.y > 0: # Right Upper 
+			if fields[coordinates.y-1][coordinates.x + 1] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x + 1, coordinates.y - 1))
+		if coordinates.x < size.x - 1 && coordinates.y < size.y - 1: # Right Down
+			if fields[coordinates.y+1][coordinates.x + 1] != FIELD_TYPE.NO_FIELD:
+				neighbour.append(Vector2j.new(coordinates.x + 1, coordinates.y + 1))
+		
+	
+#	for i in neighbour:
+#		print(i.to_string())
+	
+	return neighbour
