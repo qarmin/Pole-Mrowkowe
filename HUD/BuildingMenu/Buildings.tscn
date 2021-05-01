@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/BuildingMenu/SingleBuilding.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD/BuildingMenu/Buildings.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -10,6 +11,7 @@ font_data = ExtResource( 1 )
 anchor_top = 0.7
 anchor_right = 0.5
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,49 +48,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox"]
+[node name="VBox" type="VBoxContainer" parent="VBox/HBox"]
 margin_right = 168.0
 margin_bottom = 156.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBox" parent="VBox/HBox/VBoxContainer" instance=ExtResource( 2 )]
+[node name="Building1" parent="VBox/HBox/VBox" instance=ExtResource( 2 )]
 margin_right = 168.0
 margin_bottom = 76.0
 
-[node name="VBox2" parent="VBox/HBox/VBoxContainer" instance=ExtResource( 2 )]
+[node name="Building2" parent="VBox/HBox/VBox" instance=ExtResource( 2 )]
 margin_top = 80.0
 margin_right = 168.0
 margin_bottom = 156.0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBox/HBox"]
+[node name="VBox2" type="VBoxContainer" parent="VBox/HBox"]
 margin_left = 172.0
 margin_right = 340.0
 margin_bottom = 156.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBox" parent="VBox/HBox/VBoxContainer2" instance=ExtResource( 2 )]
+[node name="Building3" parent="VBox/HBox/VBox2" instance=ExtResource( 2 )]
 margin_right = 168.0
 margin_bottom = 76.0
 
-[node name="VBox2" parent="VBox/HBox/VBoxContainer2" instance=ExtResource( 2 )]
+[node name="Building4" parent="VBox/HBox/VBox2" instance=ExtResource( 2 )]
 margin_top = 80.0
 margin_right = 168.0
 margin_bottom = 156.0
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBox/HBox"]
+[node name="VBox3" type="VBoxContainer" parent="VBox/HBox"]
 margin_left = 344.0
 margin_right = 512.0
 margin_bottom = 156.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBox" parent="VBox/HBox/VBoxContainer3" instance=ExtResource( 2 )]
+[node name="Building5" parent="VBox/HBox/VBox3" instance=ExtResource( 2 )]
 margin_right = 168.0
 margin_bottom = 76.0
 
-[node name="VBox2" parent="VBox/HBox/VBoxContainer3" instance=ExtResource( 2 )]
+[node name="Building6" parent="VBox/HBox/VBox3" instance=ExtResource( 2 )]
 margin_top = 80.0
 margin_right = 168.0
 margin_bottom = 156.0

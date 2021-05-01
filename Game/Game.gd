@@ -63,6 +63,9 @@ func _ready() -> void:
 	for i in range(number_of_start_players):
 		player_resources[i] = {"wood": (i+2)* 100, "water" : (i+2)* 100, "gold" : (i+2)*100, "food" : (i+2)*100}
 	
+	# Update resources
+	gui_update_resources()
+	
 	# Water
 	var water : Spatial = load("res://Terrain/Water/Water.tscn").instance()
 	water.set_scale(Vector3(1000,1,1000))
@@ -240,7 +243,6 @@ func end_turn() -> void:
 		
 		# TODO Here update resources
 		single_map.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
-		$HUD/HUD/Resources.update_resources(player_resources[curr])
 		
 		curr = (curr + 1) % number_of_start_players
 		if curr == 0:
@@ -255,6 +257,8 @@ func end_turn() -> void:
 			elif players_type[curr] == PLAYERS_TYPE.HUMAN:
 				break # Tura gracza
 	
+	# Aktualizacja zasobów
+	gui_update_resources()
 	# Aktualizacja koloru gracz na mapie
 	$HUD/HUD.update_current_player_text_color(current_player)
 	print("Current player " + str(current_player))
@@ -267,3 +271,6 @@ func end_turn() -> void:
 	unit_overlay_node.stop()
 	current_unit_overlay_hex_name = ""
 	current_terrain_overlay_hex_name = ""
+
+func gui_update_resources() -> void:
+	$HUD/HUD/Resources.update_resources(player_resources[current_player], single_map.calculate_end_turn_resources_change(current_player))

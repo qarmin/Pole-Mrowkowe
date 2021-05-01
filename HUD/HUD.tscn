@@ -37,7 +37,7 @@ __meta__ = {
 }
 
 [node name="Resources" type="Control" parent="."]
-anchor_right = 0.29
+anchor_right = 0.45
 margin_bottom = 40.0
 script = ExtResource( 12 )
 __meta__ = {
@@ -56,13 +56,14 @@ __meta__ = {
 [node name="HBox" type="HBoxContainer" parent="Resources"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -10.0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Gold" type="HBoxContainer" parent="Resources/HBox"]
-margin_right = 95.0
+margin_right = 146.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -71,28 +72,30 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Gold"]
-margin_right = 45.0
+margin_right = 47.0
 margin_bottom = 40.0
 hint_tooltip = "Gold, ants always want more power and gold"
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Gold"]
-margin_left = 49.0
-margin_right = 95.0
+margin_left = 51.0
+margin_right = 146.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
-text = "5000"
+text = "5000 (+180)"
+align = 1
 valign = 1
 
 [node name="Wood" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 100.0
-margin_right = 195.0
+margin_left = 151.0
+margin_right = 298.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -101,23 +104,25 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Wood"]
-margin_right = 45.0
+margin_right = 47.0
 margin_bottom = 40.0
 hint_tooltip = "Ants looks at people and trying to build advanced building from wood"
 size_flags_horizontal = 11
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Wood"]
-margin_left = 49.0
-margin_right = 95.0
+margin_left = 51.0
+margin_right = 147.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
-text = "5000"
+text = "5000 (+180)"
+align = 1
 valign = 1
 
 [node name="Water" type="HBoxContainer" parent="Resources/HBox"]
@@ -154,8 +159,8 @@ __meta__ = {
 }
 
 [node name="Food" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 200.0
-margin_right = 296.0
+margin_left = 303.0
+margin_right = 450.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -164,23 +169,25 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Food"]
-margin_right = 46.0
+margin_right = 47.0
 margin_bottom = 40.0
 hint_tooltip = "Ant want eat, ant need to eat, and eats food"
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
 texture = ExtResource( 6 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Resources/HBox/Food"]
-margin_left = 50.0
-margin_right = 96.0
+margin_left = 51.0
+margin_right = 147.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
-text = "5000"
+text = "5000 (+180)"
+align = 1
 valign = 1
 __meta__ = {
 "_editor_description_": ""
@@ -220,9 +227,9 @@ __meta__ = {
 }
 
 [node name="Buildings" parent="." instance=ExtResource( 10 )]
-visible = false
 
 [node name="Units" parent="." instance=ExtResource( 14 )]
+visible = false
 
 [node name="Round" type="TextureRect" parent="."]
 anchor_left = 1.0
@@ -264,9 +271,9 @@ __meta__ = {
 }
 
 [node name="CurrentPlayer" type="Control" parent="."]
-anchor_left = 0.29
-anchor_right = 0.43
-margin_right = 40.0
+anchor_left = 0.45
+anchor_right = 0.691
+margin_right = 0.0639648
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false

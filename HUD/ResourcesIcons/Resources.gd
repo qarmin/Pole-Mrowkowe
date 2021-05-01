@@ -11,8 +11,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func update_resources(dictionary : Dictionary) -> void:
-	$HBox/Gold/Label.set_text(str(dictionary["gold"]))
-	$HBox/Water/Label.set_text(str(dictionary["water"]))
-	$HBox/Food/Label.set_text(str(dictionary["food"]))
-	$HBox/Wood/Label.set_text(str(dictionary["wood"]))
+func update_resources(have_resources : Dictionary, end_turn_resources : Dictionary) -> void:
+	$HBox/Gold/Label.set_text(str(have_resources["gold"]) + " (+" + str(end_turn_resources["gold"]) + ")")
+	$HBox/Water/Label.set_text(str(have_resources["water"]) + " (+" + str(end_turn_resources["water"]) + ")")
+	$HBox/Food/Label.set_text(str(have_resources["food"]) + " (+" + str(end_turn_resources["food"]) + ")")
+	$HBox/Wood/Label.set_text(str(have_resources["wood"]) + " (+" + str(end_turn_resources["wood"]) + ")")

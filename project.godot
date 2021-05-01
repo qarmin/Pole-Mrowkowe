@@ -121,3 +121,4 @@ threads/thread_model=2
 environment/default_clear_color=Color( 0.419608, 0.419608, 0.419608, 1 )
 quality/filters/msaa=2
 quality/depth/hdr=false
+environment/default_environment="res://standard_environment.tres"

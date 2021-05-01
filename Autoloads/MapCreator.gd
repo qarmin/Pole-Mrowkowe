@@ -216,13 +216,13 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
 
 				if randi() % 2 == 0:
-					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
+					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
 				if randi() % 2 == 0:
-					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM,2)
+					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM,2)
 				if randi() % 2 == 0:
-					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL,3)
+					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL,3)
 				if randi() % 2 == 0:
-					single_map.add_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS,3)
+					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS,3)
 
 	return true
 

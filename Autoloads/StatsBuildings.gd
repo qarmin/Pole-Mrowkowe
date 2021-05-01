@@ -3,6 +3,7 @@ extends Node
 enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, SAWMILL=2, BARRACKS=3, BUILDING_MAX = 4 }
 
 var all_buildings: Array = []
+var buildings_types : Array = []
 
 const BASIC_RESOURCES_PER_FIELD : Dictionary = {
 		"wood": 3,
@@ -19,7 +20,7 @@ func _ready() -> void:
 		"gold": 0,
 		"food": 0,
 	}
-	add_building(
+	building_add(
 		"anthill",
 		TYPES_OF_BUILDINGS.ANTHILL,
 		3,
@@ -39,7 +40,7 @@ func _ready() -> void:
 			default
 		]
 	)  
-	add_building(
+	building_add(
 		"farm",
 		TYPES_OF_BUILDINGS.FARM,
 		3,
@@ -59,7 +60,7 @@ func _ready() -> void:
 			default
 		]
 	)  
-	add_building(
+	building_add(
 		"sawmill",
 		TYPES_OF_BUILDINGS.SAWMILL,
 		3,
@@ -79,7 +80,7 @@ func _ready() -> void:
 			default
 		]
 	)  
-	add_building(
+	building_add(
 		"sawmill",
 		TYPES_OF_BUILDINGS.BARRACKS,
 		3,
@@ -125,7 +126,15 @@ func get_building_usage(type : int, level : int) -> Dictionary:
 	assert(false, "Failed to find building of type " + str(type))
 	return {}
 
-func add_building(name: String,type : int, levels: int, to_build: Array, production: Array, usage:Array):
+func get_bulding_name(type : int) -> String:
+	validate_building(type)
+	for single_building in all_buildings:
+		if single_building["type"] == type:
+			return single_building["name"]
+	assert(false, "Failed to find building of type " + str(type))
+	return ""
+
+func building_add(name: String,type : int, levels: int, to_build: Array, production: Array, usage:Array):
 	assert(levels > 1 && levels < 4)  # Pomiędzy 1 a 3 są dostępne poziomy budynków
 
 	assert(to_build.size() == levels)
@@ -146,8 +155,8 @@ func add_building(name: String,type : int, levels: int, to_build: Array, product
 	}
 
 	all_buildings.append(building_info)
+	buildings_types.append(type)
 
-	pass
 
 func validate_building(building : int) -> void:
 	assert(building > TYPES_OF_BUILDINGS.BUILDING_MIN && building < TYPES_OF_BUILDINGS.BUILDING_MAX)

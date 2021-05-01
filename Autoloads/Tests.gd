@@ -9,6 +9,7 @@ func _ready() -> void:
 	if true:
 		return
 	Vector2j_test()
+	resources()
 #	single_map_tests()
 	for _i in range(1):  # Stress test wykonać dla wartości > 5
 		map_test()
@@ -17,6 +18,12 @@ func _ready() -> void:
 		building_test()
 	print("Wykonano wszystkie testy")
 	pass
+
+func resources() -> void:
+	if PRINT_TESTS:
+		print("Wykonuję test Resources")
+	assert(SingleMap.are_all_resources_positive({"Roman" : 0, "Wiśnia" : 100}))
+	assert(!SingleMap.are_all_resources_positive({"Roman" : -10, "Wiśnia" : 100}))
 
 # TODO write tests
 #func single_map_tests() -> void:
@@ -31,12 +38,14 @@ func building_test() -> void:
 		print("Wykonuję test Budowania")
 	var single_map : SingleMap = SingleMap.new()
 	MapCreator.create_map(single_map, Vector2j.new(10, 1), 100)
-	single_map.add_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
-	single_map.add_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM,1)
+	single_map.building_add(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
+	single_map.building_add(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM,1)
 	assert(single_map.buildings[0][9].size() == 2)
-	single_map.remove_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM)
+	single_map.building_change_level(Vector2j.new(9,0), Buildings.TYPES_OF_BUILDINGS.ANTHILL, 3)
+	assert(single_map.buildings[0][9][Buildings.TYPES_OF_BUILDINGS.ANTHILL]["level"] == 3)
+	single_map.building_remove(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.FARM)
 	assert(single_map.buildings[0][9].size() == 1)
-	single_map.add_building(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+	single_map.building_remove(Vector2j.new(9,0),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
 	assert(single_map.buildings[0][9].size() == 0)
 	pass
 

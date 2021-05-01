@@ -194,7 +194,7 @@ func get_place_for_build(coordinates : Vector2j) -> int:
 		return available_places[0]
 	return -1
 
-# TODO Dodać funkcję/lub zmienić np. add_building aby zwracała koordynaty budynku(Transform albo Vector3) w zależności od położenia
+# TODO Dodać funkcję/lub zmienić np. building_add aby zwracała koordynaty budynku(Transform albo Vector3) w zależności od położenia
 
 func get_place_where_is_building(coordinates : Vector2j, building : int) -> Vector3:
 	Buildings.validate_building(building)
@@ -211,7 +211,7 @@ func get_place_where_is_building(coordinates : Vector2j, building : int) -> Vect
 	else:
 		return Vector3(0.522,0,0)
 
-func add_building(coordinates : Vector2j, building : int , level : int = 1) -> void:
+func building_add(coordinates : Vector2j, building : int , level : int = 1) -> void:
 	Buildings.validate_building(building)
 	assert(!buildings[coordinates.y][coordinates.x].has(building)) # Budynek nie może istnieć
 	var place : int = get_place_for_build(coordinates)
@@ -219,11 +219,20 @@ func add_building(coordinates : Vector2j, building : int , level : int = 1) -> v
 
 	buildings[coordinates.y][coordinates.x][building] = {"level" : level, "place" : place}
 	
-func remove_building(coordinates : Vector2j, building : int , level : int = 1) -> void:
+func building_remove(coordinates : Vector2j, building : int) -> void:
 	Buildings.validate_building(building)
 	assert(buildings[coordinates.y][coordinates.x].has(building)) # Budynek musi istnieć
 	
-	buildings[coordinates.y][coordinates.x][building] = level
+	assert(buildings[coordinates.y][coordinates.x].erase(building))
+	
+func building_change_level(coordinates : Vector2j, building : int, level : int ) -> void:
+	Buildings.validate_building(building)
+	assert(buildings[coordinates.y][coordinates.x].has(building)) # Budynek musi istnieć
+	assert(level >= 1 && level <= 3)
+	assert(buildings[coordinates.y][coordinates.x][building]["level"] != level) # Nie można zmienić levela na tę samą wersję
+	
+	buildings[coordinates.y][coordinates.x][building]["level"] = level
+	
 	
 # Used to calculate end turn resources change, it don't change 
 func calculate_end_turn_resources_change(player_number) -> Dictionary:
@@ -247,9 +256,19 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 
 # Adds resources from one to another dictionary
 # It does't clamp negative numbers to zero
-func add_resources(base_dict : Dictionary, to_add_dict : Dictionary) -> void:
+static func add_resources(base_dict : Dictionary, to_add_dict : Dictionary, add : bool = true) -> void:
 	for key in base_dict.keys():
-		base_dict[key] += to_add_dict[key]
+		if add:
+			base_dict[key] += to_add_dict[key]
+		else:
+			base_dict[key] -= to_add_dict[key]
+			
+static func are_all_resources_positive(dict : Dictionary) -> bool:
+	for i in dict.values():
+		if i < 0:
+			return false
+	return true
+	
 
 func add_unit(coordinates: Vector2j, unit : int, level : int) -> void:
 	Units.validate_building(unit)
@@ -274,7 +293,7 @@ func move_unit(from : Vector2j, to : Vector2j) -> void:
 	
 	
 
-func get_neighbourhoods(coordinates : Vector2j, player_number : int, _ignore_player_ants : bool = false) -> Array:
+func get_neighbourhoods(coordinates : Vector2j, _player_number : int, _ignore_player_ants : bool = false) -> Array:
 	var neighbour : Array = []
 	
 	if coordinates.x > 0: # Left
