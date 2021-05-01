@@ -30,6 +30,8 @@ func update_buildings_info(user_resources : Dictionary, buildings : Dictionary) 
 	for building in Buildings.buildings_types:
 		var name : String = Buildings.get_bulding_name(building)
 		var index : int = types_of_buildings.find(building)
+		if index == -1: # TODO Remove this, because for now just skips some buildings
+			continue
 		assert(index != -1) # This type must exists
 		
 		var downgrade_button : Control = single_building_nodes[index].find_node("Downgrade")
@@ -54,14 +56,19 @@ func update_buildings_info(user_resources : Dictionary, buildings : Dictionary) 
 		if building in buildings.keys(): 
 			var level : int = buildings[building]["level"]
 			name += " Level " + str(level)
-			downgrade_button.show()
+			if level == 1 && building == Buildings.TYPES_OF_BUILDINGS.ANTHILL: # Cannot destroy level 1 Anthill
+				downgrade_button.hide()
+			else:
+				downgrade_button.show()
+				downgrade_button.set_disabled(false)
 			
-			if level == 3:
+			if level == 3 :
 				 upgrade_button.hide()
 			else:
+				upgrade_button.show()
 				SingleMap.add_resources(cloned_user_resources, Buildings.get_building_to_build(building, level + 1))
-				if SingleMap.are_all_resources_positive(cloned_user_resources):
-					upgrade_button.show()
+				if !SingleMap.are_all_resources_positive(cloned_user_resources):
+					upgrade_button.set_disabled(true)
 		else:
 			name += " not built"
 			downgrade_button.hide()

@@ -195,6 +195,7 @@ func hex_clicked(hex: SingleHex) -> void:
 	current_terrain_overlay_hex_name = hex.get_name()
 	selected_hex = hex
 	show_buildings_menu()
+	gui_update_building_menu(coordinates)
 	$HUD/HUD/Buildings/VBox/Label.set_text("hex menu - field " + coordinates.to_string())
 
 
@@ -274,3 +275,7 @@ func end_turn() -> void:
 
 func gui_update_resources() -> void:
 	$HUD/HUD/Resources.update_resources(player_resources[current_player], single_map.calculate_end_turn_resources_change(current_player))
+	
+func gui_update_building_menu(coordinates : Vector2j) -> void:
+#	if single_map.fields[coordinates.y][coordinates.x] == current_player: # Re-enable this after tests	
+		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[coordinates.y][coordinates.x])
