@@ -1,5 +1,7 @@
 extends Node
 
+## TODO, to w ogłole będzie potrzebne?
+
 # Minusowe oznaczają, że nie można na nie wchodzić
 # Muszą być to wartości następujące po sobie - -1,0,1,2 etc.
 enum TYPES_OF_HEX { TYPE_MIN = -1, NORMAL = 0, FIELD = 1, TREE = 2, TYPE_MAX = 3 }

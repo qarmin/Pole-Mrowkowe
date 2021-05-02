@@ -10,28 +10,39 @@ func _ready() -> void:
 		return
 	Vector2j_test()
 	resources()
+	building_test()
 #	single_map_tests()
-	for _i in range(1):  # Stress test wykonać dla wartości > 5
-		map_test()
-		shrink_map()
-#		save_load_test() # TODO
-		building_test()
+#	for _i in range(1):  # Stress test wykonać dla wartości > 5
+#		map_test()
+#		shrink_map()
+##		save_load_test() # TODO
 	print("Wykonano wszystkie testy")
 	pass
 
 func resources() -> void:
 	if PRINT_TESTS:
 		print("Wykonuję test Resources")
-	assert(SingleMap.are_all_resources_positive({"Roman" : 0, "Wiśnia" : 100}))
-	assert(!SingleMap.are_all_resources_positive({"Roman" : -10, "Wiśnia" : 100}))
-
-# TODO write tests
-#func single_map_tests() -> void:
-#	var single_map : SingleMap = SingleMap.new()
-#	MapCreator.create_map(single_map, Vector2j.new(3, 3), 100)
-#	single_map.fields = [[SingleMap.FIELD_TYPE.DEFAULT_FIELD,1,1],[1,1,0],[1,1,1]]
+		
+	assert(Resources.are_all_resources_positive({"wood" : 0, "food" : 100, "gold" : 52, "water" : 40}))
+	assert(!Resources.are_all_resources_positive({"wood" : -100, "food" : 100, "gold" : 52, "water" : 40}))
 	
+	var dict : Dictionary = {"wood" : -100, "food" : 100, "gold" : 52, "water" : 40}
+	Resources.normalize_resources(dict)
+	assert(dict["wood"] == -100)
+	assert(dict["food"] == 100)
 	
+	var first : Dictionary = {"wood" : -100, "food" : 100, "gold" : 52, "water" : 40}
+	var second : Dictionary = {"wood" : 30, "food" : 150, "gold" : 48, "water" : 120}
+	Resources.add_resources(first, second)
+	assert(first["wood"] == -70 && first["food"] == 250 && first["gold"] == 100 && first["water"] == 160)
+	assert(second["wood"] == 30 && second["food"] == 150 && second["gold"] == 48 && second["water"] == 120) 
+	
+	var roman : Dictionary =  {"wood" : 80, "food" : 40, "gold" : 20, "water" : 5}
+	Resources.scale_resources(roman, 0.7)
+	assert(roman["wood"] == 56)
+	assert(roman["food"] == 28)
+	assert(roman["gold"] == 14)
+	assert(roman["water"] == 3)
 	
 func building_test() -> void:
 	if PRINT_TESTS:

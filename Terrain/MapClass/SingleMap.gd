@@ -1,17 +1,17 @@
 class_name SingleMap
 
 var map: Spatial = null
-var size: Vector2j
-var fields: Array  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
-var units: Array
-var nature: Array
+var size: Vector2j = Vector2j.new(0,0)
+var fields: Array = []  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
+var units: Array = []
+var nature: Array = [] # TODO, pola mogą mieć różne właściwości
 var preview: Image = Image.new()
-var number_of_terrain: int
-var number_of_all_possible_hexes: int
-var players: Array  # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
-var PLAAAYERS : Array
-var buildings: Array  # Tablica z budynkami [y][x]{z} 
-var real_map_size: Vector3  # Rzeczywista wielkość mapy
+var number_of_terrain: int = 0
+var number_of_all_possible_hexes: int  = 0
+var players: Array = []  # Pozycje bazowe na mapie, nie wiem do końca do czego mogłoby się to przydać, ale może być przydatne do stawiania początkowej bazy
+var PLAAAYERS : Array = []
+var buildings: Array = [] # Tablica z budynkami [y][x]{z} 
+var real_map_size: Vector3 = Vector3()  # Rzeczywista wielkość mapy
 
 ## Zmienne sprawdzające czy dla danej mapy była wykonywana dana operacja, przydatne tylko do debugowania
 var was_resetted: bool = false
@@ -242,32 +242,18 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 		for x in range(size.x):
 			if fields[y][x] == player_number:
 				# Adds basic fields 
-				add_resources(dict, Buildings.BASIC_RESOURCES_PER_FIELD)
+				Resources.add_resources(dict, Buildings.BASIC_RESOURCES_PER_FIELD)
 				
 				# Buildings
 				for i in buildings[y][x].keys():
-					add_resources(dict,Buildings.get_building_production(i,buildings[y][x][i]["level"]))
-					add_resources(dict,Buildings.get_building_usage(i,buildings[y][x][i]["level"]))
+					Resources.add_resources(dict,Buildings.get_building_production(i,buildings[y][x][i]["level"]))
+					Resources.add_resources(dict,Buildings.get_building_usage(i,buildings[y][x][i]["level"]))
 #				for i in units[y][x]:
 #					add_resources()
 	
 	
 	return dict
 
-# Adds resources from one to another dictionary
-# It does't clamp negative numbers to zero
-static func add_resources(base_dict : Dictionary, to_add_dict : Dictionary, add : bool = true) -> void:
-	for key in base_dict.keys():
-		if add:
-			base_dict[key] += to_add_dict[key]
-		else:
-			base_dict[key] -= to_add_dict[key]
-			
-static func are_all_resources_positive(dict : Dictionary) -> bool:
-	for i in dict.values():
-		if i < 0:
-			return false
-	return true
 	
 
 func add_unit(coordinates: Vector2j, unit : int, level : int) -> void:

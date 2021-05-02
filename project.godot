@@ -74,6 +74,10 @@ enabled=PoolStringArray(  )
 
 import/open_asset_import/use_fbx=false
 
+[gui]
+
+timers/tooltip_delay_sec=0.01
+
 [input]
 
 game_exit={

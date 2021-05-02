@@ -73,7 +73,7 @@ func get_unit_usage(type : int) -> Dictionary:
 	validate_type(type)
 	for ant in ants:
 		if ant["type"] == type:
-			return ant["usage"]
+			return ant["usage"].duplicate()
 			
 	assert(false, "Failed to found proper ant for this usage") 
 	return {}

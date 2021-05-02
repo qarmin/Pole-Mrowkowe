@@ -243,7 +243,7 @@ func end_turn() -> void:
 		
 		
 		# TODO Here update resources
-		single_map.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
+		Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
 		
 		curr = (curr + 1) % number_of_start_players
 		if curr == 0:
@@ -278,4 +278,4 @@ func gui_update_resources() -> void:
 	
 func gui_update_building_menu(coordinates : Vector2j) -> void:
 #	if single_map.fields[coordinates.y][coordinates.x] == current_player: # Re-enable this after tests	
-		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[coordinates.y][coordinates.x])
+		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[coordinates.y][coordinates.x], coordinates, single_map)

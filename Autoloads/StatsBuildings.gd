@@ -12,7 +12,9 @@ const BASIC_RESOURCES_PER_FIELD : Dictionary = {
 		"food": 5,
 }
 
-# Koszty budowy to L1 -> L2 a później ulepszania L2 -> L3 etc.
+const DOWNGRADE_COST : float = 0.8 # Only 80% of value can be restored from 
+
+# Koszty budowy to L1 -> L2 a później ulepszania L2 -> L3 etc. a nie wartości L0 -> L1, L0 -> L2 etc.
 func _ready() -> void:
 	var default: Dictionary = {
 		"wood": 0,
@@ -47,7 +49,7 @@ func _ready() -> void:
 		[
 			{"wood": 100, "water": 20, "gold": 5, "food": 80},
 			{"wood": 100, "water": 40, "gold": 70, "food": 90},
-			{"wood": 200, "water": 60, "gold": 80, "food": 20},
+			{"wood": 200, "water": 60, "gold": 560, "food": 20},
 		],
 		[
 			{"wood": 2, "water": 2, "gold": 0, "food": 25},
@@ -81,7 +83,7 @@ func _ready() -> void:
 		]
 	)  
 	building_add(
-		"sawmill",
+		"barracks",
 		TYPES_OF_BUILDINGS.BARRACKS,
 		3,
 		[
@@ -106,7 +108,7 @@ func get_building_to_build(type : int, level : int) -> Dictionary:
 	validate_building(type)
 	for single_building in all_buildings:
 		if single_building["type"] == type:
-			return single_building["to_build"][level - 1]
+			return single_building["to_build"][level - 1].duplicate()
 	assert(false, "Failed to find building of type " + str(type))
 	return {}
 	
@@ -114,7 +116,7 @@ func get_building_production(type : int, level : int) -> Dictionary:
 	validate_building(type)
 	for single_building in all_buildings:
 		if single_building["type"] == type:
-			return single_building["production"][level - 1]
+			return single_building["production"][level - 1].duplicate()
 	assert(false, "Failed to find building of type " + str(type))
 	return {}
 	
@@ -122,7 +124,7 @@ func get_building_usage(type : int, level : int) -> Dictionary:
 	validate_building(type)
 	for single_building in all_buildings:
 		if single_building["type"] == type:
-			return single_building["usage"][level - 1]
+			return single_building["usage"][level - 1].duplicate()
 	assert(false, "Failed to find building of type " + str(type))
 	return {}
 
