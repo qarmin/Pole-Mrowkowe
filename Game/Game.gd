@@ -93,6 +93,10 @@ func connect_clickable_signals() -> void:
 			if thing.get_name() != "Ant":
 				continue
 			assert(thing.connect("ant_clicked", self, "ant_clicked") == OK)
+		
+	
+	assert($HUD/HUD/Buildings.connect("upgrade_clicked", self, "handle_upgrade_building_click") == OK)
+	assert($HUD/HUD/Buildings.connect("downgrade_clicked", self, "handle_downgrade_building_click") == OK)
 	
 	
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
@@ -279,3 +283,13 @@ func gui_update_resources() -> void:
 func gui_update_building_menu(coordinates : Vector2j) -> void:
 #	if single_map.fields[coordinates.y][coordinates.x] == current_player: # Re-enable this after tests	
 		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[coordinates.y][coordinates.x], coordinates, single_map)
+
+
+# TODO upgrade buildings
+func handle_upgrade_building_click(type_of_building : int) -> void:
+	Buildings.validate_building(type_of_building)
+	print("Upgrade " + Buildings.get_bulding_name(type_of_building))
+	
+func handle_downgrade_building_click(type_of_building : int) -> void:
+	Buildings.validate_building(type_of_building)
+	print("Downgrade " + Buildings.get_bulding_name(type_of_building))

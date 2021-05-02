@@ -2,6 +2,8 @@ extends Node
 
 enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, SAWMILL=2, BARRACKS=3, BUILDING_MAX = 4 }
 
+const NUMBER_OF_BUILDINGS = 4
+
 var all_buildings: Array = []
 var buildings_types : Array = []
 
@@ -23,7 +25,7 @@ func _ready() -> void:
 		"food": 0,
 	}
 	building_add(
-		"anthill",
+		"Anthill",
 		TYPES_OF_BUILDINGS.ANTHILL,
 		3,
 		[
@@ -43,7 +45,7 @@ func _ready() -> void:
 		]
 	)  
 	building_add(
-		"farm",
+		"Farm",
 		TYPES_OF_BUILDINGS.FARM,
 		3,
 		[
@@ -63,7 +65,7 @@ func _ready() -> void:
 		]
 	)  
 	building_add(
-		"sawmill",
+		"Sawmill",
 		TYPES_OF_BUILDINGS.SAWMILL,
 		3,
 		[
@@ -83,7 +85,7 @@ func _ready() -> void:
 		]
 	)  
 	building_add(
-		"barracks",
+		"Barracks",
 		TYPES_OF_BUILDINGS.BARRACKS,
 		3,
 		[

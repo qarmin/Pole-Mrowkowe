@@ -1,17 +1,19 @@
 extends Control
 
+signal upgrade_clicked
+signal downgrade_clicked
+
 var building_icon : Array = [
 	"res://HUD/BuildingMenu/Anthill.png",
 	"res://HUD/BuildingMenu/Farm.png",
 	"res://HUD/BuildingMenu/Sawmill.png",
-	"res://HUD/BuildingMenu/Anthill.png",
-	"res://HUD/BuildingMenu/Anthill.png",
-	"res://HUD/BuildingMenu/Anthill.png",	
+	"res://HUD/BuildingMenu/Barracks.png",
 	]
 var types_of_buildings : Array = [
 	Buildings.TYPES_OF_BUILDINGS.ANTHILL,
 	Buildings.TYPES_OF_BUILDINGS.FARM,
 	Buildings.TYPES_OF_BUILDINGS.SAWMILL,
+	Buildings.TYPES_OF_BUILDINGS.BARRACKS,
 ]
 	
 var single_building_nodes : Array = []
@@ -21,18 +23,30 @@ func _ready() -> void:
 
 func initialize_gui() -> void:
 	
-	for i in range(6):
+	for i in range(Buildings.NUMBER_OF_BUILDINGS):
 		var node : Node = find_node("Building" + str(i + 1)).get_node("VBox")
 		assert(node!= null)
 		single_building_nodes.append(node)
 		node.get_node("AspectRatioContainer/Icon").set_texture(load(building_icon[i]))
+		
+		# Connect downgrade and upgrade buttons
+		assert(node.find_node("Upgrade").connect("button_up", self, "handle_upgrade_click", [types_of_buildings[i]]) == OK)
+		assert(node.find_node("Downgrade").connect("button_up", self, "handle_downgrade_click", [types_of_buildings[i]]) == OK)
+		
+func handle_upgrade_click(type_of_building : int) -> void:
+	Buildings.validate_building(type_of_building)
+	emit_signal("upgrade_clicked", type_of_building)
+	assert(get_signal_connection_list("upgrade_clicked").size() > 0)
+	
+func handle_downgrade_click(type_of_building : int) -> void:
+	Buildings.validate_building(type_of_building)
+	emit_signal("downgrade_clicked", type_of_building)
+	assert(get_signal_connection_list("downgrade_clicked").size() > 0)
 
 func update_buildings_info(user_resources : Dictionary, buildings : Dictionary, coordinates : Vector2j, single_map : SingleMap) -> void:
 	for building in Buildings.buildings_types:
 		var name : String = Buildings.get_bulding_name(building)
 		var index : int = types_of_buildings.find(building)
-		if index == -1: # TODO Remove this, because for now just skips some buildings
-			continue
 		assert(index != -1) # This type must exists
 		
 		var downgrade_button : Control = single_building_nodes[index].find_node("Downgrade")
@@ -42,27 +56,11 @@ func update_buildings_info(user_resources : Dictionary, buildings : Dictionary, 
 		assert(upgrade_button != null)
 		assert(downgrade_button != null)
 		
-		
-		# HINT should contains:
-		# Upgrade - only shows when upgrade is available:
-		## "Upgrade - 10G, 15W, 14F"
-		## "Usage - 10G, 15W, 14F"
-		## "Production - 15G, 20W, 40F" # If productions of
-		
-		# Downgrade - shows same thing, but dowgrade should be ~80% of value of update
-		
-		# Icon, only production and usage
-		
-		# TODO update hints, Upgrade button etc.
-		# TODO - hints with how much costs buildings
-		# TODO - if not enough resources, just hide button
-		
-		
 		var upgrade_hint_text : String = ""
 		var downgrade_hint_text : String = ""
 		var icon_hint_text : String = ""
 		var cloned_user_resources : Dictionary = user_resources.duplicate(false)
-		if building in buildings.keys(): #Budynek istniej i zawsze ma level >= 1
+		if building in buildings.keys(): #Budynek istnieje i zawsze ma level >= 1
 			var level : int = buildings[building]["level"]
 			name += " Level " + str(level)
 			
@@ -95,7 +93,7 @@ func update_buildings_info(user_resources : Dictionary, buildings : Dictionary, 
 				
 				Resources.scale_resources(to_upgrade,Buildings.DOWNGRADE_COST)
 				
-				downgrade_hint_text += "Downgrade:"
+				downgrade_hint_text += "Downgrade:\n"
 				downgrade_hint_text += "To build:  " + Resources.string_resources_short(to_upgrade) + "\n"
 				downgrade_hint_text += "Production:  " + Resources.string_resources_short(production_before) + "\n"
 				downgrade_hint_text += "Usage:  " + Resources.string_resources_short(usage_before)
@@ -118,7 +116,7 @@ func update_buildings_info(user_resources : Dictionary, buildings : Dictionary, 
 				var usage_later : Dictionary = Buildings.get_building_usage(building, level + 1)
 				var production_later : Dictionary = Buildings.get_building_production(building, level + 1)
 				
-				upgrade_hint_text += "Upgrade:"
+				upgrade_hint_text += "Upgrade:\n"
 				upgrade_hint_text += "To build:  " + Resources.string_resources_short(to_upgrade) + "\n"
 				upgrade_hint_text += "Production:  " + Resources.string_resources_short(production_later) + "\n"
 				upgrade_hint_text += "Usage:  " + Resources.string_resources_short(usage_later)
