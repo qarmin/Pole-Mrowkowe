@@ -185,7 +185,7 @@ static func convert_coordinates_to_name(coordinates : Vector2j, map_size: Vector
 func get_field_owner(coordinates : Vector2j) -> int:
 	return fields[coordinates.y][coordinates.x]
 
-func get_place_for_build(coordinates : Vector2j) -> int:
+func building_get_place_for_build(coordinates : Vector2j) -> int:
 	var builds : Dictionary = buildings[coordinates.y][coordinates.x]
 	var available_places : Array = [0,1,2,3]
 	for building in builds.values():
@@ -196,7 +196,7 @@ func get_place_for_build(coordinates : Vector2j) -> int:
 
 # TODO Dodać funkcję/lub zmienić np. building_add aby zwracała koordynaty budynku(Transform albo Vector3) w zależności od położenia
 
-func get_place_where_is_building(coordinates : Vector2j, building : int) -> Vector3:
+func building_get_place_where_is_building(coordinates : Vector2j, building : int) -> Vector3:
 	Buildings.validate_building(building)
 	assert(buildings[coordinates.y][coordinates.x].has(building)) # Budynek musi istnieć
 	
@@ -211,10 +211,13 @@ func get_place_where_is_building(coordinates : Vector2j, building : int) -> Vect
 	else:
 		return Vector3(0.522,0,0)
 
+func building_is_built(coordinates : Vector2j, building : int) -> bool:
+	return buildings[coordinates.y][coordinates.x].has(building)
+
 func building_add(coordinates : Vector2j, building : int , level : int = 1) -> void:
 	Buildings.validate_building(building)
 	assert(!buildings[coordinates.y][coordinates.x].has(building)) # Budynek nie może istnieć
-	var place : int = get_place_for_build(coordinates)
+	var place : int = building_get_place_for_build(coordinates)
 	assert(place != -1) # Musi mieć miejsce na budowę, tę funkcję można tylko wywołać gdy jesteśmy pewni że coś tu może powstać
 
 	buildings[coordinates.y][coordinates.x][building] = {"level" : level, "place" : place}
@@ -232,6 +235,10 @@ func building_change_level(coordinates : Vector2j, building : int, level : int )
 	assert(buildings[coordinates.y][coordinates.x][building]["level"] != level) # Nie można zmienić levela na tę samą wersję
 	
 	buildings[coordinates.y][coordinates.x][building]["level"] = level
+
+func building_get_level(coordinates : Vector2j, building : int) -> int :
+	Buildings.validate_building(building)
+	return buildings[coordinates.y][coordinates.x][building]["level"]
 	
 	
 # Used to calculate end turn resources change, it don't change 

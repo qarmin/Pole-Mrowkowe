@@ -2,7 +2,7 @@ extends Spatial
 
 var cpu_vs_cpu: bool = false  # Allow to have fully automated game
 
-enum PLAYERS_TYPE {NO_TYPE, HUMAN, CPU}
+enum PLAYERS_TYPE {CPU = 0, HUMAN = 1}
 
 # TODO to ma być ustawiane 
 
@@ -24,6 +24,7 @@ var current_unit_overlay_hex_name: String = ""
 
 var selected_ant: Node = null
 var selected_hex: Node = null
+var selected_coordinates: Vector2j = null
 
 var selection_ant_color_own: Color = Color("#6689d400")
 var selection_ant_color_enemy: Color = Color("#2cd91515")
@@ -38,6 +39,9 @@ onready var single_map: SingleMap = SingleMap.new()
 
 var ant_movement : Array = []
 var ant_movement_overlay = preload("res://Overlay/PossiblePath/PossiblePathOverlay.tscn")
+
+## Current coordinates
+
 
 func _ready() -> void:
 	for _i in range(6):
@@ -56,7 +60,7 @@ func _ready() -> void:
 	$Camera.set_camera_max_positions(single_map.size)
 		
 	# Aktualizacja koloru gracz na mapie
-	$HUD/HUD.update_current_player_text_color(current_player)
+	$HUD/HUD.update_current_player_text_color(current_player,players_type[current_player])
 		
 	# Start Resources
 	player_resources.resize(number_of_start_players)
@@ -127,6 +131,8 @@ func ant_clicked(ant: AntBase) -> void:
 	var coordinates : Vector2j = SingleMap.convert_name_to_coordinates(parent_name, single_map.size)
 	var neighbourhood : Array = single_map.get_neighbourhoods(coordinates,current_player)
 	
+	selected_coordinates = coordinates
+	
 	# Sprawdzenie czy aktualny gracz klika na wroga czy na siebie i dopasowuje do tego kolor
 	if single_map.get_field_owner(coordinates) == current_player:
 		unit_overlay_node.get_material().albedo_color = selection_ant_color_own
@@ -186,6 +192,8 @@ func hex_clicked(hex: SingleHex) -> void:
 
 	var coordinates : Vector2j = SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size)
 
+	selected_coordinates = coordinates
+	
 	# Sprawdzenie czy aktualny gracz klika na wrogie terytorium czy na siebie i dopasowuje do tego kolor
 	if single_map.get_field_owner(coordinates) == current_player:
 		terrain_overlay_node.get_material().albedo_color = selection_hex_color_own
@@ -199,7 +207,7 @@ func hex_clicked(hex: SingleHex) -> void:
 	current_terrain_overlay_hex_name = hex.get_name()
 	selected_hex = hex
 	show_buildings_menu()
-	gui_update_building_menu(coordinates)
+	gui_update_building_menu()
 	$HUD/HUD/Buildings/VBox/Label.set_text("hex menu - field " + coordinates.to_string())
 
 
@@ -265,12 +273,11 @@ func end_turn() -> void:
 	# Aktualizacja zasobów
 	gui_update_resources()
 	# Aktualizacja koloru gracz na mapie
-	$HUD/HUD.update_current_player_text_color(current_player)
-	print("Current player " + str(current_player))
+	$HUD/HUD.update_current_player_text_color(current_player,players_type[current_player])
+#	print("Current player " + str(current_player))
 	if new_turn:
 		round_label.set_text(str(int(round_label.get_text()) + 1))
 	
-	# TODO Update resources
 	hide_menus()
 	terrain_overlay_node.stop()
 	unit_overlay_node.stop()
@@ -280,16 +287,81 @@ func end_turn() -> void:
 func gui_update_resources() -> void:
 	$HUD/HUD/Resources.update_resources(player_resources[current_player], single_map.calculate_end_turn_resources_change(current_player))
 	
-func gui_update_building_menu(coordinates : Vector2j) -> void:
-#	if single_map.fields[coordinates.y][coordinates.x] == current_player: # Re-enable this after tests	
-		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[coordinates.y][coordinates.x], coordinates, single_map)
+func gui_update_building_menu() -> void:
+#	if single_map.fields[selected_coordinates.y][selected_coordinates.x] == current_player: # Re-enable this after tests	
+		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[selected_coordinates.y][selected_coordinates.x], selected_coordinates, single_map)
 
 
-# TODO upgrade buildings
 func handle_upgrade_building_click(type_of_building : int) -> void:
 	Buildings.validate_building(type_of_building)
+	
+	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x]) # Użytkownik musi posiadać to pole aby na nim budować
+	
+	var level : int
+	
+	if single_map.building_is_built(selected_coordinates,type_of_building):
+		# Building exits so we upgrade level
+		level = single_map.building_get_level(selected_coordinates, type_of_building) + 1
+		
+		single_map.building_change_level(selected_coordinates, type_of_building, level)
+	else:
+		# Building doesn't exits, so we build it
+		level = 1
+		
+		single_map.building_add(selected_coordinates, type_of_building, 1)
+		
+		var building_3d : Spatial
+		
+		match type_of_building:
+			Buildings.TYPES_OF_BUILDINGS.ANTHILL:
+				building_3d = MapCreator.Anthill.instance()
+			Buildings.TYPES_OF_BUILDINGS.BARRACKS:
+				building_3d = MapCreator.Barracks.instance()
+			Buildings.TYPES_OF_BUILDINGS.FARM:
+				building_3d = MapCreator.Farm.instance()
+			Buildings.TYPES_OF_BUILDINGS.SAWMILL:
+				building_3d = MapCreator.Sawmill.instance()
+			_:
+				assert(false, "Missing type of building")
+		building_3d.translation = single_map.building_get_place_where_is_building(selected_coordinates, type_of_building)
+		
+		$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).add_child(building_3d)
+		
+	var resources_to_build : Dictionary = Buildings.get_building_to_build(type_of_building,level)
+	Resources.add_resources(player_resources[current_player], resources_to_build, false)
+		
+	assert(Resources.are_all_resources_positive(player_resources[current_player]))
+	
 	print("Upgrade " + Buildings.get_bulding_name(type_of_building))
+	gui_update_building_menu()
+	gui_update_resources()
 	
 func handle_downgrade_building_click(type_of_building : int) -> void:
 	Buildings.validate_building(type_of_building)
+	
+	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x]) # Użytkownik musi posiadać to pole aby na nim budować
+	
+	var level : int = single_map.building_get_level(selected_coordinates, type_of_building)
+	assert(level >= 1 && level <= 3)
+	
+	if level > 1:
+		# We just change level of building
+		single_map.building_change_level(selected_coordinates, type_of_building, level - 1)
+	else:
+		# We must entirelly remove building
+		single_map.building_remove(selected_coordinates, type_of_building)
+		
+		var building_name : String = Buildings.get_bulding_name(type_of_building)
+		
+		$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).get_node(building_name).queue_free()
+		
+	var resources_to_build : Dictionary = Buildings.get_building_to_build(type_of_building,level)
+	Resources.scale_resources(resources_to_build,Buildings.DOWNGRADE_COST)
+	Resources.add_resources(player_resources[current_player], resources_to_build)
+		
+	assert(Resources.are_all_resources_positive(player_resources[current_player]))
+	
 	print("Downgrade " + Buildings.get_bulding_name(type_of_building))
+	gui_update_building_menu()
+	gui_update_resources()
+	

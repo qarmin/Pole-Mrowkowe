@@ -364,28 +364,28 @@ func create_3d_map(single_map: SingleMap) -> void:
 				## Buildings
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
 					var anthill = Anthill.instance()
-					anthill.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+					anthill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
 
 					SH.add_child(anthill)
 					anthill.set_owner(map)
 					
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.FARM):
 					var farm = Farm.instance()
-					farm.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM)
+					farm.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM)
 
 					SH.add_child(farm)
 					farm.set_owner(map)
 					
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.SAWMILL):
 					var sawmill = Sawmill.instance()
-					sawmill.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL)
+					sawmill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL)
 
 					SH.add_child(sawmill)
 					sawmill.set_owner(map)
 					
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.BARRACKS):
 					var barracks = Barracks.instance()
-					barracks.translation = single_map.get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS)
+					barracks.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS)
 
 					SH.add_child(barracks)
 					barracks.set_owner(map)

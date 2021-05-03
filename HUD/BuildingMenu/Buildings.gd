@@ -105,6 +105,7 @@ func update_buildings_info(user_resources : Dictionary, buildings : Dictionary, 
 				 upgrade_button.hide()
 			else:
 				upgrade_button.show()
+				upgrade_button.set_disabled(false)
 				Resources.add_resources(cloned_user_resources, Buildings.get_building_to_build(building, level + 1), false)
 				
 				if !Resources.are_all_resources_positive(cloned_user_resources):
@@ -132,13 +133,14 @@ func update_buildings_info(user_resources : Dictionary, buildings : Dictionary, 
 				icon.set_tooltip("CAN'T BUILD SECOND ANTIHLL!")
 			else:
 				upgrade_button.show()
+				upgrade_button.set_disabled(false)
 			
 			
 				Resources.add_resources(cloned_user_resources, Buildings.get_building_to_build(building, 1), false)
 				if !Resources.are_all_resources_positive(cloned_user_resources):
 					upgrade_button.set_disabled(true)
 					upgrade_hint_text += "YOU DON'T HAVE ENOUGH RESOURCES!\n"
-				if single_map.get_place_for_build(coordinates) == -1:
+				if single_map.building_get_place_for_build(coordinates) == -1:
 					upgrade_button.set_disabled(true)
 					upgrade_hint_text += "YOU CAN BUILD MAX 4 BUILDINGS ON HEX!\n"
 					

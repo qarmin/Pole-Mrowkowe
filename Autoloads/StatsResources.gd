@@ -19,8 +19,8 @@ func normalize_resources(res : Dictionary) -> void:
 func string_resources_short(res : Dictionary) -> String:
 	validate_resources(res)
 	var text : String = ""
-	text += str(res["wood"]) + "W "
 	text += str(res["gold"]) + "G "
+	text += str(res["wood"]) + "W "
 	text += str(res["food"]) + "F "
 	
 	return text
