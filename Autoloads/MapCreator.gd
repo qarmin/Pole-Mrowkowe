@@ -42,10 +42,10 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	assert(!is_instance_valid(single_map.map))
 	assert(hex_number.x > 0 && hex_number.y > 0)
 	assert(hex_number.x * hex_number.y >= 5)
-	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
+	assert(chance_to_terrain > 0 && chance_to_terrain < 6)  # 1-5 zakres
 	single_map.reset()
 	single_map.set_size(hex_number)
-	if chance_to_terrain == 100:  # Tworzy pełną mapę
+	if chance_to_terrain == 5:  # Tworzy pełną mapę
 		single_map.initialize_fields(SingleMap.FIELD_TYPE.DEFAULT_FIELD)
 		single_map.calculate_number_of_terrains()
 		return
@@ -73,8 +73,9 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	var second_try: bool = false
 
 	# Liczba potrzebnych hexów, aby mapa mogła zostać uznana za grywalną
-	# Liczba 5 określa liczbę graczy + 1(wymagane jest to przez inny algorytm)
-	var needed_hexes: int = max(5, hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0, 5) * 0.75))
+	# Liczba 5 określa liczbę maksymalną graczy + 1(wymagane jest to przez inny algorytm)
+# warning-ignore:narrowing_conversion
+	var needed_hexes: int = max(5, hex_number.x * hex_number.y * pow(chance_to_terrain / 5.0, 2))
 
 	# Zlicza ile terenów zostało
 	# Punkt (0,0) jest już dodany
@@ -109,7 +110,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 							var cep_y = current_element.y + help_array[h][i][1]
 							if !Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && !Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
 								assert(single_map.fields[cep_y][cep_x] == SingleMap.FIELD_TYPE.NO_FIELD)
-								var is_terrain: bool = randi() % 100 < chance_to_terrain
+								var is_terrain: bool = randi() % 5 < chance_to_terrain
 								if is_terrain:
 									single_map.fields[cep_y][cep_x] = SingleMap.FIELD_TYPE.DEFAULT_FIELD
 									to_check.append(Vector2j.new(cep_x, cep_y))
@@ -312,7 +313,7 @@ func pm_fully_choose_point_from_distance_array(array: Array, number_of_terrain: 
 			break
 
 	if biggest_numbers.size() == 0:
-		# TODO - To może się zdarzyć gdy liczba graczy jest równa liczbie terenów
+		# TODO - To może się zdarzyć gdy liczba graczy jest równa liczbie terenów, dlatego należy przecidziałać temu już na etapie blokady możliwości nadania zbyt małej ilości terenów
 		assert(false)
 		return Vector2j.new(0, 0)
 

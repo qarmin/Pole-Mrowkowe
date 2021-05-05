@@ -51,7 +51,7 @@ func _ready() -> void:
 		ant_movement.append(node)
 
 	# TODO, generacja nie powinna tu być, lecz zależeć od wcześniejszych wyborów gracza
-	MapCreator.create_map(single_map, Vector2j.new(6, 6), 80)
+	MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
 	MapCreator.populate_map_randomly(single_map, 50)
 	MapCreator.create_3d_map(single_map)
 	add_child(single_map.map)
@@ -166,8 +166,8 @@ func possible_ant_movements(array_of_coordinates: Array = [], hide: bool = true)
 			get_node("Map").get_node(SingleMap.convert_coordinates_to_name(array_of_coordinates[i], single_map.size)).add_child(ant_movement[i])
 			ant_movement[i].show()
 
-			print("Possible ant movements " + array_of_coordinates[i].to_string())
-			print(SingleMap.convert_coordinates_to_name(array_of_coordinates[i], single_map.size))
+#			print("Possible ant movements " + array_of_coordinates[i].to_string())
+#			print(SingleMap.convert_coordinates_to_name(array_of_coordinates[i], single_map.size))
 		else:
 			ant_movement[i].hide()
 	for coordinates in array_of_coordinates.size():
@@ -250,13 +250,12 @@ func end_turn() -> void:
 
 	var new_turn: bool = false
 	var curr: int = current_player
-	# TODO Usunąć pętlę while_true, ponieważ na chwilę obecną funkcje
+	# TODO Usunąć pętlę while_true, ponieważ na chwilę obecnie aktualnie gracze CPU są ignorowani
 	while true:
 		if get_active_players() == 1:
 			print("Wygrana")  # TODO, dodać okno z wygraną czy porażką czy coś takiego
 			return
 
-		# TODO Here update resources
 		Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
 
 		curr = (curr + 1) % number_of_start_players
@@ -292,8 +291,11 @@ func gui_update_resources() -> void:
 
 
 func gui_update_building_menu() -> void:
-#	if single_map.fields[selected_coordinates.y][selected_coordinates.x] == current_player: # Re-enable this after tests
-	$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[selected_coordinates.y][selected_coordinates.x], selected_coordinates, single_map)
+	if single_map.fields[selected_coordinates.y][selected_coordinates.x] == current_player:  # Re-enable this after tests
+		$HUD/HUD/Buildings.show()
+		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[selected_coordinates.y][selected_coordinates.x], selected_coordinates, single_map)
+	else:
+		$HUD/HUD/Buildings.hide()
 
 
 func handle_upgrade_building_click(type_of_building: int) -> void:

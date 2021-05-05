@@ -92,7 +92,7 @@ func initialize_fields(type_of_field: int):
 
 
 ## Oblicza liczbę terenów na mapie
-## Należy ją wykonać po ustawieniu tablicy fields
+## Należy ją wykonać po zakończeniu wypełniania tablicy fields
 func calculate_number_of_terrains():
 	number_of_terrain = 0
 	for y in range(size.y):
