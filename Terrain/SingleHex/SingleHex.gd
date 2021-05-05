@@ -3,6 +3,7 @@ class_name SingleHex
 
 signal hex_clicked
 
+
 func _on_StaticBody_input_event(_camera, event, _click_position, _click_normal, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == BUTTON_LEFT && event.is_pressed():

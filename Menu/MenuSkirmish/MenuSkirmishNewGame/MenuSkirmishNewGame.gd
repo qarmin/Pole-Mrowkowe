@@ -16,11 +16,8 @@ func _on_Generate_Map_button_up() -> void:
 	var single_map: SingleMap = SingleMap.new()
 	var image_texture: ImageTexture = ImageTexture.new()
 #	MapCreator.create_full_map(single_map,Vector2j.new(30,30))
-	while true:
-		MapCreator.create_map(single_map, Vector2j.new(size_of_map.x, size_of_map.y), chance_to_terrain)
-		if MapCreator.populate_map_realistically(single_map, number_of_cpu_players + 1):
-			break
-		single_map.reset()
+	MapCreator.create_map(single_map, Vector2j.new(size_of_map.x, size_of_map.y), chance_to_terrain)
+	MapCreator.populate_map_realistically(single_map, number_of_cpu_players + 1)
 	PreviewGenerator.generate_preview_image(single_map)
 
 	image_texture.create_from_image(single_map.preview, 0)  # Filtrowanie - flaga 4 - tworzy na krańcach dziwne "cienie"

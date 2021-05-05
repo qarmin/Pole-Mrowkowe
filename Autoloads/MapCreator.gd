@@ -7,7 +7,7 @@ var Ant: PackedScene = load("res://Units/Ant.tscn")
 
 # Buildings
 var Anthill: PackedScene = load("res://Models/Buildings/Anthill/Anthill.tscn")
-var Farm: PackedScene = load("res://Models/Buildings/Farm/Farm.tscn") 
+var Farm: PackedScene = load("res://Models/Buildings/Farm/Farm.tscn")
 var Sawmill: PackedScene = load("res://Models/Buildings/Sawmill/Sawmill.tscn")
 var Barracks: PackedScene = load("res://Models/Buildings/Barracks/Barracks.tscn")
 
@@ -41,7 +41,7 @@ func _ready() -> void:
 func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: int) -> void:
 	assert(!is_instance_valid(single_map.map))
 	assert(hex_number.x > 0 && hex_number.y > 0)
-	assert(hex_number.x * hex_number.y >= 4)
+	assert(hex_number.x * hex_number.y >= 5)
 	assert(chance_to_terrain > 0 && chance_to_terrain < 101)
 	single_map.reset()
 	single_map.set_size(hex_number)
@@ -56,19 +56,31 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	var checked: Array = []
 	var current_element: Vector2j = Vector2j.new(0, 0)
 
+	# Resetowanie tablicy
+	for x in range(hex_number.x):
+		for y in range(hex_number.y):
+			single_map.fields[y][x] = SingleMap.FIELD_TYPE.NO_FIELD
+
+	## Wybrany ląd (0,0) - ma to wiele plusów
+	## Przy przycinaniu trzeba mieć na uwadzę jedynie maksymalny x oraz y
+	## W przyszłości nie trzeba będzie brać pod uwagę możliwości, że hexy będą rozpoczynały się od linii parzystej
+	## przez co obliczenia będą uproszczone
+	single_map.fields[0][0] = SingleMap.FIELD_TYPE.DEFAULT_FIELD
+	to_check.append(Vector2j.new(0, 0))
+
+	# Zmienna określająca czy za pierwszym razem powiodło się tworzenie mapy.
+	# Za piewszym razem
+	var second_try: bool = false
+
+	# Liczba potrzebnych hexów, aby mapa mogła zostać uznana za grywalną
+	# Liczba 5 określa liczbę graczy + 1(wymagane jest to przez inny algorytm)
+	var needed_hexes: int = max(5, hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0, 5) * 0.75))
+
+	# Zlicza ile terenów zostało
+	# Punkt (0,0) jest już dodany
+	var number_of_terrains: int = 1
+
 	while true:
-		# Resetowanie tablicy
-		for x in range(hex_number.x):
-			for y in range(hex_number.y):
-				single_map.fields[y][x] = SingleMap.FIELD_TYPE.NO_FIELD
-
-		## Wybrany ląd (0,0) - ma to wiele plusów
-		## Przy przycinaniu trzeba mieć na uwadzę jedynie maksymalny x oraz y
-		## W przyszłości nie trzeba będzie brać pod uwagę możliwości, że hexy będą rozpoczynały się od linii parzystej
-		## przez co obliczenia będą uproszczone
-		single_map.fields[0][0] = SingleMap.FIELD_TYPE.DEFAULT_FIELD
-		to_check.append(Vector2j.new(0, 0))
-
 		#SingleMap.print_map(single_map.fields)
 		while to_check.size() > 0:
 			current_element = to_check.pop_front()
@@ -89,6 +101,10 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 							&& (current_element.y + help_array[h][i][1] >= 0)
 							&& (current_element.y + help_array[h][i][1] < hex_number.y)
 						):
+							if second_try && number_of_terrains >= needed_hexes:
+								# Znaleziono wystarczająco hexów, więc można przerwać sprawdzanie
+								to_check.clear()
+								break
 							var cep_x = current_element.x + help_array[h][i][0]
 							var cep_y = current_element.y + help_array[h][i][1]
 							if !Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && !Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
@@ -97,11 +113,12 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 								if is_terrain:
 									single_map.fields[cep_y][cep_x] = SingleMap.FIELD_TYPE.DEFAULT_FIELD
 									to_check.append(Vector2j.new(cep_x, cep_y))
+									number_of_terrains += 1
 								else:
 									single_map.fields[cep_y][cep_x] = SingleMap.FIELD_TYPE.NO_FIELD
 									checked.append(Vector2j.new(cep_x, cep_y))
 
-			#SingleMap.print_map(single_map.fields)
+			# Sprawdzenie czy przypadkiem nie chcę uznać pola pustego jako pola do przypsania mu sąsiada
 			for i in to_check:
 				assert(single_map.fields[i.y][i.x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD)
 
@@ -110,35 +127,34 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 			checked.append(current_element)
 
 		# Jeśli wygenerowano stanowczo za mało hexów, to powtarzamy ich tworzenie
-		single_map.calculate_number_of_terrains()
-
-# warning-ignore:narrowing_conversion
-		var needed_hexes: int = max(2, hex_number.x * hex_number.y * (pow(chance_to_terrain / 100.0, 5) * 0.75))
-
-		if single_map.number_of_terrain >= needed_hexes:
+		# lecz tym razem przerywamy gdy ich liczba jest równa 0
+		if number_of_terrains >= needed_hexes:
 			break
 
-#		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(single_map.number_of_terrain) + " a potrzebne było " + str(needed_hexes))
-		#	SingleMap.print_map(array)
+		# Czyścimy tablice
 		to_check.clear()
 		checked.clear()
 
+#		print("Nie udało mi się stworzyć poprawnego algorytmu - Wyznaczyłem " + str(number_of_terrains) + " a potrzebne było " + str(needed_hexes))
+#		SingleMap.print_map(single_map.fields)
+
+		# Od nowa określa, że trzeba znaleźć wszystkich sąsiadów terenów, które
+		# aktualnie są już obecne
+		for x in range(hex_number.x):
+			for y in range(hex_number.y):
+				if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
+					to_check.append(Vector2j.new(x, y))
+
+	single_map.calculate_number_of_terrains()
 	single_map.shrink_map()
 	return
 
 
 ## Wypełnia mapy w przydatny, określony z góry sposób który jest zwykle używany w grach
-func populate_map_realistically(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> bool:
-#	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
-#	assert(single_map.number_of_terrain > number_of_players)
+func populate_map_realistically(single_map: SingleMap, number_of_players: int = GameSettings.MAX_TEAMS, max_number_of_additional_terrains: int = 0) -> void:
+	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
+	assert(single_map.number_of_terrain > number_of_players)  # Must be greater, not equal because algorithms works in that way
 	assert(max_number_of_additional_terrains >= 0)
-
-	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
-#		print("Nieprawidłowa liczba graczy - " + str(number_of_players))
-		return false
-	if not (single_map.number_of_terrain > number_of_players):
-#		print("Liczba terenów " + str(single_map.number_of_terrain) + ", musi być większa niż liczba graczy - " + str(number_of_players))
-		return false
 
 	var temp_fields: Array
 	var curr: Vector2j = Vector2j.new(0, 0)
@@ -162,9 +178,11 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 		single_map.fields[single_map.players[i].y][single_map.players[i].x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + i
 
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
+
+
 #	var terrain_to_check : Array = []
 #	var terrain_checked : Array = []
-	# TODO - Dodać określoną liczbę początkową pól(nie wiem jak do końca to zaimplementować), póki co jest jedno pole dla każdego gracza.
+# TODO - Dodać określoną liczbę początkową pól(nie wiem jak do końca to zaimplementować), póki co jest jedno pole dla każdego gracza.
 #	while(max_number_of_additional_terrains > 0):
 #		for i in range(single_map.players.size()):
 #
@@ -172,7 +190,7 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 #
 #			pass
 #		max_number_of_additional_terrains -= 1
-	# TODO - Dodać podstawowe budynki do mapy podczas tworzeni - np. główne mrowisko
+# TODO - Dodać podstawowe budynki do mapy podczas tworzeni - np. główne mrowisko
 
 #	## START PRINT MAP
 #	SingleMap.print_map(single_map.fields)
@@ -182,25 +200,15 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 
 #	SingleMap.print_map(single_map.fields)
 #	## END PRINT MAP
-	return true
 
 
 ## Dowolnie wypełnia pola mrówkami, kolorami oraz budynkami
-func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> bool:
+func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
 	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
 	assert(ant_chance >= 0 && ant_chance < 101)
 	assert(single_map.size.x * single_map.size.y >= 4)
 	assert(single_map.size.x > 0 && single_map.size.y > 0)
 	SingleMap.validate_sizes_of_arrays(single_map)
-
-	if not (number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS):
-		return false
-	if not (ant_chance >= 0 && ant_chance < 101):
-		return false
-	if not (single_map.size.x * single_map.size.y >= 2):
-		return false
-	if not (single_map.size.x > 0 && single_map.size.y > 0):
-		return false
 
 	var choosen_player: int
 
@@ -216,15 +224,13 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
 
 				if randi() % 2 == 0:
-					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL,1)
+					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL, randi() % 3 + 1)
 				if randi() % 2 == 0:
-					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM,2)
+					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM, randi() % 3 + 1)
 				if randi() % 2 == 0:
-					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL,3)
+					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.SAWMILL, randi() % 3 + 1)
 				if randi() % 2 == 0:
-					single_map.building_add(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS,3)
-
-	return true
+					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS, randi() % 3 + 1)
 
 
 ## Tworzy tablicę odległości danych pól od graczy
@@ -364,32 +370,31 @@ func create_3d_map(single_map: SingleMap) -> void:
 				## Buildings
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
 					var anthill = Anthill.instance()
-					anthill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+					anthill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL)
 
 					SH.add_child(anthill)
 					anthill.set_owner(map)
-					
+
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.FARM):
 					var farm = Farm.instance()
-					farm.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.FARM)
+					farm.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM)
 
 					SH.add_child(farm)
 					farm.set_owner(map)
-					
+
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.SAWMILL):
 					var sawmill = Sawmill.instance()
-					sawmill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.SAWMILL)
+					sawmill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.SAWMILL)
 
 					SH.add_child(sawmill)
 					sawmill.set_owner(map)
-					
+
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.BARRACKS):
 					var barracks = Barracks.instance()
-					barracks.translation = single_map.building_get_place_where_is_building(Vector2j.new(x,y),Buildings.TYPES_OF_BUILDINGS.BARRACKS)
+					barracks.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS)
 
 					SH.add_child(barracks)
 					barracks.set_owner(map)
-				
 
 	pass
 

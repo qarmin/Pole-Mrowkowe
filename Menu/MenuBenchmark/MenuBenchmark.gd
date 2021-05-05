@@ -11,12 +11,12 @@ func show_benchmarks() -> void:
 
 	# Wynik 99% - Usuwa ~1% zbyt dużych/małych wyników, póki co nie potrzebuje bo raczej nie działa poprawnie
 	for i in range(Benchmark.STAGES):
-		if Benchmark.time_frame[i].size() < 10: # Nie chcę zbyt dużo obcinać wyników
+		if Benchmark.time_frame[i].size() < 10:  # Nie chcę zbyt dużo obcinać wyników
 			continue
 
 		for _j in range(Benchmark.time_frame[i].size() / 100 + 2):
-			var smallest_index : int = -1
-			var smallest_value : float = 10000
+			var smallest_index: int = -1
+			var smallest_value: float = 10000
 
 			for k in range(Benchmark.time_frame[i].size()):
 				if Benchmark.time_frame[i][k] < smallest_value:
@@ -24,15 +24,15 @@ func show_benchmarks() -> void:
 					smallest_value = Benchmark.time_frame[i][k]
 			Benchmark.time_frame[i].remove(smallest_index)
 
-			var biggest_index : int = -1
-			var biggest_value : float = -1
+			var biggest_index: int = -1
+			var biggest_value: float = -1
 
 			for k in range(Benchmark.time_frame[i].size()):
 				if Benchmark.time_frame[i][k] > biggest_value:
 					biggest_index = k
 					biggest_value = Benchmark.time_frame[i][k]
 			Benchmark.time_frame[i].remove(biggest_index)
-			
+
 	# Zminiejsza ilość pomiarów na < 1000
 	for i in range(Benchmark.STAGES):
 		while Benchmark.time_frame[i].size() > 700:
@@ -43,12 +43,11 @@ func show_benchmarks() -> void:
 				current_index += 2
 			Benchmark.time_frame[i] = temp_array
 
-
 	# Ustala jaka najodpowidniejsza będzie dla grafu skala, póki co używam stałej
 	for i in range(Benchmark.STAGES):
 		if Benchmark.time_frame[i].size() > 0:
-			if (GRAPH_SIZE_Y / max(1.0 / max(Benchmark.time_frame[i].min(),0.001), MAX_FPS)) > step_y:
-				MAX_FPS = max(1.0 / max(Benchmark.time_frame[i].min(),0.001), MAX_FPS)
+			if (GRAPH_SIZE_Y / max(1.0 / max(Benchmark.time_frame[i].min(), 0.001), MAX_FPS)) > step_y:
+				MAX_FPS = max(1.0 / max(Benchmark.time_frame[i].min(), 0.001), MAX_FPS)
 	step_y = GRAPH_SIZE_Y / MAX_FPS
 
 	# Czyści wszystkie linie

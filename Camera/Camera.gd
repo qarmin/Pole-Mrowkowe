@@ -29,17 +29,18 @@ func _ready() -> void:
 	rot_x = get_rotation().y
 	rot_y = get_rotation().x
 
-func set_camera_max_positions(size : Vector2j) -> void:
-	var x_dimension : float = size.x * MapCreator.SINGLE_HEX_DIMENSION.x
-	var z_dimension : float = (size.y *0.75 + 0.25) * MapCreator.SINGLE_HEX_DIMENSION.y # No, z is no typo
-	
+
+func set_camera_max_positions(size: Vector2j) -> void:
+	var x_dimension: float = size.x * MapCreator.SINGLE_HEX_DIMENSION.x
+	var z_dimension: float = (size.y * 0.75 + 0.25) * MapCreator.SINGLE_HEX_DIMENSION.y  # No, z is no typo
+
 	# On small maps allow to use cameras more freely
 	x_dimension = max(x_dimension, 15)
 	z_dimension = max(z_dimension, 15)
-	
-	var scalar : float = 0.8
-	camera_max_position = Vector3(x_dimension * scalar,10,z_dimension * scalar)
-	camera_min_position = Vector3(-x_dimension * scalar,3,-z_dimension * scalar)
+
+	var scalar: float = 0.8
+	camera_max_position = Vector3(x_dimension * scalar, 10, z_dimension * scalar)
+	camera_min_position = Vector3(-x_dimension * scalar, 3, -z_dimension * scalar)
 
 
 func _input(event) -> void:
@@ -101,7 +102,7 @@ func _input(event) -> void:
 			rot_x -= event.relative.x * LOOKAROUND_SPEED
 			rot_y -= event.relative.y * LOOKAROUND_SPEED
 
-			# Tylko 
+			# Tylko
 			#rot_x = clamp(rot_x,-0.6,-0.3)
 			rot_y = clamp(rot_y, -0.9, -0.5)
 

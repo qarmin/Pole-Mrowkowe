@@ -6,9 +6,11 @@ class_name Vector2j
 var x: int = 0
 var y: int = 0
 
+
 func _init(p_x: int, p_y: int) -> void:
 	x = p_x
 	y = p_y
+
 
 static func is_in_array(array: Array, vector: Vector2j) -> bool:  # : Vector2j) -> bool: #BUG
 	assert(vector.x >= 0 && vector.y >= 0)
