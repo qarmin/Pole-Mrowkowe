@@ -3,7 +3,12 @@ extends Node
 ### Klasa do tworzenia map, ich populacji oraz środkowania
 
 var SingleHex: PackedScene = load("res://Terrain/SingleHex/SingleHex.tscn")
-var Ant: PackedScene = load("res://Units/Ant.tscn")
+
+var AntWorker: PackedScene = load("res://Units/Types/Worker/Worker.tscn")
+var AntSoldier: PackedScene = load("res://Units/Types/Soldier/Soldier.tscn")
+var AntFlying: PackedScene = load("res://Units/Types/Flying/Flying.tscn")
+
+var AntsArray: Array = [AntWorker, AntSoldier, AntFlying]
 
 # Buildings
 var Anthill: PackedScene = load("res://Models/Buildings/Anthill/Anthill.tscn")
@@ -358,13 +363,14 @@ func create_3d_map(single_map: SingleMap) -> void:
 				## Units
 				if single_map.units[y][x] != Units.TYPES_OF_ANTS.NO_UNIT:
 					# TODO Dodać więcej typów mrówek
-					var ant: Spatial = Ant.instance()
+					var ant: Spatial = AntsArray[randi() % AntsArray.size()].instance()
+
 					ant.translation = Vector3(0, 1.192, 0)
 
 					if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
-						ant.get_node("Outfit").set_surface_material(0, ant_base)
+						ant.find_node("Outfit").set_surface_material(0, ant_base)
 					else:
-						ant.get_node("Outfit").set_surface_material(0, ant_texture_array[single_map.fields[y][x] - SingleMap.FIELD_TYPE.PLAYER_FIRST])
+						ant.find_node("Outfit").set_surface_material(0, ant_texture_array[single_map.fields[y][x] - SingleMap.FIELD_TYPE.PLAYER_FIRST])
 					SH.add_child(ant)
 					ant.set_owner(map)
 					pass

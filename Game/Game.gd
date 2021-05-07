@@ -95,7 +95,7 @@ func connect_clickable_signals() -> void:
 		assert(single_hex.get_name().begins_with("SingleHex"))
 		assert(single_hex.connect("hex_clicked", self, "hex_clicked") == OK)
 		for thing in single_hex.get_children():
-			if thing.get_name() != "Ant":
+			if !thing.get_name().begins_with("ANT"):
 				continue
 			assert(thing.connect("ant_clicked", self, "ant_clicked") == OK)
 

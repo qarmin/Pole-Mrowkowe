@@ -127,6 +127,14 @@ func update_buildings_info(user_resources: Dictionary, buildings: Dictionary, co
 
 		else:  # Level is always 0
 			name += " not built"
+
+			# Icon
+			icon_hint_text += "Production:  " + Resources.string_resources_short(Resources.get_resources()) + "\n"
+			icon_hint_text += "Usage:  " + Resources.string_resources_short(Resources.get_resources())
+
+			icon.set_tooltip(icon_hint_text)
+
+			# Downgrade
 			downgrade_button.hide()
 			if building == Buildings.TYPES_OF_BUILDINGS.ANTHILL:  # Can't built second anthill
 				upgrade_button.hide()

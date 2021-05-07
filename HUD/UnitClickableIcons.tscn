@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://HUD/UnitMenu/MoveUnit.png" type="Texture" id=1]
+
+[node name="UnitClickableIcons" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = ExtResource( 1 )
