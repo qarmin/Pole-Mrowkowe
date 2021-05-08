@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/UnitsIcons/Unit.png" type="Texture" id=2]
+[ext_resource path="res://HUD/UnitMenu/MoveUnit.png" type="Texture" id=3]
+[ext_resource path="res://HUD/UnitMenu/DestroyUnit.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -73,6 +75,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="VBox/MarginContainer/VBox"]
 margin_right = 220.0
 margin_bottom = 20.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 2 )
 text = "Szczypak"
 align = 1
@@ -101,6 +104,7 @@ size_flags_vertical = 3
 [node name="Strength" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Names"]
 margin_right = 50.0
 margin_bottom = 20.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Strength"
 
@@ -108,6 +112,7 @@ text = "Strength"
 margin_top = 24.0
 margin_right = 50.0
 margin_bottom = 44.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Obrona"
 
@@ -115,6 +120,7 @@ text = "Obrona"
 margin_top = 48.0
 margin_right = 50.0
 margin_bottom = 68.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Ants"
 
@@ -128,6 +134,7 @@ size_flags_vertical = 3
 [node name="Strength" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Numbers"]
 margin_right = 166.0
 margin_bottom = 20.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "30 (16 + 14)"
 
@@ -135,6 +142,7 @@ text = "30 (16 + 14)"
 margin_top = 24.0
 margin_right = 166.0
 margin_bottom = 44.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "24 (24 + 0)"
 
@@ -142,5 +150,40 @@ text = "24 (24 + 0)"
 margin_top = 48.0
 margin_right = 166.0
 margin_bottom = 68.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "80/100"
+
+[node name="Control" type="Control" parent="VBox/MarginContainer"]
+margin_left = 5.0
+margin_right = 225.0
+margin_bottom = 181.0
+
+[node name="MoveUnit" type="TextureButton" parent="VBox/MarginContainer/Control"]
+anchor_left = 0.97
+anchor_top = 0.03
+anchor_right = 0.97
+anchor_bottom = 0.03
+margin_left = -20.0
+margin_top = -7.15256e-06
+margin_bottom = 20.0
+hint_tooltip = "TODO"
+texture_normal = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DestroyUnit" type="TextureButton" parent="VBox/MarginContainer/Control"]
+anchor_left = 0.97
+anchor_top = 0.97
+anchor_right = 0.97
+anchor_bottom = 0.97
+margin_left = -20.0
+margin_top = -20.0
+hint_tooltip = "TODO"
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

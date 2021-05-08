@@ -84,7 +84,7 @@ func initialize_fields(type_of_field: int):
 		nature.append([])
 		for _x in range(size.x):
 			fields[y].append(type_of_field)
-			units[y].append(Units.TYPES_OF_ANTS.NO_UNIT)
+			units[y].append({})
 			buildings[y].append({})
 			nature[y].append(Terrain.TYPES_OF_HEX.NORMAL)
 	assert(fields.size() == units.size())
@@ -259,25 +259,25 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 		for x in range(size.x):
 			if fields[y][x] == player_number:
 				# Adds basic fields
-				Resources.add_resources(dict, Buildings.BASIC_RESOURCES_PER_FIELD)
+				Resources.add_resources(dict, Buildings.BASIC_RESOURCES_PER_FIELD,true)
 
 				# Buildings
 				for i in buildings[y][x].keys():
-					Resources.add_resources(dict, Buildings.get_building_production(i, buildings[y][x][i]["level"]))
-					Resources.add_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]))
-#				for i in units[y][x]:
-#					add_resources()
+					Resources.add_resources(dict, Buildings.get_building_production(i, buildings[y][x][i]["level"]),true)
+					Resources.add_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]),false)
+				# Units - only consume 
+				for i in units[y][x].keys():
+					Resources.add_resources(dict, Units.get_unit_usage(units[y][x]["type"],units[y][x]["level"]),false)
 
 	return dict
 
 
 func add_unit(coordinates: Vector2j, unit: int, level: int) -> void:
-	Units.validate_building(unit)
+	Units.validate_type(unit)
 	assert(units[coordinates.y][coordinates.x].empty())  # Jednostka nie może istnieć
 	assert(level >= 1 && level <= 3)
-	var get_unit_usage: Dictionary = Units.get_unit_usage(unit)
 
-	units[coordinates.y][coordinates.x] = {"type": unit, "level": level, "usage": get_unit_usage}
+	units[coordinates.y][coordinates.x] = {"type": unit, "level": level}
 
 
 func remove_unit(coordinates: Vector2j) -> void:

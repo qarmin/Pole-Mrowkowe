@@ -15,9 +15,9 @@ func validate_resources(res: Dictionary) -> void:
 func normalize_resources(res: Dictionary) -> void:
 	validate_resources(res)
 
-	for i in res.values():
-		if i < 0:
-			i = 0
+	for i in res.keys():
+		if res[i] < 0:
+			res[i] = 0
 
 
 func string_resources_short(res: Dictionary) -> String:
@@ -36,7 +36,7 @@ func scale_resources(res: Dictionary, scalar: float):
 
 
 # Adds or remove resources from base dictionary
-func add_resources(base_dict: Dictionary, to_add_dict: Dictionary, add: bool = true) -> void:
+func add_resources(base_dict: Dictionary, to_add_dict: Dictionary, add: bool) -> void:
 	validate_resources(base_dict)
 	validate_resources(to_add_dict)
 	for key in base_dict.keys():
@@ -44,7 +44,6 @@ func add_resources(base_dict: Dictionary, to_add_dict: Dictionary, add: bool = t
 			base_dict[key] += to_add_dict[key]
 		else:
 			base_dict[key] -= to_add_dict[key]
-
 
 # Only checks if some of resources are negative
 func are_all_resources_positive(dict: Dictionary) -> bool:

@@ -6,12 +6,17 @@ const PRINT_TESTS: bool = true
 # Używane tylko przy zmianach kodu dlatego, że spowalnia działanie gry
 func _ready() -> void:
 	# Przydatne tylko podczas zmiany kodu, podczas tworzenia gry tylko niepotrzebnie zwiększa czas do uruchomienia
-	if true:
+	if false:
 		return
 	Vector2j_test()
 	resources()
 	building_test()
-	for _i in range(1):  # Stress test wykonać dla wartości > 5
+	if true:
+		return
+	for _i in range(10):  # Stress test wykonać dla wartości > 5
+		Vector2j_test()
+		resources()
+		building_test()
 		map_test()
 		shrink_map()
 #		save_load_test() # TODO
@@ -28,12 +33,12 @@ func resources() -> void:
 
 	var dict: Dictionary = {"wood": -100, "food": 100, "gold": 52, "water": 40}
 	Resources.normalize_resources(dict)
-	assert(dict["wood"] == -100)
+	assert(dict["wood"] == 0)
 	assert(dict["food"] == 100)
 
 	var first: Dictionary = {"wood": -100, "food": 100, "gold": 52, "water": 40}
 	var second: Dictionary = {"wood": 30, "food": 150, "gold": 48, "water": 120}
-	Resources.add_resources(first, second)
+	Resources.add_resources(first, second, true)
 	assert(first["wood"] == -70 && first["food"] == 250 && first["gold"] == 100 && first["water"] == 160)
 	assert(second["wood"] == 30 && second["food"] == 150 && second["gold"] == 48 && second["water"] == 120)
 
@@ -49,7 +54,7 @@ func building_test() -> void:
 	if PRINT_TESTS:
 		print("Wykonuję test Budowania")
 	var single_map: SingleMap = SingleMap.new()
-	MapCreator.create_map(single_map, Vector2j.new(10, 1), 100)
+	MapCreator.create_map(single_map, Vector2j.new(10, 1), 5)
 	single_map.building_add(Vector2j.new(9, 0), Buildings.TYPES_OF_BUILDINGS.ANTHILL, 1)
 	single_map.building_add(Vector2j.new(9, 0), Buildings.TYPES_OF_BUILDINGS.FARM, 1)
 	assert(single_map.buildings[0][9].size() == 2)
@@ -97,55 +102,55 @@ func map_test() -> void:
 
 	var single_map: SingleMap = SingleMap.new()
 
-	MapCreator.create_map(single_map, Vector2j.new(13, 13), 75)
+	MapCreator.create_map(single_map, Vector2j.new(13, 13), 4)
 	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
 
-	MapCreator.create_map(single_map, Vector2j.new(9, 9), 75)
+	MapCreator.create_map(single_map, Vector2j.new(9, 9), 4)
 	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 3)
 
-	MapCreator.create_map(single_map, Vector2j.new(4, 7), 75)
+	MapCreator.create_map(single_map, Vector2j.new(4, 7), 4)
 	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 3)
 
-	MapCreator.create_map(single_map, Vector2j.new(15, 3), 75)
+	MapCreator.create_map(single_map, Vector2j.new(15, 3), 4)
 	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 2)
 
-	MapCreator.create_map(single_map, Vector2j.new(15, 3), 100)
+	MapCreator.create_map(single_map, Vector2j.new(15, 3), 5)
 	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
 
-	MapCreator.create_map(single_map, Vector2j.new(13, 13), 100)
+	MapCreator.create_map(single_map, Vector2j.new(13, 13), 5)
 	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 2)
 	assert(check_integration_of_map(single_map))
 
-	MapCreator.create_map(single_map, Vector2j.new(20, 10), 100)
+	MapCreator.create_map(single_map, Vector2j.new(20, 10), 5)
 	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)
 	assert(check_integration_of_map(single_map))
 
-	MapCreator.create_map(single_map, Vector2j.new(10, 20), 100)
+	MapCreator.create_map(single_map, Vector2j.new(10, 20), 5)
 	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 3)
 	assert(check_integration_of_map(single_map))
 
-	MapCreator.create_map(single_map, Vector2j.new(30, 6), 100)
+	MapCreator.create_map(single_map, Vector2j.new(30, 6), 5)
 	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_randomly(single_map, 4)

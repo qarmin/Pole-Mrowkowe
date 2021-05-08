@@ -227,7 +227,7 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.fields[y][x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + choosen_player
 
 				if randi() % 100 < ant_chance:
-					single_map.units[y][x] = randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1
+					single_map.add_unit(Vector2j.new(x,y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1, 1)
 
 				if randi() % 2 == 0:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL, randi() % 3 + 1)
@@ -361,7 +361,7 @@ func create_3d_map(single_map: SingleMap) -> void:
 				SH.set_owner(map)
 
 				## Units
-				if single_map.units[y][x] != Units.TYPES_OF_ANTS.NO_UNIT:
+				if single_map.units[y][x].empty():
 					# TODO Dodać więcej typów mrówek
 					var ant: Spatial = AntsArray[randi() % AntsArray.size()].instance()
 

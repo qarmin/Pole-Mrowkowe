@@ -12,10 +12,10 @@ var armors: Array = []
 
 func _ready() -> void:
 	var default: Dictionary = {
-		"wood": 20,
-		"water": 20,
-		"gold": 20,
-		"food": 20,
+		"wood": 200,
+		"water": 200,
+		"gold": 200,
+		"food": 200,
 	}
 	var stats_default: Dictionary = {
 		"ants": 100,
@@ -70,7 +70,16 @@ func add_ant(data: Dictionary) -> void:
 	ants.append(data)
 
 
-func get_unit_usage(type: int) -> Dictionary:
+func get_unit_usage(type: int, _level : int) -> Dictionary:
+	validate_type(type)
+	for ant in ants:
+		if ant["type"] == type:
+			return ant["usage"].duplicate()
+
+	assert(false, "Failed to found proper ant for this usage")
+	return {}
+	
+func get_default_stats(type: int, _level : int) -> Dictionary:
 	validate_type(type)
 	for ant in ants:
 		if ant["type"] == type:

@@ -256,7 +256,8 @@ func end_turn() -> void:
 			print("Wygrana")  # TODO, dodać okno z wygraną czy porażką czy coś takiego
 			return
 
-		Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
+		Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr), true)
+		Resources.normalize_resources(player_resources[curr]) # Prevents from being resource smaller than 0
 
 		curr = (curr + 1) % number_of_start_players
 		if curr == 0:
@@ -364,7 +365,7 @@ func handle_downgrade_building_click(type_of_building: int) -> void:
 
 	var resources_to_build: Dictionary = Buildings.get_building_to_build(type_of_building, level)
 	Resources.scale_resources(resources_to_build, Buildings.DOWNGRADE_COST)
-	Resources.add_resources(player_resources[current_player], resources_to_build)
+	Resources.add_resources(player_resources[current_player], resources_to_build, true)
 
 	assert(Resources.are_all_resources_positive(player_resources[current_player]))
 

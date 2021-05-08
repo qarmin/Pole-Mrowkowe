@@ -11,7 +11,28 @@ func _ready() -> void:
 
 
 func update_resources(have_resources: Dictionary, end_turn_resources: Dictionary) -> void:
-	$HBox/Gold/Label.set_text(str(have_resources["gold"]) + " (+" + str(end_turn_resources["gold"]) + ")")
-	$HBox/Water/Label.set_text(str(have_resources["water"]) + " (+" + str(end_turn_resources["water"]) + ")")
-	$HBox/Food/Label.set_text(str(have_resources["food"]) + " (+" + str(end_turn_resources["food"]) + ")")
-	$HBox/Wood/Label.set_text(str(have_resources["wood"]) + " (+" + str(end_turn_resources["wood"]) + ")")
+	var positive_symbol : String = ""
+	
+	if end_turn_resources["gold"] >= 0:
+		positive_symbol = "+"
+	else:
+		positive_symbol = ""
+	$HBox/Gold/Label.set_text(str(have_resources["gold"]) + " (" + positive_symbol + str(end_turn_resources["gold"]) + ")")
+	
+	if end_turn_resources["water"] >= 0:
+		positive_symbol = "+"
+	else:
+		positive_symbol = ""
+	$HBox/Water/Label.set_text(str(have_resources["water"]) + " (" + positive_symbol + str(end_turn_resources["water"]) + ")")
+	
+	if end_turn_resources["food"] >= 0:
+		positive_symbol = "+"
+	else:
+		positive_symbol = ""
+	$HBox/Food/Label.set_text(str(have_resources["food"]) + " (" + positive_symbol + str(end_turn_resources["food"]) + ")")
+	
+	if end_turn_resources["wood"] >= 0:
+		positive_symbol = "+"
+	else:
+		positive_symbol = ""
+	$HBox/Wood/Label.set_text(str(have_resources["wood"]) + " (" + positive_symbol + str(end_turn_resources["wood"]) + ")")
