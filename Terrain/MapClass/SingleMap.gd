@@ -259,15 +259,15 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 		for x in range(size.x):
 			if fields[y][x] == player_number:
 				# Adds basic fields
-				Resources.add_resources(dict, Buildings.BASIC_RESOURCES_PER_FIELD,true)
+				Resources.add_resources(dict, Buildings.BASIC_RESOURCES_PER_FIELD)
 
 				# Buildings
 				for i in buildings[y][x].keys():
-					Resources.add_resources(dict, Buildings.get_building_production(i, buildings[y][x][i]["level"]),true)
-					Resources.add_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]),false)
+					Resources.add_resources(dict, Buildings.get_building_production(i, buildings[y][x][i]["level"]))
+					Resources.remove_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]))
 				# Units - only consume 
 				for i in units[y][x].keys():
-					Resources.add_resources(dict, Units.get_unit_usage(units[y][x]["type"],units[y][x]["level"]),false)
+					Resources.remove_resources(dict, Units.get_unit_usage(units[y][x]["type"],units[y][x]["level"]))
 
 	return dict
 

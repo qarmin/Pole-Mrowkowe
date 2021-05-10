@@ -38,9 +38,15 @@ func resources() -> void:
 
 	var first: Dictionary = {"wood": -100, "food": 100, "gold": 52, "water": 40}
 	var second: Dictionary = {"wood": 30, "food": 150, "gold": 48, "water": 120}
-	Resources.add_resources(first, second, true)
+	Resources.add_resources(first, second)
 	assert(first["wood"] == -70 && first["food"] == 250 && first["gold"] == 100 && first["water"] == 160)
 	assert(second["wood"] == 30 && second["food"] == 150 && second["gold"] == 48 && second["water"] == 120)
+	
+	var third: Dictionary = {"wood": -100, "food": 100, "gold": 52, "water": 40}
+	var forth: Dictionary = {"wood": 30, "food": 150, "gold": 48, "water": 120}
+	Resources.remove_resources(third, forth)
+	assert(third["wood"] == -130 && third["food"] == -50 && third["gold"] == 4 && third["water"] == -80)
+	assert(forth["wood"] == 30 && forth["food"] == 150 && forth["gold"] == 48 && forth["water"] == 120)
 
 	var roman: Dictionary = {"wood": 80, "food": 40, "gold": 20, "water": 5}
 	Resources.scale_resources(roman, 0.7)
@@ -75,6 +81,9 @@ func Vector2j_test() -> void:
 	var vec_3: Vector2j = Vector2j.new(42, 25)
 	var vec_4: Vector2j = Vector2j.new(25, 3)
 	var vec_5: Vector2j = Vector2j.new(31, 25)
+
+	assert(vec_1.x == 1)
+	assert(vec_1.y == 3)
 
 	var array: Array = []
 
