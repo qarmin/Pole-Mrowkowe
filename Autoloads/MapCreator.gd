@@ -187,7 +187,6 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
 
-
 #	var terrain_to_check : Array = []
 #	var terrain_checked : Array = []
 # TODO - Dodać określoną liczbę początkową pól(nie wiem jak do końca to zaimplementować), póki co jest jedno pole dla każdego gracza.
@@ -198,16 +197,8 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 #
 #			pass
 #		max_number_of_additional_terrains -= 1
-# TODO - Dodać podstawowe budynki do mapy podczas tworzeni - np. główne mrowisko
 
-#	## START PRINT MAP
-#	SingleMap.print_map(single_map.fields)
-#
-#	for i in single_map.players:
-#		single_map.fields[i.y][i.x] = 88
-
-#	SingleMap.print_map(single_map.fields)
-#	## END PRINT MAP
+	populate_map_buildings(single_map)
 
 
 ## Dowolnie wypełnia pola mrówkami, kolorami oraz budynkami
@@ -229,25 +220,25 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.fields[y][x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + choosen_player
 
 				if randi() % 100 < ant_chance:
-					single_map.add_unit(Vector2j.new(x,y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1, 1)
+					single_map.add_unit(Vector2j.new(x, y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX), 1)
 
 				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL, randi() % 3 + 1)
-				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM, randi() % 3 + 1)
-				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.SAWMILL, randi() % 3 + 1)
-				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS, randi() % 3 + 1)
-				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.PILE, randi() % 3 + 1)
-				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE, randi() % 3 + 1)
 
 
 ## Tworzy tablicę odległości danych pól od graczy
 func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
-	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od
+	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od wybranych
 	var current_element: Vector2j = Vector2j.new(0, 0)
 	var current_value: int = 0
 
@@ -331,9 +322,16 @@ func pm_fully_choose_point_from_distance_array(array: Array, number_of_terrain: 
 	return biggest_numbers[randi() % biggest_numbers.size()]
 
 
-## TODO Dodawanie budynków tj mrowisko itp.
-func populate_map_buildings(_single_map: SingleMap) -> void:
-	push_warning("TODO - Tworzenie głównej siedziby i być może jakichś podstawowych budynków, może być przydatne przy tworzeniu mapy")
+func populate_map_buildings(single_map: SingleMap) -> void:
+	# Add Anthill of first level
+	for coordinates in single_map.players:
+		single_map.building_add(coordinates, Buildings.TYPES_OF_BUILDINGS.ANTHILL, 1)
+
+	# Randomly put with 30 % chance one building
+	for x in single_map.size.x:
+		for y in single_map.size.y:
+			if randi() % 10 < 3:
+				single_map.building_add(Vector2j.new(x, y), randi() % (Buildings.NUMBER_OF_BUILDINGS - 1) + 1, 1)
 
 
 ## Tworzy mapę 3D, którą można użyć w Scene Tree(Jest to zwykły Node)
@@ -367,9 +365,8 @@ func create_3d_map(single_map: SingleMap) -> void:
 				SH.set_owner(map)
 
 				## Units
-				if single_map.units[y][x].empty():
-					# TODO Dodać więcej typów mrówek
-					var ant: Spatial = AntsArray[randi() % AntsArray.size()].instance()
+				if !single_map.units[y][x].empty():
+					var ant: Spatial = AntsArray[single_map.units[y][x]["type"]].instance()
 
 					ant.translation = Vector3(0, 1.192, 0)
 
@@ -408,22 +405,20 @@ func create_3d_map(single_map: SingleMap) -> void:
 
 					SH.add_child(barracks)
 					barracks.set_owner(map)
-					
+
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.GOLD_MINE):
 					var gold_mine = GoldMine.instance()
 					gold_mine.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE)
 
 					SH.add_child(gold_mine)
 					gold_mine.set_owner(map)
-					
+
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.PILE):
 					var piles = Piles.instance()
 					piles.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.PILE)
 
 					SH.add_child(piles)
 					piles.set_owner(map)
-
-	pass
 
 
 ## Dokładnie centruje mapę

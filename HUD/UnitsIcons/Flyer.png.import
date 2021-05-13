@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Unit.png-06a47a0006bcc52a5e339056f1303ce4.stex"
+path="res://.import/Flyer.png-48018bdb7cb76d436baec708286a76dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/UnitsIcons/Unit.png"
-dest_files=[ "res://.import/Unit.png-06a47a0006bcc52a5e339056f1303ce4.stex" ]
+source_file="res://HUD/UnitsIcons/Flyer.png"
+dest_files=[ "res://.import/Flyer.png-48018bdb7cb76d436baec708286a76dd.stex" ]
 
 [params]
 

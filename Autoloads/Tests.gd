@@ -41,7 +41,7 @@ func resources() -> void:
 	Resources.add_resources(first, second)
 	assert(first["wood"] == -70 && first["food"] == 250 && first["gold"] == 100 && first["water"] == 160)
 	assert(second["wood"] == 30 && second["food"] == 150 && second["gold"] == 48 && second["water"] == 120)
-	
+
 	var third: Dictionary = {"wood": -100, "food": 100, "gold": 52, "water": 40}
 	var forth: Dictionary = {"wood": 30, "food": 150, "gold": 48, "water": 120}
 	Resources.remove_resources(third, forth)

@@ -265,9 +265,9 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 				for i in buildings[y][x].keys():
 					Resources.add_resources(dict, Buildings.get_building_production(i, buildings[y][x][i]["level"]))
 					Resources.remove_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]))
-				# Units - only consume 
+				# Units - only consume
 				for i in units[y][x].keys():
-					Resources.remove_resources(dict, Units.get_unit_usage(units[y][x]["type"],units[y][x]["level"]))
+					Resources.remove_resources(dict, Units.get_unit_usage(units[y][x]["type"], units[y][x]["level"]))
 
 	return dict
 

@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HUD/UnitsIcons/Flyer.png" type="Texture" id=1]
+[ext_resource path="res://HUD/Up.png" type="Texture" id=2]
+[ext_resource path="res://HUD/BuildingMenu/BuildingFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://HUD/BuildingMenu/DisabledButton.png" type="Texture" id=4]
+
+[node name="VBox" type="Control"]
+margin_right = 57.0
+margin_bottom = 172.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0.333333 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+custom_constants/separation = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="VBox"]
+margin_right = 51.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 3 )
+text = "Mrówek"
+align = 1
+valign = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBox"]
+margin_top = 21.0
+margin_right = 51.0
+margin_bottom = 166.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="VBox/AspectRatioContainer"]
+margin_top = 47.0
+margin_right = 51.0
+margin_bottom = 98.0
+size_flags_horizontal = 5
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="CreateUnit" type="TextureButton" parent="VBox/AspectRatioContainer/Icon"]
+anchor_left = 0.7
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.3
+hint_tooltip = "TODO Update this"
+texture_normal = ExtResource( 2 )
+texture_disabled = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}

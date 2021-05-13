@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://HUD/UnitsIcons/Unit.png" type="Texture" id=2]
+[ext_resource path="res://HUD/UnitsIcons/Soldier.png" type="Texture" id=2]
 [ext_resource path="res://HUD/UnitMenu/MoveUnit.png" type="Texture" id=3]
 [ext_resource path="res://HUD/UnitMenu/DestroyUnit.png" type="Texture" id=4]
 

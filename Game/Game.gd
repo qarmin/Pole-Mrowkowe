@@ -101,6 +101,7 @@ func connect_clickable_signals() -> void:
 
 	assert($HUD/HUD/Buildings.connect("upgrade_clicked", self, "handle_upgrade_building_click") == OK)
 	assert($HUD/HUD/Buildings.connect("downgrade_clicked", self, "handle_downgrade_building_click") == OK)
+	assert($HUD/HUD/Buildings.connect("create_unit_clicked", self, "handle_create_unit_click") == OK)
 
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
@@ -257,7 +258,7 @@ func end_turn() -> void:
 			return
 
 		Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
-		Resources.normalize_resources(player_resources[curr]) # Prevents from being resource smaller than 0
+		Resources.normalize_resources(player_resources[curr])  # Prevents from being resource smaller than 0
 
 		curr = (curr + 1) % number_of_start_players
 		if curr == 0:
@@ -299,6 +300,38 @@ func gui_update_building_menu() -> void:
 		$HUD/HUD/Buildings.hide()
 
 
+func handle_create_unit_click(type_of_unit: int) -> void:
+	Units.validate_type(type_of_unit)
+	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
+	assert(single_map.units[selected_coordinates.y][selected_coordinates.x].empty())  # Pole nie może posiadać na sobie żadnej jednostki
+
+	var unit_3d: Spatial
+
+	match type_of_unit:
+		Units.TYPES_OF_ANTS.FLYER:
+			unit_3d = MapCreator.AntFlying.instance()
+		Units.TYPES_OF_ANTS.SOLDIER:
+			unit_3d = MapCreator.AntSoldier.instance()
+		Units.TYPES_OF_ANTS.WORKER:
+			unit_3d = MapCreator.AntWorker.instance()
+		_:
+			assert(false, "Missing type of unit")
+
+	unit_3d.translation = Vector3(0, 1.192, 0)
+	$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).add_child(unit_3d)
+
+	single_map.add_unit(selected_coordinates, type_of_unit, 1)
+
+	var resources_to_build = Units.get_unit_to_build(type_of_unit, 1)
+	Resources.remove_resources(player_resources[current_player], resources_to_build)
+	assert(Resources.are_all_resources_positive(player_resources[current_player]))
+
+	print("Created unit: " + Units.get_unit_name(type_of_unit))
+	gui_update_building_menu()
+	gui_update_resources()
+	pass
+
+
 func handle_upgrade_building_click(type_of_building: int) -> void:
 	Buildings.validate_building(type_of_building)
 
@@ -328,6 +361,10 @@ func handle_upgrade_building_click(type_of_building: int) -> void:
 				building_3d = MapCreator.Farm.instance()
 			Buildings.TYPES_OF_BUILDINGS.SAWMILL:
 				building_3d = MapCreator.Sawmill.instance()
+			Buildings.TYPES_OF_BUILDINGS.BARRACKS:
+				building_3d = MapCreator.Barracks.instance()
+			Buildings.TYPES_OF_BUILDINGS.PILE:
+				building_3d = MapCreator.Piles.instance()
 			_:
 				assert(false, "Missing type of building")
 		building_3d.translation = single_map.building_get_place_where_is_building(selected_coordinates, type_of_building)

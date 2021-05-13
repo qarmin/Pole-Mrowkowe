@@ -3,6 +3,8 @@ extends Control
 signal upgrade_clicked
 signal downgrade_clicked
 
+signal create_unit_clicked
+
 var building_icon: Array = [
 	"res://HUD/BuildingMenu/Anthill.png",
 	"res://HUD/BuildingMenu/Farm.png",
@@ -19,8 +21,19 @@ var types_of_buildings: Array = [
 	Buildings.TYPES_OF_BUILDINGS.PILE,
 	Buildings.TYPES_OF_BUILDINGS.GOLD_MINE,
 ]
+var units_icon: Array = [
+	"res://HUD/UnitsIcons/Worker.png",
+	"res://HUD/UnitsIcons/Soldier.png",
+	"res://HUD/UnitsIcons/Flyer.png",
+]
+var types_of_units: Array = [
+	Units.TYPES_OF_ANTS.WORKER,
+	Units.TYPES_OF_ANTS.SOLDIER,
+	Units.TYPES_OF_ANTS.FLYER,
+]
 
 var single_building_nodes: Array = []
+var single_unit_nodes: Array = []
 
 
 func _ready() -> void:
@@ -38,6 +51,21 @@ func initialize_gui() -> void:
 		assert(node.find_node("Upgrade").connect("button_up", self, "handle_upgrade_click", [types_of_buildings[i]]) == OK)
 		assert(node.find_node("Downgrade").connect("button_up", self, "handle_downgrade_click", [types_of_buildings[i]]) == OK)
 
+	for i in range(Units.TYPES_OF_ANTS.ANT_MAX):
+		var node: Node = find_node("Unit" + str(i + 1)).get_node("VBox")
+		assert(node != null)
+		single_unit_nodes.append(node)
+		node.get_node("AspectRatioContainer/Icon").set_texture(load(units_icon[i]))
+
+		# Connect downgrade and upgrade buttons
+		assert(node.find_node("CreateUnit").connect("button_up", self, "handle_create_unit_click", [types_of_units[i]]) == OK)
+
+
+func handle_create_unit_click(type_of_unit: int) -> void:
+	Units.validate_type(type_of_unit)
+	emit_signal("create_unit_clicked", type_of_unit)
+	assert(get_signal_connection_list("create_unit_clicked").size() > 0)
+
 
 func handle_upgrade_click(type_of_building: int) -> void:
 	Buildings.validate_building(type_of_building)
@@ -52,6 +80,7 @@ func handle_downgrade_click(type_of_building: int) -> void:
 
 
 func update_buildings_info(user_resources: Dictionary, buildings: Dictionary, coordinates: Vector2j, single_map: SingleMap) -> void:
+	update_units_info(user_resources, buildings, coordinates, single_map)
 	for building in Buildings.buildings_types:
 		var name: String = Buildings.get_bulding_name(building)
 		var index: int = types_of_buildings.find(building)
@@ -166,3 +195,51 @@ func update_buildings_info(user_resources: Dictionary, buildings: Dictionary, co
 				upgrade_button.set_tooltip(upgrade_hint_text)
 
 		single_building_nodes[index].get_node("Name").set_text(name)
+
+
+func update_units_info(user_resources: Dictionary, buildings: Dictionary, coordinates: Vector2j, single_map: SingleMap) -> void:
+	for unit in Units.units_types:
+		var name: String = Units.get_unit_name(unit)
+		var index: int = types_of_units.find(unit)
+		assert(index != -1)  # This type must exists
+
+		var usage: Dictionary = Units.get_unit_usage(unit, 1)
+		var to_build: Dictionary = Units.get_unit_to_build(unit, 1)
+
+		var create_unit: TextureButton = single_unit_nodes[index].find_node("CreateUnit")
+		var icon: Control = single_unit_nodes[index].find_node("Icon")
+		assert(icon != null)
+		assert(create_unit != null)
+
+		var create_unit_hint_text: String = ""
+		var icon_hint_text: String = ""
+
+		var cloned_user_resources: Dictionary = user_resources.duplicate(false)
+
+		if !single_map.units[coordinates.y][coordinates.x].empty():
+			if single_map.units[coordinates.y][coordinates.x]["type"] == index:
+				icon_hint_text = "Usage:  " + Resources.string_resources_short(usage)
+				create_unit.hide()
+			else:
+				create_unit.show()
+				create_unit.set_disabled(true)
+				create_unit_hint_text = "ALREADY THERE IS ANT IN FIELD!"
+		else:
+			create_unit.show()
+			if buildings.has(Buildings.TYPES_OF_BUILDINGS.BARRACKS) || buildings.has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
+				Resources.remove_resources(cloned_user_resources, to_build)
+				if Resources.are_all_resources_positive(cloned_user_resources):
+					create_unit.set_disabled(false)
+					create_unit_hint_text = "Usage:  " + Resources.string_resources_short(usage) + "\n"
+					create_unit_hint_text += "To build:  " + Resources.string_resources_short(to_build)
+				else:
+					create_unit.set_disabled(true)
+					create_unit_hint_text = "YOU DON'T HAVE ENOUGH OF RESOURCES"
+			else:
+				create_unit.set_disabled(true)
+				create_unit_hint_text = "YOU CAN ONLY CREATE UNIT ON FIELD WITH ANTHILL OR BARRACKS!"
+
+		icon.set_tooltip(icon_hint_text)
+		create_unit.set_tooltip(create_unit_hint_text)
+
+		single_unit_nodes[index].get_node("Name").set_text(name)

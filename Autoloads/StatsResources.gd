@@ -42,12 +42,14 @@ func add_resources(base_dict: Dictionary, to_add_dict: Dictionary) -> void:
 	for key in base_dict.keys():
 		base_dict[key] += to_add_dict[key]
 
+
 # Remove resources from base dictionary
 func remove_resources(base_dict: Dictionary, to_add_dict: Dictionary) -> void:
 	validate_resources(base_dict)
 	validate_resources(to_add_dict)
 	for key in base_dict.keys():
 		base_dict[key] -= to_add_dict[key]
+
 
 # Only checks if some of resources are negative
 func are_all_resources_positive(dict: Dictionary) -> bool:
