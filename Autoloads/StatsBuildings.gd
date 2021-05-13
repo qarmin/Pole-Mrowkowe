@@ -1,8 +1,8 @@
 extends Node
 
-enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, SAWMILL = 2, BARRACKS = 3, BUILDING_MAX = 4 }
+enum TYPES_OF_BUILDINGS { BUILDING_MIN = -1, ANTHILL = 0, FARM = 1, SAWMILL = 2, BARRACKS = 3, PILE = 4, GOLD_MINE = 5, BUILDING_MAX = 6 }
 
-const NUMBER_OF_BUILDINGS = 4
+const NUMBER_OF_BUILDINGS = 6
 
 var all_buildings: Array = []
 var buildings_types: Array = []
@@ -76,6 +76,38 @@ func _ready() -> void:
 	building_add(
 		"Barracks",
 		TYPES_OF_BUILDINGS.BARRACKS,
+		3,
+		[
+			{"wood": 100, "water": 20, "gold": 1, "food": 3},
+			{"wood": 100, "water": 40, "gold": 2, "food": 4},
+			{"wood": 200, "water": 60, "gold": 3, "food": 5},
+		],
+		[
+			{"wood": 2, "water": 2, "gold": 0, "food": 25},
+			{"wood": 5, "water": 5, "gold": 0, "food": 40},
+			{"wood": 5, "water": 10, "gold": 1, "food": 70},
+		],
+		[default, default, default]
+	)
+	building_add(
+		"Gold Mine",
+		TYPES_OF_BUILDINGS.GOLD_MINE,
+		3,
+		[
+			{"wood": 100, "water": 20, "gold": 1, "food": 3},
+			{"wood": 100, "water": 40, "gold": 2, "food": 4},
+			{"wood": 200, "water": 60, "gold": 3, "food": 5},
+		],
+		[
+			{"wood": 2, "water": 2, "gold": 0, "food": 25},
+			{"wood": 5, "water": 5, "gold": 0, "food": 40},
+			{"wood": 5, "water": 10, "gold": 1, "food": 70},
+		],
+		[default, default, default]
+	)
+	building_add(
+		"Pile",
+		TYPES_OF_BUILDINGS.PILE,
 		3,
 		[
 			{"wood": 100, "water": 20, "gold": 1, "food": 3},

@@ -15,6 +15,8 @@ var Anthill: PackedScene = load("res://Models/Buildings/Anthill/Anthill.tscn")
 var Farm: PackedScene = load("res://Models/Buildings/Farm/Farm.tscn")
 var Sawmill: PackedScene = load("res://Models/Buildings/Sawmill/Sawmill.tscn")
 var Barracks: PackedScene = load("res://Models/Buildings/Barracks/Barracks.tscn")
+var Piles: PackedScene = load("res://Models/Buildings/Piles/Piles.tscn")
+var GoldMine: PackedScene = load("res://Models/Buildings/GoldMine/GoldMine.tscn")
 
 const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 2)  # Dokładna wartość to (1.7321,2) ale czasami pomiędzy nimi migocze wolna przestrzeń, dlatego należy to nieco zmniejszyć
 const NODE_BASE_NAME: String = "SingleHex"
@@ -229,14 +231,18 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 				if randi() % 100 < ant_chance:
 					single_map.add_unit(Vector2j.new(x,y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX - Units.TYPES_OF_ANTS.ANT_MIN - 1) + Units.TYPES_OF_ANTS.ANT_MIN + 1, 1)
 
-				if randi() % 2 == 0:
+				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL, randi() % 3 + 1)
-				if randi() % 2 == 0:
+				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM, randi() % 3 + 1)
-				if randi() % 2 == 0:
+				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.SAWMILL, randi() % 3 + 1)
-				if randi() % 2 == 0:
+				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS, randi() % 3 + 1)
+				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.PILE, randi() % 3 + 1)
+				if randi() % 2 == 0&& single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE, randi() % 3 + 1)
 
 
 ## Tworzy tablicę odległości danych pól od graczy
@@ -402,6 +408,20 @@ func create_3d_map(single_map: SingleMap) -> void:
 
 					SH.add_child(barracks)
 					barracks.set_owner(map)
+					
+				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.GOLD_MINE):
+					var gold_mine = GoldMine.instance()
+					gold_mine.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE)
+
+					SH.add_child(gold_mine)
+					gold_mine.set_owner(map)
+					
+				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.PILE):
+					var piles = Piles.instance()
+					piles.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.PILE)
+
+					SH.add_child(piles)
+					piles.set_owner(map)
 
 	pass
 

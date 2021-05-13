@@ -8,12 +8,16 @@ var building_icon: Array = [
 	"res://HUD/BuildingMenu/Farm.png",
 	"res://HUD/BuildingMenu/Sawmill.png",
 	"res://HUD/BuildingMenu/Barracks.png",
+	"res://HUD/BuildingMenu/Pile.png",
+	"res://HUD/BuildingMenu/GoldMine.png",
 ]
 var types_of_buildings: Array = [
 	Buildings.TYPES_OF_BUILDINGS.ANTHILL,
 	Buildings.TYPES_OF_BUILDINGS.FARM,
 	Buildings.TYPES_OF_BUILDINGS.SAWMILL,
 	Buildings.TYPES_OF_BUILDINGS.BARRACKS,
+	Buildings.TYPES_OF_BUILDINGS.PILE,
+	Buildings.TYPES_OF_BUILDINGS.GOLD_MINE,
 ]
 
 var single_building_nodes: Array = []

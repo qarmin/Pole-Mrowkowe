@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/GoldCreate.glb-9235f07d4eefdf78511de0b766fe9526.scn"
+path="res://.import/GoldMine.glb-04af9c5e42613ae3bab0e0bbcac8b3cb.scn"
 
 [deps]
 
-source_file="res://Models/Buildings/GoldCreate/GoldCreate.glb"
-dest_files=[ "res://.import/GoldCreate.glb-9235f07d4eefdf78511de0b766fe9526.scn" ]
+source_file="res://Models/Buildings/GoldMine/GoldMine.glb"
+dest_files=[ "res://.import/GoldMine.glb-04af9c5e42613ae3bab0e0bbcac8b3cb.scn" ]
 
 [params]
 
@@ -16,6 +16,7 @@ nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
+nodes/use_legacy_names=true
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
