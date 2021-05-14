@@ -24,12 +24,12 @@ var types_of_buildings: Array = [
 var units_icon: Array = [
 	"res://HUD/UnitsIcons/Worker.png",
 	"res://HUD/UnitsIcons/Soldier.png",
-	"res://HUD/UnitsIcons/Flyer.png",
+	"res://HUD/UnitsIcons/Flying.png",
 ]
 var types_of_units: Array = [
 	Units.TYPES_OF_ANTS.WORKER,
 	Units.TYPES_OF_ANTS.SOLDIER,
-	Units.TYPES_OF_ANTS.FLYER,
+	Units.TYPES_OF_ANTS.FLYING,
 ]
 
 var single_building_nodes: Array = []
@@ -127,8 +127,10 @@ func update_buildings_info(user_resources: Dictionary, buildings: Dictionary, co
 					production_before = Buildings.get_building_production(building, level - 1)
 
 				Resources.scale_resources(to_upgrade, Buildings.DOWNGRADE_COST)
-
-				downgrade_hint_text += "Downgrade:\n"
+				if level > 1:
+					downgrade_hint_text += "Downgrade Building\n"
+				else:
+					downgrade_hint_text += "Removing Building\n"
 				downgrade_hint_text += "To build:  " + Resources.string_resources_short(to_upgrade) + "\n"
 				downgrade_hint_text += "Production:  " + Resources.string_resources_short(production_before) + "\n"
 				downgrade_hint_text += "Usage:  " + Resources.string_resources_short(usage_before)
@@ -151,7 +153,7 @@ func update_buildings_info(user_resources: Dictionary, buildings: Dictionary, co
 				var usage_later: Dictionary = Buildings.get_building_usage(building, level + 1)
 				var production_later: Dictionary = Buildings.get_building_production(building, level + 1)
 
-				upgrade_hint_text += "Upgrade:\n"
+				upgrade_hint_text += "Upgrade Building\n"
 				upgrade_hint_text += "To build:  " + Resources.string_resources_short(to_upgrade) + "\n"
 				upgrade_hint_text += "Production:  " + Resources.string_resources_short(production_later) + "\n"
 				upgrade_hint_text += "Usage:  " + Resources.string_resources_short(usage_later)
@@ -188,6 +190,7 @@ func update_buildings_info(user_resources: Dictionary, buildings: Dictionary, co
 				var usage_later: Dictionary = Buildings.get_building_usage(building, 1)
 				var production_later: Dictionary = Buildings.get_building_production(building, 1)
 
+				upgrade_hint_text += "Create building\n"
 				upgrade_hint_text += "To build:  " + Resources.string_resources_short(to_upgrade) + "\n"
 				upgrade_hint_text += "Production:  " + Resources.string_resources_short(production_later) + "\n"
 				upgrade_hint_text += "Usage:  " + Resources.string_resources_short(usage_later)
@@ -230,7 +233,8 @@ func update_units_info(user_resources: Dictionary, buildings: Dictionary, coordi
 				Resources.remove_resources(cloned_user_resources, to_build)
 				if Resources.are_all_resources_positive(cloned_user_resources):
 					create_unit.set_disabled(false)
-					create_unit_hint_text = "Usage:  " + Resources.string_resources_short(usage) + "\n"
+					create_unit_hint_text = "Create Unit\n"
+					create_unit_hint_text += "Usage:  " + Resources.string_resources_short(usage) + "\n"
 					create_unit_hint_text += "To build:  " + Resources.string_resources_short(to_build)
 				else:
 					create_unit.set_disabled(true)
@@ -243,3 +247,6 @@ func update_units_info(user_resources: Dictionary, buildings: Dictionary, coordi
 		create_unit.set_tooltip(create_unit_hint_text)
 
 		single_unit_nodes[index].get_node("Name").set_text(name)
+
+
+

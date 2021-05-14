@@ -31,7 +31,7 @@ tracks/0/keys = {
 "values": [ Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.295, 0 ), Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.12557, 0 ) ]
 }
 
-[node name="ANTFlyer" type="Spatial"]
+[node name="ANTFlying" type="Spatial"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 script = ExtResource( 1 )
 

@@ -1,6 +1,6 @@
 extends Node
 
-enum TYPES_OF_ANTS { NO_UNIT = -100, ANT_MIN = -1, WORKER, SOLDIER, FLYER, ANT_MAX }
+enum TYPES_OF_ANTS { NO_UNIT = -100, ANT_MIN = -1, WORKER, SOLDIER, FLYING, ANT_MAX }
 enum TYPES_OF_STATS { STATS_MIN = -1, ANTS, ATTACK, DEFENSE, LUCK, ACTION_POINTS, NUMBER_OF_MOVEMENT, STATS_MAX }
 enum TYPES_OF_ARMOR { ARMOR_MIN = 0, BRONZE, SILVER, GOLD }
 
@@ -11,6 +11,7 @@ var armors: Array = []
 
 var units_types: Array = []
 
+const DOWNGRADE_COST: float = 0.7  # Only 70% of value can be restored from
 
 func _ready() -> void:
 	var default: Dictionary = {
@@ -33,8 +34,8 @@ func _ready() -> void:
 	add_ant({"name": "Soldier", "type": TYPES_OF_ANTS.SOLDIER, "to_build": default, "usage": default, "stats": stats_default, "armor": TYPES_OF_ARMOR.BRONZE})
 	add_ant(
 		{
-			"name": "Flyer",
-			"type": TYPES_OF_ANTS.FLYER,
+			"name": "Flying",
+			"type": TYPES_OF_ANTS.FLYING,
 			"to_build":
 			{
 				"wood": 110,

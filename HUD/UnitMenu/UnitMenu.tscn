@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/UnitsIcons/Soldier.png" type="Texture" id=2]
 [ext_resource path="res://HUD/UnitMenu/MoveUnit.png" type="Texture" id=3]
 [ext_resource path="res://HUD/UnitMenu/DestroyUnit.png" type="Texture" id=4]
+[ext_resource path="res://HUD/UnitMenu/UnitMenu.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -15,6 +16,7 @@ font_data = ExtResource( 1 )
 anchor_top = 0.65
 anchor_right = 0.225
 anchor_bottom = 1.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,7 +74,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="VBox/MarginContainer/VBox"]
+[node name="AntName" type="Label" parent="VBox/MarginContainer/VBox"]
 margin_right = 220.0
 margin_bottom = 20.0
 mouse_filter = 1
@@ -80,7 +82,7 @@ custom_fonts/font = SubResource( 2 )
 text = "Szczypak"
 align = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBox/MarginContainer/VBox"]
+[node name="AntIcon" type="TextureRect" parent="VBox/MarginContainer/VBox"]
 margin_top = 24.0
 margin_right = 220.0
 margin_bottom = 109.0

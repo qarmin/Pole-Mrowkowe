@@ -102,6 +102,7 @@ func connect_clickable_signals() -> void:
 	assert($HUD/HUD/Buildings.connect("upgrade_clicked", self, "handle_upgrade_building_click") == OK)
 	assert($HUD/HUD/Buildings.connect("downgrade_clicked", self, "handle_downgrade_building_click") == OK)
 	assert($HUD/HUD/Buildings.connect("create_unit_clicked", self, "handle_create_unit_click") == OK)
+	assert($HUD/HUD/Units.connect("destroy_unit_clicked", self, "handle_destroy_unit_click") == OK)
 
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
@@ -148,6 +149,7 @@ func ant_clicked(ant: AntBase) -> void:
 	current_unit_overlay_hex_name = parent_name
 	selected_ant = ant
 	show_units_menu()
+	gui_update_units()
 	$HUD/HUD/Units/VBox/Label.set_text("unit menu - field " + coordinates.to_string())
 
 
@@ -294,13 +296,48 @@ func gui_update_resources() -> void:
 
 func gui_update_building_menu() -> void:
 	if single_map.fields[selected_coordinates.y][selected_coordinates.x] == current_player:  # Re-enable this after tests
-		$HUD/HUD/Buildings.show()
 		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[selected_coordinates.y][selected_coordinates.x], selected_coordinates, single_map)
 	else:
 		$HUD/HUD/Buildings.hide()
+		
+func gui_update_units() -> void:
+	if single_map.fields[selected_coordinates.y][selected_coordinates.x] == current_player:  # Re-enable this after tests
+		$HUD/HUD/Units.update_units_info(single_map.units[selected_coordinates.y][selected_coordinates.x],selected_coordinates, single_map)
+	else:
+		$HUD/HUD/Units.hide()
 
+func handle_destroy_unit_click() -> void:
+	hide_menus()
+	possible_ant_movements()
+	unit_overlay_node.hide()
+	
+	
+	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
+	assert(!single_map.units[selected_coordinates.y][selected_coordinates.x].empty()) # Pole musi posiadać jednostkę
+	
+
+	var qq =  single_map.units[selected_coordinates.y][selected_coordinates.x]
+	var type_of_unit =qq["type"]
+	var unit_name: String = Units.get_unit_name(type_of_unit)
+
+	$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).get_node("ANT" + unit_name).queue_free()
+	
+	var resources_to_build: Dictionary = Units.get_unit_to_build(type_of_unit, 1)
+	Resources.scale_resources(resources_to_build, Units.DOWNGRADE_COST)
+	Resources.add_resources(player_resources[current_player], resources_to_build)
+
+	assert(Resources.are_all_resources_positive(player_resources[current_player]))
+
+	# We must entirelly remove unit
+	single_map.remove_unit(selected_coordinates)
+	
+	print("Removed unit " + Units.get_unit_name(type_of_unit))
+	gui_update_building_menu()
+	gui_update_resources()
+	pass
 
 func handle_create_unit_click(type_of_unit: int) -> void:
+		
 	Units.validate_type(type_of_unit)
 	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
 	assert(single_map.units[selected_coordinates.y][selected_coordinates.x].empty())  # Pole nie może posiadać na sobie żadnej jednostki
@@ -308,7 +345,7 @@ func handle_create_unit_click(type_of_unit: int) -> void:
 	var unit_3d: Spatial
 
 	match type_of_unit:
-		Units.TYPES_OF_ANTS.FLYER:
+		Units.TYPES_OF_ANTS.FLYING:
 			unit_3d = MapCreator.AntFlying.instance()
 		Units.TYPES_OF_ANTS.SOLDIER:
 			unit_3d = MapCreator.AntSoldier.instance()
