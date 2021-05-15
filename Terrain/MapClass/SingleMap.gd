@@ -277,7 +277,7 @@ func add_unit(coordinates: Vector2j, unit: int, level: int) -> void:
 	assert(units[coordinates.y][coordinates.x].empty())  # Jednostka nie może istnieć
 	assert(level >= 1 && level <= 3)
 
-	units[coordinates.y][coordinates.x] = {"type": unit, "level": level}
+	units[coordinates.y][coordinates.x] = {"type": unit, "level": level, "stats": Units.get_default_stats(unit, level)}
 
 
 func remove_unit(coordinates: Vector2j) -> void:
@@ -287,13 +287,6 @@ func remove_unit(coordinates: Vector2j) -> void:
 
 func has_unit(coordinates: Vector2j) -> bool:
 	return !units[coordinates.y][coordinates.x].empty()
-
-
-func move_unit(from: Vector2j, to: Vector2j) -> void:
-	assert(!units[from.y][from.x].empty())
-	assert(units[to.y][to.x].empty())
-	units[to.y][to.x] = units[from.y][from.x]
-	units[from.y][from.x] = {}
 
 
 func get_neighbourhoods(coordinates: Vector2j, player_number: int, _ignore_player_ants: bool = false) -> Array:
@@ -335,7 +328,7 @@ func get_neighbourhoods(coordinates: Vector2j, player_number: int, _ignore_playe
 			if fields[coordinates.y + 1][coordinates.x + 1] != FIELD_TYPE.NO_FIELD:
 				neighbour.append(Vector2j.new(coordinates.x + 1, coordinates.y + 1))
 
-	var checked_neighbour : Array = []
+	var checked_neighbour: Array = []
 	for i in neighbour:
 		if !_check_if_on_field_is_player_ant(player_number, i):
 			checked_neighbour.append(i)
@@ -344,32 +337,65 @@ func get_neighbourhoods(coordinates: Vector2j, player_number: int, _ignore_playe
 
 	return checked_neighbour
 
-func _check_if_on_field_is_player_ant(player_number: int, coordinates : Vector2j) -> bool:
+
+func _check_if_on_field_is_player_ant(player_number: int, coordinates: Vector2j) -> bool:
 	if !units[coordinates.y][coordinates.x].empty() && fields[coordinates.y][coordinates.x] == player_number:
 		return true
 	return false
 
 
-enum FIGHT_RESULTS {ATTACKER_WON_KILLED_ANT, ATTACKER_WON_EMPTY_FIELD, DRAW_BOTH_ANT_LIVE, DRAW_BOTH_ANT_DEAD, DEFENDER_WON}
+enum FIGHT_RESULTS { ATTACKER_WON_KILLED_ANT, ATTACKER_WON_EMPTY_FIELD, DRAW_BOTH_ANT_LIVE, DRAW_BOTH_ANT_DEAD, DEFENDER_WON }
 
-# start_c, 
-func move_ant_between_field(start_c : Vector2j, end_c : Vector2j) -> int:
-	assert(fields[start_c.y][start_c.x] != FIELD_TYPE.NO_FIELD)
-	assert(fields[end_c.y][end_c.x] != FIELD_TYPE.NO_FIELD)
-	assert(!units[start_c.y][start_c.x].empty())
-	assert(!(!units[end_c.y][end_c.x].empty() && fields[start_c.y][start_c.x] == fields[end_c.y][end_c.x]))
-	
+
+# TODO nie zapomnieć aby zaktualizować pola(fields) i kolory mrówek i pól
+func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
+	assert(fields[start_c.y][start_c.x] != FIELD_TYPE.NO_FIELD)  # Musi istnieć pole mrówki atakującej
+	assert(fields[end_c.y][end_c.x] != FIELD_TYPE.NO_FIELD)  # Musi istnieć pole atakowane
+	assert(!units[start_c.y][start_c.x].empty())  # Musi istnieć mrówka atakująca
+	assert(!(!units[end_c.y][end_c.x].empty() && fields[start_c.y][start_c.x] == fields[end_c.y][end_c.x]))  # Nie można przemiesczać się na pole jeśli pole jest nasze i mrówka też jest nasza
+	assert(units[start_c.y][start_c.x]["stats"]["number_of_movement"] > 0)  # Musi mieć mrówka możliwość poruszania
+
+	units[start_c.y][start_c.x]["stats"]["number_of_movement"] -= 1
+
 	# Brak Walki
 	if units[end_c.y][end_c.x].empty():
-		units[end_c.y][end_c.x] =units[start_c.y][start_c.x].duplicate(true)
+		units[end_c.y][end_c.x] = units[start_c.y][start_c.x].duplicate(true)
 		units[start_c.y][start_c.x] = {}
 		return FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
 	# Walka
 	else:
-		# TODO 
-		var attacker_stats : Dictionary = units[start_c.y][start_c.x]["stats"]
-		var defender_stats : Dictionary = units[start_c.y][start_c.x]["stats"]
-		
+		var attacker_stats: Dictionary = units[start_c.y][start_c.x]["stats"].duplicate(true)
+		var defender_stats: Dictionary = units[end_c.y][end_c.x]["stats"].duplicate(true)
+		# TODO Dodać dodatkowe zasoby które można brać z budynków
+
+		var additional_attack: float = 1.9
+		if attacker_stats["ants"] < 10 && defender_stats["ants"] < 10:
+			additional_attack *= 5.0
+		elif attacker_stats["ants"] < 20 && defender_stats["ants"] < 20:
+			additional_attack *= 3.0
+
+		var destroyed_defenders_ants: int = attacker_stats["attack"] * additional_attack * attacker_stats["ants"] * (100 - defender_stats["defense"]) * (randi() * 0.2 + 0.8)
+		var destroyed_attackers_ants: int = defender_stats["attack"] * additional_attack * defender_stats["ants"] * (100 - attacker_stats["defense"]) * (randi() * 0.2 + 0.8)
+
+		attacker_stats["ants"] -= destroyed_attackers_ants
+		defender_stats["ants"] -= destroyed_defenders_ants
+
+		units[start_c.y][start_c.x]["stats"]["ants"] = max(attacker_stats["ants"], 0)
+		units[end_c.y][end_c.x]["stats"]["ants"] = max(defender_stats["ants"], 0)
+
+		if attacker_stats["ants"] <= 0 && defender_stats["ants"] <= 0:
+			units[end_c.y][end_c.x] = {}
+			units[start_c.y][start_c.x] = {}
+			return FIGHT_RESULTS.DRAW_BOTH_ANT_DEAD
+		elif attacker_stats["ants"] <= 0 && defender_stats["ants"] > 0:
+			units[start_c.y][start_c.x] = {}
+			return FIGHT_RESULTS.DEFENDER_WON
+		elif attacker_stats["ants"] > 0 && defender_stats["ants"] > 0:
+			return FIGHT_RESULTS.DRAW_BOTH_ANT_LIVE
+		elif attacker_stats["ants"] > 0 && defender_stats["ants"] <= 0:
+			units[end_c.y][end_c.x] = units[start_c.y][start_c.x].duplicate(true)
+			units[start_c.y][start_c.x] = {}
+			return FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT
+
+		assert(false)
 		return FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
-	
-	

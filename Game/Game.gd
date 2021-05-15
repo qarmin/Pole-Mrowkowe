@@ -9,7 +9,7 @@ enum PLAYERS_TYPE { CPU = 0, HUMAN = 1 }
 # WAITING_FOR_END_OF_MOVING - Użytkownik czeka na zakończenie przesuwania się jednostki
 # CPU_TURN - Tura komputera
 
-enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN}
+enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN }
 var current_status = STATUS.USER_NORMAL
 
 # TODO to ma być ustawiane podczas wyboru potyczki
@@ -48,7 +48,10 @@ onready var single_map: SingleMap = SingleMap.new()
 var ant_movement: Array = []
 var ant_movement_overlay = preload("res://Overlay/PossiblePath/PossiblePathOverlay.tscn")
 
+# Tablica z sąsiadami, musi być aktualizowana na bieżąco
+var neighbourhood_array: Array = []
 ## Current coordinates
+
 
 # Inicjalizuje wszystkie elementy
 func _ready() -> void:
@@ -91,6 +94,7 @@ func _ready() -> void:
 	connect_clickable_signals()
 	pass
 
+
 func _input(event) -> void:
 	# ESCAPE i prawy przycisk myszy umożliwiają przerwanie wybieranie miejsca gdzie można zaatakować
 	if current_status == STATUS.CHOOSING_MOVE_PLACE:
@@ -98,15 +102,16 @@ func _input(event) -> void:
 #			if event.get_button_mask() == BUTTON_MASK_RIGHT:
 #				current_status = STATUS.USER_NORMAL
 #				hide_everything()
-		if event is InputEventKey &&  event.is_pressed():
+		if event is InputEventKey && event.is_pressed():
 			if event.get_scancode() == KEY_ESCAPE:
 				current_status = STATUS.USER_NORMAL
 				hide_everything()
-	
+
 
 func _process(_delta: float) -> void:
 	# TODO Add logic to CPU movement
 	pass
+
 
 # Łączy wszystkie sygnały
 func connect_clickable_signals() -> void:
@@ -124,7 +129,7 @@ func connect_clickable_signals() -> void:
 	assert($HUD/HUD/Buildings.connect("create_unit_clicked", self, "handle_create_unit_click") == OK)
 	assert($HUD/HUD/Units.connect("destroy_unit_clicked", self, "handle_destroy_unit_click") == OK)
 	assert($HUD/HUD/Units.connect("move_unit_clicked", self, "handle_move_unit_click") == OK)
-	
+
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
 	round_node.connect("try_to_end_turn_clicked", self, "end_turn")
@@ -132,9 +137,51 @@ func connect_clickable_signals() -> void:
 	confirmation_dialog.connect("confirmed", self, "end_turn")
 
 
+func move_unit(end_c: Vector2j):
+	var start_c: Vector2j = selected_coordinates
+
+	var result: int = single_map.move_unit(start_c, end_c)
+	var start_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(start_c, single_map.size))
+	var end_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size))
+
+	match result:
+		SingleMap.FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD:
+			var start_ant: Spatial = get_unit_from_field(start_c)
+			start_hex.remove_child(start_ant)
+			end_hex.add_child(start_ant)
+
+			update_field_color(end_c)
+			current_status = STATUS.WAITING_FOR_END_OF_MOVING
+		SingleMap.FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT:
+			var start_ant: Spatial = get_unit_from_field(start_c)
+			start_hex.remove_child(start_ant)
+			end_hex.add_child(start_ant)
+
+			update_field_color(end_c)
+			get_unit_from_field(end_c).queue_free()
+			current_status = STATUS.WAITING_FOR_END_OF_MOVING
+		SingleMap.FIGHT_RESULTS.DEFENDER_WON:
+			get_unit_from_field(start_c).queue_free()
+			current_status = STATUS.USER_NORMAL
+		SingleMap.FIGHT_RESULTS.DRAW_BOTH_ANT_DEAD:
+			get_unit_from_field(start_c).queue_free()
+			get_unit_from_field(end_c).queue_free()
+			current_status = STATUS.USER_NORMAL
+		SingleMap.FIGHT_RESULTS.DRAW_BOTH_ANT_LIVE:
+			current_status = STATUS.USER_NORMAL
+
+	hide_everything()
+
+
 func ant_clicked(ant: AntBase) -> void:
 	var parent_name: String = ant.get_parent().get_name()
 #	print("Ant " + parent_name + "/" + ant.get_name() + " was clicked and this was handled!")
+
+	if current_status == STATUS.CHOOSING_MOVE_PLACE:
+		var clicked_coordinates: Vector2j = SingleMap.convert_name_to_coordinates(parent_name, single_map.size)
+		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
+			move_unit(clicked_coordinates)
+			return
 
 	# Jeśli mrówka była wcześniej kliknięta, to usuwamy zaznaczenie
 	if parent_name == current_unit_overlay_hex_name:
@@ -181,7 +228,6 @@ func possible_ant_movements(array_of_coordinates: Array = [], hide: bool = true)
 
 	for i in range(6):
 		if i < array_of_coordinates.size():
-			
 			ant_movement[i].get_parent().remove_child(ant_movement[i])
 
 			get_node("Map").get_node(SingleMap.convert_coordinates_to_name(array_of_coordinates[i], single_map.size)).add_child(ant_movement[i])
@@ -197,6 +243,12 @@ func possible_ant_movements(array_of_coordinates: Array = [], hide: bool = true)
 
 
 func hex_clicked(hex: SingleHex) -> void:
+	if current_status == STATUS.CHOOSING_MOVE_PLACE:
+		var clicked_coordinates: Vector2j = SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size)
+		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
+			move_unit(clicked_coordinates)
+			return
+
 	possible_ant_movements()
 
 	# TODO checkif players
@@ -250,7 +302,8 @@ func hide_menus():
 	$HUD/HUD/Buildings.hide()
 	$HUD/HUD/Units.hide()
 	$HUD/HUD/MovingInfo.hide()
-	
+
+
 func hide_everything():
 	hide_menus()
 	possible_ant_movements()
@@ -327,38 +380,37 @@ func gui_update_building_menu() -> void:
 		$HUD/HUD/Buildings.update_buildings_info(player_resources[current_player], single_map.buildings[selected_coordinates.y][selected_coordinates.x], selected_coordinates, single_map)
 	else:
 		$HUD/HUD/Buildings.hide()
-		
+
+
 func gui_update_units() -> void:
 	if single_map.fields[selected_coordinates.y][selected_coordinates.x] == current_player:  # Re-enable this after tests
-		$HUD/HUD/Units.update_units_info(single_map.units[selected_coordinates.y][selected_coordinates.x],selected_coordinates, single_map)
+		$HUD/HUD/Units.update_units_info(single_map.units[selected_coordinates.y][selected_coordinates.x], selected_coordinates, single_map)
 	else:
 		$HUD/HUD/Units.hide()
 
+
 func handle_move_unit_click() -> void:
-	current_status = STATUS.CHOOSING_MOVE_PLACE
-	
-	$HUD/HUD/MovingInfo.show()
-	
-	var neighbourhood: Array = single_map.get_neighbourhoods(selected_coordinates, current_player)
-	possible_ant_movements(neighbourhood, false)
-	
-	
+	if single_map.units[selected_coordinates.y][selected_coordinates.x]["stats"]["number_of_movement"] > 0:
+		$HUD/HUD/MovingInfo.show()
+		current_status = STATUS.CHOOSING_MOVE_PLACE
+		neighbourhood_array = single_map.get_neighbourhoods(selected_coordinates, current_player)
+		possible_ant_movements(neighbourhood_array, false)
+
+
 func handle_destroy_unit_click() -> void:
 	hide_menus()
 	possible_ant_movements()
 	unit_overlay_node.hide()
-	
-	
-	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
-	assert(!single_map.units[selected_coordinates.y][selected_coordinates.x].empty()) # Pole musi posiadać jednostkę
-	
 
-	var qq =  single_map.units[selected_coordinates.y][selected_coordinates.x]
-	var type_of_unit =qq["type"]
+	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
+	assert(!single_map.units[selected_coordinates.y][selected_coordinates.x].empty())  # Pole musi posiadać jednostkę
+
+	var qq = single_map.units[selected_coordinates.y][selected_coordinates.x]
+	var type_of_unit = qq["type"]
 	var unit_name: String = Units.get_unit_name(type_of_unit)
 
 	$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).get_node("ANT" + unit_name).queue_free()
-	
+
 	var resources_to_build: Dictionary = Units.get_unit_to_build(type_of_unit, 1)
 	Resources.scale_resources(resources_to_build, Units.DOWNGRADE_COST)
 	Resources.add_resources(player_resources[current_player], resources_to_build)
@@ -367,14 +419,14 @@ func handle_destroy_unit_click() -> void:
 
 	# We must entirelly remove unit
 	single_map.remove_unit(selected_coordinates)
-	
+
 	print("Removed unit " + Units.get_unit_name(type_of_unit))
 	gui_update_building_menu()
 	gui_update_resources()
 	pass
 
+
 func handle_create_unit_click(type_of_unit: int) -> void:
-		
 	Units.validate_type(type_of_unit)
 	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
 	assert(single_map.units[selected_coordinates.y][selected_coordinates.x].empty())  # Pole nie może posiadać na sobie żadnej jednostki
@@ -489,30 +541,27 @@ func handle_downgrade_building_click(type_of_building: int) -> void:
 	gui_update_building_menu()
 	gui_update_resources()
 
-## Uaktualnia kolor jednostki dla danego pola i hexa
-#func update_field_after_move(coordinates : Vector2j) -> void:
-#	assert(single_map.fields[coordinates.y][coordinates.x] != SingleMap.FIELD_TYPE.NO_FIELD)
-#
-#	# There is field on 
-#	if !single_map.units[coordinates.y][coordinates.x].empty():
-#
-#		pass # TODO there is unit update it
-##	else:
-##		single_map.
-#
-#
-#
-#	pass
+
+# Uaktualnia kolor jednostki dla danego pola i hexa
+func update_field_color(coordinates: Vector2j) -> void:
+	assert(single_map.fields[coordinates.y][coordinates.x] != SingleMap.FIELD_TYPE.NO_FIELD)
+
+	var name: String = SingleMap.convert_coordinates_to_name(coordinates, single_map.size)
+
+	$Map.get_node(name).set_surface_material(0, MapCreator.texture_array[current_player])
+
+
 #
 #func check_if_on_field_is_unit(coordinates : Vector2j) -> bool:
 #	for i in $Map.get_node(SingleMap.convert_coordinates_to_name(coordinates, single_map.size)).get_children():
 #		if i.begins_with("ANT"):
 #			return true
 #	return false
-#
-#func get_unit_from_field(coordinates : Vector2j) -> Spatial:
-#	for i in $Map.get_node(SingleMap.convert_coordinates_to_name(coordinates, single_map.size)).get_children():
-#		if i.begins_with("ANT"):
-#			return i
-#	assert(false)
-#	return Spatial.new()
+
+
+func get_unit_from_field(coordinates: Vector2j) -> Spatial:
+	for i in $Map.get_node(SingleMap.convert_coordinates_to_name(coordinates, single_map.size)).get_children():
+		if i.get_name().begins_with("ANT"):
+			return i
+	assert(false)
+	return Spatial.new()

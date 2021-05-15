@@ -247,6 +247,3 @@ func update_units_info(user_resources: Dictionary, buildings: Dictionary, coordi
 		create_unit.set_tooltip(create_unit_hint_text)
 
 		single_unit_nodes[index].get_node("Name").set_text(name)
-
-
-
