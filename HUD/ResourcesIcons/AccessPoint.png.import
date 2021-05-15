@@ -14,8 +14,8 @@ dest_files=[ "res://.import/AccessPoint.png-3360880db9a6f3a9c9fd83f7236cc330.ste
 
 [params]
 
-compress/mode=1
-compress/lossy_quality=0.0
+compress/mode=0
+compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
