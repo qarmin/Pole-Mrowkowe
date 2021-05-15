@@ -26,6 +26,8 @@ onready var round_node = $HUD/HUD/Round
 onready var round_label = $HUD/HUD/Round/Label
 onready var confirmation_dialog = $HUD/HUD/ConfirmationDialog
 
+var attacked_icon = load("res://HUD/AttackedIcon/AttackedIcon.tscn")
+
 # Selection
 var current_terrain_overlay_hex_name: String = ""
 var current_unit_overlay_hex_name: String = ""
@@ -143,6 +145,8 @@ func move_unit(end_c: Vector2j):
 	var result: int = single_map.move_unit(start_c, end_c)
 	var start_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(start_c, single_map.size))
 	var end_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size))
+	
+	end_hex.add_child(attacked_icon.instance())
 
 	match result:
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD:
@@ -151,6 +155,7 @@ func move_unit(end_c: Vector2j):
 			end_hex.add_child(start_ant)
 
 			update_field_color(end_c)
+			single_map.fields[end_c.y][end_c.x] = current_player
 			current_status = STATUS.WAITING_FOR_END_OF_MOVING
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT:
 			var start_ant: Spatial = get_unit_from_field(start_c)
@@ -159,6 +164,7 @@ func move_unit(end_c: Vector2j):
 
 			update_field_color(end_c)
 			get_unit_from_field(end_c).queue_free()
+			single_map.fields[end_c.y][end_c.x] = current_player
 			current_status = STATUS.WAITING_FOR_END_OF_MOVING
 		SingleMap.FIGHT_RESULTS.DEFENDER_WON:
 			get_unit_from_field(start_c).queue_free()
@@ -329,7 +335,6 @@ func try_to_end_turn() -> void:
 
 
 func end_turn() -> void:
-	# TODO Jeśli to jest tura gracza to może to kliknąć, w przeciwnym wypadku nie wyjść z funkcji
 	print("Koniec tury")
 
 	var new_turn: bool = false
@@ -358,6 +363,8 @@ func end_turn() -> void:
 
 	# Aktualizacja zasobów
 	gui_update_resources()
+	# Reset ruchu mrówek
+	restore_ant_movement_ability()
 	# Aktualizacja koloru gracz na mapie
 	$HUD/HUD.update_current_player_text_color(current_player, players_type[current_player])
 #	print("Current player " + str(current_player))
@@ -565,3 +572,11 @@ func get_unit_from_field(coordinates: Vector2j) -> Spatial:
 			return i
 	assert(false)
 	return Spatial.new()
+
+func restore_ant_movement_ability():
+	for y in single_map.size.y:
+		for x in single_map.size.x:
+			if single_map.fields[y][x] == current_player && !single_map.units[y][x].empty(): 
+				var unit_type = single_map.units[y][x]["type"]
+				single_map.units[y][x]["stats"]["number_of_movement"] = Units.get_default_stats(unit_type,1)["number_of_movement"]
+				

@@ -374,11 +374,18 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
 		elif attacker_stats["ants"] < 20 && defender_stats["ants"] < 20:
 			additional_attack *= 3.0
 
-		var destroyed_defenders_ants: int = attacker_stats["attack"] * additional_attack * attacker_stats["ants"] * (100 - defender_stats["defense"]) * (randi() * 0.2 + 0.8)
-		var destroyed_attackers_ants: int = defender_stats["attack"] * additional_attack * defender_stats["ants"] * (100 - attacker_stats["defense"]) * (randi() * 0.2 + 0.8)
+		print(attacker_stats["attack"])
+		print(attacker_stats["ants"])
+		print(defender_stats["defense"])
+		
+		var destroyed_defenders_ants: int = attacker_stats["attack"] * additional_attack * attacker_stats["ants"] * (100 - defender_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
+		var destroyed_attackers_ants: int = defender_stats["attack"] * additional_attack * defender_stats["ants"] * (100 - attacker_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
 
 		attacker_stats["ants"] -= destroyed_attackers_ants
 		defender_stats["ants"] -= destroyed_defenders_ants
+		
+		print("Destroyed attacker ants " + str(destroyed_attackers_ants))
+		print("Destroyed defenders ants " + str(destroyed_defenders_ants))
 
 		units[start_c.y][start_c.x]["stats"]["ants"] = max(attacker_stats["ants"], 0)
 		units[end_c.y][end_c.x]["stats"]["ants"] = max(defender_stats["ants"], 0)

@@ -23,8 +23,8 @@ func _ready() -> void:
 	}
 	var stats_default: Dictionary = {
 		"ants": 100,
-		"defense": 10,
-		"attack": 10,
+		"defense": 30,
+		"attack": 30,
 		"number_of_movement": 1,
 	}
 #		"luck": 40,
