@@ -20,7 +20,7 @@ surfaces/0 = {
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.956863, 0.470588, 0, 1 )
 
-[node name="Piles" type="Spatial"]
+[node name="Pile" type="Spatial"]
 
 [node name="Cube" type="MeshInstance" parent="."]
 transform = Transform( 0.0208892, 0.107076, 0, -0.0171068, 0.130751, 0, 0, 0, 0.027, -0.041, 1.036, 0 )

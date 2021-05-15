@@ -4,14 +4,22 @@ var cpu_vs_cpu: bool = false  # Allow to have fully automated game
 
 enum PLAYERS_TYPE { CPU = 0, HUMAN = 1 }
 
-# TODO to ma być ustawiane
+# USER_NORMAL - Zwykły ruch gracza
+# CHOOSING_MOVE_PLACE - Użytkownik wybiera polę do którego chce przejść
+# WAITING_FOR_END_OF_MOVING - Użytkownik czeka na zakończenie przesuwania się jednostki
+# CPU_TURN - Tura komputera
+
+enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN}
+var current_status = STATUS.USER_NORMAL
+
+# TODO to ma być ustawiane podczas wyboru potyczki
 
 var number_of_start_players: int = 4  # Number of all players
 var active_players: int = 3  # How many players still play
 var current_player: int = 0  # Actual player
 var players_activite: Array = [true, true, false, true]  # Stan aktualny w graczach, czy ciągle żyją
 var players_type: Array = [PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.CPU, PLAYERS_TYPE.CPU]
-# TODO Maybe players name?
+# TODO Maybe add players name?
 var player_resources: Array = []
 
 onready var round_node = $HUD/HUD/Round
@@ -42,7 +50,7 @@ var ant_movement_overlay = preload("res://Overlay/PossiblePath/PossiblePathOverl
 
 ## Current coordinates
 
-
+# Inicjalizuje wszystkie elementy
 func _ready() -> void:
 	for _i in range(6):
 		var node: Spatial = ant_movement_overlay.instance()
@@ -83,12 +91,24 @@ func _ready() -> void:
 	connect_clickable_signals()
 	pass
 
+func _input(event) -> void:
+	# ESCAPE i prawy przycisk myszy umożliwiają przerwanie wybieranie miejsca gdzie można zaatakować
+	if current_status == STATUS.CHOOSING_MOVE_PLACE:
+#		if event is InputEventMouse &&  event.is_pressed():
+#			if event.get_button_mask() == BUTTON_MASK_RIGHT:
+#				current_status = STATUS.USER_NORMAL
+#				hide_everything()
+		if event is InputEventKey &&  event.is_pressed():
+			if event.get_scancode() == KEY_ESCAPE:
+				current_status = STATUS.USER_NORMAL
+				hide_everything()
+	
 
 func _process(_delta: float) -> void:
 	# TODO Add logic to CPU movement
 	pass
 
-
+# Łączy wszystkie sygnały
 func connect_clickable_signals() -> void:
 	# Łączenie każdego pola oraz mrówki na mapie z funkcją wyświelającą
 	for single_hex in $Map.get_children():
@@ -103,7 +123,8 @@ func connect_clickable_signals() -> void:
 	assert($HUD/HUD/Buildings.connect("downgrade_clicked", self, "handle_downgrade_building_click") == OK)
 	assert($HUD/HUD/Buildings.connect("create_unit_clicked", self, "handle_create_unit_click") == OK)
 	assert($HUD/HUD/Units.connect("destroy_unit_clicked", self, "handle_destroy_unit_click") == OK)
-
+	assert($HUD/HUD/Units.connect("move_unit_clicked", self, "handle_move_unit_click") == OK)
+	
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
 	round_node.connect("try_to_end_turn_clicked", self, "end_turn")
@@ -130,14 +151,12 @@ func ant_clicked(ant: AntBase) -> void:
 	selected_hex = null
 
 	var coordinates: Vector2j = SingleMap.convert_name_to_coordinates(parent_name, single_map.size)
-	var neighbourhood: Array = single_map.get_neighbourhoods(coordinates, current_player)
 
 	selected_coordinates = coordinates
 
 	# Sprawdzenie czy aktualny gracz klika na wroga czy na siebie i dopasowuje do tego kolor
 	if single_map.get_field_owner(coordinates) == current_player:
 		unit_overlay_node.get_material().albedo_color = selection_ant_color_own
-		possible_ant_movements(neighbourhood, false)
 	else:
 		unit_overlay_node.get_material().albedo_color = selection_ant_color_enemy
 		possible_ant_movements()
@@ -162,8 +181,7 @@ func possible_ant_movements(array_of_coordinates: Array = [], hide: bool = true)
 
 	for i in range(6):
 		if i < array_of_coordinates.size():
-			ant_movement[i].show()
-
+			
 			ant_movement[i].get_parent().remove_child(ant_movement[i])
 
 			get_node("Map").get_node(SingleMap.convert_coordinates_to_name(array_of_coordinates[i], single_map.size)).add_child(ant_movement[i])
@@ -219,16 +237,30 @@ func hex_clicked(hex: SingleHex) -> void:
 func show_buildings_menu():
 	$HUD/HUD/Buildings.show()
 	$HUD/HUD/Units.hide()
+	$HUD/HUD/MovingInfo.hide()
 
 
 func show_units_menu():
 	$HUD/HUD/Units.show()
 	$HUD/HUD/Buildings.hide()
+	$HUD/HUD/MovingInfo.hide()
 
 
 func hide_menus():
 	$HUD/HUD/Buildings.hide()
 	$HUD/HUD/Units.hide()
+	$HUD/HUD/MovingInfo.hide()
+	
+func hide_everything():
+	hide_menus()
+	possible_ant_movements()
+	current_terrain_overlay_hex_name = ""
+	current_unit_overlay_hex_name = ""
+	selected_ant = null
+	selected_hex = null
+	selected_coordinates = null
+	terrain_overlay_node.hide()
+	unit_overlay_node.hide()
 
 
 func get_active_players() -> int:
@@ -241,10 +273,6 @@ func get_active_players() -> int:
 
 func try_to_end_turn() -> void:
 	confirmation_dialog.popup()
-
-
-func show_all_possible_ant_position() -> void:
-	pass
 
 
 func end_turn() -> void:
@@ -306,6 +334,15 @@ func gui_update_units() -> void:
 	else:
 		$HUD/HUD/Units.hide()
 
+func handle_move_unit_click() -> void:
+	current_status = STATUS.CHOOSING_MOVE_PLACE
+	
+	$HUD/HUD/MovingInfo.show()
+	
+	var neighbourhood: Array = single_map.get_neighbourhoods(selected_coordinates, current_player)
+	possible_ant_movements(neighbourhood, false)
+	
+	
 func handle_destroy_unit_click() -> void:
 	hide_menus()
 	possible_ant_movements()
@@ -357,11 +394,16 @@ func handle_create_unit_click(type_of_unit: int) -> void:
 	unit_3d.translation = Vector3(0, 1.192, 0)
 	$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).add_child(unit_3d)
 
+	# Connect
+	assert(unit_3d.connect("ant_clicked", self, "ant_clicked") == OK)
+
 	single_map.add_unit(selected_coordinates, type_of_unit, 1)
 
 	var resources_to_build = Units.get_unit_to_build(type_of_unit, 1)
 	Resources.remove_resources(player_resources[current_player], resources_to_build)
 	assert(Resources.are_all_resources_positive(player_resources[current_player]))
+
+	unit_3d.find_node("Outfit").set_surface_material(0, MapCreator.ant_texture_array[current_player])
 
 	print("Created unit: " + Units.get_unit_name(type_of_unit))
 	gui_update_building_menu()
@@ -398,8 +440,8 @@ func handle_upgrade_building_click(type_of_building: int) -> void:
 				building_3d = MapCreator.Farm.instance()
 			Buildings.TYPES_OF_BUILDINGS.SAWMILL:
 				building_3d = MapCreator.Sawmill.instance()
-			Buildings.TYPES_OF_BUILDINGS.BARRACKS:
-				building_3d = MapCreator.Barracks.instance()
+			Buildings.TYPES_OF_BUILDINGS.GOLD_MINE:
+				building_3d = MapCreator.GoldMine.instance()
 			Buildings.TYPES_OF_BUILDINGS.PILE:
 				building_3d = MapCreator.Piles.instance()
 			_:
@@ -446,3 +488,31 @@ func handle_downgrade_building_click(type_of_building: int) -> void:
 	print("Downgrade " + Buildings.get_bulding_name(type_of_building))
 	gui_update_building_menu()
 	gui_update_resources()
+
+## Uaktualnia kolor jednostki dla danego pola i hexa
+#func update_field_after_move(coordinates : Vector2j) -> void:
+#	assert(single_map.fields[coordinates.y][coordinates.x] != SingleMap.FIELD_TYPE.NO_FIELD)
+#
+#	# There is field on 
+#	if !single_map.units[coordinates.y][coordinates.x].empty():
+#
+#		pass # TODO there is unit update it
+##	else:
+##		single_map.
+#
+#
+#
+#	pass
+#
+#func check_if_on_field_is_unit(coordinates : Vector2j) -> bool:
+#	for i in $Map.get_node(SingleMap.convert_coordinates_to_name(coordinates, single_map.size)).get_children():
+#		if i.begins_with("ANT"):
+#			return true
+#	return false
+#
+#func get_unit_from_field(coordinates : Vector2j) -> Spatial:
+#	for i in $Map.get_node(SingleMap.convert_coordinates_to_name(coordinates, single_map.size)).get_children():
+#		if i.begins_with("ANT"):
+#			return i
+#	assert(false)
+#	return Spatial.new()

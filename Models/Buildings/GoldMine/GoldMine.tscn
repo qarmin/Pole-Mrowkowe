@@ -20,7 +20,7 @@ surfaces/0 = {
 "vertex_count": 96
 }
 
-[node name="GoldCreate" type="Spatial"]
+[node name="Gold Mine" type="Spatial"]
 transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0 )
 
 [node name="Cylinder" type="MeshInstance" parent="."]

@@ -1,7 +1,7 @@
 extends Node
 
 enum TYPES_OF_ANTS { NO_UNIT = -100, ANT_MIN = -1, WORKER, SOLDIER, FLYING, ANT_MAX }
-enum TYPES_OF_STATS { STATS_MIN = -1, ANTS, ATTACK, DEFENSE, LUCK, ACTION_POINTS, NUMBER_OF_MOVEMENT, STATS_MAX }
+enum TYPES_OF_STATS { STATS_MIN = -1, ANTS, ATTACK, DEFENSE, NUMBER_OF_MOVEMENT, STATS_MAX } # Luck, ACTION_POINTS
 enum TYPES_OF_ARMOR { ARMOR_MIN = 0, BRONZE, SILVER, GOLD }
 
 const HELMETS_DEFENSE: PoolIntArray = PoolIntArray([2, 4, 6])
@@ -24,8 +24,8 @@ func _ready() -> void:
 		"ants": 100,
 		"defense": 10,
 		"attack": 10,
-		"luck": 40,
-		"action_points": 2,
+#		"luck": 40,
+#		"action_points": 2,
 		"number_of_movement": 1,
 	}
 
@@ -81,9 +81,18 @@ func get_unit_name(type: int) -> String:
 			return single_unit["name"]
 	assert(false, "Failed to find unit of type " + str(type))
 	return ""
+	
 
 
 func get_unit_usage(type: int, _level: int) -> Dictionary:
+	validate_type(type)
+	for ant in ants:
+		if ant["type"] == type:
+			return ant["usage"].duplicate()
+	assert(false, "Failed to found proper ant for this usage")
+	return {}
+	
+func get_unit_stats(type: int, _level: int) -> Dictionary:
 	validate_type(type)
 	for ant in ants:
 		if ant["type"] == type:

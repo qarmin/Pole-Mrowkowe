@@ -1,6 +1,9 @@
 extends Control
 
 signal destroy_unit_clicked
+signal move_unit_clicked
+
+var move_button : TextureButton
 
 var destroy_button : TextureButton
 var icon : TextureRect
@@ -16,6 +19,8 @@ func _ready() -> void:
 	initialize_gui()
 
 func initialize_gui() -> void:
+	move_button= find_node("MoveUnit")
+	
 	destroy_button = find_node("DestroyUnit")
 	icon = find_node("AntIcon")
 	ant_name = find_node("AntName")
@@ -23,10 +28,16 @@ func initialize_gui() -> void:
 	assert(icon != null)
 
 	assert(destroy_button.connect("button_up", self, "handle_remove_unit_click") == OK)
+	assert(move_button.connect("button_up", self, "handle_move_unit_click") == OK)
 		
 func handle_remove_unit_click() -> void:
 	emit_signal("destroy_unit_clicked")
 	assert(get_signal_connection_list("destroy_unit_clicked").size() > 0)
+	
+func handle_move_unit_click() -> void:
+	emit_signal("move_unit_clicked")
+	assert(get_signal_connection_list("move_unit_clicked").size() > 0)
+	pass
 	
 func update_units_info(unit: Dictionary, _coordinates: Vector2j, _single_map: SingleMap) -> void:
 	

@@ -296,7 +296,7 @@ func move_unit(from: Vector2j, to: Vector2j) -> void:
 	units[from.y][from.x] = {}
 
 
-func get_neighbourhoods(coordinates: Vector2j, _player_number: int, _ignore_player_ants: bool = false) -> Array:
+func get_neighbourhoods(coordinates: Vector2j, player_number: int, _ignore_player_ants: bool = false) -> Array:
 	var neighbour: Array = []
 
 	if coordinates.x > 0:  # Left
@@ -335,7 +335,41 @@ func get_neighbourhoods(coordinates: Vector2j, _player_number: int, _ignore_play
 			if fields[coordinates.y + 1][coordinates.x + 1] != FIELD_TYPE.NO_FIELD:
 				neighbour.append(Vector2j.new(coordinates.x + 1, coordinates.y + 1))
 
+	var checked_neighbour : Array = []
+	for i in neighbour:
+		if !_check_if_on_field_is_player_ant(player_number, i):
+			checked_neighbour.append(i)
 #	for i in neighbour:
 #		print(i.to_string())
 
-	return neighbour
+	return checked_neighbour
+
+func _check_if_on_field_is_player_ant(player_number: int, coordinates : Vector2j) -> bool:
+	if !units[coordinates.y][coordinates.x].empty() && fields[coordinates.y][coordinates.x] == player_number:
+		return true
+	return false
+
+
+enum FIGHT_RESULTS {ATTACKER_WON_KILLED_ANT, ATTACKER_WON_EMPTY_FIELD, DRAW_BOTH_ANT_LIVE, DRAW_BOTH_ANT_DEAD, DEFENDER_WON}
+
+# start_c, 
+func move_ant_between_field(start_c : Vector2j, end_c : Vector2j) -> int:
+	assert(fields[start_c.y][start_c.x] != FIELD_TYPE.NO_FIELD)
+	assert(fields[end_c.y][end_c.x] != FIELD_TYPE.NO_FIELD)
+	assert(!units[start_c.y][start_c.x].empty())
+	assert(!(!units[end_c.y][end_c.x].empty() && fields[start_c.y][start_c.x] == fields[end_c.y][end_c.x]))
+	
+	# Brak Walki
+	if units[end_c.y][end_c.x].empty():
+		units[end_c.y][end_c.x] =units[start_c.y][start_c.x].duplicate(true)
+		units[start_c.y][start_c.x] = {}
+		return FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
+	# Walka
+	else:
+		# TODO 
+		var attacker_stats : Dictionary = units[start_c.y][start_c.x]["stats"]
+		var defender_stats : Dictionary = units[start_c.y][start_c.x]["stats"]
+		
+		return FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
+	
+	
