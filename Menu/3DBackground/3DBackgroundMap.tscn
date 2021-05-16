@@ -1,1631 +1,1053 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Units/Outfit/OutfitBase.tres" type="Material" id=1]
-[ext_resource path="res://Units/Body/Body.tres" type="Material" id=2]
-[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM1.tres" type="Material" id=3]
-[ext_resource path="res://Units/Outfit/OutfitTEAM4.tres" type="Material" id=4]
-[ext_resource path="res://Terrain/SingleHex/SingleHexBase.tres" type="Material" id=5]
-[ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Units/Helmets/Bronze.tres" type="Material" id=9]
-[ext_resource path="res://Units/Outfit/OutfitTEAM1.tres" type="Material" id=10]
-[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM2.tres" type="Material" id=11]
-[ext_resource path="res://Units/Outfit/OutfitTEAM2.tres" type="Material" id=12]
+[ext_resource path="res://Units/Types/Soldier/Soldier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Units/Types/Worker/Worker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Terrain/SingleHex/SingleHex.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Models/Buildings/Farm/Farm.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Models/Buildings/Sawmill/Sawmill.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Models/Buildings/Barracks/Barracks.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Models/Buildings/GoldMine/GoldMine.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM1.tres" type="Material" id=10]
+[ext_resource path="res://Models/Buildings/Piles/Piles.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Terrain/SingleHex/SingleHexBase.tres" type="Material" id=12]
 [ext_resource path="res://Terrain/SingleHex/SingleHexTEAM3.tres" type="Material" id=13]
-[ext_resource path="res://Units/Outfit/OutfitTEAM3.tres" type="Material" id=14]
-[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM4.tres" type="Material" id=15]
-
-[sub_resource type="CubeMesh" id=1]
-material = ExtResource( 1 )
-
-[sub_resource type="CubeMesh" id=2]
-material = ExtResource( 9 )
-
-[sub_resource type="CubeMesh" id=3]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM2.tres" type="Material" id=14]
+[ext_resource path="res://Units/Types/Flying/Flying.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Models/Buildings/Anthill/Anthill.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Terrain/SingleHex/SingleHexTEAM4.tres" type="Material" id=18]
 
 [node name="Map" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.66, 0, -7.5 )
 
-[node name="SingleHex0" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.324202, 0.75 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex0"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex0/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex0/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex0/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex10" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.653889, 2.25 )
-material/0 = ExtResource( 11 )
-
-[node name="Ant" type="Spatial" parent="SingleHex10"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex10/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex0" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.227, 0.284043, -6.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex10/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex0" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex10/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Barracks" parent="SingleHex0" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex20" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.298161, 3.75 )
-material/0 = ExtResource( 11 )
+[node name="Gold Mine" parent="SingleHex0" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex20"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="SingleHex1" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.495, 0.327452, -6.75 )
+material/0 = ExtResource( 13 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex20/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="ANTWorker" parent="SingleHex1" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Sawmill" parent="SingleHex1" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
+
+[node name="Barracks" parent="SingleHex1" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex1" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="SingleHex3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.031, 0.551593, -6.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex20/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex3" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex20/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex3" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex30" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.818761, 5.25 )
-material/0 = ExtResource( 5 )
+[node name="Barracks" parent="SingleHex3" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="SingleHex40" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.720717, 6.75 )
-material/0 = ExtResource( 5 )
+[node name="Pile" parent="SingleHex3" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex40"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="SingleHex5" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.433001, 0.228281, -6.75 )
+material/0 = ExtResource( 13 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex40/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+[node name="Sawmill" parent="SingleHex5" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex40/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Barracks" parent="SingleHex5" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex40/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Gold Mine" parent="SingleHex5" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="SingleHex50" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.157049, 8.25 )
-material/0 = ExtResource( 15 )
-
-[node name="SingleHex60" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.333739, 9.75 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex60"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex60/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex60/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex60/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex70" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.431745, 11.25 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex70"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex70/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex70/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex70/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex80" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.0642495, 12.75 )
-material/0 = ExtResource( 11 )
-
-[node name="Ant" type="Spatial" parent="SingleHex80"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex80/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex6" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.165, 0.948546, -6.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex80/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTFlying" parent="SingleHex6" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex80/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Anthill" parent="SingleHex6" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="SingleHex90" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.732, 0.213295, 14.25 )
-material/0 = ExtResource( 11 )
+[node name="Sawmill" parent="SingleHex6" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex90"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Barracks" parent="SingleHex6" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex90/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="Gold Mine" parent="SingleHex6" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
+
+[node name="SingleHex7" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.897, 0.160264, -6.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex90/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTSoldier" parent="SingleHex7" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex90/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Barracks" parent="SingleHex7" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="SingleHex1" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.0697875, 0.75 )
-material/0 = ExtResource( 13 )
+[node name="SingleHex8" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.629, 0.757262, -6.75 )
+material/0 = ExtResource( 10 )
 
-[node name="Ant" type="Spatial" parent="SingleHex1"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="ANTWorker" parent="SingleHex8" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex1/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
+[node name="Anthill" parent="SingleHex8" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex1/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Pile" parent="SingleHex8" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex1/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex11" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.652585, 2.25 )
-material/0 = ExtResource( 11 )
-
-[node name="Ant" type="Spatial" parent="SingleHex11"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex11/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex11" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.629, 0.763976, -5.25 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex11/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTSoldier" parent="SingleHex11" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex11/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Sawmill" parent="SingleHex11" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
 
-[node name="SingleHex21" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.74825, 3.75 )
-material/0 = ExtResource( 5 )
+[node name="Barracks" parent="SingleHex11" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex21"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Pile" parent="SingleHex11" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex21/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+[node name="SingleHex12" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.897, 0.268366, -5.25 )
+material/0 = ExtResource( 18 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex21/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Sawmill" parent="SingleHex12" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex21/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Barracks" parent="SingleHex12" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex31" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.818569, 5.25 )
-material/0 = ExtResource( 11 )
+[node name="SingleHex13" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.937933, -5.25 )
+material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex31"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="ANTFlying" parent="SingleHex13" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex31/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="Anthill" parent="SingleHex13" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex13" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="Gold Mine" parent="SingleHex13" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="SingleHex14" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.432999, 0.349451, -5.25 )
+material/0 = ExtResource( 10 )
+
+[node name="Anthill" parent="SingleHex14" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex14" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="SingleHex15" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.364482, -5.25 )
+material/0 = ExtResource( 14 )
+
+[node name="Anthill" parent="SingleHex15" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex15" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Barracks" parent="SingleHex15" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="Gold Mine" parent="SingleHex15" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
+
+[node name="SingleHex17" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.763, 0.471906, -5.25 )
+material/0 = ExtResource( 14 )
+
+[node name="Sawmill" parent="SingleHex17" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
+
+[node name="SingleHex18" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.495, 0.999412, -5.25 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex31/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex18" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex31/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Sawmill" parent="SingleHex18" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="SingleHex41" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.61076, 6.75 )
-material/0 = ExtResource( 15 )
+[node name="Barracks" parent="SingleHex18" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex41"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Pile" parent="SingleHex18" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex41/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex41/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex41/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex51" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.118677, 8.25 )
-material/0 = ExtResource( 11 )
-
-[node name="Ant" type="Spatial" parent="SingleHex51"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex51/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex19" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.227, 0.225609, -5.25 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex51/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTWorker" parent="SingleHex19" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex51/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Anthill" parent="SingleHex19" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="SingleHex61" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.374099, 9.75 )
-material/0 = ExtResource( 15 )
+[node name="Farm" parent="SingleHex19" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex71" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.321274, 11.25 )
-material/0 = ExtResource( 3 )
+[node name="Sawmill" parent="SingleHex19" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex71"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Pile" parent="SingleHex19" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex71/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex71/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex71/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex81" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.598, 0.348376, 12.75 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex81"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex81/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex81/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex81/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex91" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.464, 0.510712, 14.25 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex91"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex91/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex91/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex91/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex2" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33, 0.085016, 0.75 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex2"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex2/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex2/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex2/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex12" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.471135, 2.25 )
+[node name="SingleHex20" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.227, 0.39069, -3.75 )
 material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex12"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Anthill" parent="SingleHex20" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex12/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="Barracks" parent="SingleHex20" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="SingleHex21" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.495, 0.521936, -3.75 )
 material/0 = ExtResource( 14 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex12/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTWorker" parent="SingleHex21" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex12/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex21" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="SingleHex32" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.691305, 5.25 )
+[node name="SingleHex22" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.763, 0.713089, -3.75 )
+material/0 = ExtResource( 10 )
+
+[node name="ANTFlying" parent="SingleHex22" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Anthill" parent="SingleHex22" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex22" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Sawmill" parent="SingleHex22" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
+
+[node name="Barracks" parent="SingleHex22" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
+
+[node name="SingleHex23" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.031, 0.697562, -3.75 )
+material/0 = ExtResource( 10 )
+
+[node name="Anthill" parent="SingleHex23" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex23" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="SingleHex24" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.299, 0.13269, -3.75 )
 material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex32"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="ANTFlying" parent="SingleHex24" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex32/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
+[node name="Farm" parent="SingleHex24" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex32/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Gold Mine" parent="SingleHex24" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex32/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Pile" parent="SingleHex24" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex42" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33, 0.97596, 6.75 )
-material/0 = ExtResource( 11 )
-
-[node name="Ant" type="Spatial" parent="SingleHex42"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex42/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex25" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.433001, 0.379088, -3.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex42/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTWorker" parent="SingleHex25" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex42/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Anthill" parent="SingleHex25" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="SingleHex52" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.951532, 8.25 )
-material/0 = ExtResource( 15 )
+[node name="Sawmill" parent="SingleHex25" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex52"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Gold Mine" parent="SingleHex25" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex52/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
+[node name="Pile" parent="SingleHex25" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex52/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex52/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex62" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33, 0.872913, 9.75 )
-material/0 = ExtResource( 5 )
-
-[node name="SingleHex72" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.658811, 11.25 )
-material/0 = ExtResource( 15 )
-
-[node name="SingleHex92" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 0.0274893, 14.25 )
+[node name="SingleHex28" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.629, 0.510599, -3.75 )
 material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex92"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="ANTFlying" parent="SingleHex28" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex92/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
+[node name="Anthill" parent="SingleHex28" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex92/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Farm" parent="SingleHex28" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex92/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Barracks" parent="SingleHex28" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="SingleHex23" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.062, 0.751299, 3.75 )
-material/0 = ExtResource( 5 )
+[node name="Gold Mine" parent="SingleHex28" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex23"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex23/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex23/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex23/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex33" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.570753, 5.25 )
+[node name="SingleHex29" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.361, 0.061025, -3.75 )
 material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex33"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Farm" parent="SingleHex29" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex33/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
+[node name="Sawmill" parent="SingleHex29" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex33/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Pile" parent="SingleHex29" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex33/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="SingleHex30" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.361, 0.692592, -2.25 )
+material/0 = ExtResource( 13 )
 
-[node name="SingleHex53" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.453853, 8.25 )
-material/0 = ExtResource( 11 )
+[node name="ANTWorker" parent="SingleHex30" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex53"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Farm" parent="SingleHex30" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex53/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="Sawmill" parent="SingleHex30" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="Barracks" parent="SingleHex30" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="Pile" parent="SingleHex30" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
+
+[node name="SingleHex33" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.941297, -2.25 )
+material/0 = ExtResource( 13 )
+
+[node name="Farm" parent="SingleHex33" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Barracks" parent="SingleHex33" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex33" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="SingleHex34" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.432999, 0.28264, -2.25 )
+material/0 = ExtResource( 10 )
+
+[node name="Sawmill" parent="SingleHex34" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
+
+[node name="Gold Mine" parent="SingleHex34" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="Pile" parent="SingleHex34" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="SingleHex36" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.031, 0.0798689, -2.25 )
+material/0 = ExtResource( 10 )
+
+[node name="Farm" parent="SingleHex36" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex36" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="Barracks" parent="SingleHex36" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="Pile" parent="SingleHex36" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
+
+[node name="SingleHex37" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.763, 0.528395, -2.25 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex53/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex37" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex53/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex37" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex63" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.062, 0.85001, 9.75 )
-material/0 = ExtResource( 3 )
+[node name="Gold Mine" parent="SingleHex37" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex63"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex63/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex63/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex63/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex73" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.314961, 11.25 )
-material/0 = ExtResource( 13 )
-
-[node name="SingleHex83" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.062, 0.752594, 12.75 )
-material/0 = ExtResource( 13 )
-
-[node name="SingleHex93" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.928, 0.581696, 14.25 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex93"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex93/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex93/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex93/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex4" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.15362, 0.75 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex4"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex4/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex4/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex4/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex14" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.858528, 2.25 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex14"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex14/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex14/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex14/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex24" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.539996, 3.75 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex24"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex24/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex24/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex24/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex34" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.857972, 5.25 )
-material/0 = ExtResource( 13 )
-
-[node name="Ant" type="Spatial" parent="SingleHex34"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex34/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex39" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.227, 0.221447, -2.25 )
 material/0 = ExtResource( 14 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex34/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTSoldier" parent="SingleHex39" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex34/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex39" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="SingleHex44" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.991646, 6.75 )
-material/0 = ExtResource( 13 )
+[node name="Barracks" parent="SingleHex39" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex44"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Pile" parent="SingleHex39" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex44/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex40" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.227, 0.308923, -0.75 )
 material/0 = ExtResource( 14 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex44/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex40" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex44/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex40" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex54" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.115309, 8.25 )
-material/0 = ExtResource( 11 )
+[node name="Sawmill" parent="SingleHex40" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
 
-[node name="SingleHex64" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.329085, 9.75 )
-material/0 = ExtResource( 5 )
+[node name="Pile" parent="SingleHex40" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="SingleHex74" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.794736, 11.25 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex74"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex74/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex74/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex74/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex84" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.794, 0.404466, 12.75 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex84"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex84/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex84/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex84/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex94" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66, 0.851139, 14.25 )
-material/0 = ExtResource( 13 )
-
-[node name="Ant" type="Spatial" parent="SingleHex94"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex94/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex94/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex94/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex5" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.0901781, 0.75 )
-material/0 = ExtResource( 11 )
-
-[node name="Ant" type="Spatial" parent="SingleHex5"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex5/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex41" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.495, 0.501141, -0.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex5/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex41" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex5/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Sawmill" parent="SingleHex41" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="SingleHex15" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.925087, 2.25 )
-material/0 = ExtResource( 3 )
+[node name="Barracks" parent="SingleHex41" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex15"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex15/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex15/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex15/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex25" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.848602, 3.75 )
-material/0 = ExtResource( 3 )
-
-[node name="SingleHex35" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.748675, 5.25 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex35"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex35/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex35/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex35/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex45" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.503947, 6.75 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex45"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex45/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex45/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex45/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex55" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.311972, 8.25 )
-material/0 = ExtResource( 15 )
-
-[node name="SingleHex65" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.0570049, 9.75 )
-material/0 = ExtResource( 5 )
-
-[node name="SingleHex75" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.0196824, 11.25 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex75"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex75/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex75/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex75/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex85" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.526, 0.882271, 12.75 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex85"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex85/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex85/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex85/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex95" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.392, 0.710596, 14.25 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex95"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex95/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex95/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex95/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex6" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.434398, 0.75 )
-material/0 = ExtResource( 11 )
-
-[node name="SingleHex16" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.124, 0.312108, 2.25 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex16"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex16/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex16/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex16/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex26" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.25439, 3.75 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex26"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex26/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex26/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex26/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex46" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.46927, 6.75 )
-material/0 = ExtResource( 13 )
-
-[node name="Ant" type="Spatial" parent="SingleHex46"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex46/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex42" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.763, 0.61498, -0.75 )
 material/0 = ExtResource( 14 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex46/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex42" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex46/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex42" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex56" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.124, 0.960084, 8.25 )
-material/0 = ExtResource( 11 )
+[node name="Sawmill" parent="SingleHex42" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex56"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Barracks" parent="SingleHex42" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex56/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex45" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.433001, 0.903061, -0.75 )
+material/0 = ExtResource( 18 )
+
+[node name="Gold Mine" parent="SingleHex45" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex45" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="SingleHex46" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.165, 0.582965, -0.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex56/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTFlying" parent="SingleHex46" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex56/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Anthill" parent="SingleHex46" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="SingleHex66" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.102422, 9.75 )
-material/0 = ExtResource( 5 )
+[node name="Farm" parent="SingleHex46" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex66"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Barracks" parent="SingleHex46" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex66/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+[node name="Gold Mine" parent="SingleHex46" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex66/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="SingleHex47" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.897, 0.60688, -0.75 )
+material/0 = ExtResource( 13 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex66/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Anthill" parent="SingleHex47" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="SingleHex86" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258, 0.0697898, 12.75 )
-material/0 = ExtResource( 15 )
+[node name="Farm" parent="SingleHex47" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex86"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Gold Mine" parent="SingleHex47" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex86/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
+[node name="SingleHex48" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.629, 0.993456, -0.75 )
+material/0 = ExtResource( 13 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex86/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTFlying" parent="SingleHex48" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex86/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Gold Mine" parent="SingleHex48" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, -0.522 )
 
-[node name="SingleHex96" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.124, 0.50028, 14.25 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex96"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex96/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex96/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex96/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex7" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.888192, 0.75 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex7"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex7/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex7/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex7/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex17" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.886271, 2.25 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex17"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex17/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex17/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex17/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex27" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.238962, 3.75 )
-material/0 = ExtResource( 11 )
-
-[node name="Ant" type="Spatial" parent="SingleHex27"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex27/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex52" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.897, 0.340517, 0.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex27/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex52" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex27/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Barracks" parent="SingleHex52" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex37" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.937912, 5.25 )
-material/0 = ExtResource( 3 )
+[node name="Pile" parent="SingleHex52" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex37"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex37/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex37/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex37/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex47" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.0909202, 6.75 )
+[node name="SingleHex53" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.317795, 0.75 )
 material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex47"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="ANTWorker" parent="SingleHex53" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex47/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
+[node name="Pile" parent="SingleHex53" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex47/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="SingleHex54" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.432999, 0.927377, 0.75 )
+material/0 = ExtResource( 18 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex47/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="ANTSoldier" parent="SingleHex54" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="SingleHex57" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.29154, 8.25 )
-material/0 = ExtResource( 3 )
+[node name="Sawmill" parent="SingleHex54" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex57"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Barracks" parent="SingleHex54" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex57/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex55" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.34369, 0.75 )
 material/0 = ExtResource( 10 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex57/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex55" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex57/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex55" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex67" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.211978, 9.75 )
-material/0 = ExtResource( 11 )
+[node name="Gold Mine" parent="SingleHex55" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex67"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Pile" parent="SingleHex55" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex67/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex56" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.031, 0.0160483, 0.75 )
+material/0 = ExtResource( 18 )
+
+[node name="Barracks" parent="SingleHex56" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="SingleHex57" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.763, 0.385022, 0.75 )
+material/0 = ExtResource( 14 )
+
+[node name="ANTWorker" parent="SingleHex57" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Anthill" parent="SingleHex57" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex57" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="SingleHex58" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.495, 0.427781, 0.75 )
 material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex67/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex58" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex67/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex58" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex77" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.0574485, 11.25 )
-material/0 = ExtResource( 15 )
+[node name="Barracks" parent="SingleHex58" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex77"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Pile" parent="SingleHex58" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex77/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
+[node name="SingleHex60" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.227, 0.609972, 2.25 )
+material/0 = ExtResource( 12 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex77/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Farm" parent="SingleHex60" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex77/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Barracks" parent="SingleHex60" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="SingleHex87" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.99, 0.00830962, 12.75 )
-material/0 = ExtResource( 13 )
+[node name="Gold Mine" parent="SingleHex60" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex87"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="SingleHex61" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.495, 0.743755, 2.25 )
+material/0 = ExtResource( 18 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex87/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="ANTFlying" parent="SingleHex61" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Farm" parent="SingleHex61" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex61" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex61" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="SingleHex62" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.763, 0.503115, 2.25 )
 material/0 = ExtResource( 14 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex87/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTFlying" parent="SingleHex62" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex87/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Anthill" parent="SingleHex62" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="SingleHex97" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.856, 0.922043, 14.25 )
-material/0 = ExtResource( 3 )
+[node name="Sawmill" parent="SingleHex62" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="SingleHex8" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.353414, 0.75 )
-material/0 = ExtResource( 13 )
+[node name="Barracks" parent="SingleHex62" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="SingleHex18" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.780963, 2.25 )
-material/0 = ExtResource( 5 )
+[node name="Pile" parent="SingleHex62" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex18"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="SingleHex63" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.031, 0.973199, 2.25 )
+material/0 = ExtResource( 18 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex18/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+[node name="ANTWorker" parent="SingleHex63" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex18/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Barracks" parent="SingleHex63" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex18/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Gold Mine" parent="SingleHex63" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="SingleHex28" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.0528941, 3.75 )
-material/0 = ExtResource( 3 )
+[node name="Pile" parent="SingleHex63" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex28"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="SingleHex64" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.299, 0.401161, 2.25 )
+material/0 = ExtResource( 12 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex28/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="ANTFlying" parent="SingleHex64" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Sawmill" parent="SingleHex64" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
+
+[node name="Barracks" parent="SingleHex64" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex64" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="SingleHex66" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.165, 0.113777, 2.25 )
+material/0 = ExtResource( 18 )
+
+[node name="ANTSoldier" parent="SingleHex66" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Anthill" parent="SingleHex66" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex66" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Sawmill" parent="SingleHex66" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
+
+[node name="Gold Mine" parent="SingleHex66" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
+
+[node name="SingleHex67" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.897, 0.520705, 2.25 )
 material/0 = ExtResource( 10 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex28/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTFlying" parent="SingleHex67" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex28/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Anthill" parent="SingleHex67" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="SingleHex38" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.826859, 5.25 )
-material/0 = ExtResource( 15 )
+[node name="Farm" parent="SingleHex67" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex38"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="SingleHex69" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.361, 0.267211, 2.25 )
+material/0 = ExtResource( 12 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex38/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
+[node name="Farm" parent="SingleHex69" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex38/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Sawmill" parent="SingleHex69" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex38/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Gold Mine" parent="SingleHex69" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
 
-[node name="SingleHex48" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.888796, 6.75 )
+[node name="SingleHex70" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.361, 0.303896, 3.75 )
 material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex48"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="ANTFlying" parent="SingleHex70" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex48/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="Sawmill" parent="SingleHex70" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
+
+[node name="SingleHex71" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.629, 0.901698, 3.75 )
 material/0 = ExtResource( 14 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex48/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Anthill" parent="SingleHex71" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex48/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Sawmill" parent="SingleHex71" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
 
-[node name="SingleHex58" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.701589, 8.25 )
-material/0 = ExtResource( 3 )
+[node name="Barracks" parent="SingleHex71" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
 
-[node name="Ant" type="Spatial" parent="SingleHex58"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Pile" parent="SingleHex71" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex58/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
+[node name="SingleHex72" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.897, 0.0559499, 3.75 )
+material/0 = ExtResource( 12 )
+
+[node name="Anthill" parent="SingleHex72" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex72" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Sawmill" parent="SingleHex72" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
+
+[node name="Pile" parent="SingleHex72" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
+
+[node name="SingleHex73" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.223699, 3.75 )
+material/0 = ExtResource( 14 )
+
+[node name="Anthill" parent="SingleHex73" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex73" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex73" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="SingleHex75" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.64897, 3.75 )
+material/0 = ExtResource( 13 )
+
+[node name="Anthill" parent="SingleHex75" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Barracks" parent="SingleHex75" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Gold Mine" parent="SingleHex75" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="SingleHex76" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.031, 0.16645, 3.75 )
+material/0 = ExtResource( 13 )
+
+[node name="ANTSoldier" parent="SingleHex76" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Anthill" parent="SingleHex76" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Barracks" parent="SingleHex76" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="SingleHex78" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.495, 0.459182, 3.75 )
+material/0 = ExtResource( 18 )
+
+[node name="Anthill" parent="SingleHex78" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex78" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="Gold Mine" parent="SingleHex78" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="SingleHex80" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.227, 0.497693, 5.25 )
+material/0 = ExtResource( 13 )
+
+[node name="Gold Mine" parent="SingleHex80" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex80" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="SingleHex81" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.495, 0.890066, 5.25 )
+material/0 = ExtResource( 12 )
+
+[node name="ANTSoldier" parent="SingleHex81" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Barracks" parent="SingleHex81" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Pile" parent="SingleHex81" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="SingleHex82" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.763, 0.181246, 5.25 )
+material/0 = ExtResource( 12 )
+
+[node name="Anthill" parent="SingleHex82" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="SingleHex83" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.031, 0.749893, 5.25 )
+material/0 = ExtResource( 12 )
+
+[node name="Anthill" parent="SingleHex83" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex83" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Gold Mine" parent="SingleHex83" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex83" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="SingleHex84" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.299, 0.165804, 5.25 )
+material/0 = ExtResource( 12 )
+
+[node name="ANTWorker" parent="SingleHex84" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Anthill" parent="SingleHex84" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex84" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Pile" parent="SingleHex84" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="SingleHex86" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.165, 0.572272, 5.25 )
+material/0 = ExtResource( 18 )
+
+[node name="Farm" parent="SingleHex86" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex86" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="Gold Mine" parent="SingleHex86" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="SingleHex87" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.897, 0.598272, 5.25 )
+material/0 = ExtResource( 12 )
+
+[node name="Farm" parent="SingleHex87" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Barracks" parent="SingleHex87" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Gold Mine" parent="SingleHex87" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="SingleHex90" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.361, 0.930056, 6.75 )
+material/0 = ExtResource( 13 )
+
+[node name="Barracks" parent="SingleHex90" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Gold Mine" parent="SingleHex90" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="Pile" parent="SingleHex90" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="SingleHex92" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.897, 0.789697, 6.75 )
+material/0 = ExtResource( 13 )
+
+[node name="ANTWorker" parent="SingleHex92" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Sawmill" parent="SingleHex92" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
+
+[node name="SingleHex93" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.165, 0.0502541, 6.75 )
+material/0 = ExtResource( 13 )
+
+[node name="Farm" parent="SingleHex93" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Sawmill" parent="SingleHex93" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.522, 0, 0 )
+
+[node name="Barracks" parent="SingleHex93" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.522 )
+
+[node name="Pile" parent="SingleHex93" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
+
+[node name="SingleHex94" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.432999, 0.523902, 6.75 )
 material/0 = ExtResource( 10 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex58/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="ANTSoldier" parent="SingleHex94" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex58/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Farm" parent="SingleHex94" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
 
-[node name="SingleHex78" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.588, 0.383312, 11.25 )
+[node name="Pile" parent="SingleHex94" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="SingleHex95" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.299, 0.743723, 6.75 )
 material/0 = ExtResource( 13 )
 
-[node name="Ant" type="Spatial" parent="SingleHex78"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="ANTWorker" parent="SingleHex95" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex78/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
+[node name="Anthill" parent="SingleHex95" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
 
-[node name="Helmet" type="MeshInstance" parent="SingleHex78/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Farm" parent="SingleHex95" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
 
-[node name="Body" type="MeshInstance" parent="SingleHex78/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+[node name="Sawmill" parent="SingleHex95" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
 
-[node name="SingleHex88" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.722, 0.414482, 12.75 )
+[node name="Barracks" parent="SingleHex95" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 0, 0 )
+
+[node name="SingleHex96" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.031, 0.438397, 6.75 )
+material/0 = ExtResource( 12 )
+
+[node name="ANTSoldier" parent="SingleHex96" instance=ExtResource( 1 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Sawmill" parent="SingleHex96" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
+
+[node name="SingleHex97" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.763, 0.648262, 6.75 )
+material/0 = ExtResource( 18 )
+
+[node name="ANTFlying" parent="SingleHex97" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Farm" parent="SingleHex97" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522 )
+
+[node name="Barracks" parent="SingleHex97" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Gold Mine" parent="SingleHex97" instance=ExtResource( 8 )]
+transform = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0.522 )
+
+[node name="SingleHex98" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.495, 0.547585, 6.75 )
+material/0 = ExtResource( 12 )
+
+[node name="ANTFlying" parent="SingleHex98" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
+
+[node name="Anthill" parent="SingleHex98" instance=ExtResource( 17 )]
+transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, -0.522 )
+
+[node name="Farm" parent="SingleHex98" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )
+
+[node name="Sawmill" parent="SingleHex98" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.522 )
+
+[node name="SingleHex99" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.227, 0.692871, 6.75 )
 material/0 = ExtResource( 13 )
 
-[node name="SingleHex9" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.811812, 0.75 )
-material/0 = ExtResource( 15 )
+[node name="ANTWorker" parent="SingleHex99" instance=ExtResource( 2 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.192, 0 )
 
-[node name="Ant" type="Spatial" parent="SingleHex9"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
+[node name="Sawmill" parent="SingleHex99" instance=ExtResource( 6 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.522 )
 
-[node name="Outfit" type="MeshInstance" parent="SingleHex9/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex9/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex9/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex19" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.367947, 2.25 )
-material/0 = ExtResource( 3 )
-
-[node name="Ant" type="Spatial" parent="SingleHex19"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex19/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 10 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex19/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex19/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex29" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.946238, 3.75 )
-material/0 = ExtResource( 15 )
-
-[node name="SingleHex39" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.476297, 5.25 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex39"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex39/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex39/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex39/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex49" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.120674, 6.75 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex49"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex49/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex49/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex49/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex59" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.699804, 8.25 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex59"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex59/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex59/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex59/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex69" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.297383, 9.75 )
-material/0 = ExtResource( 13 )
-
-[node name="Ant" type="Spatial" parent="SingleHex69"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex69/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 14 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex69/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex69/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex79" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.838495, 11.25 )
-material/0 = ExtResource( 15 )
-
-[node name="Ant" type="Spatial" parent="SingleHex79"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex79/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex79/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex79/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex89" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.454, 0.0556495, 12.75 )
-material/0 = ExtResource( 5 )
-
-[node name="Ant" type="Spatial" parent="SingleHex89"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.2, 0 )
-
-[node name="Outfit" type="MeshInstance" parent="SingleHex89/Ant"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-
-[node name="Helmet" type="MeshInstance" parent="SingleHex89/Ant"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Body" type="MeshInstance" parent="SingleHex89/Ant"]
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="SingleHex99" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.32, 0.561229, 14.25 )
-material/0 = ExtResource( 3 )
+[node name="Pile" parent="SingleHex99" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522, 0, 0 )

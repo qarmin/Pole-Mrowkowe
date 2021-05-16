@@ -37,10 +37,9 @@ script = ExtResource( 3 )
 environment = ExtResource( 1 )
 
 [node name="Map" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.66, -0.758, -7.5 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.60804, -0.525517, 0.595079, -4.47035e-07, 0.749559, 0.661938, -0.793906, 0.402485, -0.455762, 7.39996, 5.62791, -4.30465 )
+transform = Transform( 0.65277, 0.390806, -0.648971, -0.00783421, 0.8601, 0.510066, 0.757516, -0.327871, 0.564508, -8.02793, 4.78406, 6.30015 )
 
 [node name="AnimationPlayerCamera" type="AnimationPlayer" parent="."]
 anims/BasicCameraMovement = SubResource( 1 )
@@ -54,4 +53,4 @@ directional_shadow_bias_split_scale = 0.21
 anims/LightMovement = SubResource( 2 )
 
 [node name="MeshInstance" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, 0, 0 )
+transform = Transform( 1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0.0895586, -0.0478306, -0.132901 )
