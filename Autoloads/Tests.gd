@@ -111,6 +111,12 @@ func map_test() -> void:
 
 	var single_map: SingleMap = SingleMap.new()
 
+	MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
+	SingleMap.validate_sizes_of_arrays(single_map)
+	assert(check_integration_of_map(single_map))
+# warning-ignore:return_value_discarded
+	MapCreator.populate_map_randomly_playable(single_map, 4)
+
 	MapCreator.create_map(single_map, Vector2j.new(13, 13), 4)
 	SingleMap.validate_sizes_of_arrays(single_map)
 	assert(check_integration_of_map(single_map))

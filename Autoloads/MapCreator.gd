@@ -236,6 +236,74 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE, randi() % 3 + 1)
 
 
+## Dowolnie wypełnia pola mrówkami, kolorami oraz budynkami
+func populate_map_randomly_playable(single_map: SingleMap, ant_chance: int = 100, number_of_players: int = GameSettings.MAX_TEAMS) -> void:
+	assert(number_of_players > 1 && number_of_players <= GameSettings.MAX_TEAMS)
+	assert(ant_chance >= 0 && ant_chance < 101)
+	assert(single_map.size.x * single_map.size.y >= 4)
+	assert(single_map.size.x > 0 && single_map.size.y > 0)
+	SingleMap.validate_sizes_of_arrays(single_map)
+
+	var choosen_player: int
+
+	var anthill_used: Array = []
+	for i in number_of_players:
+		anthill_used.append(false)
+
+	while true:
+		for i in number_of_players:
+			anthill_used[i] = false
+
+		for y in range(single_map.size.y):
+			for x in range(single_map.size.x):
+				if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
+					single_map.building_remove_all(Vector2j.new(x, y))
+					single_map.unit_remove_all(Vector2j.new(x, y))
+
+					choosen_player = randi() % (number_of_players + 1) - 1
+
+					if choosen_player != -1:
+						single_map.fields[y][x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + choosen_player
+
+					# Na pustym polu nie może być mrowiska
+					if choosen_player != -1:
+						if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+							if anthill_used[choosen_player] == false:
+								anthill_used[choosen_player] = true
+								single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL, randi() % 3 + 1)
+								single_map.add_unit(Vector2j.new(x, y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX), 1)
+
+					if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+						single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM, randi() % 3 + 1)
+					if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+						single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.SAWMILL, randi() % 3 + 1)
+					if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+						single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS, randi() % 3 + 1)
+					if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+						single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.PILE, randi() % 3 + 1)
+					if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
+						single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE, randi() % 3 + 1)
+
+					if randi() % 100 < ant_chance && single_map.units[y][x].empty():
+						single_map.add_unit(Vector2j.new(x, y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX), 1)
+		# Check if on all hex are available ants and anthills, if not
+		var all_players_have_anthill: bool = true
+		for i in number_of_players:
+			if anthill_used[i] == false:
+				all_players_have_anthill = false
+		if all_players_have_anthill:
+			break
+
+		for y in range(single_map.size.y):
+			for x in range(single_map.size.x):
+				if single_map.fields[y][x] != SingleMap.FIELD_TYPE.NO_FIELD:
+					single_map.fields[y][x] = SingleMap.FIELD_TYPE.DEFAULT_FIELD
+
+
+#		print("CANNOT CREATE MAP, CREATING AGAIN")
+#		print(all_players_have_anthill)
+
+
 ## Tworzy tablicę odległości danych pól od graczy
 func pm_fully_create_distance_array(fields: Array, players: Array) -> Array:
 	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od wybranych

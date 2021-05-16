@@ -18,6 +18,9 @@ anchor_left = 0.05
 anchor_top = 0.25
 anchor_right = 0.95
 anchor_bottom = 0.75
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="ColorRect" parent="Control"]
 show_behind_parent = true
@@ -169,6 +172,7 @@ max_value = 3.0
 value = 1.0
 
 [node name="PlayerName" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
+visible = false
 margin_top = 84.0
 margin_right = 329.0
 margin_bottom = 108.0
@@ -188,18 +192,34 @@ max_length = 20
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="ChanceOfTerrain" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
-margin_top = 112.0
+[node name="GenerateMapRandomly" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
+margin_top = 84.0
 margin_right = 329.0
-margin_bottom = 136.0
+margin_bottom = 124.0
 
-[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/ChanceOfTerrain"]
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/GenerateMapRandomly"]
+margin_top = 13.0
+margin_right = 212.0
+margin_bottom = 27.0
+text = "Generate random populated map"
+
+[node name="GenerateRandomMap" type="CheckButton" parent="Control/Margin/HBox/VBox/GenerateMapRandomly"]
+margin_left = 216.0
+margin_right = 292.0
+margin_bottom = 40.0
+
+[node name="ChanceOfTerrain2" type="HBoxContainer" parent="Control/Margin/HBox/VBox"]
+margin_top = 128.0
+margin_right = 329.0
+margin_bottom = 152.0
+
+[node name="Label" type="Label" parent="Control/Margin/HBox/VBox/ChanceOfTerrain2"]
 margin_top = 5.0
 margin_right = 143.0
 margin_bottom = 19.0
 text = "Chance of Terrain (1-5)"
 
-[node name="SpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/ChanceOfTerrain"]
+[node name="TerrainChanceSpinBox" type="SpinBox" parent="Control/Margin/HBox/VBox/ChanceOfTerrain2"]
 margin_left = 147.0
 margin_right = 221.0
 margin_bottom = 24.0

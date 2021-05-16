@@ -145,7 +145,7 @@ func move_unit(end_c: Vector2j):
 	var result: int = single_map.move_unit(start_c, end_c)
 	var start_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(start_c, single_map.size))
 	var end_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size))
-	
+
 	if single_map.fields[end_c.y][end_c.x] != current_player:
 		end_hex.add_child(attacked_icon.instance())
 
@@ -575,10 +575,10 @@ func get_unit_from_field(coordinates: Vector2j) -> Spatial:
 	assert(false)
 	return Spatial.new()
 
+
 func restore_ant_movement_ability():
 	for y in single_map.size.y:
 		for x in single_map.size.x:
-			if single_map.fields[y][x] == current_player && !single_map.units[y][x].empty(): 
+			if single_map.fields[y][x] == current_player && !single_map.units[y][x].empty():
 				var unit_type = single_map.units[y][x]["type"]
-				single_map.units[y][x]["stats"]["number_of_movement"] = Units.get_default_stats(unit_type,1)["number_of_movement"]
-				
+				single_map.units[y][x]["stats"]["number_of_movement"] = Units.get_default_stats(unit_type, 1)["number_of_movement"]

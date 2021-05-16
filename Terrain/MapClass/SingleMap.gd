@@ -221,6 +221,14 @@ func building_is_built(coordinates: Vector2j, building: int) -> bool:
 	return buildings[coordinates.y][coordinates.x].has(building)
 
 
+func building_remove_all(coordinates: Vector2j):
+	buildings[coordinates.y][coordinates.x].clear()
+
+
+func unit_remove_all(coordinates: Vector2j):
+	units[coordinates.y][coordinates.x] = {}
+
+
 func building_add(coordinates: Vector2j, building: int, level: int = 1) -> void:
 	Buildings.validate_building(building)
 	assert(!buildings[coordinates.y][coordinates.x].has(building))  # Budynek nie może istnieć
@@ -377,13 +385,13 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
 		print(attacker_stats["attack"])
 		print(attacker_stats["ants"])
 		print(defender_stats["defense"])
-		
+
 		var destroyed_defenders_ants: int = attacker_stats["attack"] * additional_attack * attacker_stats["ants"] * (100 - defender_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
 		var destroyed_attackers_ants: int = defender_stats["attack"] * additional_attack * defender_stats["ants"] * (100 - attacker_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
 
 		attacker_stats["ants"] -= destroyed_attackers_ants
 		defender_stats["ants"] -= destroyed_defenders_ants
-		
+
 		print("Destroyed attacker ants " + str(destroyed_attackers_ants))
 		print("Destroyed defenders ants " + str(destroyed_defenders_ants))
 
