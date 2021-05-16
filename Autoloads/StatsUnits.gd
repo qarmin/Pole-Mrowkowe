@@ -11,7 +11,7 @@ var armors: Array = []
 
 var units_types: Array = []
 
-const DOWNGRADE_COST: float = 0.7  # Only 70% of value can be restored from
+const DOWNGRADE_COST: float = 0.8  # Only 80% of value can be restored from
 
 
 func _ready() -> void:
@@ -22,9 +22,9 @@ func _ready() -> void:
 		"food": 200,
 	}
 	var stats_default: Dictionary = {
-		"ants": 100,
-		"defense": 30,
 		"attack": 30,
+		"defense": 30,
+		"ants": 100,
 		"number_of_movement": 1,
 	}
 #		"luck": 40,

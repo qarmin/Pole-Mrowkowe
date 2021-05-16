@@ -146,9 +146,11 @@ func move_unit(end_c: Vector2j):
 	var start_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(start_c, single_map.size))
 	var end_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size))
 	
-	end_hex.add_child(attacked_icon.instance())
+	if single_map.fields[end_c.y][end_c.x] != current_player:
+		end_hex.add_child(attacked_icon.instance())
 
 	match result:
+		# Stosowany również do przechodzenia na własne terytoria
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD:
 			var start_ant: Spatial = get_unit_from_field(start_c)
 			start_hex.remove_child(start_ant)

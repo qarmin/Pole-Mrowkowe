@@ -9,6 +9,11 @@ var destroy_button: TextureButton
 var icon: TextureRect
 var ant_name: Label
 
+var attack_stat : Label
+var defense_stat : Label
+var ant_stat : Label
+var movement_stat : Label
+
 var units_icons: Dictionary = {
 	Units.TYPES_OF_ANTS.WORKER: "res://HUD/UnitsIcons/Worker.png",
 	Units.TYPES_OF_ANTS.SOLDIER: "res://HUD/UnitsIcons/Soldier.png",
@@ -26,8 +31,20 @@ func initialize_gui() -> void:
 	destroy_button = find_node("DestroyUnit")
 	icon = find_node("AntIcon")
 	ant_name = find_node("AntName")
+	
+	attack_stat = find_node("AttackValue")
+	defense_stat = find_node("DefenseValue")
+	ant_stat = find_node("AntsValue")
+	movement_stat = find_node("MovementValue")
+	
 	assert(destroy_button != null)
 	assert(icon != null)
+	assert(ant_name != null)
+	
+	assert(attack_stat != null)
+	assert(defense_stat != null)
+	assert(ant_stat != null)
+	assert(movement_stat != null)
 
 	assert(destroy_button.connect("button_up", self, "handle_remove_unit_click") == OK)
 	assert(move_button.connect("button_up", self, "handle_move_unit_click") == OK)
@@ -41,7 +58,6 @@ func handle_remove_unit_click() -> void:
 func handle_move_unit_click() -> void:
 	emit_signal("move_unit_clicked")
 	assert(get_signal_connection_list("move_unit_clicked").size() > 0)
-	pass
 
 
 func update_units_info(unit: Dictionary, _coordinates: Vector2j, _single_map: SingleMap) -> void:
@@ -61,4 +77,13 @@ func update_units_info(unit: Dictionary, _coordinates: Vector2j, _single_map: Si
 	icon.set_tooltip(icon_hint)
 	destroy_button.set_tooltip(destroy_hint)
 
-	pass
+	
+	attack_stat.set_text(str(unit["stats"]["attack"]))
+	defense_stat.set_text(str(unit["stats"]["defense"]))
+	ant_stat.set_text(str(unit["stats"]["ants"]) + "/" + str(Units.get_default_stats(unit["type"],1)["ants"]))
+	movement_stat.set_text(str(unit["stats"]["number_of_movement"])  + "/" + str(Units.get_default_stats(unit["type"],1)["number_of_movement"]))
+	
+	if unit["stats"]["number_of_movement"] > 0:
+		move_button.show()
+	else:
+		move_button.hide()
