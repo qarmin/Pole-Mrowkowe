@@ -91,7 +91,7 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 	while true:
 		#SingleMap.print_map(single_map.fields)
 		while to_check.size() > 0:
-			current_element = to_check.pop_front()
+			current_element = to_check.pop_back()
 
 			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
 			assert(single_map.fields[current_element.y][current_element.x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD)
@@ -123,7 +123,6 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 									to_check.append(Vector2j.new(cep_x, cep_y))
 									number_of_terrains += 1
 								else:
-									single_map.fields[cep_y][cep_x] = SingleMap.FIELD_TYPE.NO_FIELD
 									checked.append(Vector2j.new(cep_x, cep_y))
 
 			# Sprawdzenie czy przypadkiem nie chcę uznać pola pustego jako pola do przypsania mu sąsiada
@@ -152,6 +151,9 @@ func create_map(single_map: SingleMap, hex_number: Vector2j, chance_to_terrain: 
 			for y in range(hex_number.y):
 				if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 					to_check.append(Vector2j.new(x, y))
+
+		# Losuje tablicę do sprawdzenia tak by zaczynał losowego elementu i lepiej wybierało się dane.
+		to_check.shuffle()
 
 	single_map.calculate_number_of_terrains()
 	single_map.shrink_map()
@@ -383,7 +385,7 @@ func pm_fully_choose_point_from_distance_array(array: Array, number_of_terrain: 
 			break
 
 	if biggest_numbers.size() == 0:
-		# TODO - To może się zdarzyć gdy liczba graczy jest równa liczbie terenów, dlatego należy przecidziałać temu już na etapie blokady możliwości nadania zbyt małej ilości terenów
+		# TODO - To może się zdarzyć gdy liczba graczy jest równa liczbie terenów, dlatego należy przecidziałać temu już na etapie blokady możliwości nadania zbyt małej ilości terenów, pasuje być może stworzyć algorytm który nie posiada tego defektu
 		assert(false)
 		return Vector2j.new(0, 0)
 
@@ -394,6 +396,7 @@ func populate_map_buildings(single_map: SingleMap) -> void:
 	# Add Anthill of first level
 	for coordinates in single_map.players:
 		single_map.building_add(coordinates, Buildings.TYPES_OF_BUILDINGS.ANTHILL, 1)
+		single_map.add_unit(coordinates, randi() % Units.TYPES_OF_ANTS.ANT_MAX, 1)
 
 	# Randomly put with 30 % chance one building
 	for x in single_map.size.x:

@@ -33,6 +33,11 @@ func load_game() -> void:
 	MapCreator.create_3d_map(single_map)
 	loaded_game.add_child(single_map.map)
 
-	get_node("/root/MenuSkirmishNewGame").queue_free()
+	var node_to_delete: Control
+	for i in get_node("/root").get_children():
+		if i is Control:
+			node_to_delete = i
+
+	node_to_delete.queue_free()
 	get_node("/root").add_child(loaded_game)
 #	assert(get_tree().change_scene_to(loaded_game) == OK)

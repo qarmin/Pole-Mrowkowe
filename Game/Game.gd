@@ -201,6 +201,7 @@ func move_unit(end_c: Vector2j):
 		SingleMap.FIGHT_RESULTS.DRAW_BOTH_ANT_LIVE:
 			current_status = STATUS.USER_NORMAL
 
+	gui_update_resources()
 	hide_everything()
 
 
