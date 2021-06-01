@@ -251,6 +251,7 @@ margin_right = 180.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 180, 0 )
 custom_fonts/font = ExtResource( 3 )
+disabled = true
 text = "Start skirmish"
 
 [node name="Generate Map" type="Button" parent="Buttons"]
@@ -284,5 +285,6 @@ margin_right = 0.0
 margin_bottom = 0.0
 text = "Skirmish"
 
+[connection signal="button_up" from="Buttons/StartSkirmish" to="." method="_on_StartSkirmish_button_up"]
 [connection signal="button_up" from="Buttons/Generate Map" to="." method="_on_Generate_Map_button_up"]
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

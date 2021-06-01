@@ -376,7 +376,7 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
 		var defender_stats: Dictionary = units[end_c.y][end_c.x]["stats"].duplicate(true)
 		# TODO Dodać dodatkowe zasoby które można brać z budynków
 
-		var additional_attack: float = 1.9
+		var additional_attack: float = 2.9
 		if attacker_stats["ants"] < 10 && defender_stats["ants"] < 10:
 			additional_attack *= 5.0
 		elif attacker_stats["ants"] < 20 && defender_stats["ants"] < 20:

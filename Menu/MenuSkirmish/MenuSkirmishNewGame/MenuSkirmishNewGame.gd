@@ -13,6 +13,7 @@ var use_random_map: bool
 ## Następnie generowany jest podgląd,
 func _on_Generate_Map_button_up() -> void:
 	read_values()
+	$Buttons/StartSkirmish.set_disabled(false)
 
 	var single_map: SingleMap = SingleMap.new()
 	var image_texture: ImageTexture = ImageTexture.new()
@@ -22,6 +23,7 @@ func _on_Generate_Map_button_up() -> void:
 		MapCreator.populate_map_randomly_playable(single_map, 10, number_of_cpu_players + 1)
 	else:
 		MapCreator.populate_map_realistically(single_map, number_of_cpu_players + 1)
+	GameSettings.single_map = single_map
 	PreviewGenerator.generate_preview_image(single_map)
 
 	image_texture.create_from_image(single_map.preview, 0)  # 0 Filtrowanie - flaga 4 - tworzy na krańcach dziwne "cienie"
@@ -37,3 +39,9 @@ func read_values() -> void:
 	player_name = find_node("PlayerName").get_node("LineEdit").get_text()
 	chance_to_terrain = find_node("TerrainChanceSpinBox").get_value()
 	use_random_map = find_node("GenerateRandomMap").is_pressed()
+
+	GameSettings.number_of_players = number_of_cpu_players + 1
+
+
+func _on_StartSkirmish_button_up():
+	GameSettings.load_game()

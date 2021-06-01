@@ -17,8 +17,8 @@ var current_status = STATUS.USER_NORMAL
 var number_of_start_players: int = 4  # Number of all players
 var active_players: int = 3  # How many players still play
 var current_player: int = 0  # Actual player
-var players_activite: Array = [true, true, false, true]  # Stan aktualny w graczach, czy ciągle żyją
-var players_type: Array = [PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.CPU, PLAYERS_TYPE.CPU]
+var players_activite: Array = []  #[true, true, false, true]  # Stan aktualny w graczach, czy ciągle żyją
+var players_type: Array = []  #[PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.CPU, PLAYERS_TYPE.CPU]
 # TODO Maybe add players name?
 var player_resources: Array = []
 
@@ -45,7 +45,7 @@ var selection_hex_color_enemy: Color = Color("#2cd91515")
 var terrain_overlay_node: CSGTorus = preload("res://Overlay/TerrainOverlay.tscn").instance()
 var unit_overlay_node: CSGTorus = preload("res://Overlay/UnitOverlay.tscn").instance()
 
-onready var single_map: SingleMap = SingleMap.new()
+var single_map: SingleMap
 
 var ant_movement: Array = []
 var ant_movement_overlay = preload("res://Overlay/PossiblePath/PossiblePathOverlay.tscn")
@@ -54,9 +54,31 @@ var ant_movement_overlay = preload("res://Overlay/PossiblePath/PossiblePathOverl
 var neighbourhood_array: Array = []
 ## Current coordinates
 
+var map_was_generated_before: bool = false
+
+# If it is ready and entered to tree, then only then everything can be initialized
+var ready_and_entered: int = 0
+
+
+func _enter_tree():
+	ready_and_entered += 1
+
+
+func _ready():
+	ready_and_entered += 1
+
 
 # Inicjalizuje wszystkie elementy
-func _ready() -> void:
+func initialize_game() -> void:
+	active_players = number_of_start_players
+	current_player = 0
+	for i in range(number_of_start_players):
+		players_activite.push_back(true)
+		players_type.push_back(PLAYERS_TYPE.CPU)
+		player_resources.push_back({"wood": (i + 2) * 100, "water": (i + 2) * 100, "gold": (i + 2) * 100, "food": (i + 2) * 100})
+
+	players_type[0] = PLAYERS_TYPE.HUMAN  # First player is always a human
+
 	for _i in range(6):
 		var node: Spatial = ant_movement_overlay.instance()
 		add_child(node)
@@ -64,21 +86,18 @@ func _ready() -> void:
 		ant_movement.append(node)
 
 	# TODO, generacja nie powinna tu być, lecz zależeć od wcześniejszych wyborów gracza
-	MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
-	MapCreator.populate_map_randomly(single_map, 50)
-	MapCreator.create_3d_map(single_map)
-	add_child(single_map.map)
+	if !map_was_generated_before:
+		single_map = SingleMap.new()
+		MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
+		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
+		MapCreator.create_3d_map(single_map)
+		add_child(single_map.map)
 
 	# Ustawianie tutaj wielkości dozwolonego przez kamerę obszaru
 	$Camera.set_camera_max_positions(single_map.size)
 
 	# Aktualizacja koloru gracz na mapie
 	$HUD/HUD.update_current_player_text_color(current_player, players_type[current_player])
-
-	# Start Resources
-	player_resources.resize(number_of_start_players)
-	for i in range(number_of_start_players):
-		player_resources[i] = {"wood": (i + 2) * 100, "water": (i + 2) * 100, "gold": (i + 2) * 100, "food": (i + 2) * 100}
 
 	# Update resources
 	gui_update_resources()
@@ -111,6 +130,10 @@ func _input(event) -> void:
 
 
 func _process(_delta: float) -> void:
+	if ready_and_entered == 2:
+		initialize_game()
+		ready_and_entered = 100
+
 	# TODO Add logic to CPU movement
 	pass
 
