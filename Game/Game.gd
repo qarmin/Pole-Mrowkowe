@@ -222,6 +222,7 @@ func ant_clicked(ant: AntBase) -> void:
 		selected_ant = null
 		hide_menus()
 		possible_ant_movements()
+		current_status = STATUS.USER_NORMAL
 		return
 
 	# Na wszelki wypadek odznaczamy zaznaczenie na terenie
@@ -280,6 +281,8 @@ func hex_clicked(hex: SingleHex) -> void:
 		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
 			move_unit(clicked_coordinates)
 			return
+		else: # Kliknięto na nieprawidłowy hex
+			current_status = STATUS.USER_NORMAL
 
 	possible_ant_movements()
 
@@ -334,6 +337,7 @@ func hide_menus():
 	$HUD/HUD/Buildings.hide()
 	$HUD/HUD/Units.hide()
 	$HUD/HUD/MovingInfo.hide()
+	
 
 
 func hide_everything():
@@ -346,6 +350,7 @@ func hide_everything():
 	selected_coordinates = null
 	terrain_overlay_node.hide()
 	unit_overlay_node.hide()
+	
 
 
 func get_active_players() -> int:
