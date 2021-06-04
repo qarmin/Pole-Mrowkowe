@@ -382,17 +382,15 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 	else:
 		var attacker_stats: Dictionary = units[start_c.y][start_c.x]["stats"].duplicate(true)
 		var defender_stats: Dictionary = units[end_c.y][end_c.x]["stats"].duplicate(true)
-		# TODO Dodać dodatkowe zasoby które można brać z budynków
+
+		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.PILE):
+			defender_stats["defense"] += 15
 
 		var additional_attack: float = 2.9
 		if attacker_stats["ants"] < 10 && defender_stats["ants"] < 10:
 			additional_attack *= 5.0
 		elif attacker_stats["ants"] < 20 && defender_stats["ants"] < 20:
 			additional_attack *= 3.0
-
-		print(attacker_stats["attack"])
-		print(attacker_stats["ants"])
-		print(defender_stats["defense"])
 
 		var destroyed_defenders_ants: int = attacker_stats["attack"] * additional_attack * attacker_stats["ants"] * (100 - defender_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
 		var destroyed_attackers_ants: int = defender_stats["attack"] * additional_attack * defender_stats["ants"] * (100 - attacker_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
