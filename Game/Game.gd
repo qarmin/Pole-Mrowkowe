@@ -218,6 +218,10 @@ func ant_clicked(ant: AntBase) -> void:
 		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
 			move_unit_3d(clicked_coordinates)
 			return
+		else:
+			current_status = STATUS.USER_NORMAL
+
+	possible_ant_movements()
 
 	# Jeśli mrówka była wcześniej kliknięta, to usuwamy zaznaczenie
 	if parent_name == current_unit_overlay_hex_name:
@@ -225,7 +229,6 @@ func ant_clicked(ant: AntBase) -> void:
 		current_unit_overlay_hex_name = ""
 		selected_ant = null
 		hide_menus()
-		possible_ant_movements()
 		current_status = STATUS.USER_NORMAL
 		return
 
