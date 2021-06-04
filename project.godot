@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Pole Mrowkowe"
-run/main_scene="res://Start.tscn"
+run/main_scene="res://Game/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]

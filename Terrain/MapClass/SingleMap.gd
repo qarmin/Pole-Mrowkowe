@@ -355,8 +355,14 @@ func _check_if_on_field_is_player_ant(player_number: int, coordinates: Vector2j)
 enum FIGHT_RESULTS { ATTACKER_WON_KILLED_ANT, ATTACKER_WON_EMPTY_FIELD, DRAW_BOTH_ANT_LIVE, DRAW_BOTH_ANT_DEAD, DEFENDER_WON }
 
 
+class FightResult:
+	var result: int
+	var attacker_defeated: int = 0
+	var defender_defeated: int = 0
+
+
 # TODO nie zapomnieć aby zaktualizować pola(fields) i kolory mrówek i pól
-func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
+func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 	assert(fields[start_c.y][start_c.x] != FIELD_TYPE.NO_FIELD)  # Musi istnieć pole mrówki atakującej
 	assert(fields[end_c.y][end_c.x] != FIELD_TYPE.NO_FIELD)  # Musi istnieć pole atakowane
 	assert(!units[start_c.y][start_c.x].empty())  # Musi istnieć mrówka atakująca
@@ -365,11 +371,13 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
 
 	units[start_c.y][start_c.x]["stats"]["number_of_movement"] -= 1
 
+	var result: FightResult = FightResult.new()
+
 	# Brak Walki
 	if units[end_c.y][end_c.x].empty():
 		units[end_c.y][end_c.x] = units[start_c.y][start_c.x].duplicate(true)
 		units[start_c.y][start_c.x] = {}
-		return FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
+		result.result = FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
 	# Walka
 	else:
 		var attacker_stats: Dictionary = units[start_c.y][start_c.x]["stats"].duplicate(true)
@@ -389,6 +397,9 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
 		var destroyed_defenders_ants: int = attacker_stats["attack"] * additional_attack * attacker_stats["ants"] * (100 - defender_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
 		var destroyed_attackers_ants: int = defender_stats["attack"] * additional_attack * defender_stats["ants"] * (100 - attacker_stats["defense"]) * (randf() * 0.4 + 0.6) / 10000
 
+		result.attacker_defeated = int(min(attacker_stats["ants"], destroyed_attackers_ants))
+		result.defender_defeated = int(min(defender_stats["ants"], destroyed_defenders_ants))
+
 		attacker_stats["ants"] -= destroyed_attackers_ants
 		defender_stats["ants"] -= destroyed_defenders_ants
 
@@ -401,16 +412,15 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> int:
 		if attacker_stats["ants"] <= 0 && defender_stats["ants"] <= 0:
 			units[end_c.y][end_c.x] = {}
 			units[start_c.y][start_c.x] = {}
-			return FIGHT_RESULTS.DRAW_BOTH_ANT_DEAD
+			result.result = FIGHT_RESULTS.DRAW_BOTH_ANT_DEAD
 		elif attacker_stats["ants"] <= 0 && defender_stats["ants"] > 0:
 			units[start_c.y][start_c.x] = {}
-			return FIGHT_RESULTS.DEFENDER_WON
+			result.result = FIGHT_RESULTS.DEFENDER_WON
 		elif attacker_stats["ants"] > 0 && defender_stats["ants"] > 0:
-			return FIGHT_RESULTS.DRAW_BOTH_ANT_LIVE
+			result.result = FIGHT_RESULTS.DRAW_BOTH_ANT_LIVE
 		elif attacker_stats["ants"] > 0 && defender_stats["ants"] <= 0:
 			units[end_c.y][end_c.x] = units[start_c.y][start_c.x].duplicate(true)
 			units[start_c.y][start_c.x] = {}
-			return FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT
+			result.result = FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT
 
-		assert(false)
-		return FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
+	return result

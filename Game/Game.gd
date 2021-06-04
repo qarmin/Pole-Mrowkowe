@@ -85,7 +85,6 @@ func initialize_game() -> void:
 		node.hide()
 		ant_movement.append(node)
 
-	# TODO, generacja nie powinna tu być, lecz zależeć od wcześniejszych wyborów gracza
 	if !map_was_generated_before:
 		single_map = SingleMap.new()
 		MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
@@ -162,17 +161,20 @@ func connect_clickable_signals() -> void:
 	confirmation_dialog.connect("confirmed", self, "end_turn")
 
 
-func move_unit(end_c: Vector2j):
+func move_unit_3d(end_c: Vector2j):
 	var start_c: Vector2j = selected_coordinates
 
-	var result: int = single_map.move_unit(start_c, end_c)
+	var result = single_map.move_unit(start_c, end_c)
+
 	var start_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(start_c, single_map.size))
 	var end_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size))
 
 	if single_map.fields[end_c.y][end_c.x] != current_player:
-		end_hex.add_child(attacked_icon.instance())
+		var attack_icon = attacked_icon.instance()
+		attack_icon.show_icon(result.attacker_defeated, result.defender_defeated)
+		end_hex.add_child(attack_icon)
 
-	match result:
+	match result.result:
 		# Stosowany również do przechodzenia na własne terytoria
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD:
 			var start_ant: Spatial = get_unit_from_field(start_c)
@@ -200,6 +202,8 @@ func move_unit(end_c: Vector2j):
 			current_status = STATUS.USER_NORMAL
 		SingleMap.FIGHT_RESULTS.DRAW_BOTH_ANT_LIVE:
 			current_status = STATUS.USER_NORMAL
+		_:
+			assert(false, "Missing fight result")
 
 	gui_update_resources()
 	hide_everything()
@@ -212,7 +216,7 @@ func ant_clicked(ant: AntBase) -> void:
 	if current_status == STATUS.CHOOSING_MOVE_PLACE:
 		var clicked_coordinates: Vector2j = SingleMap.convert_name_to_coordinates(parent_name, single_map.size)
 		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
-			move_unit(clicked_coordinates)
+			move_unit_3d(clicked_coordinates)
 			return
 
 	# Jeśli mrówka była wcześniej kliknięta, to usuwamy zaznaczenie
@@ -279,9 +283,9 @@ func hex_clicked(hex: SingleHex) -> void:
 	if current_status == STATUS.CHOOSING_MOVE_PLACE:
 		var clicked_coordinates: Vector2j = SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size)
 		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
-			move_unit(clicked_coordinates)
+			move_unit_3d(clicked_coordinates)
 			return
-		else: # Kliknięto na nieprawidłowy hex
+		else:  # Kliknięto na nieprawidłowy hex
 			current_status = STATUS.USER_NORMAL
 
 	possible_ant_movements()
@@ -337,7 +341,6 @@ func hide_menus():
 	$HUD/HUD/Buildings.hide()
 	$HUD/HUD/Units.hide()
 	$HUD/HUD/MovingInfo.hide()
-	
 
 
 func hide_everything():
@@ -350,7 +353,6 @@ func hide_everything():
 	selected_coordinates = null
 	terrain_overlay_node.hide()
 	unit_overlay_node.hide()
-	
 
 
 func get_active_players() -> int:
