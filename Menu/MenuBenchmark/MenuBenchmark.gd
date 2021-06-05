@@ -35,7 +35,7 @@ func show_benchmarks() -> void:
 
 	# Zminiejsza ilość pomiarów na < 1000
 	for i in range(Benchmark.STAGES):
-		while Benchmark.time_frame[i].size() > 700:
+		while Benchmark.time_frame[i].size() > 200:
 			var temp_array: Array = []
 			var current_index: int = 0
 			while current_index + 1 < Benchmark.time_frame[i].size():

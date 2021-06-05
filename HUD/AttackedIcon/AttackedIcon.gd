@@ -10,10 +10,9 @@ func show_icon(attacker_units: int, defenders_units: int, attacker_defeated: int
 	$Viewport/Fight/Lost/Attacker.set_text(str(attacker_defeated))
 	$Viewport/Fight/Lost/Defender.set_text(str(defenders_defeated))
 
-	# Czarny ekran przy get_data z tekstury
 	var img = $Viewport.get_texture()
 	$Numbers.set_texture(img)
-
+	
 
 func remove(_unused) -> void:
 	queue_free()

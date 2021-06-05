@@ -33,22 +33,33 @@ __meta__ = {
 [node name="VBox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="VBox"]
-margin_right = 230.0
+[node name="Header" type="MarginContainer" parent="VBox"]
+margin_right = 224.0
+margin_bottom = 20.0
+custom_constants/margin_left = 5
+
+[node name="Label" type="Label" parent="VBox/Header"]
+margin_left = 5.0
+margin_right = 224.0
 margin_bottom = 20.0
 custom_fonts/font = SubResource( 1 )
 text = "unit menu - unit XYZ on field aa x bb"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBox"]
 margin_top = 24.0
-margin_right = 230.0
-margin_bottom = 240.0
+margin_right = 224.0
+margin_bottom = 234.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 0
 custom_constants/margin_left = 5
@@ -56,61 +67,68 @@ custom_constants/margin_bottom = 5
 
 [node name="ColorRect" type="ColorRect" parent="VBox/MarginContainer"]
 margin_left = 5.0
-margin_right = 225.0
-margin_bottom = 211.0
+margin_right = 219.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color( 0.262745, 0.0117647, 0.294118, 0.203922 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/MarginContainer"]
 margin_left = 5.0
-margin_right = 225.0
-margin_bottom = 211.0
+margin_right = 219.0
+margin_bottom = 205.0
+custom_constants/margin_left = 5
+
+[node name="VBox" type="VBoxContainer" parent="VBox/MarginContainer/MarginContainer"]
+margin_left = 5.0
+margin_right = 214.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AntName" type="Label" parent="VBox/MarginContainer/VBox"]
-margin_right = 220.0
+[node name="AntName" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox"]
+margin_right = 209.0
 margin_bottom = 20.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 2 )
 text = "Szczypak"
 align = 1
 
-[node name="AntIcon" type="TextureRect" parent="VBox/MarginContainer/VBox"]
+[node name="AntIcon" type="TextureRect" parent="VBox/MarginContainer/MarginContainer/VBox"]
 margin_top = 24.0
-margin_right = 220.0
-margin_bottom = 115.0
+margin_right = 209.0
+margin_bottom = 109.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBox/MarginContainer/VBox"]
-margin_top = 119.0
-margin_right = 220.0
-margin_bottom = 211.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBox/MarginContainer/MarginContainer/VBox"]
+margin_top = 113.0
+margin_right = 209.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 
-[node name="Names" type="VBoxContainer" parent="VBox/MarginContainer/VBox/HBoxContainer"]
+[node name="Names" type="VBoxContainer" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer"]
 margin_right = 61.0
 margin_bottom = 92.0
 size_flags_vertical = 3
 
-[node name="Attack" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Names"]
+[node name="Attack" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Names"]
 margin_right = 61.0
 margin_bottom = 20.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Attack"
 
-[node name="Defense" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Names"]
+[node name="Defense" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Names"]
 margin_top = 24.0
 margin_right = 61.0
 margin_bottom = 44.0
@@ -118,7 +136,7 @@ mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Defense"
 
-[node name="Ants" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Names"]
+[node name="Ants" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Names"]
 margin_top = 48.0
 margin_right = 61.0
 margin_bottom = 68.0
@@ -126,7 +144,7 @@ mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Ants"
 
-[node name="Movement" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Names"]
+[node name="Movement" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Names"]
 margin_top = 72.0
 margin_right = 61.0
 margin_bottom = 92.0
@@ -134,39 +152,39 @@ mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Movements"
 
-[node name="Numbers" type="VBoxContainer" parent="VBox/MarginContainer/VBox/HBoxContainer"]
+[node name="Numbers" type="VBoxContainer" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer"]
 margin_left = 65.0
-margin_right = 220.0
+margin_right = 209.0
 margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AttackValue" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Numbers"]
-margin_right = 155.0
+[node name="AttackValue" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Numbers"]
+margin_right = 144.0
 margin_bottom = 20.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "30 (16 + 14)"
 
-[node name="DefenseValue" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Numbers"]
+[node name="DefenseValue" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Numbers"]
 margin_top = 24.0
-margin_right = 155.0
+margin_right = 144.0
 margin_bottom = 44.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "24 (24 + 0)"
 
-[node name="AntsValue" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Numbers"]
+[node name="AntsValue" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Numbers"]
 margin_top = 48.0
-margin_right = 155.0
+margin_right = 144.0
 margin_bottom = 68.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "80/100"
 
-[node name="MovementValue" type="Label" parent="VBox/MarginContainer/VBox/HBoxContainer/Numbers"]
+[node name="MovementValue" type="Label" parent="VBox/MarginContainer/MarginContainer/VBox/HBoxContainer/Numbers"]
 margin_top = 72.0
-margin_right = 155.0
+margin_right = 144.0
 margin_bottom = 92.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
@@ -174,8 +192,8 @@ text = "1/2"
 
 [node name="Control" type="Control" parent="VBox/MarginContainer"]
 margin_left = 5.0
-margin_right = 225.0
-margin_bottom = 211.0
+margin_right = 219.0
+margin_bottom = 205.0
 
 [node name="MoveUnit" type="TextureButton" parent="VBox/MarginContainer/Control"]
 anchor_left = 0.97

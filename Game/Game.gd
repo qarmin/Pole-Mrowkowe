@@ -13,8 +13,6 @@ enum PLAYERS_TYPE { CPU = 0, HUMAN = 1 }
 enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN, CPU_WAIT }
 var current_status = STATUS.USER_NORMAL
 
-# TODO to ma być ustawiane podczas wyboru potyczki
-
 var number_of_start_players: int = 4  # Number of all players
 var active_players: int = 3  # How many players still play
 var current_player: int = 0  # Actual player
@@ -89,7 +87,8 @@ func initialize_game() -> void:
 	if !map_was_generated_before:
 		single_map = SingleMap.new()
 		MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
-		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
+#		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
+		MapCreator.populate_map_realistically(single_map, number_of_start_players)
 		MapCreator.create_3d_map(single_map)
 		add_child(single_map.map)
 
@@ -167,7 +166,7 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 	if user_attack:
 		type_of_attack = STATUS.USER_NORMAL
 	else:
-		type_of_attack = STATUS.CPU_TURN
+		type_of_attack = STATUS.CPU_WAIT
 
 	var start_c: Vector2j = selected_coordinates
 
@@ -196,7 +195,7 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 
 			update_field_color(end_c)
 			single_map.fields[end_c.y][end_c.x] = current_player
-			current_status = STATUS.WAITING_FOR_END_OF_MOVING
+			current_status = type_of_attack
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT:
 			var start_ant: Spatial = get_unit_from_field(start_c)
 			start_hex.remove_child(start_ant)
@@ -205,16 +204,16 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 			update_field_color(end_c)
 			get_unit_from_field(end_c).queue_free()
 			single_map.fields[end_c.y][end_c.x] = current_player
-			current_status = STATUS.WAITING_FOR_END_OF_MOVING
+			current_status = type_of_attack
 		SingleMap.FIGHT_RESULTS.DEFENDER_WON:
 			get_unit_from_field(start_c).queue_free()
-			current_status = STATUS.USER_NORMAL
+			current_status = type_of_attack
 		SingleMap.FIGHT_RESULTS.DRAW_BOTH_ANT_DEAD:
 			get_unit_from_field(start_c).queue_free()
 			get_unit_from_field(end_c).queue_free()
-			current_status = STATUS.USER_NORMAL
+			current_status = type_of_attack
 		SingleMap.FIGHT_RESULTS.DRAW_BOTH_ANT_LIVE:
-			current_status = STATUS.USER_NORMAL
+			current_status = type_of_attack
 		_:
 			assert(false, "Missing fight result")
 
@@ -269,7 +268,7 @@ func ant_clicked(ant: AntBase) -> void:
 	selected_ant = ant
 	show_units_menu()
 	gui_update_units()
-	$HUD/HUD/Units/VBox/Label.set_text("unit menu - field " + coordinates.to_string())
+	$HUD/HUD/Units/VBox/Header/Label.set_text("unit menu - field " + coordinates.to_string())
 
 
 # TODO - tylko powinno być to widoczne gdy gracz naciśnie na przycisk przemieszczania się

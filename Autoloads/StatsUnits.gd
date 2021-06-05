@@ -25,7 +25,7 @@ func _ready() -> void:
 		"attack": 30,
 		"defense": 30,
 		"ants": 100,
-		"number_of_movement": 1,
+		"number_of_movement": 10,
 	}
 #		"luck": 40,
 #		"action_points": 2,
