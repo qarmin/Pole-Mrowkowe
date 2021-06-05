@@ -13,7 +13,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, 2, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5, 3, 1, 0, 4, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5 )
+tracks/0/keys = PoolRealArray( 0, 1, 0, 2.5, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5, 3, 1, 0, 4.5, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5 )
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
@@ -32,12 +32,12 @@ size = 50
 font_data = ExtResource( 3 )
 
 [node name="Sprite3D" type="Sprite3D"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 10, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Numbers" type="Sprite3D" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.10676, 0 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.6187, 0 )
 flip_h = true
 flip_v = true
 
@@ -45,20 +45,30 @@ flip_v = true
 anims/SIze = SubResource( 1 )
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 200, 50 )
+size = Vector2( 200, 130 )
 transparent_bg = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Viewport"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Fight" type="VBoxContainer" parent="Viewport"]
+margin_right = 166.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Basic" type="HBoxContainer" parent="Viewport/Fight"]
+margin_right = 166.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Attacker" type="Label" parent="Viewport/HBoxContainer"]
-margin_right = 64.0
+[node name="Attacker" type="Label" parent="Viewport/Fight/Basic"]
+margin_right = 60.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -70,9 +80,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="vs" type="Label" parent="Viewport/HBoxContainer"]
-margin_left = 68.0
-margin_right = 132.0
+[node name="vs" type="Label" parent="Viewport/Fight/Basic"]
+margin_left = 64.0
+margin_right = 102.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -84,9 +94,63 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Defender" type="Label" parent="Viewport/HBoxContainer"]
-margin_left = 136.0
-margin_right = 200.0
+[node name="Defender" type="Label" parent="Viewport/Fight/Basic"]
+margin_left = 106.0
+margin_right = 166.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+text = "200"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lost" type="HBoxContainer" parent="Viewport/Fight"]
+modulate = Color( 0.752941, 0, 0, 1 )
+margin_top = 64.0
+margin_right = 166.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attacker" type="Label" parent="Viewport/Fight/Lost"]
+modulate = Color( 0.713726, 0, 0, 1 )
+margin_right = 60.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+text = "100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vs" type="Label" parent="Viewport/Fight/Lost"]
+margin_left = 64.0
+margin_right = 102.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+text = "vs"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defender" type="Label" parent="Viewport/Fight/Lost"]
+modulate = Color( 0.713726, 0, 0, 1 )
+margin_left = 106.0
+margin_right = 166.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6

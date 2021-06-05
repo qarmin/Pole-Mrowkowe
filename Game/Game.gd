@@ -8,8 +8,9 @@ enum PLAYERS_TYPE { CPU = 0, HUMAN = 1 }
 # CHOOSING_MOVE_PLACE - Użytkownik wybiera polę do którego chce przejść
 # WAITING_FOR_END_OF_MOVING - Użytkownik czeka na zakończenie przesuwania się jednostki
 # CPU_TURN - Tura komputera
+# CPU_WAIT - Czekanie po ruchu gracza, tak aby np. 10 ruchów nie było robionych w przeciągu 0.5 sekundy
 
-enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN }
+enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN, CPU_WAIT }
 var current_status = STATUS.USER_NORMAL
 
 # TODO to ma być ustawiane podczas wyboru potyczki
@@ -161,8 +162,20 @@ func connect_clickable_signals() -> void:
 	confirmation_dialog.connect("confirmed", self, "end_turn")
 
 
-func move_unit_3d(end_c: Vector2j):
+func move_unit_3d(end_c: Vector2j, user_attack: bool):
+	var type_of_attack: int
+	if user_attack:
+		type_of_attack = STATUS.USER_NORMAL
+	else:
+		type_of_attack = STATUS.CPU_TURN
+
 	var start_c: Vector2j = selected_coordinates
+
+	var qq = single_map.units[start_c.y][start_c.x]
+	var start_units: int = single_map.units[start_c.y][start_c.x]["stats"]["ants"]
+	var end_units: int = 0
+	if !single_map.units[end_c.y][end_c.x].empty():
+		end_units = single_map.units[end_c.y][end_c.x]["stats"]["ants"]
 
 	var result = single_map.move_unit(start_c, end_c)
 
@@ -171,7 +184,7 @@ func move_unit_3d(end_c: Vector2j):
 
 	if single_map.fields[end_c.y][end_c.x] != current_player:
 		var attack_icon = attacked_icon.instance()
-		attack_icon.show_icon(result.attacker_defeated, result.defender_defeated)
+		attack_icon.show_icon(start_units, end_units, result.attacker_defeated, result.defender_defeated)
 		end_hex.add_child(attack_icon)
 
 	match result.result:
@@ -216,7 +229,7 @@ func ant_clicked(ant: AntBase) -> void:
 	if current_status == STATUS.CHOOSING_MOVE_PLACE:
 		var clicked_coordinates: Vector2j = SingleMap.convert_name_to_coordinates(parent_name, single_map.size)
 		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
-			move_unit_3d(clicked_coordinates)
+			move_unit_3d(clicked_coordinates, true)
 			return
 		else:
 			current_status = STATUS.USER_NORMAL
@@ -286,7 +299,7 @@ func hex_clicked(hex: SingleHex) -> void:
 	if current_status == STATUS.CHOOSING_MOVE_PLACE:
 		var clicked_coordinates: Vector2j = SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size)
 		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
-			move_unit_3d(clicked_coordinates)
+			move_unit_3d(clicked_coordinates, true)
 			return
 		else:  # Kliknięto na nieprawidłowy hex
 			current_status = STATUS.USER_NORMAL

@@ -401,9 +401,6 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 		attacker_stats["ants"] -= destroyed_attackers_ants
 		defender_stats["ants"] -= destroyed_defenders_ants
 
-		print("Destroyed attacker ants " + str(destroyed_attackers_ants))
-		print("Destroyed defenders ants " + str(destroyed_defenders_ants))
-
 		units[start_c.y][start_c.x]["stats"]["ants"] = max(attacker_stats["ants"], 0)
 		units[end_c.y][end_c.x]["stats"]["ants"] = max(defender_stats["ants"], 0)
 

@@ -149,3 +149,5 @@ func _animation_finished(anim_name: String) -> void:
 		$Settings.set_text("Maximum Settings(6/6)\nMap 30x30(6/6)")
 	elif anim_name == "CameraMovement6":
 		test_ended()
+#	else: # TODO Reneable this
+#		assert(false, "Missing Animation Name")
