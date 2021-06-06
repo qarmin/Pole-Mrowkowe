@@ -74,7 +74,7 @@ func initialize_game() -> void:
 	for i in range(number_of_start_players):
 		players_activite.push_back(true)
 		players_type.push_back(PLAYERS_TYPE.CPU)
-		player_resources.push_back({"wood": (i + 2) * 100, "water": (i + 2) * 100, "gold": (i + 2) * 100, "food": (i + 2) * 100})
+		player_resources.push_back({"wood": (i + 2) * 100, "gold": (i + 2) * 100, "food": (i + 2) * 100})
 
 	players_type[0] = PLAYERS_TYPE.HUMAN  # First player is always a human
 
@@ -87,8 +87,8 @@ func initialize_game() -> void:
 	if !map_was_generated_before:
 		single_map = SingleMap.new()
 		MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
-#		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
-		MapCreator.populate_map_realistically(single_map, number_of_start_players)
+		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
+#		MapCreator.populate_map_realistically(single_map, number_of_start_players)
 		MapCreator.create_3d_map(single_map)
 		add_child(single_map.map)
 
@@ -170,7 +170,6 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 
 	var start_c: Vector2j = selected_coordinates
 
-	var qq = single_map.units[start_c.y][start_c.x]
 	var start_units: int = single_map.units[start_c.y][start_c.x]["stats"]["ants"]
 	var end_units: int = 0
 	if !single_map.units[end_c.y][end_c.x].empty():

@@ -17,7 +17,6 @@ func _ready() -> void:
 			"production":
 			{
 				"wood": 10,
-				"water": 10,
 				"gold": 5,
 				"food": 10,
 			}
@@ -30,7 +29,6 @@ func _ready() -> void:
 			"production":
 			{
 				"wood": 5,
-				"water": 15,
 				"gold": 2,
 				"food": 20,
 			}
@@ -43,7 +41,6 @@ func _ready() -> void:
 			"production":
 			{
 				"wood": 30,
-				"water": 15,
 				"gold": 3,
 				"food": 0,
 			}

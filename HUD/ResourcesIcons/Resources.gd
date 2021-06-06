@@ -19,12 +19,6 @@ func update_resources(have_resources: Dictionary, end_turn_resources: Dictionary
 		positive_symbol = ""
 	$HBox/Gold/Label.set_text(str(have_resources["gold"]) + " (" + positive_symbol + str(end_turn_resources["gold"]) + ")")
 
-	if end_turn_resources["water"] >= 0:
-		positive_symbol = "+"
-	else:
-		positive_symbol = ""
-	$HBox/Water/Label.set_text(str(have_resources["water"]) + " (" + positive_symbol + str(end_turn_resources["water"]) + ")")
-
 	if end_turn_resources["food"] >= 0:
 		positive_symbol = "+"
 	else:

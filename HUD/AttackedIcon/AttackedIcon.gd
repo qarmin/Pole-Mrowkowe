@@ -12,7 +12,7 @@ func show_icon(attacker_units: int, defenders_units: int, attacker_defeated: int
 
 	var img = $Viewport.get_texture()
 	$Numbers.set_texture(img)
-	
+
 
 func remove(_unused) -> void:
 	queue_free()

@@ -1,10 +1,10 @@
 extends Node
 
-var resources: Array = ["wood", "water", "gold", "food"]
+var resources: Array = ["wood", "gold", "food"]
 
 
 func get_resources() -> Dictionary:
-	return {"wood": 0, "water": 0, "gold": 0, "food": 0}
+	return {"wood": 0, "gold": 0, "food": 0}
 
 
 func validate_resources(res: Dictionary) -> void:

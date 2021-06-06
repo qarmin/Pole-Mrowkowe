@@ -17,7 +17,6 @@ const DOWNGRADE_COST: float = 0.8  # Only 80% of value can be restored from
 func _ready() -> void:
 	var default: Dictionary = {
 		"wood": 200,
-		"water": 200,
 		"gold": 200,
 		"food": 200,
 	}
@@ -30,26 +29,61 @@ func _ready() -> void:
 #		"luck": 40,
 #		"action_points": 2,
 
-	# TODO change Usage to normal
-	add_ant({"name": "Worker", "type": TYPES_OF_ANTS.WORKER, "to_build": default, "usage": default, "stats": stats_default, "armor": TYPES_OF_ARMOR.BRONZE})
-	add_ant({"name": "Soldier", "type": TYPES_OF_ANTS.SOLDIER, "to_build": default, "usage": default, "stats": stats_default, "armor": TYPES_OF_ARMOR.BRONZE})
+	add_ant(
+		{
+			"name": "Worker",
+			"type": TYPES_OF_ANTS.WORKER,
+			"to_build":
+			{
+				"wood": 60,
+				"gold": 50,
+				"food": 60,
+			},
+			"usage":
+			{
+				"wood": 10,
+				"gold": 20,
+				"food": 40,
+			},
+			"stats": stats_default,
+			"armor": TYPES_OF_ARMOR.BRONZE
+		}
+	)
+	add_ant(
+		{
+			"name": "Soldier",
+			"type": TYPES_OF_ANTS.SOLDIER,
+			"to_build":
+			{
+				"wood": 60,
+				"gold": 50,
+				"food": 60,
+			},
+			"usage":
+			{
+				"wood": 10,
+				"gold": 20,
+				"food": 40,
+			},
+			"stats": stats_default,
+			"armor": TYPES_OF_ARMOR.BRONZE
+		}
+	)
 	add_ant(
 		{
 			"name": "Flying",
 			"type": TYPES_OF_ANTS.FLYING,
 			"to_build":
 			{
-				"wood": 110,
-				"water": 10,
-				"gold": 5,
-				"food": 10,
+				"wood": 60,
+				"gold": 50,
+				"food": 60,
 			},
 			"usage":
 			{
 				"wood": 10,
-				"water": 10,
-				"gold": 5,
-				"food": 10,
+				"gold": 20,
+				"food": 40,
 			},
 			"stats": stats_default,
 			"armor": TYPES_OF_ARMOR.BRONZE,
