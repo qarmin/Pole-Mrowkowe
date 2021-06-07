@@ -335,7 +335,7 @@ func hex_clicked(hex: SingleHex) -> void:
 	selected_hex = hex
 	show_buildings_menu()
 	gui_update_building_menu()
-	$HUD/HUD/Buildings/VBox/Label.set_text("hex menu - field " + coordinates.to_string())
+	$HUD/HUD/Buildings/VBox/Label.set_text("hex menu - field " + coordinates.to_string()) # Spacja jest potrzebna przed nazwą aby lepiej to wyglądało
 
 
 # TODO może dodać tutaj info czy jest to menu gracza czy wroga?

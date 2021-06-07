@@ -29,20 +29,24 @@ __meta__ = {
 [node name="VBox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = -3.0
+margin_bottom = -3.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="VBox"]
-margin_right = 860.0
+margin_right = 854.0
 margin_bottom = 20.0
 custom_fonts/font = SubResource( 1 )
-text = "building menu - on field aa x bb"
+text = "Hex menu - on field aa x bb"
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
 margin_top = 24.0
-margin_right = 860.0
-margin_bottom = 180.0
+margin_right = 854.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -50,63 +54,63 @@ __meta__ = {
 }
 
 [node name="VBox" type="VBoxContainer" parent="VBox/HBox"]
-margin_right = 140.0
-margin_bottom = 156.0
+margin_right = 139.0
+margin_bottom = 152.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Building1" parent="VBox/HBox/VBox" instance=ExtResource( 2 )]
-margin_right = 140.0
-margin_bottom = 76.0
+margin_right = 139.0
+margin_bottom = 74.0
 
 [node name="Building2" parent="VBox/HBox/VBox" instance=ExtResource( 2 )]
-margin_top = 80.0
-margin_right = 140.0
-margin_bottom = 156.0
+margin_top = 78.0
+margin_right = 139.0
+margin_bottom = 152.0
 
 [node name="VBox2" type="VBoxContainer" parent="VBox/HBox"]
-margin_left = 144.0
-margin_right = 284.0
-margin_bottom = 156.0
+margin_left = 143.0
+margin_right = 282.0
+margin_bottom = 152.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Building3" parent="VBox/HBox/VBox2" instance=ExtResource( 2 )]
-margin_right = 140.0
-margin_bottom = 76.0
+margin_right = 139.0
+margin_bottom = 74.0
 
 [node name="Building4" parent="VBox/HBox/VBox2" instance=ExtResource( 2 )]
-margin_top = 80.0
-margin_right = 140.0
-margin_bottom = 156.0
+margin_top = 78.0
+margin_right = 139.0
+margin_bottom = 152.0
 
 [node name="VBox3" type="VBoxContainer" parent="VBox/HBox"]
-margin_left = 288.0
-margin_right = 428.0
-margin_bottom = 156.0
+margin_left = 286.0
+margin_right = 425.0
+margin_bottom = 152.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Building5" parent="VBox/HBox/VBox3" instance=ExtResource( 2 )]
-margin_right = 140.0
-margin_bottom = 76.0
+margin_right = 139.0
+margin_bottom = 74.0
 
 [node name="Building6" parent="VBox/HBox/VBox3" instance=ExtResource( 2 )]
-margin_top = 80.0
-margin_right = 140.0
-margin_bottom = 156.0
+margin_top = 78.0
+margin_right = 139.0
+margin_bottom = 152.0
 
 [node name="Unit1" parent="VBox/HBox" instance=ExtResource( 4 )]
-margin_left = 432.0
-margin_right = 572.0
-margin_bottom = 156.0
+margin_left = 429.0
+margin_right = 568.0
+margin_bottom = 152.0
 
 [node name="Unit2" parent="VBox/HBox" instance=ExtResource( 4 )]
-margin_left = 576.0
-margin_right = 716.0
-margin_bottom = 156.0
+margin_left = 572.0
+margin_right = 711.0
+margin_bottom = 152.0
 
 [node name="Unit3" parent="VBox/HBox" instance=ExtResource( 4 )]
-margin_left = 720.0
-margin_right = 860.0
-margin_bottom = 156.0
+margin_left = 715.0
+margin_right = 854.0
+margin_bottom = 152.0

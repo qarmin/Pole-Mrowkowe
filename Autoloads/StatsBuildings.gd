@@ -108,9 +108,9 @@ func _ready() -> void:
 		TYPES_OF_BUILDINGS.PILE,
 		3,
 		[
-			{"wood": 100, "gold": 1, "food": 3},
-			{"wood": 100, "gold": 2, "food": 4},
-			{"wood": 200, "gold": 3, "food": 5},
+			{"wood": 10, "gold": 1, "food": 3},
+			{"wood": 10, "gold": 2, "food": 4},
+			{"wood": 20, "gold": 3, "food": 5},
 		],
 		[
 			{"wood": 2, "gold": 0, "food": 25},

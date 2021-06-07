@@ -15,17 +15,17 @@ const DOWNGRADE_COST: float = 0.8  # Only 80% of value can be restored from
 
 
 func _ready() -> void:
-	var default: Dictionary = {
-		"wood": 200,
-		"gold": 200,
-		"food": 200,
-	}
-	var stats_default: Dictionary = {
-		"attack": 30,
-		"defense": 30,
-		"ants": 100,
-		"number_of_movement": 10,
-	}
+#	var default: Dictionary = {
+#		"wood": 200,
+#		"gold": 200,
+#		"food": 200,
+#	}
+#	var stats_default: Dictionary = {
+#		"attack": 30,
+#		"defense": 30,
+#		"ants": 100,
+#		"number_of_movement": 10,
+#	}
 #		"luck": 40,
 #		"action_points": 2,
 
@@ -35,17 +35,23 @@ func _ready() -> void:
 			"type": TYPES_OF_ANTS.WORKER,
 			"to_build":
 			{
-				"wood": 60,
-				"gold": 50,
-				"food": 60,
+				"wood": 7,
+				"gold": 15,
+				"food": 16,
 			},
 			"usage":
 			{
-				"wood": 10,
-				"gold": 20,
-				"food": 40,
+				"wood": 5,
+				"gold": 10,
+				"food": 15,
 			},
-			"stats": stats_default,
+			"stats":
+			{
+				"attack": 30,
+				"defense": 20,
+				"ants": 100,
+				"number_of_movement": 1,
+			},
 			"armor": TYPES_OF_ARMOR.BRONZE
 		}
 	)
@@ -55,17 +61,23 @@ func _ready() -> void:
 			"type": TYPES_OF_ANTS.SOLDIER,
 			"to_build":
 			{
-				"wood": 60,
-				"gold": 50,
-				"food": 60,
+				"wood": 12,
+				"gold": 30,
+				"food": 15,
 			},
 			"usage":
 			{
-				"wood": 10,
-				"gold": 20,
-				"food": 40,
+				"wood": 5,
+				"gold": 15,
+				"food": 20,
 			},
-			"stats": stats_default,
+			"stats":
+			{
+				"attack": 45,
+				"defense": 40,
+				"ants": 100,
+				"number_of_movement": 1,
+			},
 			"armor": TYPES_OF_ARMOR.BRONZE
 		}
 	)
@@ -75,17 +87,23 @@ func _ready() -> void:
 			"type": TYPES_OF_ANTS.FLYING,
 			"to_build":
 			{
-				"wood": 60,
-				"gold": 50,
-				"food": 60,
+				"wood": 25,
+				"gold": 40,
+				"food": 10,
 			},
 			"usage":
 			{
 				"wood": 10,
 				"gold": 20,
-				"food": 40,
+				"food": 20,
 			},
-			"stats": stats_default,
+			"stats":
+			{
+				"attack": 35,
+				"defense": 10,
+				"ants": 100,
+				"number_of_movement": 2,
+			},
 			"armor": TYPES_OF_ARMOR.BRONZE,
 		}
 	)
