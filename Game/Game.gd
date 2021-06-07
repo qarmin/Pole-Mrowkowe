@@ -58,8 +58,35 @@ var map_was_generated_before: bool = false
 # If it is ready and entered to tree, then only then everything can be initialized
 var ready_and_entered: int = 0
 
+const CPU_WAIT_TIME : float = 0.5
+var cpu_wait_time : float = CPU_WAIT_TIME
 
-func _enter_tree():
+func _process(delta: float) -> void:
+	if ready_and_entered == 2:
+		initialize_game()
+		ready_and_entered = 100
+
+	if current_status == STATUS.CPU_TURN ||  current_status == STATUS.CPU_WAIT:
+		cpu_wait_time -= delta
+		if cpu_wait_time < 0:
+			cpu_wait_time = CPU_WAIT_TIME
+			
+			# TODO Dodać logikę CPU
+			# If can do nothing
+			# Can no move unit
+			# Can no build new building
+			# Can no remove unit
+			end_turn(false)
+		pass
+
+
+	# TODO Add logic to CPU movement
+	pass
+
+func can_player_do_things() -> bool:
+	return current_status == STATUS.CHOOSING_MOVE_PLACE || current_status == STATUS.USER_NORMAL
+
+func _enter_tree() -> void:
 	ready_and_entered += 1
 
 
@@ -128,13 +155,6 @@ func _input(event) -> void:
 				hide_everything()
 
 
-func _process(_delta: float) -> void:
-	if ready_and_entered == 2:
-		initialize_game()
-		ready_and_entered = 100
-
-	# TODO Add logic to CPU movement
-	pass
 
 
 # Łączy wszystkie sygnały
@@ -156,9 +176,9 @@ func connect_clickable_signals() -> void:
 
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
-	round_node.connect("try_to_end_turn_clicked", self, "end_turn")
+	round_node.connect("try_to_end_turn_clicked", self, "end_turn", [true])
 
-	confirmation_dialog.connect("confirmed", self, "end_turn")
+	confirmation_dialog.connect("confirmed", self, "end_turn", [true])
 
 
 func move_unit_3d(end_c: Vector2j, user_attack: bool):
@@ -221,6 +241,10 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 
 
 func ant_clicked(ant: AntBase) -> void:
+	# Tura CPU
+	if !can_player_do_things():
+		return
+		
 	var parent_name: String = ant.get_parent().get_name()
 #	print("Ant " + parent_name + "/" + ant.get_name() + " was clicked and this was handled!")
 
@@ -294,6 +318,10 @@ func possible_ant_movements(array_of_coordinates: Array = [], hide: bool = true)
 
 
 func hex_clicked(hex: SingleHex) -> void:
+	# Tura CPU
+	if !can_player_do_things():
+		return
+	
 	if current_status == STATUS.CHOOSING_MOVE_PLACE:
 		var clicked_coordinates: Vector2j = SingleMap.convert_name_to_coordinates(hex.get_name(), single_map.size)
 		if Vector2j.is_in_array(neighbourhood_array, clicked_coordinates):
@@ -381,32 +409,37 @@ func try_to_end_turn() -> void:
 	confirmation_dialog.popup()
 
 
-func end_turn() -> void:
+func end_turn(only_player_can_end_turn : bool) -> void:
+	if only_player_can_end_turn && !can_player_do_things():
+		# To nie jest tura gracza a on chce to kliknąć
+		return
+	
 	print("Koniec tury")
 
 	var new_turn: bool = false
 	var curr: int = current_player
-	# TODO Usunąć pętlę while_true, ponieważ na chwilę obecnie aktualnie gracze CPU są ignorowani
+	
+	if get_active_players() == 1:
+		print("Wygrana")  # TODO, dodać okno z wygraną czy porażką czy coś takiego
+		return
+
+	Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
+	Resources.normalize_resources(player_resources[curr])  # Prevents from being resource smaller than 0
+
 	while true:
-		if get_active_players() == 1:
-			print("Wygrana")  # TODO, dodać okno z wygraną czy porażką czy coś takiego
-			return
-
-		Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
-		Resources.normalize_resources(player_resources[curr])  # Prevents from being resource smaller than 0
-
 		curr = (curr + 1) % number_of_start_players
 		if curr == 0:
 			new_turn = true
-
-		assert(curr != current_player)  # To by znaczyło że nie znaleziono żadnego gracza innego od aktualnego
 		if players_activite[curr]:
-			current_player = curr
-			if players_type[curr] == PLAYERS_TYPE.CPU:
-				# TODO wykonać tury dla użytkownika CPU
-				pass
-			elif players_type[curr] == PLAYERS_TYPE.HUMAN:
-				break  # Tura gracza
+			break
+
+	assert(curr != current_player)  # To by znaczyło że nie znaleziono żadnego gracza innego od aktualnego
+	
+	current_player = curr
+	if players_type[curr] == PLAYERS_TYPE.CPU:
+		current_status = STATUS.CPU_TURN
+	elif players_type[curr] == PLAYERS_TYPE.HUMAN:
+		current_status = STATUS.USER_NORMAL
 
 	# Aktualizacja zasobów
 	gui_update_resources()
@@ -418,11 +451,7 @@ func end_turn() -> void:
 	if new_turn:
 		round_label.set_text(str(int(round_label.get_text()) + 1))
 
-	hide_menus()
-	terrain_overlay_node.stop()
-	unit_overlay_node.stop()
-	current_unit_overlay_hex_name = ""
-	current_terrain_overlay_hex_name = ""
+	hide_everything()
 
 
 func gui_update_resources() -> void:
