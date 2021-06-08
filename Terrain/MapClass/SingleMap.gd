@@ -197,10 +197,6 @@ func building_get_place_for_build(coordinates: Vector2j) -> int:
 		return available_places[0]
 	return -1
 
-
-# TODO Dodać funkcję/lub zmienić np. building_add aby zwracała koordynaty budynku(Transform albo Vector3) w zależności od położenia
-
-
 func building_get_place_where_is_building(coordinates: Vector2j, building: int) -> Vector3:
 	Buildings.validate_building(building)
 	assert(buildings[coordinates.y][coordinates.x].has(building))  # Budynek musi istnieć
@@ -359,6 +355,9 @@ class FightResult:
 	var result: int
 	var attacker_defeated: int = 0
 	var defender_defeated: int = 0
+	
+	var defeated_enemy: bool = false # Czy pokonano wroga całkowicie
+	var changed_fields : Array = [] # Lista pól do aktualizacji po zniszczeniu wroga
 
 
 # TODO nie zapomnieć aby zaktualizować pola(fields) i kolory mrówek i pól
@@ -371,6 +370,9 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 
 	units[start_c.y][start_c.x]["stats"]["number_of_movement"] -= 1
 
+	var attacker_id : int = fields[start_c.y][start_c.x]
+	var defender_id : int = fields[end_c.y][end_c.x]
+
 	var result: FightResult = FightResult.new()
 
 	# Brak Walki
@@ -378,6 +380,10 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 		units[end_c.y][end_c.x] = units[start_c.y][start_c.x].duplicate(true)
 		units[start_c.y][start_c.x] = {}
 		result.result = FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
+		fields[end_c.y][end_c.x] = attacker_id
+		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
+			result.defeated_enemy = true
+			building_remove(Vector2j.new(end_c.x,end_c.y),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
 	# Walka
 	else:
 		var attacker_stats: Dictionary = units[start_c.y][start_c.x]["stats"].duplicate(true)
@@ -417,5 +423,17 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 			units[end_c.y][end_c.x] = units[start_c.y][start_c.x].duplicate(true)
 			units[start_c.y][start_c.x] = {}
 			result.result = FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT
+			fields[end_c.y][end_c.x] = attacker_id
+			if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
+				result.defeated_enemy = true
+				building_remove(Vector2j.new(end_c.x,end_c.y),Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+
+	if result.defeated_enemy:
+		for y in range(size.y):
+			for x in range(size.x):
+				
+				if fields[y][x] == defender_id:
+					fields[y][x] = FIELD_TYPE.DEFAULT_FIELD
+					result.changed_fields.append(Vector2j.new(x,y))
 
 	return result

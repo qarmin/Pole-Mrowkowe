@@ -10,10 +10,10 @@ enum PLAYERS_TYPE { CPU = 0, HUMAN = 1 }
 # CPU_TURN - Tura komputera
 # CPU_WAIT - Czekanie po ruchu gracza, tak aby np. 10 ruchów nie było robionych w przeciągu 0.5 sekundy
 
-enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN, CPU_WAIT }
+enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN, CPU_WAIT , GAME_ENDED}
 var current_status = STATUS.USER_NORMAL
 
-var number_of_start_players: int = 4  # Number of all players
+var number_of_start_players: int = 2  # Number of all players
 var active_players: int = 3  # How many players still play
 var current_player: int = 0  # Actual player
 var players_activite: Array = []  #[true, true, false, true]  # Stan aktualny w graczach, czy ciągle żyją
@@ -58,7 +58,7 @@ var map_was_generated_before: bool = false
 # If it is ready and entered to tree, then only then everything can be initialized
 var ready_and_entered: int = 0
 
-const CPU_WAIT_TIME : float = 0.5
+const CPU_WAIT_TIME : float = 0.01
 var cpu_wait_time : float = CPU_WAIT_TIME
 
 func _process(delta: float) -> void:
@@ -113,9 +113,9 @@ func initialize_game() -> void:
 
 	if !map_was_generated_before:
 		single_map = SingleMap.new()
-		MapCreator.create_map(single_map, Vector2j.new(6, 6), 4)
-		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
-#		MapCreator.populate_map_realistically(single_map, number_of_start_players)
+		MapCreator.create_map(single_map, Vector2j.new(3, 3), 2)
+#		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
+		MapCreator.populate_map_realistically(single_map, number_of_start_players)
 		MapCreator.create_3d_map(single_map)
 		add_child(single_map.map)
 
@@ -189,6 +189,9 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 		type_of_attack = STATUS.CPU_WAIT
 
 	var start_c: Vector2j = selected_coordinates
+	
+#	var attacker_id : int = single_map.fields[start_c.y][start_c.x]
+	var defender_id : int = single_map.fields[end_c.y][end_c.x]
 
 	var start_units: int = single_map.units[start_c.y][start_c.x]["stats"]["ants"]
 	var end_units: int = 0
@@ -205,6 +208,8 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 		attack_icon.show_icon(start_units, end_units, result.attacker_defeated, result.defender_defeated)
 		end_hex.add_child(attack_icon)
 
+	var anthill_name: String = Buildings.get_bulding_name(Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+	
 	match result.result:
 		# Stosowany również do przechodzenia na własne terytoria
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD:
@@ -213,17 +218,27 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 			end_hex.add_child(start_ant)
 
 			update_field_color(end_c)
-			single_map.fields[end_c.y][end_c.x] = current_player
 			current_status = type_of_attack
+			
+			# Mrowisko musi zostać usunięte jeśli istnieje
+			if $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).has_node(anthill_name):
+				$Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).get_node(anthill_name).queue_free()
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT:
+			var end_ant: Spatial = get_unit_from_field(end_c)
+			end_hex.remove_child(end_ant)
+			end_ant.set_name("TO DELETE")
+			end_ant.queue_free()
+			
 			var start_ant: Spatial = get_unit_from_field(start_c)
 			start_hex.remove_child(start_ant)
 			end_hex.add_child(start_ant)
 
 			update_field_color(end_c)
-			get_unit_from_field(end_c).queue_free()
-			single_map.fields[end_c.y][end_c.x] = current_player
 			current_status = type_of_attack
+			
+			# Mrowisko musi zostać usunięte jeśli istnieje
+			if $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).has_node(anthill_name):
+				$Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).get_node(anthill_name).queue_free()
 		SingleMap.FIGHT_RESULTS.DEFENDER_WON:
 			get_unit_from_field(start_c).queue_free()
 			current_status = type_of_attack
@@ -235,9 +250,15 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 			current_status = type_of_attack
 		_:
 			assert(false, "Missing fight result")
-
+	
+	if result.defeated_enemy:
+		players_activite[defender_id] = false
+		for coord in result.changed_fields:
+			update_field_color(coord)
+	
 	gui_update_resources()
 	hide_everything()
+	check_win()
 
 
 func ant_clicked(ant: AntBase) -> void:
@@ -400,10 +421,18 @@ func hide_everything():
 func get_active_players() -> int:
 	var count: int = 0
 	for i in players_activite:
-		count += 1
+		if i:
+			count += 1
 
 	return count
 
+func check_win():
+	if get_active_players() == 1:
+		current_status = STATUS.GAME_ENDED
+		if players_activite[0]:
+			print("Wygrana TODO")
+		else:
+			print("Przegrana TODO")
 
 func try_to_end_turn() -> void:
 	confirmation_dialog.popup()
@@ -419,10 +448,6 @@ func end_turn(only_player_can_end_turn : bool) -> void:
 	var new_turn: bool = false
 	var curr: int = current_player
 	
-	if get_active_players() == 1:
-		print("Wygrana")  # TODO, dodać okno z wygraną czy porażką czy coś takiego
-		return
-
 	Resources.add_resources(player_resources[curr], single_map.calculate_end_turn_resources_change(curr))
 	Resources.normalize_resources(player_resources[curr])  # Prevents from being resource smaller than 0
 
@@ -628,10 +653,21 @@ func handle_downgrade_building_click(type_of_building: int) -> void:
 # Uaktualnia kolor jednostki dla danego pola i hexa
 func update_field_color(coordinates: Vector2j) -> void:
 	assert(single_map.fields[coordinates.y][coordinates.x] != SingleMap.FIELD_TYPE.NO_FIELD)
-
+	
 	var name: String = SingleMap.convert_coordinates_to_name(coordinates, single_map.size)
+	var hex_node : Node = $Map.get_node(name)
 
-	$Map.get_node(name).set_surface_material(0, MapCreator.texture_array[current_player])
+	if single_map.fields[coordinates.y][coordinates.x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
+		hex_node.set_surface_material(0, MapCreator.texture_base)
+		for i in hex_node.get_children():
+			if i.get_name().begins_with("ANT"):
+				i.find_node("Outfit").set_surface_material(0, MapCreator.ant_base)
+			
+	else:
+		hex_node.set_surface_material(0, MapCreator.texture_array[current_player])
+		for i in hex_node.get_children():
+			if i.get_name().begins_with("ANT"):
+				i.find_node("Outfit").set_surface_material(0, MapCreator.ant_texture_array[current_player])
 
 
 #
