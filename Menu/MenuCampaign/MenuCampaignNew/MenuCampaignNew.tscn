@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/BackToMenuCampaign.gd" type="Script" id=3]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/StartCampaign.gd" type="Script" id=4]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/Campaign2Blocked.png" type="Texture" id=5]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/MenuCampaignNew.gd" type="Script" id=6]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/Campaign3Blocked.png" type="Texture" id=7]
+[ext_resource path="res://Menu/MenuCampaign/MenuCampaignNew/Campaign1Normal.png" type="Texture" id=8]
 
 [node name="MenuCampaignNew" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -21,9 +27,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Button" parent="Buttons"]
+[node name="StartCampaign" type="Button" parent="Buttons"]
 margin_right = 273.0
-margin_bottom = 71.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = "Start Campaign"
+script = ExtResource( 4 )
+
+[node name="Back" type="Button" parent="Buttons"]
+margin_top = 64.0
+margin_right = 273.0
+margin_bottom = 110.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
@@ -33,4 +50,68 @@ script = ExtResource( 3 )
 [node name="Options" parent="." instance=ExtResource( 2 )]
 text = "new campaign"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.05
+anchor_top = 0.25
+anchor_right = 0.9
+anchor_bottom = 0.7
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0.298039, 0.298039, 0.298039, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 895.0
+margin_bottom = 295.0
+custom_constants/separation = 31
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="ColorRect/MarginContainer/HBoxContainer"]
+margin_right = 272.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="TextureButton2" type="TextureButton" parent="ColorRect/MarginContainer/HBoxContainer"]
+margin_left = 303.0
+margin_right = 576.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource( 5 )
+expand = true
+
+[node name="TextureButton3" type="TextureButton" parent="ColorRect/MarginContainer/HBoxContainer"]
+margin_left = 607.0
+margin_right = 880.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+toggle_mode = true
+texture_normal = ExtResource( 7 )
+expand = true
+
 [connection signal="pressed" from="Buttons/Back" to="Buttons/Back" method="_on_BackToMenuCampaign_pressed"]
+[connection signal="toggled" from="ColorRect/MarginContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_toggled"]

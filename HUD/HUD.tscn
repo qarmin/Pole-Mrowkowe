@@ -262,13 +262,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="EndTurnDialog" type="ConfirmationDialog" parent="."]
 visible = true
 margin_left = 306.0
 margin_top = 222.0
 margin_right = 639.0
 margin_bottom = 314.0
-dialog_text = "Are you sure that you want to do this?"
+window_title = "Confirm turn ending"
+dialog_text = "Are you sure that you want to end turn?"
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -313,6 +314,31 @@ anchor_bottom = 1.0
 custom_fonts/font = SubResource( 4 )
 text = "MOVING UNIT MODE"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndGameColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.203922 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndGameDialog" type="AcceptDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.5
+margin_top = -44.0
+margin_right = 100.5
+margin_bottom = 44.0
+window_title = "Game End"
+dialog_text = "You TODO"
 __meta__ = {
 "_edit_use_anchors_": false
 }
