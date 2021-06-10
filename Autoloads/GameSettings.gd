@@ -10,6 +10,7 @@ var single_map: SingleMap = null
 var number_of_players: int = 0
 
 var game_started: bool = false  # TODO add something to it
+var game_data_set_before: bool = false
 
 
 func _process(delta: float) -> void:
@@ -25,19 +26,9 @@ func load_game() -> void:
 	assert(single_map != null)
 	assert(number_of_players != 0)
 
+	game_data_set_before = true
+
 	var loaded_game = load("res://Game/Game.tscn").instance()
 
-	loaded_game.number_of_start_players = number_of_players
-	loaded_game.single_map = single_map
-	loaded_game.map_was_generated_before = true
-	MapCreator.create_3d_map(single_map)
-	loaded_game.add_child(single_map.map)
-
-	var node_to_delete: Control
-	for i in get_node("/root").get_children():
-		if i is Control:
-			node_to_delete = i
-
-	node_to_delete.queue_free()
-	get_node("/root").add_child(loaded_game)
-#	assert(get_tree().change_scene_to(loaded_game) == OK)
+	if get_tree().change_scene("res://Game/Game.tscn") != OK:
+		assert(false)

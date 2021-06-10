@@ -100,6 +100,14 @@ func _ready():
 
 # Inicjalizuje wszystkie elementy
 func initialize_game() -> void:
+	# Pobiera dane z singletonu jeśli akurat nie były zapisane
+	if GameSettings.game_data_set_before:
+		number_of_start_players = GameSettings.number_of_players
+		single_map = GameSettings.single_map
+		map_was_generated_before = true
+		MapCreator.create_3d_map(single_map)
+		add_child(single_map.map)
+
 	active_players = number_of_start_players
 	current_player = 0
 	for i in range(number_of_start_players):
@@ -182,12 +190,13 @@ func connect_clickable_signals() -> void:
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
 	round_node.connect("try_to_end_turn_clicked", self, "end_turn", [true])
 
-	end_turn_dialog.connect("confirmed", self, "end_turn", [true])
-	end_game_dialog.connect("confirmed", self, "end_game")
+	assert(end_turn_dialog.connect("confirmed", self, "end_turn", [true]) == OK)
+	assert(end_game_dialog.connect("confirmed", self, "end_game") == OK)
 
 
 func end_game() -> void:
-	assert(get_tree().change_scene("res://Start.tscn") == OK)
+	if get_tree().change_scene("res://Start.tscn") != OK:
+		assert(false)
 
 
 func move_unit_3d(end_c: Vector2j, user_attack: bool):
@@ -437,15 +446,18 @@ func get_active_players() -> int:
 
 
 func check_win():
-	if get_active_players() == 1:
+	if get_active_players() == 1 && players_activite[0]:
 		current_status = STATUS.GAME_ENDED
 		end_game_color_rect.show()
 
-		if players_activite[0]:
-			end_game_dialog.get_label().set_text("You win game!")
-		else:
-			end_game_dialog.get_label().set_text("You lost game!")
+		end_game_dialog.get_label().set_text("You win game!")
+		end_game_dialog.popup()
 
+	elif !players_activite[0]:
+		current_status = STATUS.GAME_ENDED
+		end_game_color_rect.show()
+
+		end_game_dialog.get_label().set_text("You lost game!")
 		end_game_dialog.popup()
 
 

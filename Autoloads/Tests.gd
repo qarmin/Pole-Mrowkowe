@@ -152,7 +152,7 @@ func map_test() -> void:
 	MapCreator.populate_map_realistically(single_map, 2)
 	assert(check_integration_of_map(single_map))
 
-	MapCreator.create_map(single_map, Vector2j.new(20, 10), 5)
+	MapCreator.create_map(single_map, Vector2j.new(20, 10), 1)
 	SingleMap.validate_sizes_of_arrays(single_map)
 # warning-ignore:return_value_discarded
 	MapCreator.populate_map_realistically(single_map, 4)

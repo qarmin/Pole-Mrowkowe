@@ -95,7 +95,8 @@ func test_ended() -> void:
 	## Ustawia zmienną, która spowoduje że przejście do Menu Głównego od razu przeniesie do benchmarku
 	Benchmark.benchmarks_waits_to_be_shown = true
 
-	assert(get_tree().change_scene("res://Menu/Menu/Menu.tscn") == OK)
+	if get_tree().change_scene("res://Menu/Menu/Menu.tscn") != OK:
+		assert(false)
 
 
 ## Dodaje co każdą klatkę do wyniku 1 punkt i sprawdza czy dany test się nie zakończył

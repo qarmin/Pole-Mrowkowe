@@ -11,9 +11,9 @@ func test_create_map():
 	var single_map: SingleMap = SingleMap.new()
 
 	MapCreator.create_map(single_map, Vector2j.new(10, 10), 4)
-	MapCreator.populate_map_realistically(single_map, 4)
-#	MapCreator.populate_map_randomly(single_map, 50)
-#	MapCreator.populate_map_randomly_playable(single_map, 50)
+#	MapCreator.populate_map_realistically(single_map, 4)
+#	MapCreator.populate_map_randomly(single_map, 80)
+	MapCreator.populate_map_randomly_playable(single_map, 50)
 	MapCreator.create_3d_map(single_map)
 #	PreviewGenerator.generate_preview_image(single_map)
 	add_child(single_map.map)

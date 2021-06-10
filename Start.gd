@@ -4,4 +4,5 @@ extends Spatial
 
 
 func _ready():
-	assert(get_tree().change_scene("res://Menu/Menu/Menu.tscn") == OK)
+	if get_tree().change_scene("res://Menu/Menu/Menu.tscn") != OK:
+		assert(false)
