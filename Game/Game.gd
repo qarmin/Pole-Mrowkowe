@@ -719,3 +719,12 @@ func restore_ant_movement_ability():
 			if single_map.fields[y][x] == current_player && !single_map.units[y][x].empty():
 				var unit_type = single_map.units[y][x]["type"]
 				single_map.units[y][x]["stats"]["number_of_movement"] = Units.get_default_stats(unit_type, 1)["number_of_movement"]
+
+func _exit_tree():
+	for i in ant_movement:
+		i.queue_free()
+	terrain_overlay_node.queue_free()
+	unit_overlay_node.queue_free()
+	single_map.reset()
+#	for i in ant_movement:
+#		i.queue_free()

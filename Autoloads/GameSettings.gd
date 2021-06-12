@@ -28,7 +28,5 @@ func load_game() -> void:
 
 	game_data_set_before = true
 
-	var loaded_game = load("res://Game/Game.tscn").instance()
-
 	if get_tree().change_scene("res://Game/Game.tscn") != OK:
 		assert(false)
