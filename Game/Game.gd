@@ -728,3 +728,78 @@ func _exit_tree():
 	single_map.reset()
 #	for i in ant_movement:
 #		i.queue_free()
+
+
+# Usuwa budynki z pola gracza
+func ai_remove_to_costly_buildings() -> bool:
+	## 1. Stwórz listę wszystkich budynków gracza na mapie
+	## 2. Usuwaj wszystkie budynki, dopóki istnieją zasoby na 
+	var player_buildings : Array = []
+	
+	
+	
+	return true
+
+# Sprawdza i wyszukuje jakie budynki jakie może wybudować
+# Wyszukuje te surowce, których miałby najmniej i je buduje
+func ai_check_which_buildings_build() -> void:
+	pass
+
+# Pobiera informacje o najbliższych hexach z którymi sąsiaduje dany
+func ai_get_array_of_closest_fields() -> Array:
+	return []
+#	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od wybranych
+#	var current_element: Vector2j = Vector2j.new(0, 0)
+#	var current_value: int = 0
+#
+#	for i in range(fields.size()):
+#		smallest_array.append([])
+#		for _j in range(fields[i].size()):
+#			smallest_array[i].append(-1)
+#
+#	var checked: Array = []
+#	var to_check: Array = []
+#	var to_check_value: Array = []
+#
+#	for r in players:
+#		to_check.append(r)
+#		to_check_value.append(0)
+#		smallest_array[r.y][r.x] = 0
+#
+#		while to_check.size() > 0:
+#			current_element = to_check.pop_front()
+#			current_value = to_check_value.pop_front()
+#
+#			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
+#
+#			var help_array = [[[0, -1], [1, -1], [-1, 0], [1, 0], [0, 1], [1, 1]], [[-1, -1], [0, -1], [-1, 0], [1, 0], [-1, 1], [0, 1]]]
+#
+#			for h in [0, 1]:
+#				if current_element.y % 2 == ((h + 1) % 2):
+#					for i in range(6):
+#						if (
+#							(current_element.x + help_array[h][i][0] >= 0)
+#							&& (current_element.x + help_array[h][i][0] < smallest_array[0].size())
+#							&& (current_element.y + help_array[h][i][1] >= 0)
+#							&& (current_element.y + help_array[h][i][1] < smallest_array.size())
+#						):
+#							var cep_x = current_element.x + help_array[h][i][0]
+#							var cep_y = current_element.y + help_array[h][i][1]
+#							if !Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && !Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
+#								if fields[cep_y][cep_x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
+#									if smallest_array[cep_y][cep_x] == -1 || smallest_array[cep_y][cep_x] > current_value:
+#										smallest_array[cep_y][cep_x] = current_value + 1
+#										to_check.append(Vector2j.new(cep_x, cep_y))
+#										to_check_value.append(current_value + 1)
+#
+#			assert(!Vector2j.is_in_array(checked, current_element))
+#
+#			checked.append(current_element)
+#		checked = []
+#		to_check = []
+#		to_check_value = []
+#
+#	return smallest_array
+
+func ai_check_if_opponent_is_near_anthill() :
+	pass
