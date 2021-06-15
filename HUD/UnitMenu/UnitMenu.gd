@@ -69,6 +69,7 @@ func update_units_info(unit: Dictionary, _coordinates: Vector2j, _single_map: Si
 
 	var to_build = Units.get_unit_to_build(unit_type, 1)
 	Resources.scale_resources(to_build, Units.DOWNGRADE_COST)
+	Resources.scale_resources(to_build, unit["stats"]["ants"] / 100.0)
 	var usage = Units.get_unit_usage(unit_type, 1)
 
 	var icon_hint: String = "Usage: " + Resources.string_resources_short(usage)

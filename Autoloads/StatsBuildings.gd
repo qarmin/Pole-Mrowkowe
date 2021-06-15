@@ -29,95 +29,119 @@ func _ready() -> void:
 		3,
 		[
 			default,  # Always have at least 1 level and cannot be built
-			{"wood": 100, "gold": 60, "food": 80},
-			{"wood": 200, "gold": 70, "food": 40},
+			{"wood": 12, "gold": 15, "food": 20},
+			{"wood": 14, "gold": 19, "food": 40},
 		],
 		[
-			{"wood": 12, "gold": 10, "food": 5},
-			{"wood": 24, "gold": 20, "food": 20},
-			{"wood": 36, "gold": 20, "food": 20},
+			{"wood": 18, "gold": 20, "food": 20},
+			{"wood": 23, "gold": 25, "food": 22},
+			{"wood": 26, "gold": 30, "food": 24},
 		],
-		[default, default, default]
+		[
+			{"wood": 0, "gold": 0, "food": 0},
+			{"wood": 0, "gold": 0, "food": 0},
+			{"wood": 0, "gold": 0, "food": 0},
+		]
 	)
 	building_add(
 		"Farm",
 		TYPES_OF_BUILDINGS.FARM,
 		3,
 		[
-			{"wood": 100, "gold": 5, "food": 80},
-			{"wood": 100, "gold": 70, "food": 90},
-			{"wood": 200, "gold": 560, "food": 20},
+			{"wood": 15, "gold": 3, "food": 6},
+			{"wood": 17, "gold": 4, "food": 7},
+			{"wood": 19, "gold": 5, "food": 8},
 		],
 		[
-			{"wood": 2, "gold": 0, "food": 25},
-			{"wood": 5, "gold": 0, "food": 40},
-			{"wood": 5, "gold": 1, "food": 70},
+			{"wood": 0, "gold": 0, "food": 21},
+			{"wood": 0, "gold": 0, "food": 26},
+			{"wood": 0, "gold": 0, "food": 32},
 		],
-		[default, default, default]
+		[
+			{"wood": 3, "gold": 1, "food": 0},
+			{"wood": 4, "gold": 2, "food": 0},
+			{"wood": 5, "gold": 2, "food": 0},
+		]
 	)
 	building_add(
 		"Sawmill",
 		TYPES_OF_BUILDINGS.SAWMILL,
 		3,
 		[
-			{"wood": 100, "gold": 1, "food": 3},
-			{"wood": 100, "gold": 2, "food": 4},
-			{"wood": 200, "gold": 3, "food": 5},
+			{"wood": 45, "gold": 24, "food": 4},
+			{"wood": 60, "gold": 26, "food": 6},
+			{"wood": 70, "gold": 30, "food": 8},
 		],
 		[
-			{"wood": 2, "gold": 0, "food": 25},
-			{"wood": 5, "gold": 0, "food": 40},
-			{"wood": 5, "gold": 1, "food": 70},
+			{"wood": 28, "gold": 0, "food": 0},
+			{"wood": 32, "gold": 0, "food": 0},
+			{"wood": 40, "gold": 0, "food": 0},
 		],
-		[default, default, default]
+		[
+			{"wood": 0, "gold": 2, "food": 5},
+			{"wood": 0, "gold": 3, "food": 7},
+			{"wood": 0, "gold": 5, "food": 9},
+		]
 	)
 	building_add(
 		"Barracks",
 		TYPES_OF_BUILDINGS.BARRACKS,
 		3,
 		[
-			{"wood": 100, "gold": 1, "food": 3},
-			{"wood": 100, "gold": 2, "food": 4},
-			{"wood": 200, "gold": 3, "food": 5},
+			{"wood": 45, "gold": 24, "food": 40},
+			{"wood": 60, "gold": 26, "food": 50},
+			{"wood": 70, "gold": 30, "food": 55},
 		],
 		[
-			{"wood": 2, "gold": 0, "food": 25},
-			{"wood": 5, "gold": 0, "food": 40},
-			{"wood": 5, "gold": 1, "food": 70},
+			{"wood": 0, "gold": 0, "food": 0},
+			{"wood": 0, "gold": 0, "food": 0},
+			{"wood": 0, "gold": 0, "food": 0},
 		],
-		[default, default, default]
+		[
+			{"wood": 12, "gold": 8, "food": 18},
+			{"wood": 13, "gold": 10, "food": 20},
+			{"wood": 14, "gold": 11, "food": 24},
+		]
 	)
 	building_add(
 		"Gold Mine",
 		TYPES_OF_BUILDINGS.GOLD_MINE,
 		3,
 		[
-			{"wood": 100, "gold": 1, "food": 3},
-			{"wood": 100, "gold": 2, "food": 4},
-			{"wood": 200, "gold": 3, "food": 5},
+			{"wood": 90, "gold": 15, "food": 30},
+			{"wood": 120, "gold": 20, "food": 40},
+			{"wood": 150, "gold": 25, "food": 50},
 		],
 		[
-			{"wood": 2, "gold": 0, "food": 25},
-			{"wood": 5, "gold": 0, "food": 40},
-			{"wood": 5, "gold": 1, "food": 70},
+			{"wood": 0, "gold": 15, "food": 0},
+			{"wood": 0, "gold": 19, "food": 0},
+			{"wood": 0, "gold": 25, "food": 0},
 		],
-		[default, default, default]
+		[
+			{"wood": 20, "gold": 0, "food": 13},
+			{"wood": 24, "gold": 0, "food": 15},
+			{"wood": 28, "gold": 0, "food": 17},
+		]
 	)
 	building_add(
 		"Pile",
 		TYPES_OF_BUILDINGS.PILE,
 		3,
 		[
-			{"wood": 10, "gold": 1, "food": 3},
-			{"wood": 10, "gold": 2, "food": 4},
-			{"wood": 20, "gold": 3, "food": 5},
+			{"wood": 36, "gold": 4, "food": 8},
+			{"wood": 40, "gold": 6, "food": 10},
+			{"wood": 45, "gold": 7, "food": 12},
 		],
 		[
-			{"wood": 2, "gold": 0, "food": 25},
-			{"wood": 5, "gold": 0, "food": 40},
-			{"wood": 5, "gold": 1, "food": 70},
+			{"wood": 0, "gold": 0, "food": 0},
+			{"wood": 0, "gold": 0, "food": 0},
+			{"wood": 0, "gold": 0, "food": 0},
 		],
-		[default, default, default]
+		[
+			{"wood": 12, "gold": 1, "food": 9},
+			{"wood": 14, "gold": 2, "food": 12},
+			{"wood": 16, "gold": 3, "food": 15},
+		]
 	)
 
 
@@ -126,6 +150,11 @@ func get_building_to_build(type: int, level: int) -> Dictionary:
 	validate_building(type)
 	for single_building in all_buildings:
 		if single_building["type"] == type:
+			if level > 2: # Tak, to nie jest błąd
+				var res_to_build : Dictionary = single_building["to_build"][level - 1].duplicate()
+				Resources.remove_resources(res_to_build, single_building["to_build"][level - 2].duplicate())
+				return res_to_build
+				
 			return single_building["to_build"][level - 1].duplicate()
 	assert(false, "Failed to find building of type " + str(type))
 	return {}

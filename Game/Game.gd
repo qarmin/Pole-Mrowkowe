@@ -73,7 +73,9 @@ func _process(delta: float) -> void:
 		cpu_wait_time -= delta
 		if cpu_wait_time < 0:
 			cpu_wait_time = CPU_WAIT_TIME
-
+			
+			ai_remove_to_costly_buildings()
+			
 			# TODO Dodać logikę CPU
 			# If can do nothing
 			# Can no move unit
@@ -113,7 +115,7 @@ func initialize_game() -> void:
 	for i in range(number_of_start_players):
 		players_activite.push_back(true)
 		players_type.push_back(PLAYERS_TYPE.CPU)
-		player_resources.push_back({"wood": (i + 2) * 100, "gold": (i + 2) * 100, "food": (i + 2) * 100})
+		player_resources.push_back({"wood": 30, "gold": 30, "food": 30})
 
 	players_type[0] = PLAYERS_TYPE.HUMAN  # First player is always a human
 
@@ -126,8 +128,8 @@ func initialize_game() -> void:
 	if !map_was_generated_before:
 		single_map = SingleMap.new()
 		MapCreator.create_map(single_map, Vector2j.new(3, 3), 2)
-#		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
-		MapCreator.populate_map_realistically(single_map, number_of_start_players)
+		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
+#		MapCreator.populate_map_realistically(single_map, number_of_start_players)
 		MapCreator.create_3d_map(single_map)
 		add_child(single_map.map)
 
@@ -729,20 +731,60 @@ func _exit_tree():
 #	for i in ant_movement:
 #		i.queue_free()
 
+func get_next_turn_resources(player : int) -> Dictionary:
+	var to_return : Dictionary = player_resources[player].duplicate(true)
+	Resources.add_resources(to_return, single_map.calculate_end_turn_resources_change(player))
+	return to_return
 
-# Usuwa budynki z pola gracza
+# Usuwa budynki z pola gracza, zwraca true, jeśli coś usunęło
+# MUSI zostać wykonany po usunięciu mrówek
 func ai_remove_to_costly_buildings() -> bool:
 	## 1. Stwórz listę wszystkich budynków gracza na mapie
-	## 2. Usuwaj wszystkie budynki, dopóki istnieją zasoby na 
+	## 2. Usuwaj wszystkie budynki, które nie produkują zasobów, dopóki nie zdobyto dodatnich zasobów
+	## 3. Na wszelki wypadek usuń jeden dodatkowo budynek nie produkujący zasobów
+	
+	var removed_something : bool = false
+
+	# Nie potrzeba
+	if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
+		return false
+	
+	## Zapisuje do tablicy informacje w formie {pozycja : typ_budynek}
 	var player_buildings : Array = []
+	var player_buildings_create_resources : Array = []
+	
+	for y in single_map.size.y:
+		for x in single_map.size.x:
+			if single_map.fields[y][x] == current_player:
+				for building in single_map.buildings[y][x]:
+					if building == Buildings.TYPES_OF_BUILDINGS.BARRACKS || building == Buildings.TYPES_OF_BUILDINGS.PILE:
+						player_buildings.append({Vector2j.new(x,y):building})
+					else:
+						player_buildings_create_resources.append({Vector2j.new(x,y):building})
+	
+	for index in player_buildings_create_resources.size():
+		var data : Dictionary = player_buildings_create_resources[index]
+		var coordinates : Vector2j = data.keys()[0]
+		var building : int = data[coordinates]
+		if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
+			return true
 	
 	
 	
+	return false
+	
+# Usuwa jednostki z pola gracza, zwraca true, jeśli coś usunęło
+func ai_remove_to_costly_units() -> bool:
+	## 1. Stwórz listę wszystkich jednostek danego gracza na mapie
+	## 2. Usuwaj wszystkie budynki, które nie produkują zasobów, dopóki nie zdobyto dodatnich zasobów
+	## 3. Na wszelki wypadek usuń jeden dodatkowo budynek nie produkujący zasobów
 	return true
 
 # Sprawdza i wyszukuje jakie budynki jakie może wybudować
 # Wyszukuje te surowce, których miałby najmniej i je buduje
 func ai_check_which_buildings_build() -> void:
+	## 1. Wykonuje się, tylko i wyłącznie jeśli nie usunięto jednostki lub 
+	
 	pass
 
 # Pobiera informacje o najbliższych hexach z którymi sąsiaduje dany

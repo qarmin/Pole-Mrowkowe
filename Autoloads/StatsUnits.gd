@@ -148,16 +148,6 @@ func get_unit_usage(type: int, _level: int) -> Dictionary:
 	assert(false, "Failed to found proper ant for this usage")
 	return {}
 
-
-func get_unit_stats(type: int, _level: int) -> Dictionary:
-	validate_type(type)
-	for ant in ants:
-		if ant["type"] == type:
-			return ant["usage"].duplicate()
-	assert(false, "Failed to found proper ant for this usage")
-	return {}
-
-
 func get_unit_to_build(type: int, _level: int) -> Dictionary:
 	validate_type(type)
 	for ant in ants:

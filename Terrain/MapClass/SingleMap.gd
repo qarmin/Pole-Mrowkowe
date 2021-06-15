@@ -270,10 +270,11 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 				for i in buildings[y][x].keys():
 					Resources.add_resources(dict, Buildings.get_building_production(i, buildings[y][x][i]["level"]))
 					Resources.remove_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]))
+					
 				# Units - only consume
-				for i in units[y][x].keys():
+				if !units[y][x].empty():
 					Resources.remove_resources(dict, Units.get_unit_usage(units[y][x]["type"], units[y][x]["level"]))
-
+	
 	return dict
 
 
@@ -391,7 +392,7 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 		var defender_stats: Dictionary = units[end_c.y][end_c.x]["stats"].duplicate(true)
 
 		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.PILE):
-			defender_stats["defense"] += 15
+			defender_stats["defense"] += 15 + (buildings[end_c.y][end_c.x][Buildings.TYPES_OF_BUILDINGS.PILE]["level"] * 0.3 + 0.7) # 15, 15*1.3, 15.1.6
 
 		var additional_attack: float = 2.9
 		if attacker_stats["ants"] < 10 && defender_stats["ants"] < 10:
