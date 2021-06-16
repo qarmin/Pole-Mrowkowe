@@ -121,7 +121,7 @@ func add_ant(data: Dictionary) -> void:
 	assert(data["usage"].has_all(Resources.resources))
 	assert(data["stats"].size() == TYPES_OF_STATS.STATS_MAX)
 
-	assert(data["stats"]["defense"] < 50)  # Powinno być zawsze mniejsze niż x
+	assert(data["stats"]["defense"] <= 40)  # Powinno być zawsze mniejsze niż x
 	assert(data["stats"]["attack"] < 50)  # Powinno być zawsze mniejsze niż x
 	assert(data["stats"]["number_of_movement"] > 0)
 

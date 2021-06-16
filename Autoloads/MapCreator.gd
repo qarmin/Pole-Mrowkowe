@@ -401,7 +401,7 @@ func populate_map_buildings(single_map: SingleMap) -> void:
 	# Randomly put with 30 % chance one building
 	for x in single_map.size.x:
 		for y in single_map.size.y:
-			if randi() % 10 < 3:
+			if randi() % 10 < 2:
 				single_map.building_add(Vector2j.new(x, y), randi() % (Buildings.NUMBER_OF_BUILDINGS - 1) + 1, 1)
 
 

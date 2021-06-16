@@ -393,6 +393,8 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 
 		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.PILE):
 			defender_stats["defense"] += 15 + (buildings[end_c.y][end_c.x][Buildings.TYPES_OF_BUILDINGS.PILE]["level"] * 0.3 + 0.7) # 15, 15*1.3, 15.1.6
+		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.BARRACKS):
+			defender_stats["defense"] += 15 + (buildings[end_c.y][end_c.x][Buildings.TYPES_OF_BUILDINGS.BARRACKS]["level"] * 0.3 + 0.7) # 15, 15*1.3, 15.1.6
 
 		var additional_attack: float = 2.9
 		if attacker_stats["ants"] < 10 && defender_stats["ants"] < 10:
