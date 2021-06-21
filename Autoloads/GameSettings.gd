@@ -12,6 +12,8 @@ var number_of_players: int = 0
 var game_started: bool = false  # TODO add something to it
 var game_data_set_before: bool = false
 
+var message : String = ""
+
 
 func _process(delta: float) -> void:
 	if game_started == true:

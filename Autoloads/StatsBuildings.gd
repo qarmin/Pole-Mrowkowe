@@ -33,9 +33,9 @@ func _ready() -> void:
 			{"wood": 14, "gold": 19, "food": 40},
 		],
 		[
-			{"wood": 18, "gold": 20, "food": 20},
-			{"wood": 23, "gold": 25, "food": 22},
-			{"wood": 26, "gold": 30, "food": 24},
+			{"wood": 28, "gold": 30, "food": 30},
+			{"wood": 33, "gold": 35, "food": 32},
+			{"wood": 36, "gold": 40, "food": 34},
 		],
 		[
 			{"wood": 0, "gold": 0, "food": 0},

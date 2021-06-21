@@ -440,3 +440,13 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 					result.changed_fields.append(Vector2j.new(x, y))
 
 	return result
+
+func get_user_fields_array(player : int ) -> Array:
+	var array : Array = []
+	
+	for x in size.x:
+		for y in size.y:
+			if fields[y][x] == player:
+				array.push_back(Vector2j.new(x,y))
+			
+	return array
