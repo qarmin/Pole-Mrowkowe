@@ -270,11 +270,11 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 				for i in buildings[y][x].keys():
 					Resources.add_resources(dict, Buildings.get_building_production(i, buildings[y][x][i]["level"]))
 					Resources.remove_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]))
-					
+
 				# Units - only consume
 				if !units[y][x].empty():
 					Resources.remove_resources(dict, Units.get_unit_usage(units[y][x]["type"], units[y][x]["level"]))
-	
+
 	return dict
 
 
@@ -392,9 +392,9 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 		var defender_stats: Dictionary = units[end_c.y][end_c.x]["stats"].duplicate(true)
 
 		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.PILE):
-			defender_stats["defense"] += 15 + (buildings[end_c.y][end_c.x][Buildings.TYPES_OF_BUILDINGS.PILE]["level"] * 0.3 + 0.7) # 15, 15*1.3, 15.1.6
+			defender_stats["defense"] += 15 + (buildings[end_c.y][end_c.x][Buildings.TYPES_OF_BUILDINGS.PILE]["level"] * 0.3 + 0.7)  # 15, 15*1.3, 15.1.6
 		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.BARRACKS):
-			defender_stats["defense"] += 15 + (buildings[end_c.y][end_c.x][Buildings.TYPES_OF_BUILDINGS.BARRACKS]["level"] * 0.3 + 0.7) # 15, 15*1.3, 15.1.6
+			defender_stats["defense"] += 15 + (buildings[end_c.y][end_c.x][Buildings.TYPES_OF_BUILDINGS.BARRACKS]["level"] * 0.3 + 0.7)  # 15, 15*1.3, 15.1.6
 
 		var additional_attack: float = 2.9
 		if attacker_stats["ants"] < 10 && defender_stats["ants"] < 10:
@@ -441,12 +441,37 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 
 	return result
 
-func get_user_fields_array(player : int ) -> Array:
-	var array : Array = []
-	
+
+func get_user_fields_array(player: int) -> Array:
+	var array: Array = []
+
 	for x in size.x:
 		for y in size.y:
 			if fields[y][x] == player:
-				array.push_back(Vector2j.new(x,y))
-			
+				array.push_back(Vector2j.new(x, y))
+
 	return array
+
+
+func get_user_units_array(player: int) -> Array:
+	var array: Array = []
+
+	for x in size.x:
+		for y in size.y:
+			if fields[y][x] == player:
+				if !units[y][x].empty():
+					array.push_back(Vector2j.new(x, y))
+
+	return array
+
+
+func count_unit_number(player: int) -> int:
+	var number: int = 0
+
+	for x in size.x:
+		for y in size.y:
+			if fields[y][x] == player:
+				if !units[y][x].empty():
+					number += 1
+
+	return number

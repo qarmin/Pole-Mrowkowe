@@ -150,11 +150,11 @@ func get_building_to_build(type: int, level: int) -> Dictionary:
 	validate_building(type)
 	for single_building in all_buildings:
 		if single_building["type"] == type:
-			if level > 2: # Tak, to nie jest błąd
-				var res_to_build : Dictionary = single_building["to_build"][level - 1].duplicate()
+			if level > 2:  # Tak, to nie jest błąd
+				var res_to_build: Dictionary = single_building["to_build"][level - 1].duplicate()
 				Resources.remove_resources(res_to_build, single_building["to_build"][level - 2].duplicate())
 				return res_to_build
-				
+
 			return single_building["to_build"][level - 1].duplicate()
 	assert(false, "Failed to find building of type " + str(type))
 	return {}

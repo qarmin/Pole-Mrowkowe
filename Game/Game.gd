@@ -7,8 +7,7 @@ enum PLAYERS_TYPE { CPU = 0, HUMAN = 1 }
 # USER_NORMAL - Zwykły ruch gracza
 # CHOOSING_MOVE_PLACE - Użytkownik wybiera polę do którego chce przejść
 # WAITING_FOR_END_OF_MOVING - Użytkownik czeka na zakończenie przesuwania się jednostki
-# CPU_TURN - Tura komputera
-# CPU_WAIT - Czekanie po ruchu gracza, tak aby np. 10 ruchów nie było robionych w przeciągu 0.5 sekundy
+# CPU_TURN - Tura komputera, na początku usuwane, dodawane są
 
 enum STATUS { USER_NORMAL, CHOOSING_MOVE_PLACE, WAITING_FOR_END_OF_MOVING, CPU_TURN, GAME_ENDED }
 var current_status = STATUS.USER_NORMAL
@@ -60,9 +59,10 @@ var map_was_generated_before: bool = false
 # If it is ready and entered to tree, then only then everything can be initialized
 var ready_and_entered: int = 0
 
-const CPU_WAIT_TIME: float = 0.01
+const CPU_WAIT_TIME: float = 0.1
 var cpu_wait_time: float = CPU_WAIT_TIME
-var computer_removed_things : bool = false
+var computer_removed_things: bool = false
+
 
 func _process(delta: float) -> void:
 	if ready_and_entered == 2:
@@ -73,18 +73,18 @@ func _process(delta: float) -> void:
 		cpu_wait_time -= delta
 		if cpu_wait_time < 0:
 			cpu_wait_time = CPU_WAIT_TIME
-			
-			# Only once 
+
+			# Only once after
 			if !computer_removed_things:
 				computer_removed_things = true
-				var removed_something : bool = false
-				
-				ai_remove_to_costly_units()
-				ai_remove_to_costly_buildings()
+				var removed_something: bool = false
+
+				removed_something = removed_something || ai_remove_to_costly_units()
+				removed_something = removed_something || ai_remove_to_costly_buildings()
 				if !removed_something:
 					ai_add_buildings()
 					ai_add_units()
-			
+
 			if !ai_move_players():
 				end_turn(false)
 
@@ -113,7 +113,7 @@ func initialize_game() -> void:
 
 	active_players = number_of_start_players
 	current_player = 0
-	for i in range(number_of_start_players):
+	for _i in range(number_of_start_players):
 		players_activite.push_back(true)
 		players_type.push_back(PLAYERS_TYPE.CPU)
 		player_resources.push_back({"wood": 30, "gold": 30, "food": 30})
@@ -128,7 +128,7 @@ func initialize_game() -> void:
 
 	if !map_was_generated_before:
 		single_map = SingleMap.new()
-		MapCreator.create_map(single_map, Vector2j.new(3, 3), 2)
+		MapCreator.create_map(single_map, Vector2j.new(3, 3), 5)
 		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
 #		MapCreator.populate_map_realistically(single_map, number_of_start_players)
 		MapCreator.create_3d_map(single_map)
@@ -473,7 +473,7 @@ func end_turn(only_player_can_end_turn: bool) -> void:
 		# To nie jest tura gracza a on chce to kliknąć
 		return
 
-	print("Koniec tury")
+#	print("Koniec tury")
 
 	var new_turn: bool = false
 	var curr: int = current_player
@@ -559,7 +559,7 @@ func handle_destroy_unit_click() -> void:
 	# We must entirelly remove unit
 	single_map.remove_unit(selected_coordinates)
 
-	print("Removed unit " + Units.get_unit_name(type_of_unit))
+#	print("Removed unit " + Units.get_unit_name(type_of_unit))
 	gui_update_building_menu()
 	gui_update_resources()
 	pass
@@ -596,7 +596,7 @@ func handle_create_unit_click(type_of_unit: int) -> void:
 
 	unit_3d.find_node("Outfit").set_surface_material(0, MapCreator.ant_texture_array[current_player])
 
-	print("Created unit: " + Units.get_unit_name(type_of_unit))
+#	print("Created unit: " + Units.get_unit_name(type_of_unit))
 	gui_update_building_menu()
 	gui_update_resources()
 	pass
@@ -646,7 +646,7 @@ func handle_upgrade_building_click(type_of_building: int) -> void:
 
 	assert(Resources.are_all_resources_positive(player_resources[current_player]))
 
-	print("Upgrade " + Buildings.get_bulding_name(type_of_building))
+#	print("Upgrade " + Buildings.get_bulding_name(type_of_building))
 	gui_update_building_menu()
 	gui_update_resources()
 
@@ -676,7 +676,7 @@ func handle_downgrade_building_click(type_of_building: int) -> void:
 
 	assert(Resources.are_all_resources_positive(player_resources[current_player]))
 
-	print("Downgrade " + Buildings.get_bulding_name(type_of_building))
+#	print("Downgrade " + Buildings.get_bulding_name(type_of_building))
 	gui_update_building_menu()
 	gui_update_resources()
 
@@ -724,36 +724,62 @@ func restore_ant_movement_ability():
 				var unit_type = single_map.units[y][x]["type"]
 				single_map.units[y][x]["stats"]["number_of_movement"] = Units.get_default_stats(unit_type, 1)["number_of_movement"]
 
+
 func _exit_tree():
 	for i in ant_movement:
 		i.queue_free()
 	terrain_overlay_node.queue_free()
 	unit_overlay_node.queue_free()
 	single_map.reset()
+
+
 #	for i in ant_movement:
 #		i.queue_free()
 
-func get_next_turn_resources(player : int) -> Dictionary:
-	var to_return : Dictionary = player_resources[player].duplicate(true)
+
+func get_next_turn_resources(player: int) -> Dictionary:
+	var to_return: Dictionary = player_resources[player].duplicate(true)
 	Resources.add_resources(to_return, single_map.calculate_end_turn_resources_change(player))
 	return to_return
 
+
 func ai_add_units() -> void:
-	print("Adding Units")
-	pass
-	
-func ai_add_buildings() -> void:
-	print("Adding buildings")
-	var temp_res : Dictionary = player_resources[current_player].duplicate(true)
-	Resources.remove_resources(temp_res,{"wood":50,"food":50,"gold":50})
+#	print("Adding Units")
+	var temp_res: Dictionary = player_resources[current_player].duplicate(true)
+	Resources.remove_resources(temp_res, {"wood": 100, "food": 100, "gold": 100})
 
 	if !Resources.are_all_resources_positive(temp_res):
-		return # No resources to add building
-	
+		return  # No resources to add unit
+
+	var all_coordinates: Array = single_map.get_user_fields_array(current_player)
+
+	for _i in range(3):
+		var coordinate: Vector2j = all_coordinates[randi() % all_coordinates.size()]
+		var unit_to_create: int = randi() % Units.TYPES_OF_ANTS.ANT_MAX
+
+		if single_map.units[coordinate.y][coordinate.x].empty():
+			temp_res = player_resources[current_player].duplicate(true)
+			Resources.remove_resources(temp_res, Units.get_unit_to_build(unit_to_create, 1))
+
+			if Resources.are_all_resources_positive(temp_res):
+				selected_coordinates = coordinate
+
+				handle_create_unit_click(unit_to_create)
+				print_cpu_things("## Created Unit")
+
+
+func ai_add_buildings() -> void:
+#	print("Adding buildings")
+	var temp_res: Dictionary = player_resources[current_player].duplicate(true)
+	Resources.remove_resources(temp_res, {"wood": 50, "food": 50, "gold": 50})
+
+	if !Resources.are_all_resources_positive(temp_res):
+		return  # No resources to add building
+
 	# Tylko buduj jeśli wszystkie surowce są na plusie
-	var change_resources : Dictionary = single_map.calculate_end_turn_resources_change(current_player)
+	var change_resources: Dictionary = single_map.calculate_end_turn_resources_change(current_player)
 	if Resources.are_all_resources_positive(change_resources):
-		var smallest_number : int = 1000000
+		var smallest_number: int = 1000000
 		var building_to_build = Buildings.TYPES_OF_BUILDINGS.ANTHILL
 		if change_resources["food"] < smallest_number:
 			building_to_build = Buildings.TYPES_OF_BUILDINGS.FARM
@@ -765,128 +791,142 @@ func ai_add_buildings() -> void:
 			building_to_build = Buildings.TYPES_OF_BUILDINGS.GOLD_MINE
 			smallest_number = change_resources["gold"]
 		assert(smallest_number != 1000000)
-			
-		var all_coordinates : Array = single_map.get_user_fields_array(current_player)
+
+		var all_coordinates: Array = single_map.get_user_fields_array(current_player)
 		#
-		for i in range(5):
-			var coordinate : Vector2j = all_coordinates[randi() % all_coordinates.size()]
-			
+		for _i in range(5):
+			var coordinate: Vector2j = all_coordinates[randi() % all_coordinates.size()]
+
 			if single_map.building_get_place_for_build(coordinate) != -1:
 				# Póki co się buduje, nie ulepsza
-				if !single_map.building_is_built(coordinate,building_to_build):
-					selected_coordinates = coordinate
-					handle_upgrade_building_click(building_to_build)
-					print("## Built Building")
-					break
-		
-	
-	
+				if !single_map.building_is_built(coordinate, building_to_build):
+					temp_res = player_resources[current_player].duplicate(true)
+					Resources.remove_resources(temp_res, Buildings.get_building_to_build(building_to_build, 1))
+
+					if Resources.are_all_resources_positive(temp_res):
+						selected_coordinates = coordinate
+
+						handle_upgrade_building_click(building_to_build)
+						print_cpu_things("## Built Building")
+						break
+
+
 # Usuwa budynki z pola gracza, zwraca true, jeśli coś usunęło
 # MUSI zostać wykonany po usunięciu mrówek
 func ai_remove_to_costly_buildings() -> bool:
-	## 1. Stwórz listę wszystkich budynków gracza na mapie
-	## 2. Usuwaj wszystkie budynki, które nie produkują zasobów, dopóki nie zdobyto dodatnich zasobów
-	## 3. Na wszelki wypadek usuń jeden dodatkowo budynek nie produkujący zasobów
-	
-	var removed_something : bool = false
+	var removed_something: bool = false
 
 	# Nie potrzeba usuwać budynku
 	if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
 		return removed_something
-	
+
 	## Zapisuje do tablicy informacje w formie {pozycja : typ_budynek}
-	var player_buildings : Array = []
-	var player_buildings_create_resources : Array = []
-	
+	var player_buildings: Array = []
+	var player_buildings_create_resources: Array = []
+
 	for y in single_map.size.y:
 		for x in single_map.size.x:
 			if single_map.fields[y][x] == current_player:
 				for building in single_map.buildings[y][x]:
-					if building == Buildings.TYPES_OF_BUILDINGS.BARRACKS || building == Buildings.TYPES_OF_BUILDINGS.PILE:
-						player_buildings.append({Vector2j.new(x,y):building})
+					if building == Buildings.TYPES_OF_BUILDINGS.ANTHILL:
+						pass  # Do nothing, cannot remove anthill
+					elif building == Buildings.TYPES_OF_BUILDINGS.BARRACKS || building == Buildings.TYPES_OF_BUILDINGS.PILE:
+						player_buildings.append({Vector2j.new(x, y): building})
 					else:
-						player_buildings_create_resources.append({Vector2j.new(x,y):building})
-	
+						player_buildings_create_resources.append({Vector2j.new(x, y): building})
+
 	for index in player_buildings.size():
-		var data : Dictionary = player_buildings[index]
-		var coordinates : Vector2j = data.keys()[0]
-		var type : int = data.values()[0]
-		
+		var data: Dictionary = player_buildings[index]
+		var coordinates: Vector2j = data.keys()[0]
+		var type: int = data.values()[0]
+
 		removed_something = true
-		print("## REMOVED BUILDING")
-		
+		print_cpu_things("## REMOVED BUILDING PILES/BARRACKS")
+
 		selected_coordinates = coordinates
 		handle_downgrade_building_click(type)
-		
+
 		if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
 			return removed_something
-	
-#	# TODO Remove also normal buildings
-#	for index in player_buildings_create_resources.size():
-#		var data : Dictionary = player_buildings_create_resources[index]
-#		var coordinates : Vector2j = data.keys()[0]
-#		var type : int = data.values()[0]
-#
-#		removed_something = true
-#
-#		selected_coordinates = coordinates
-#		handle_downgrade_building_click(type)
-#
-#		if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
-#			return removed_something
-	
+
+	if single_map.count_unit_number(current_player) >= 2:
+		return removed_something
+
+	for index in player_buildings_create_resources.size():
+		var data: Dictionary = player_buildings_create_resources[index]
+		var coordinates: Vector2j = data.keys()[0]
+		var type: int = data.values()[0]
+
+		removed_something = true
+		print_cpu_things("## REMOVED RESOURCE BUILDINGS")
+
+		selected_coordinates = coordinates
+		handle_downgrade_building_click(type)
+
+		if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
+			return removed_something
+
 	return removed_something
-	
+
+
 # Usuwa jednostki z pola gracza, zwraca true, jeśli coś usunęło
 func ai_remove_to_costly_units() -> bool:
-	var removed_something : bool = false
+	var removed_something: bool = false
 
 	## Zapisuje do tablicy informacje w formie {pozycja : typ_mrówki}
-	var player_units : Array = []
+	var player_units: Array = []
 
 	# Nie potrzeba usuwać jednostek
 	if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
 		return removed_something
-	
+
 	for y in single_map.size.y:
 		for x in single_map.size.x:
 			if single_map.fields[y][x] == current_player:
 				if !single_map.units[y][x].empty():
-					player_units.append(Vector2j.new(x,y))
-	
+					player_units.append(Vector2j.new(x, y))
+
 	# Nie trzeba usuwać mrówek jeśli jest ich 2 lub mniej
-	if player_units.size() > 2:
+	if player_units.size() <= 2:
 		return removed_something
-	
-	for index in (player_units.size() - 2):
-		var coordinates : Vector2j = player_units[index]
-		
+
+	for index in player_units.size() - 2:
+		var coordinates: Vector2j = player_units[index]
+
 		selected_coordinates = coordinates
-		
+
 		handle_destroy_unit_click()
-		
+
 		removed_something = true
-		print("## REMOVED UNIT")
-		
+		print_cpu_things("## REMOVED UNIT")
+
 		if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
 			return removed_something
-	
+
 	return removed_something
+
 
 # Return if moved unit
 func ai_move_players() -> bool:
-	return false
+	var units: Array = single_map.get_user_units_array(current_player)
 
-# Sprawdza i wyszukuje jakie budynki jakie może wybudować
-# Wyszukuje te surowce, których miałby najmniej i je buduje
-func ai_check_which_buildings_build() -> void:
-	## 1. Wykonuje się, tylko i wyłącznie jeśli nie usunięto jednostki lub 
-	
-	pass
+	var unit_have_movement: bool = false
+
+	for index in units.size():
+		var coordinates: Vector2j = units[index]
+		var unit = single_map.units[coordinates.y][coordinates.x]
+		if single_map.units[coordinates.y][coordinates.x]["stats"]["number_of_movement"] > 0:
+			single_map.units[coordinates.y][coordinates.x]["stats"]["number_of_movement"] -= 1
+			print("Moving unit TODO")
+
+	return unit_have_movement
+
 
 # Pobiera informacje o najbliższych hexach z którymi sąsiaduje dany
 func ai_get_array_of_closest_fields() -> Array:
 	return []
+
+
 #	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od wybranych
 #	var current_element: Vector2j = Vector2j.new(0, 0)
 #	var current_value: int = 0
@@ -940,5 +980,10 @@ func ai_get_array_of_closest_fields() -> Array:
 #
 #	return smallest_array
 
-func ai_check_if_opponent_is_near_anthill() :
+
+func ai_check_if_opponent_is_near_anthill():
 	pass
+
+
+func print_cpu_things(text: String) -> void:
+	print(text)
