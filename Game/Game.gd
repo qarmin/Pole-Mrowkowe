@@ -183,11 +183,13 @@ func connect_clickable_signals() -> void:
 	# Łączenie każdego pola oraz mrówki na mapie z funkcją wyświelającą
 	for single_hex in $Map.get_children():
 		assert(single_hex.get_name().begins_with("SingleHex"))
-		assert(single_hex.connect("hex_clicked", self, "hex_clicked") == OK)
+		if single_hex.connect("hex_clicked", self, "hex_clicked") != OK:
+			assert(false)
 		for thing in single_hex.get_children():
 			if !thing.get_name().begins_with("ANT"):
 				continue
-			assert(thing.connect("ant_clicked", self, "ant_clicked") == OK)
+			if thing.connect("ant_clicked", self, "ant_clicked") != OK:
+				assert(false)
 
 	if $HUD/HUD/Buildings.connect("upgrade_clicked", self, "handle_upgrade_building_click") != OK:
 		assert(false)
@@ -204,8 +206,11 @@ func connect_clickable_signals() -> void:
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
 	round_node.connect("try_to_end_turn_clicked", self, "end_turn", [true])
 
-	assert(end_turn_dialog.connect("confirmed", self, "end_turn", [true]) == OK)
-	assert(end_game_dialog.connect("confirmed", self, "end_game") == OK)
+	if end_turn_dialog.connect("confirmed", self, "end_turn", [true])  != OK:
+		assert(false)
+
+	if end_game_dialog.connect("confirmed", self, "end_game")  != OK:
+		assert(false)
 
 
 func end_game() -> void:
@@ -599,7 +604,8 @@ func handle_create_unit_click(type_of_unit: int) -> void:
 	$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).add_child(unit_3d)
 
 	# Connect
-	assert(unit_3d.connect("ant_clicked", self, "ant_clicked") == OK)
+	if unit_3d.connect("ant_clicked", self, "ant_clicked") != OK:
+		assert(false)
 
 	single_map.add_unit(selected_coordinates, type_of_unit, 1)
 
