@@ -383,9 +383,12 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 		units[start_c.y][start_c.x] = {}
 		result.result = FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
 		fields[end_c.y][end_c.x] = attacker_id
-		if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
-			result.defeated_enemy = true
-			building_remove(Vector2j.new(end_c.x, end_c.y), Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+
+		# Don't remove self anthill, just remove anthill of enemy
+		if attacker_id != defender_id:
+			if buildings[end_c.y][end_c.x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
+				result.defeated_enemy = true
+				building_remove(Vector2j.new(end_c.x, end_c.y), Buildings.TYPES_OF_BUILDINGS.ANTHILL)
 	# Walka
 	else:
 		var attacker_stats: Dictionary = units[start_c.y][start_c.x]["stats"].duplicate(true)
@@ -442,13 +445,17 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 	return result
 
 
-func get_user_fields_array(player: int) -> Array:
+func get_user_fields_array(player: int, only_create_soldiers: bool = false) -> Array:
 	var array: Array = []
 
 	for x in size.x:
 		for y in size.y:
 			if fields[y][x] == player:
-				array.push_back(Vector2j.new(x, y))
+				if only_create_soldiers:
+					if building_is_built(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL) || building_is_built(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS):
+						array.push_back(Vector2j.new(x, y))
+				else:
+					array.push_back(Vector2j.new(x, y))
 
 	return array
 

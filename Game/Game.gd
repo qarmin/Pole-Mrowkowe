@@ -25,6 +25,7 @@ onready var round_label = $HUD/HUD/Round/Label
 onready var end_turn_dialog: ConfirmationDialog = $HUD/HUD/EndTurnDialog
 onready var end_game_color_rect: ColorRect = $HUD/HUD/EndGameColorRect
 onready var end_game_dialog: AcceptDialog = $HUD/HUD/EndGameDialog
+onready var start_game_campaign_dialog: AcceptDialog = $HUD/HUD/StartGameCampaignDialog
 
 var attacked_icon = load("res://HUD/AttackedIcon/AttackedIcon.tscn")
 
@@ -59,7 +60,7 @@ var map_was_generated_before: bool = false
 # If it is ready and entered to tree, then only then everything can be initialized
 var ready_and_entered: int = 0
 
-const CPU_WAIT_TIME: float = 0.1
+const CPU_WAIT_TIME: float = 0.2
 var cpu_wait_time: float = CPU_WAIT_TIME
 var computer_removed_things: bool = false
 
@@ -129,10 +130,15 @@ func initialize_game() -> void:
 	if !map_was_generated_before:
 		single_map = SingleMap.new()
 		MapCreator.create_map(single_map, Vector2j.new(3, 3), 5)
-		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
-#		MapCreator.populate_map_realistically(single_map, number_of_start_players)
+#		MapCreator.populate_map_randomly_playable(single_map, 50, number_of_start_players)
+		MapCreator.populate_map_realistically(single_map, number_of_start_players)
 		MapCreator.create_3d_map(single_map)
 		add_child(single_map.map)
+
+	if GameSettings.message != "":
+		start_game_campaign_dialog.set_text(GameSettings.message)
+		start_game_campaign_dialog.show()
+		GameSettings.message = ""
 
 	# Ustawianie tutaj wielkości dozwolonego przez kamerę obszaru
 	$Camera.set_camera_max_positions(single_map.size)
@@ -183,11 +189,16 @@ func connect_clickable_signals() -> void:
 				continue
 			assert(thing.connect("ant_clicked", self, "ant_clicked") == OK)
 
-	assert($HUD/HUD/Buildings.connect("upgrade_clicked", self, "handle_upgrade_building_click") == OK)
-	assert($HUD/HUD/Buildings.connect("downgrade_clicked", self, "handle_downgrade_building_click") == OK)
-	assert($HUD/HUD/Buildings.connect("create_unit_clicked", self, "handle_create_unit_click") == OK)
-	assert($HUD/HUD/Units.connect("destroy_unit_clicked", self, "handle_destroy_unit_click") == OK)
-	assert($HUD/HUD/Units.connect("move_unit_clicked", self, "handle_move_unit_click") == OK)
+	if $HUD/HUD/Buildings.connect("upgrade_clicked", self, "handle_upgrade_building_click") != OK:
+		assert(false)
+	if $HUD/HUD/Buildings.connect("downgrade_clicked", self, "handle_downgrade_building_click") != OK:
+		assert(false)
+	if $HUD/HUD/Buildings.connect("create_unit_clicked", self, "handle_create_unit_click") != OK:
+		assert(false)
+	if $HUD/HUD/Units.connect("destroy_unit_clicked", self, "handle_destroy_unit_click") != OK:
+		assert(false)
+	if $HUD/HUD/Units.connect("move_unit_clicked", self, "handle_move_unit_click") != OK:
+		assert(false)
 
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
@@ -242,8 +253,9 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 			current_status = type_of_attack
 
 			# Mrowisko musi zostać usunięte jeśli istnieje
-			if $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).has_node(anthill_name):
-				$Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).get_node(anthill_name).queue_free()
+			if result.defeated_enemy:
+				if $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).has_node(anthill_name):
+					$Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).get_node(anthill_name).queue_free()
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT:
 			var end_ant: Spatial = get_unit_from_field(end_c)
 			end_hex.remove_child(end_ant)
@@ -258,8 +270,9 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 			current_status = type_of_attack
 
 			# Mrowisko musi zostać usunięte jeśli istnieje
-			if $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).has_node(anthill_name):
-				$Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).get_node(anthill_name).queue_free()
+			if result.defeated_enemy:
+				if $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).has_node(anthill_name):
+					$Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).get_node(anthill_name).queue_free()
 		SingleMap.FIGHT_RESULTS.DEFENDER_WON:
 			get_unit_from_field(start_c).queue_free()
 			current_status = type_of_attack
@@ -746,12 +759,12 @@ func get_next_turn_resources(player: int) -> Dictionary:
 func ai_add_units() -> void:
 #	print("Adding Units")
 	var temp_res: Dictionary = player_resources[current_player].duplicate(true)
-	Resources.remove_resources(temp_res, {"wood": 100, "food": 100, "gold": 100})
+	Resources.remove_resources(temp_res, {"wood": 50, "food": 50, "gold": 50})
 
 	if !Resources.are_all_resources_positive(temp_res):
 		return  # No resources to add unit
 
-	var all_coordinates: Array = single_map.get_user_fields_array(current_player)
+	var all_coordinates: Array = single_map.get_user_fields_array(current_player, true)
 
 	for _i in range(3):
 		var coordinate: Vector2j = all_coordinates[randi() % all_coordinates.size()]
@@ -761,11 +774,16 @@ func ai_add_units() -> void:
 			temp_res = player_resources[current_player].duplicate(true)
 			Resources.remove_resources(temp_res, Units.get_unit_to_build(unit_to_create, 1))
 
-			if Resources.are_all_resources_positive(temp_res):
+			var temp_res_2 = single_map.calculate_end_turn_resources_change(current_player)
+			Resources.remove_resources(temp_res_2, Units.get_unit_usage(unit_to_create, 1))
+
+			if Resources.are_all_resources_positive(temp_res) && Resources.are_all_resources_positive(temp_res_2):
 				selected_coordinates = coordinate
 
 				handle_create_unit_click(unit_to_create)
-				print_cpu_things("## Created Unit")
+
+
+#				print_cpu_things("## Created Unit")
 
 
 func ai_add_buildings() -> void:
@@ -807,7 +825,7 @@ func ai_add_buildings() -> void:
 						selected_coordinates = coordinate
 
 						handle_upgrade_building_click(building_to_build)
-						print_cpu_things("## Built Building")
+#						print_cpu_things("## Built Building")
 						break
 
 
@@ -841,7 +859,7 @@ func ai_remove_to_costly_buildings() -> bool:
 		var type: int = data.values()[0]
 
 		removed_something = true
-		print_cpu_things("## REMOVED BUILDING PILES/BARRACKS")
+#		print_cpu_things("## REMOVED BUILDING PILES/BARRACKS")
 
 		selected_coordinates = coordinates
 		handle_downgrade_building_click(type)
@@ -858,7 +876,7 @@ func ai_remove_to_costly_buildings() -> bool:
 		var type: int = data.values()[0]
 
 		removed_something = true
-		print_cpu_things("## REMOVED RESOURCE BUILDINGS")
+#		print_cpu_things("## REMOVED RESOURCE BUILDINGS")
 
 		selected_coordinates = coordinates
 		handle_downgrade_building_click(type)
@@ -898,7 +916,7 @@ func ai_remove_to_costly_units() -> bool:
 		handle_destroy_unit_click()
 
 		removed_something = true
-		print_cpu_things("## REMOVED UNIT")
+#		print_cpu_things("## REMOVED UNIT")
 
 		if Resources.are_all_resources_positive(get_next_turn_resources(current_player)):
 			return removed_something
@@ -914,75 +932,138 @@ func ai_move_players() -> bool:
 
 	for index in units.size():
 		var coordinates: Vector2j = units[index]
-		var unit = single_map.units[coordinates.y][coordinates.x]
 		if single_map.units[coordinates.y][coordinates.x]["stats"]["number_of_movement"] > 0:
-			single_map.units[coordinates.y][coordinates.x]["stats"]["number_of_movement"] -= 1
-			print("Moving unit TODO")
+#			print("Moving unit TODO")
+			var array_of_fields: Array = ai_get_array_of_closest_fields(coordinates)
+			if !array_of_fields.empty():
+				selected_coordinates = coordinates
+				move_unit_3d(array_of_fields[array_of_fields.size() - 1], false)
+				unit_have_movement = true
+				break  # Only one movement - at time, need to cooldown
 
 	return unit_have_movement
 
 
 # Pobiera informacje o najbliższych hexach z którymi sąsiaduje dany
-func ai_get_array_of_closest_fields() -> Array:
-	return []
+func ai_get_array_of_closest_fields(unit_coordinates: Vector2j) -> Array:
+	var NoneValue: int = -10000
 
+	# Array to check
 
-#	var smallest_array: Array = []  # Tablica z najmniejszymi odległościami od wybranych
-#	var current_element: Vector2j = Vector2j.new(0, 0)
-#	var current_value: int = 0
-#
-#	for i in range(fields.size()):
-#		smallest_array.append([])
-#		for _j in range(fields[i].size()):
-#			smallest_array[i].append(-1)
-#
-#	var checked: Array = []
-#	var to_check: Array = []
-#	var to_check_value: Array = []
-#
-#	for r in players:
-#		to_check.append(r)
-#		to_check_value.append(0)
-#		smallest_array[r.y][r.x] = 0
-#
-#		while to_check.size() > 0:
-#			current_element = to_check.pop_front()
-#			current_value = to_check_value.pop_front()
-#
-#			#print("Sprawdzam teraz punkt " + str(current_element.x) + " " + str(current_element.y))
-#
-#			var help_array = [[[0, -1], [1, -1], [-1, 0], [1, 0], [0, 1], [1, 1]], [[-1, -1], [0, -1], [-1, 0], [1, 0], [-1, 1], [0, 1]]]
-#
-#			for h in [0, 1]:
-#				if current_element.y % 2 == ((h + 1) % 2):
-#					for i in range(6):
-#						if (
-#							(current_element.x + help_array[h][i][0] >= 0)
-#							&& (current_element.x + help_array[h][i][0] < smallest_array[0].size())
-#							&& (current_element.y + help_array[h][i][1] >= 0)
-#							&& (current_element.y + help_array[h][i][1] < smallest_array.size())
-#						):
-#							var cep_x = current_element.x + help_array[h][i][0]
-#							var cep_y = current_element.y + help_array[h][i][1]
-#							if !Vector2j.is_in_array(checked, Vector2j.new(cep_x, cep_y)) && !Vector2j.is_in_array(to_check, Vector2j.new(cep_x, cep_y)):
-#								if fields[cep_y][cep_x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
-#									if smallest_array[cep_y][cep_x] == -1 || smallest_array[cep_y][cep_x] > current_value:
-#										smallest_array[cep_y][cep_x] = current_value + 1
-#										to_check.append(Vector2j.new(cep_x, cep_y))
-#										to_check_value.append(current_value + 1)
-#
-#			assert(!Vector2j.is_in_array(checked, current_element))
-#
-#			checked.append(current_element)
-#		checked = []
-#		to_check = []
-#		to_check_value = []
-#
-#	return smallest_array
+	var map_created: Array = []
 
+	for y in single_map.size.y:
+		map_created.append([])
+		for x in single_map.size.x:
+			var value: int = 0
+			if single_map.fields[y][x] == SingleMap.FIELD_TYPE.NO_FIELD:
+				value = NoneValue
+			else:
+				# Cannot move to field when already unit is there
+				if single_map.fields[y][x] == current_player && !single_map.units[y][x].empty():
+					value = NoneValue
+				else:
+					value = 10000000
 
-func ai_check_if_opponent_is_near_anthill():
-	pass
+			map_created[y].append(value)
+			pass
+
+	map_created[unit_coordinates.y][unit_coordinates.x] = 0
+
+#	single_map.print_map(map_created)
+
+	var to_check: Array = [unit_coordinates]
+	var to_check_value: Array = [0]
+
+	var help_array = [[[0, -1], [1, -1], [-1, 0], [1, 0], [0, 1], [1, 1]], [[-1, -1], [0, -1], [-1, 0], [1, 0], [-1, 1], [0, 1]]]
+
+	while !to_check.empty():
+		var current_element: Vector2j = to_check.pop_front()
+		var current_value: int = to_check_value.pop_front()
+
+		for h in [0, 1]:
+			if current_element.y % 2 == ((h + 1) % 2):
+				for i in range(6):
+					if (
+						(current_element.x + help_array[h][i][0] >= 0)
+						&& (current_element.x + help_array[h][i][0] < map_created[0].size())
+						&& (current_element.y + help_array[h][i][1] >= 0)
+						&& (current_element.y + help_array[h][i][1] < map_created.size())
+					):
+						var cep_x = current_element.x + help_array[h][i][0]
+						var cep_y = current_element.y + help_array[h][i][1]
+
+						if map_created[cep_y][cep_x] > current_value:
+							map_created[cep_y][cep_x] = current_value + 1
+							to_check.append(Vector2j.new(cep_x, cep_y))
+							to_check_value.append(current_value + 1)
+
+	# Gdzie się znajduje najbliższy
+	var closest_enemy_terrain: Vector2j
+	var closest_terrain_value: int = 10000
+
+	for y in single_map.size.y:
+		for x in single_map.size.x:
+			if single_map.fields[y][x] != current_player && map_created[y][x] != NoneValue:
+				if map_created[y][x] < closest_terrain_value:
+					closest_enemy_terrain = Vector2j.new(x, y)
+					closest_terrain_value = map_created[y][x]
+				elif map_created[y][x] == closest_terrain_value:  # Allot to choose more random fields
+					if randi() % 2:
+						closest_enemy_terrain = Vector2j.new(x, y)
+						closest_terrain_value = map_created[y][x]
+
+#	single_map.print_map(map_created)
+
+	# Przeciwnik nie może nigdzie się ruszyć bo jest przyblokowany przez inne jednostki
+	if closest_terrain_value == 10000:
+#		print("Exiting")
+		return []
+
+#	print("Najbliższy przeciwnik " + closest_enemy_terrain.to_string()  + "         " + str(closest_terrain_value))
+
+	var road_to_end: Array = [closest_enemy_terrain]
+
+	to_check = [closest_enemy_terrain]
+	to_check_value = [closest_terrain_value]
+
+	while !to_check.empty():
+		var current_element: Vector2j = to_check.pop_front()
+		var current_value: int = to_check_value.pop_front()
+
+		var elements_to_choose: Array = []
+
+		for h in [0, 1]:
+			if current_element.y % 2 == ((h + 1) % 2):
+				for i in range(6):
+					if (
+						(current_element.x + help_array[h][i][0] >= 0)
+						&& (current_element.x + help_array[h][i][0] < map_created[0].size())
+						&& (current_element.y + help_array[h][i][1] >= 0)
+						&& (current_element.y + help_array[h][i][1] < map_created.size())
+					):
+						var cep_x = current_element.x + help_array[h][i][0]
+						var cep_y = current_element.y + help_array[h][i][1]
+
+						if map_created[cep_y][cep_x] == current_value - 1:
+							elements_to_choose.append(Vector2j.new(cep_x, cep_y))
+
+		if !elements_to_choose.empty():
+			var random_element: Vector2j = elements_to_choose[randi() % elements_to_choose.size()]
+#			print("CLOSEST" + closest_enemy_terrain.to_string())
+#			print("HOW long" + str(current_value))
+#
+#			print("RANDOM " + random_element.to_string())
+
+			if current_value != 1:
+				road_to_end.append(random_element)
+				to_check.append(random_element)
+				to_check_value.append(current_value - 1)
+
+#	for i in road_to_end.size():
+#		print("Step " + str(i) + " " + road_to_end[i].to_string())
+
+	return road_to_end
 
 
 func print_cpu_things(text: String) -> void:
