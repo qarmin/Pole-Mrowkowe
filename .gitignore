@@ -13,6 +13,7 @@ GeneratedMap.tscn
 NoGIT/
 GeneratedPreview.png
 save_slot*
+.godot/
 
 # Rust 
 target/

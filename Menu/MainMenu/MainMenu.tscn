@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Menu/MainMenu/ExitGame.gd" type="Script" id=1]
 [ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Menu/MainMenu/Options.gd" type="Script" id=5]
 [ext_resource path="res://Menu/MainMenu/Benchmark.gd" type="Script" id=6]
 [ext_resource path="res://Menu/MainMenu/Campaign.gd" type="Script" id=7]
+[ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.0243902, 0.0243902, 0.0243902, 1, 1, 1, 1, 1 )
@@ -14,6 +15,10 @@ colors = PoolColorArray( 0.0243902, 0.0243902, 0.0243902, 1, 1, 1, 1, 1 )
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 width = 1
+
+[sub_resource type="DynamicFont" id=3]
+size = 29
+font_data = ExtResource( 8 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -104,6 +109,32 @@ anchor_right = 1.0
 anchor_bottom = 0.9
 texture = SubResource( 2 )
 expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.012
+anchor_top = 0.868
+anchor_right = 0.238
+anchor_bottom = 1.0
+margin_right = -38.912
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Version" type="Label" parent="VBoxContainer"]
+margin_right = 335.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "Version 0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Author" type="Label" parent="VBoxContainer"]
+margin_top = 40.0
+margin_right = 335.0
+margin_bottom = 76.0
+custom_fonts/font = SubResource( 3 )
+text = "Created by Rafał Mikrut (Qarmin)"
 
 [connection signal="pressed" from="Buttons/Campaign" to="Buttons/Campaign" method="_on_Campaign_pressed"]
 [connection signal="pressed" from="Buttons/Single Game" to="Buttons/Single Game" method="_on_Single_Game_pressed"]

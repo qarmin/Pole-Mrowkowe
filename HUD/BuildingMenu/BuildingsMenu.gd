@@ -48,8 +48,10 @@ func initialize_gui() -> void:
 		node.get_node("AspectRatioContainer/Icon").set_texture(load(building_icon[i]))
 
 		# Connect downgrade and upgrade buttons
-		assert(node.find_node("Upgrade").connect("button_up", self, "handle_upgrade_click", [types_of_buildings[i]]) == OK)
-		assert(node.find_node("Downgrade").connect("button_up", self, "handle_downgrade_click", [types_of_buildings[i]]) == OK)
+		if node.find_node("Upgrade").connect("button_up", self, "handle_upgrade_click", [types_of_buildings[i]]) != OK:
+			assert(false)
+		if node.find_node("Downgrade").connect("button_up", self, "handle_downgrade_click", [types_of_buildings[i]]) != OK:
+			assert(false)
 
 	for i in range(Units.TYPES_OF_ANTS.ANT_MAX):
 		var node: Node = find_node("Unit" + str(i + 1)).get_node("VBox")
@@ -58,7 +60,8 @@ func initialize_gui() -> void:
 		node.get_node("AspectRatioContainer/Icon").set_texture(load(units_icon[i]))
 
 		# Connect downgrade and upgrade buttons
-		assert(node.find_node("CreateUnit").connect("button_up", self, "handle_create_unit_click", [types_of_units[i]]) == OK)
+		if node.find_node("CreateUnit").connect("button_up", self, "handle_create_unit_click", [types_of_units[i]]) != OK:
+			assert(false)
 
 
 func handle_create_unit_click(type_of_unit: int) -> void:
