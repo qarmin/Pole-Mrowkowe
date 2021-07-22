@@ -1,4 +1,4 @@
-extends Camera
+extends Camera3D
 
 # Prędkość rozglądania się za pomocą kursora myszy
 const LOOKAROUND_SPEED: float = 0.0025
@@ -10,8 +10,8 @@ const SCROLL_SPEED: float = 1.0
 const MOVEMENT_SPEED: float = 10.0
 
 # Używane w obracaniu obrazem
-onready var rot_x: float = 0.0
-onready var rot_y: float = 0.0
+@onready var rot_x: float = 0.0
+@onready var rot_y: float = 0.0
 
 var projection_changed: bool = false
 
@@ -48,25 +48,25 @@ func _input(event) -> void:
 	if event is InputEventKey:
 		if event.is_pressed():
 			if event.get_scancode() == KEY_R:  # Reset Kamery
-				set_translation(Vector3(-0.443, 7.127, 5.624))
+				set_position(Vector3(-0.443, 7.127, 5.624))
 				look_at(Vector3(0, 0, 0), Vector3(0, 1, 0))
 				rot_x = get_rotation().y
 				rot_y = get_rotation().x
 			if event.get_scancode() == KEY_P:  # Zmiana projekcji
 				if !projection_changed:
-					if get_projection() == Camera.PROJECTION_PERSPECTIVE:
-						set_projection(Camera.PROJECTION_ORTHOGONAL)
+					if get_projection() == Camera3D.PROJECTION_PERSPECTIVE:
+						set_projection(Camera3D.PROJECTION_ORTHOGONAL)
 					else:
-						set_projection(Camera.PROJECTION_PERSPECTIVE)
+						set_projection(Camera3D.PROJECTION_PERSPECTIVE)
 					projection_changed = true
 			if event.get_scancode() == KEY_UP || event.get_scancode() == KEY_W:
-				movement_keys_pressed |= CAMERA_MOVEMENT.UP
+				movement_keys_pressed |= int(CAMERA_MOVEMENT.UP)
 			elif event.get_scancode() == KEY_DOWN || event.get_scancode() == KEY_S:
-				movement_keys_pressed |= CAMERA_MOVEMENT.DOWN
+				movement_keys_pressed |= int(CAMERA_MOVEMENT.DOWN)
 			if event.get_scancode() == KEY_LEFT || event.get_scancode() == KEY_A:
-				movement_keys_pressed |= CAMERA_MOVEMENT.LEFT
+				movement_keys_pressed |= int(CAMERA_MOVEMENT.LEFT)
 			elif event.get_scancode() == KEY_RIGHT || event.get_scancode() == KEY_D:
-				movement_keys_pressed |= CAMERA_MOVEMENT.RIGHT
+				movement_keys_pressed |= int(CAMERA_MOVEMENT.RIGHT)
 
 		else:
 			if event.get_scancode() == KEY_P:
@@ -83,22 +83,22 @@ func _input(event) -> void:
 	# Mysz - kliknięcie
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			if event.get_button_mask() == BUTTON_MASK_MIDDLE:  # Środokowy przycisk myszy - Klik
+			if event.get_button_mask() == MOUSE_BUTTON_MASK_MIDDLE:  # Środokowy przycisk myszy - Klik
 				pass
 			if event.get_button_mask() == 8:  # Scroll w górę
-				if get_projection() == Camera.PROJECTION_PERSPECTIVE:
+				if get_projection() == Camera3D.PROJECTION_PERSPECTIVE:
 					move_camera(CAMERA_MOVEMENT.FORWARD_SCROLL)
 				pass
 			if event.get_button_mask() == 16:  # Scroll w dół
-				if get_projection() == Camera.PROJECTION_PERSPECTIVE:
+				if get_projection() == Camera3D.PROJECTION_PERSPECTIVE:
 					move_camera(CAMERA_MOVEMENT.BACK_SCROLL)
 				pass
 
 	# Mysz - poruszanie
 	if event is InputEventMouseMotion:
-		if event.get_button_mask() == BUTTON_LEFT:  # Lewy przycisk myszy
+		if event.get_button_mask() ==  MOUSE_BUTTON_LEFT:  # Lewy przycisk myszy
 			pass
-		if event.get_button_mask() == BUTTON_RIGHT:  # Prawy przycisk myszy - na chwilę obraca kamerą wokół własnej osi Y
+		if event.get_button_mask() == MOUSE_BUTTON_RIGHT:  # Prawy przycisk myszy - na chwilę obraca kamerą wokół własnej osi Y
 			rot_x -= event.relative.x * LOOKAROUND_SPEED
 			rot_y -= event.relative.y * LOOKAROUND_SPEED
 
@@ -111,26 +111,26 @@ func _input(event) -> void:
 			rotate_object_local(Vector3(1, 0, 0), rot_y)  # then rotate in X
 
 
-func move_camera(roman: int, delta: float = -1) -> void:
+func move_camera(roman: int, delta: float = -1.0) -> void:
 	if delta < 0:
 		delta = 1.0
 
 	var move_vec_local: Vector3 = Vector3()
 	var move_vec_global: Vector3 = Vector3()
 
-	if roman & CAMERA_MOVEMENT.BACK_SCROLL == CAMERA_MOVEMENT.BACK_SCROLL:
+	if roman & int(CAMERA_MOVEMENT.BACK_SCROLL) == int(CAMERA_MOVEMENT.BACK_SCROLL):
 		move_vec_local.z += SCROLL_SPEED
-	elif roman & CAMERA_MOVEMENT.FORWARD_SCROLL == CAMERA_MOVEMENT.FORWARD_SCROLL:
+	elif roman & int(CAMERA_MOVEMENT.FORWARD_SCROLL) == int(CAMERA_MOVEMENT.FORWARD_SCROLL):
 		move_vec_local.z -= SCROLL_SPEED
-	if roman & CAMERA_MOVEMENT.UP == CAMERA_MOVEMENT.UP:
+	if roman & int(CAMERA_MOVEMENT.UP) == int(CAMERA_MOVEMENT.UP):
 		move_vec_global.x -= sin(get_rotation().y) * MOVEMENT_SPEED
 		move_vec_global.z -= cos(get_rotation().y) * MOVEMENT_SPEED
-	elif roman & CAMERA_MOVEMENT.DOWN == CAMERA_MOVEMENT.DOWN:
+	elif roman & int(CAMERA_MOVEMENT.DOWN) == int(CAMERA_MOVEMENT.DOWN):
 		move_vec_global.x += sin(get_rotation().y) * MOVEMENT_SPEED
 		move_vec_global.z += cos(get_rotation().y) * MOVEMENT_SPEED
-	if roman & CAMERA_MOVEMENT.LEFT == CAMERA_MOVEMENT.LEFT:
+	if roman & int(CAMERA_MOVEMENT.LEFT) == int(CAMERA_MOVEMENT.LEFT):
 		move_vec_local.x -= MOVEMENT_SPEED
-	elif roman & CAMERA_MOVEMENT.RIGHT == CAMERA_MOVEMENT.RIGHT:
+	elif roman & int(CAMERA_MOVEMENT.RIGHT) == int(CAMERA_MOVEMENT.RIGHT):
 		move_vec_local.x += MOVEMENT_SPEED
 	#move_vec = move_vec.rotated(Vector3(0,1,0),rotation_degrees.y)
 
@@ -139,7 +139,7 @@ func move_camera(roman: int, delta: float = -1) -> void:
 		# Jeśli nie wyjdzie to pozwalamy mu się poruszać z pełną prędkością po mapie,
 		# Jeśli wyjdzie to wtedy skalujemy ruch, tak aby oś y zatrzymała się równo na granicy
 
-		var current_transform: Transform = get_transform()
+		var current_transform: Transform3D = get_transform()
 		translate(move_vec_local * delta)
 		# Skala jaką należy zaaplikować do prędkości aby nie wypaść poza obręb mapy
 		var move_scale: float = 1
@@ -164,8 +164,8 @@ func move_camera(roman: int, delta: float = -1) -> void:
 
 	if move_vec_global != Vector3():
 		global_translate(move_vec_global * delta)
-		translation.z = clamp(translation.z, camera_min_position.z, camera_max_position.z)
-		translation.x = clamp(translation.x, camera_min_position.x, camera_max_position.x)
+		position.z = clamp(position.z, camera_min_position.z, camera_max_position.z)
+		position.x = clamp(position.x, camera_min_position.x, camera_max_position.x)
 		pass
 
 

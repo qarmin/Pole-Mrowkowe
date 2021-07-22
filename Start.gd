@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 ## TODO Pozamieniać wszystie res:// na user:// gdzie tylko to możliwe
 

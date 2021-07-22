@@ -1,6 +1,6 @@
 class_name SingleMap
 
-var map: Spatial = null
+var map: Node3D = null
 var size: Vector2j = Vector2j.new(0, 0)
 var fields: Array = []  # Dwuwymiarowa tablica z zaznaczonymi polami, gdzie które się znajduje, tak aby nie trzeba było cały czas sięgać po tablicę
 var units: Array = []
@@ -52,7 +52,7 @@ func set_players(new_players: Array) -> void:
 	players = new_players
 
 
-func set_map(new_map: Spatial) -> void:
+func set_map(new_map: Node3D) -> void:
 	assert(map == null)  # Nie wyczyszczono starej mapy poprawnie
 	map = new_map
 	shrink_map()  # Usuwa niepotrzebne tereny
@@ -71,7 +71,7 @@ func set_preview(new_preview: Image) -> void:
 
 ## Inicjalizacja terenów, jednostek na nich i budynków
 func initialize_fields(type_of_field: int):
-	assert(type_of_field == FIELD_TYPE.DEFAULT_FIELD or type_of_field == FIELD_TYPE.NO_FIELD)
+	assert(type_of_field == int(FIELD_TYPE.DEFAULT_FIELD) or type_of_field == int(FIELD_TYPE.NO_FIELD))
 	assert(fields.size() == 0)
 	fields.clear()
 	units.clear()
@@ -273,7 +273,7 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 					Resources.remove_resources(dict, Buildings.get_building_usage(i, buildings[y][x][i]["level"]))
 
 				# Units - only consume
-				if !units[y][x].empty():
+				if !units[y][x].is_empty():
 					Resources.remove_resources(dict, Units.get_unit_usage(units[y][x]["type"], units[y][x]["level"]))
 
 	return dict
@@ -281,19 +281,19 @@ func calculate_end_turn_resources_change(player_number) -> Dictionary:
 
 func add_unit(coordinates: Vector2j, unit: int, level: int) -> void:
 	Units.validate_type(unit)
-	assert(units[coordinates.y][coordinates.x].empty())  # Jednostka nie może istnieć
+	assert(units[coordinates.y][coordinates.x].is_empty())  # Jednostka nie może istnieć
 	assert(level >= 1 && level <= 3)
 
 	units[coordinates.y][coordinates.x] = {"type": unit, "level": level, "stats": Units.get_default_stats(unit, level)}
 
 
 func remove_unit(coordinates: Vector2j) -> void:
-	assert(!units[coordinates.y][coordinates.x].empty())  # Jednostka musi istnieć
+	assert(!units[coordinates.y][coordinates.x].is_empty())  # Jednostka musi istnieć
 	units[coordinates.y][coordinates.x] = {}
 
 
 func has_unit(coordinates: Vector2j) -> bool:
-	return !units[coordinates.y][coordinates.x].empty()
+	return !units[coordinates.y][coordinates.x].is_empty()
 
 
 func get_neighbourhoods(coordinates: Vector2j, player_number: int, _ignore_player_ants: bool = false) -> Array:
@@ -346,7 +346,7 @@ func get_neighbourhoods(coordinates: Vector2j, player_number: int, _ignore_playe
 
 
 func _check_if_on_field_is_player_ant(player_number: int, coordinates: Vector2j) -> bool:
-	if !units[coordinates.y][coordinates.x].empty() && fields[coordinates.y][coordinates.x] == player_number:
+	if !units[coordinates.y][coordinates.x].is_empty() && fields[coordinates.y][coordinates.x] == player_number:
 		return true
 	return false
 
@@ -367,8 +367,8 @@ class FightResult:
 func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 	assert(fields[start_c.y][start_c.x] != FIELD_TYPE.NO_FIELD)  # Musi istnieć pole mrówki atakującej
 	assert(fields[end_c.y][end_c.x] != FIELD_TYPE.NO_FIELD)  # Musi istnieć pole atakowane
-	assert(!units[start_c.y][start_c.x].empty())  # Musi istnieć mrówka atakująca
-	assert(!(!units[end_c.y][end_c.x].empty() && fields[start_c.y][start_c.x] == fields[end_c.y][end_c.x]))  # Nie można przemiesczać się na pole jeśli pole jest nasze i mrówka też jest nasza
+	assert(!units[start_c.y][start_c.x].is_empty())  # Musi istnieć mrówka atakująca
+	assert(!(!units[end_c.y][end_c.x].is_empty() && fields[start_c.y][start_c.x] == fields[end_c.y][end_c.x]))  # Nie można przemiesczać się na pole jeśli pole jest nasze i mrówka też jest nasza
 	assert(units[start_c.y][start_c.x]["stats"]["number_of_movement"] > 0)  # Musi mieć mrówka możliwość poruszania
 
 	units[start_c.y][start_c.x]["stats"]["number_of_movement"] -= 1
@@ -379,7 +379,7 @@ func move_unit(start_c: Vector2j, end_c: Vector2j) -> FightResult:
 	var result: FightResult = FightResult.new()
 
 	# Brak Walki
-	if units[end_c.y][end_c.x].empty():
+	if units[end_c.y][end_c.x].is_empty():
 		units[end_c.y][end_c.x] = units[start_c.y][start_c.x].duplicate(true)
 		units[start_c.y][start_c.x] = {}
 		result.result = FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD
@@ -467,7 +467,7 @@ func get_user_units_array(player: int) -> Array:
 	for x in size.x:
 		for y in size.y:
 			if fields[y][x] == player:
-				if !units[y][x].empty():
+				if !units[y][x].is_empty():
 					array.push_back(Vector2j.new(x, y))
 
 	return array
@@ -479,7 +479,7 @@ func count_unit_number(player: int) -> int:
 	for x in size.x:
 		for y in size.y:
 			if fields[y][x] == player:
-				if !units[y][x].empty():
+				if !units[y][x].is_empty():
 					number += 1
 
 	return number

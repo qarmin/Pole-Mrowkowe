@@ -5,7 +5,7 @@ const NUMBER_OF_ALL_MONITORS: int = 18
 
 func _ready() -> void:
 	for _i in range(NUMBER_OF_ALL_MONITORS):
-		add_child(load("res://Menu/Performance/SinglePerf.tscn").instance())
+		add_child(load("res://Menu/Performance/SinglePerf.tscn").instantiate())
 
 
 func _process(_delta) -> void:
@@ -40,10 +40,10 @@ func _process(_delta) -> void:
 	i += 1
 	get_child(i).set_text("RENDER_2D_DRAW_CALLS_IN_FRAME: " + str(Performance.get_monitor(Performance.RENDER_2D_DRAW_CALLS_IN_FRAME)))
 	i += 1
-	get_child(i).set_text("RENDER_VIDEO_MEM_USED: " + str(stepify(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 1000000.0, 0.01)) + "MB")
+	get_child(i).set_text("RENDER_VIDEO_MEM_USED: " + str(snapped(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 1000000.0, 0.01)) + "MB")
 	i += 1
-	get_child(i).set_text("RENDER_TEXTURE_MEM_USED: " + str(stepify(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED) / 1000000.0, 0.01)) + "MB")
+	get_child(i).set_text("RENDER_TEXTURE_MEM_USED: " + str(snapped(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED) / 1000000.0, 0.01)) + "MB")
 	i += 1
-	get_child(i).set_text("RENDER_VERTEX_MEM_USED: " + str(stepify(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED) / 1000000.0, 0.01)) + "MB")
+	get_child(i).set_text("RENDER_VERTEX_MEM_USED: " + str(snapped(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED) / 1000000.0, 0.01)) + "MB")
 	i += 1
 	assert((i) == NUMBER_OF_ALL_MONITORS)

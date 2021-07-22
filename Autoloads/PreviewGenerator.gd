@@ -43,7 +43,7 @@ func generate_preview_image(single_map: SingleMap, square_size: Vector2j = Vecto
 			if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 				current_color = colors[0]
 			else:
-				current_color = colors[single_map.fields[y][x] - SingleMap.FIELD_TYPE.PLAYER_FIRST + 1]
+				current_color = colors[single_map.fields[y][x] + 1]
 
 			if y % 2 == 1:
 # warning-ignore:integer_division
@@ -60,7 +60,7 @@ func generate_preview_image(single_map: SingleMap, square_size: Vector2j = Vecto
 			for i_y in range(square_size.y + border_size):
 				for i_x in range(square_size.x + border_size):
 					if i_x < border_size || i_y < border_size || i_x > square_size.x - 1 || i_y > square_size.y - 1:  # Rysuje krawędzie
-						img.set_pixel(square_size.x * x + odd_line_offset + i_x + image_offset.x, square_size.y * y + i_y + image_offset.y, Color.black)
+						img.set_pixel(square_size.x * x + odd_line_offset + i_x + image_offset.x, square_size.y * y + i_y + image_offset.y, Color.BLACK)
 					else:  # Wypełnia środek
 						img.set_pixel(square_size.x * x + odd_line_offset + i_x + image_offset.x, square_size.y * y + i_y + image_offset.y, current_color)
 

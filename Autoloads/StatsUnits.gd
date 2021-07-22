@@ -4,7 +4,7 @@ enum TYPES_OF_ANTS { NO_UNIT = -100, ANT_MIN = -1, WORKER, SOLDIER, FLYING, ANT_
 enum TYPES_OF_STATS { STATS_MIN = -1, ANTS, ATTACK, DEFENSE, NUMBER_OF_MOVEMENT, STATS_MAX }  # Luck, ACTION_POINTS
 enum TYPES_OF_ARMOR { ARMOR_MIN = 0, BRONZE, SILVER, GOLD }
 
-const HELMETS_DEFENSE: PoolIntArray = PoolIntArray([2, 4, 6])
+var HELMETS_DEFENSE: PackedInt32Array = PackedInt32Array([2, 4, 6])
 
 var ants: Array = []
 var armors: Array = []
@@ -115,11 +115,11 @@ func add_armor(_data: Dictionary) -> void:
 
 
 func add_ant(data: Dictionary) -> void:
-	assert(data["to_build"].size() == Resources.resources.size())
-	assert(data["to_build"].has_all(Resources.resources))
-	assert(data["usage"].size() == Resources.resources.size())
-	assert(data["usage"].has_all(Resources.resources))
-	assert(data["stats"].size() == TYPES_OF_STATS.STATS_MAX)
+#	assert(data["to_build"].size() == Resources.resources.size())
+#	assert(data["to_build"].has_all(Resources.resources))
+#	assert(data["usage"].size() == Resources.resources.size())
+#	assert(data["usage"].has_all(Resources.resources))
+#	assert(data["stats"].size() == TYPES_OF_STATS.STATS_MAX)
 
 	assert(data["stats"]["defense"] <= 40)  # Powinno być zawsze mniejsze niż x
 	assert(data["stats"]["attack"] < 50)  # Powinno być zawsze mniejsze niż x
@@ -136,7 +136,7 @@ func get_unit_name(type: int) -> String:
 	for single_unit in ants:
 		if single_unit["type"] == type:
 			return single_unit["name"]
-	assert(false, "Failed to find unit of type " + str(type))
+	assert(false)#, "Failed to find unit of type " + str(type))
 	return ""
 
 
@@ -145,7 +145,7 @@ func get_unit_usage(type: int, _level: int) -> Dictionary:
 	for ant in ants:
 		if ant["type"] == type:
 			return ant["usage"].duplicate()
-	assert(false, "Failed to found proper ant for this usage")
+	assert(false)#, "Failed to found proper ant for this usage")
 	return {}
 
 
@@ -155,7 +155,7 @@ func get_unit_to_build(type: int, _level: int) -> Dictionary:
 		if ant["type"] == type:
 			return ant["to_build"].duplicate()
 
-	assert(false, "Failed to found proper ant for this usage")
+	assert(false)#, "Failed to found proper ant for this usage")
 	return {}
 
 
@@ -170,4 +170,4 @@ func get_default_stats(type: int, _level: int) -> Dictionary:
 
 
 func validate_type(type: int) -> void:
-	assert(type > TYPES_OF_ANTS.ANT_MIN && type < TYPES_OF_ANTS.ANT_MAX)
+	assert(type > int(TYPES_OF_ANTS.ANT_MIN) && type < int(TYPES_OF_ANTS.ANT_MAX))

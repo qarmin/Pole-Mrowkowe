@@ -46,9 +46,9 @@ func initialize_gui() -> void:
 	assert(ant_stat != null)
 	assert(movement_stat != null)
 
-	if destroy_button.connect("button_up", self, "handle_remove_unit_click") != OK:
+	if destroy_button.connect("button_up", Callable(self, "handle_remove_unit_click")) != OK:
 		assert(false)
-	if move_button.connect("button_up", self, "handle_move_unit_click") != OK:
+	if move_button.connect("button_up", Callable(self, "handle_move_unit_click")) != OK:
 		assert(false)
 
 

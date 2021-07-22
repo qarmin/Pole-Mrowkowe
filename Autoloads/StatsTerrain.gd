@@ -63,4 +63,4 @@ func get_field_production(type: int) -> Dictionary:
 
 
 func validate_type(type: int) -> void:
-	assert(type > TYPES_OF_HEX.TYPE_MIN && type < TYPES_OF_HEX.TYPE_MAX)
+	assert(type > int(TYPES_OF_HEX.TYPE_MIN) && type < int(TYPES_OF_HEX.TYPE_MAX))

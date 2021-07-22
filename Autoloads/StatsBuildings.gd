@@ -17,7 +17,7 @@ const DOWNGRADE_COST: float = 0.8  # Only 80% of value can be restored from
 
 
 # Koszty budowy to L1 -> L2 a później ulepszania L2 -> L3 etc. a nie wartości L0 -> L1, L0 -> L2 etc.
-func _ready() -> void:
+func _init():
 	var default: Dictionary = {
 		"wood": 0,
 		"gold": 0,
@@ -156,7 +156,7 @@ func get_building_to_build(type: int, level: int) -> Dictionary:
 				return res_to_build
 
 			return single_building["to_build"][level - 1].duplicate()
-	assert(false, "Failed to find building of type " + str(type))
+	assert(false)#, "Failed to find building of type " + str(type))
 	return {}
 
 
@@ -165,7 +165,7 @@ func get_building_production(type: int, level: int) -> Dictionary:
 	for single_building in all_buildings:
 		if single_building["type"] == type:
 			return single_building["production"][level - 1].duplicate()
-	assert(false, "Failed to find building of type " + str(type))
+	assert(false)#, "Failed to find building of type " + str(type))
 	return {}
 
 
@@ -174,7 +174,7 @@ func get_building_usage(type: int, level: int) -> Dictionary:
 	for single_building in all_buildings:
 		if single_building["type"] == type:
 			return single_building["usage"][level - 1].duplicate()
-	assert(false, "Failed to find building of type " + str(type))
+	assert(false)#, "Failed to find building of type " + str(type))
 	return {}
 
 
@@ -183,7 +183,7 @@ func get_bulding_name(type: int) -> String:
 	for single_building in all_buildings:
 		if single_building["type"] == type:
 			return single_building["name"]
-	assert(false, "Failed to find building of type " + str(type))
+	assert(false)#, "Failed to find building of type " + str(type))
 	return ""
 
 
@@ -212,4 +212,4 @@ func building_add(name: String, type: int, levels: int, to_build: Array, product
 
 
 func validate_building(building: int) -> void:
-	assert(building > TYPES_OF_BUILDINGS.BUILDING_MIN && building < TYPES_OF_BUILDINGS.BUILDING_MAX)
+	assert(building > int(TYPES_OF_BUILDINGS.BUILDING_MIN) && building < int(TYPES_OF_BUILDINGS.BUILDING_MAX))

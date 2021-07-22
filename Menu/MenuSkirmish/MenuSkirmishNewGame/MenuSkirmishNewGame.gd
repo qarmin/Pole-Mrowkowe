@@ -26,7 +26,7 @@ func _on_Generate_Map_button_up() -> void:
 	GameSettings.single_map = single_map
 	PreviewGenerator.generate_preview_image(single_map)
 
-	image_texture.create_from_image(single_map.preview, 0)  # 0 Filtrowanie - flaga 4 - tworzy na krańcach dziwne "cienie"
+	image_texture.create_from_image(single_map.preview)#, 0)  # 0 Filtrowanie - flaga 4 - tworzy na krańcach dziwne "cienie"
 
 	$Control/Margin/HBox/TextureRect.set_texture(image_texture)
 

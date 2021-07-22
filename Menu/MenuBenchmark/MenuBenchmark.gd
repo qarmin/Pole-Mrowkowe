@@ -72,7 +72,7 @@ func show_benchmarks() -> void:
 				new_line2D.add_point(Vector2(j * step_x + x_offset * i, 1.0 / Benchmark.time_frame[i][j] * step_y - 3))
 	$TextureRect/VBoxContainer/Graph.set_texture($Viewport.get_texture())
 
-	find_node("WarningStart").set_text("Average - " + str(stepify(Benchmark.average_fps, 0.1)) + " fps")
+	find_node("WarningStart").set_text("Average - " + str(snapped(Benchmark.average_fps, 0.1)) + " fps")
 
 	assert(Benchmark.STAGES == 6)
 
@@ -80,16 +80,16 @@ func show_benchmarks() -> void:
 	find_node("Low").set_text(
 		(
 			"LOW GRAPHICS - "
-			+ str(stepify(low_points, 0.1))
+			+ str(snapped(low_points, 0.1))
 			+ " fps\n"
 			+ "3x3 MAP - "
-			+ str(stepify(Benchmark.stages_frames_per_second[0], 0.1))
+			+ str(snapped(Benchmark.stages_frames_per_second[0], 0.1))
 			+ " fps\n"
 			+ "10x10 MAP - "
-			+ str(stepify(Benchmark.stages_frames_per_second[1], 0.1))
+			+ str(snapped(Benchmark.stages_frames_per_second[1], 0.1))
 			+ " fps\n"
 			+ "30x30 MAP - "
-			+ str(stepify(Benchmark.stages_frames_per_second[2], 0.1))
+			+ str(snapped(Benchmark.stages_frames_per_second[2], 0.1))
 			+ " fps"
 		)
 	)
@@ -97,16 +97,16 @@ func show_benchmarks() -> void:
 	find_node("High").set_text(
 		(
 			"HIGH GRAPHICS - "
-			+ str(stepify(high_points, 0.1))
+			+ str(snapped(high_points, 0.1))
 			+ " fps\n"
 			+ "3x3 MAP - "
-			+ str(stepify(Benchmark.stages_frames_per_second[3], 0.1))
+			+ str(snapped(Benchmark.stages_frames_per_second[3], 0.1))
 			+ " fps\n"
 			+ "10x10 MAP - "
-			+ str(stepify(Benchmark.stages_frames_per_second[4], 0.1))
+			+ str(snapped(Benchmark.stages_frames_per_second[4], 0.1))
 			+ " fps\n"
 			+ "30x30 MAP - "
-			+ str(stepify(Benchmark.stages_frames_per_second[5], 0.1))
+			+ str(snapped(Benchmark.stages_frames_per_second[5], 0.1))
 			+ " fps"
 		)
 	)

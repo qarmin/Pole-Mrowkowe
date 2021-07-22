@@ -20,9 +20,9 @@ var GoldMine: PackedScene = load("res://Models/Buildings/GoldMine/GoldMine.tscn"
 
 const SINGLE_HEX_DIMENSION: Vector2 = Vector2(1.732, 2)  # Dokładna wartość to (1.7321,2) ale czasami pomiędzy nimi migocze wolna przestrzeń, dlatego należy to nieco zmniejszyć
 const NODE_BASE_NAME: String = "SingleHex"
-var texture_base: SpatialMaterial
+var texture_base: StandardMaterial3D
 var texture_array: Array = []
-var ant_base: SpatialMaterial
+var ant_base: StandardMaterial3D
 var ant_texture_array: Array = []
 
 
@@ -185,7 +185,7 @@ func populate_map_realistically(single_map: SingleMap, number_of_players: int = 
 
 	# Dorysowanie do mapy miejsc w których znajdują się bazy graczy
 	for i in range(single_map.players.size()):
-		single_map.fields[single_map.players[i].y][single_map.players[i].x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + i
+		single_map.fields[single_map.players[i].y][single_map.players[i].x] = i
 
 	# Ustawienie tyle ile się da pól obok, ile tylko się da
 
@@ -219,10 +219,10 @@ func populate_map_randomly(single_map: SingleMap, ant_chance: int = 100, number_
 				choosen_player = randi() % (number_of_players + 1) - 1
 
 				if choosen_player != -1:
-					single_map.fields[y][x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + choosen_player
+					single_map.fields[y][x] = choosen_player
 
 				if randi() % 100 < ant_chance:
-					single_map.add_unit(Vector2j.new(x, y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX), 1)
+					single_map.add_unit(Vector2j.new(x, y), randi() % int(Units.TYPES_OF_ANTS.ANT_MAX), 1)
 
 				if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 					single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL, randi() % 3 + 1)
@@ -265,7 +265,7 @@ func populate_map_randomly_playable(single_map: SingleMap, ant_chance: int = 100
 					choosen_player = randi() % (number_of_players + 1) - 1
 
 					if choosen_player != -1:
-						single_map.fields[y][x] = SingleMap.FIELD_TYPE.PLAYER_FIRST + choosen_player
+						single_map.fields[y][x] = choosen_player
 
 					# Na pustym polu nie może być mrowiska
 					if choosen_player != -1:
@@ -273,7 +273,7 @@ func populate_map_randomly_playable(single_map: SingleMap, ant_chance: int = 100
 							if anthill_used[choosen_player] == false:
 								anthill_used[choosen_player] = true
 								single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL, randi() % 3 + 1)
-								single_map.add_unit(Vector2j.new(x, y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX), 1)
+								single_map.add_unit(Vector2j.new(x, y), randi() % int(Units.TYPES_OF_ANTS.ANT_MAX), 1)
 
 					if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 						single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM, randi() % 3 + 1)
@@ -286,8 +286,8 @@ func populate_map_randomly_playable(single_map: SingleMap, ant_chance: int = 100
 					if randi() % 2 == 0 && single_map.building_get_place_for_build(Vector2j.new(x, y)) != -1:
 						single_map.building_add(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE, randi() % 3 + 1)
 
-					if randi() % 100 < ant_chance && single_map.units[y][x].empty():
-						single_map.add_unit(Vector2j.new(x, y), randi() % (Units.TYPES_OF_ANTS.ANT_MAX), 1)
+					if randi() % 100 < ant_chance && single_map.units[y][x].is_empty():
+						single_map.add_unit(Vector2j.new(x, y), randi() % int(Units.TYPES_OF_ANTS.ANT_MAX), 1)
 		# Check if on all hex are available ants and anthills, if not
 		var all_players_have_anthill: bool = true
 		for i in number_of_players:
@@ -396,7 +396,7 @@ func populate_map_buildings(single_map: SingleMap) -> void:
 	# Add Anthill of first level
 	for coordinates in single_map.players:
 		single_map.building_add(coordinates, Buildings.TYPES_OF_BUILDINGS.ANTHILL, 1)
-		single_map.add_unit(coordinates, randi() % Units.TYPES_OF_ANTS.ANT_MAX, 1)
+		single_map.add_unit(coordinates, randi() % int(Units.TYPES_OF_ANTS.ANT_MAX), 1)
 
 	# Randomly put with 30 % chance one building
 	for x in single_map.size.x:
@@ -407,7 +407,7 @@ func populate_map_buildings(single_map: SingleMap) -> void:
 
 ## Tworzy mapę 3D, którą można użyć w Scene Tree(Jest to zwykły Node)
 func create_3d_map(single_map: SingleMap) -> void:
-	var map: Spatial = Spatial.new()
+	var map: Node3D = Node3D.new()
 	map.set_name("Map")
 
 	single_map.set_map(map)
@@ -419,13 +419,13 @@ func create_3d_map(single_map: SingleMap) -> void:
 		for x in single_map.size.x:
 			## Fields
 			if single_map.fields[y][x] != SingleMap.FIELD_TYPE.NO_FIELD:
-				var SH: MeshInstance = SingleHex.instance()
-				SH.translation = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
+				var SH: MeshInstance3D = SingleHex.instantiate()
+				SH.position = Vector3(x * SINGLE_HEX_DIMENSION.x, randf(), y * SINGLE_HEX_DIMENSION.y * 0.75)
 				# Przesunięcie względem mapy
-				SH.translation += move_translation
+				SH.position += move_translation
 
 				if y % 2 == 1:
-					SH.translation += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
+					SH.position += Vector3(0.5 * SINGLE_HEX_DIMENSION.x, 0, 0)
 				SH.set_name(NODE_BASE_NAME + str(y * single_map.size.x + x))
 
 				if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
@@ -436,10 +436,10 @@ func create_3d_map(single_map: SingleMap) -> void:
 				SH.set_owner(map)
 
 				## Units
-				if !single_map.units[y][x].empty():
-					var ant: Spatial = AntsArray[single_map.units[y][x]["type"]].instance()
+				if !single_map.units[y][x].is_empty():
+					var ant: Node3D = AntsArray[single_map.units[y][x]["type"]].instantiate()
 
-					ant.translation = Vector3(0, 1.192, 0)
+					ant.position = Vector3(0, 1.192, 0)
 
 					if single_map.fields[y][x] == SingleMap.FIELD_TYPE.DEFAULT_FIELD:
 						ant.find_node("Outfit").set_surface_material(0, ant_base)
@@ -450,43 +450,43 @@ func create_3d_map(single_map: SingleMap) -> void:
 					pass
 				## Buildings
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.ANTHILL):
-					var anthill = Anthill.instance()
-					anthill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL)
+					var anthill = Anthill.instantiate()
+					anthill.position = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.ANTHILL)
 
 					SH.add_child(anthill)
 					anthill.set_owner(map)
 
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.FARM):
-					var farm = Farm.instance()
-					farm.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM)
+					var farm = Farm.instantiate()
+					farm.position = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.FARM)
 
 					SH.add_child(farm)
 					farm.set_owner(map)
 
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.SAWMILL):
-					var sawmill = Sawmill.instance()
-					sawmill.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.SAWMILL)
+					var sawmill = Sawmill.instantiate()
+					sawmill.position = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.SAWMILL)
 
 					SH.add_child(sawmill)
 					sawmill.set_owner(map)
 
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.BARRACKS):
-					var barracks = Barracks.instance()
-					barracks.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS)
+					var barracks = Barracks.instantiate()
+					barracks.position = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.BARRACKS)
 
 					SH.add_child(barracks)
 					barracks.set_owner(map)
 
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.GOLD_MINE):
-					var gold_mine = GoldMine.instance()
-					gold_mine.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE)
+					var gold_mine = GoldMine.instantiate()
+					gold_mine.position = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.GOLD_MINE)
 
 					SH.add_child(gold_mine)
 					gold_mine.set_owner(map)
 
 				if single_map.buildings[y][x].has(Buildings.TYPES_OF_BUILDINGS.PILE):
-					var piles = Piles.instance()
-					piles.translation = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.PILE)
+					var piles = Piles.instantiate()
+					piles.position = single_map.building_get_place_where_is_building(Vector2j.new(x, y), Buildings.TYPES_OF_BUILDINGS.PILE)
 
 					SH.add_child(piles)
 					piles.set_owner(map)
@@ -495,7 +495,7 @@ func create_3d_map(single_map: SingleMap) -> void:
 ## Dokładnie centruje mapę
 func center_map(single_map: SingleMap) -> Vector3:
 	assert(single_map.size.x > 0 && single_map.size.y > 0)
-	var translation: Vector3 = Vector3()
+	var position: Vector3 = Vector3()
 
 	single_map.real_map_size.x = single_map.size.x * SINGLE_HEX_DIMENSION.x
 	## Gdy w parzystej linii na końcu jest obecny hex, to wtedy wymiary mapy są większe niż zazwyczaj
@@ -507,8 +507,8 @@ func center_map(single_map: SingleMap) -> Vector3:
 	single_map.real_map_size.y = SINGLE_HEX_DIMENSION.y * 0.25 + single_map.size.y * (SINGLE_HEX_DIMENSION.y * 0.75)
 
 	# Mapa początkowo jest już przesunięta tak aby wskazywała na środek pierwszego hexa, dlatego należy to skoregować
-	translation.x -= (single_map.real_map_size.x - SINGLE_HEX_DIMENSION.x) / 2.0
-	translation.z -= (single_map.real_map_size.y - SINGLE_HEX_DIMENSION.y) / 2.0
+	position.x -= (single_map.real_map_size.x - SINGLE_HEX_DIMENSION.x) / 2.0
+	position.z -= (single_map.real_map_size.y - SINGLE_HEX_DIMENSION.y) / 2.0
 
 	# Zwraca przesunięcie, które trzeba wykonać na każdym z elementów
-	return translation
+	return position

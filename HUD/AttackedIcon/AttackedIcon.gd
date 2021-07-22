@@ -3,7 +3,7 @@ extends Sprite3D
 
 func show_icon(attacker_units: int, defenders_units: int, attacker_defeated: int, defenders_defeated: int):
 	$AnimationPlayer.play("SIze")
-	if $AnimationPlayer.connect("animation_finished", self, "remove") != OK:
+	if $AnimationPlayer.connect("animation_finished", Callable(self, "remove")) != OK:
 		assert(false)
 
 	$Viewport/Fight/Basic/Attacker.set_text(str(attacker_units))

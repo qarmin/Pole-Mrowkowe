@@ -1,6 +1,6 @@
 extends Node
 
-onready var game_time: float = OS.get_ticks_msec()
+@onready var game_time: float = Time.get_ticks_msec()
 const MAX_TEAMS: int = 4  # Służy do sprawdzania czy wszędzie zaaktualizowano tę liczbę gdzie tylko możliwe
 
 enum GAME_TYPE { NO_TYPE, SKIRMISH, CAMPAIGN }

@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 #var hex_number # Powino się w Autoload GameSettings.gd(Nie jestem do końca jednak tego pewien)
 #var SingleHexOwner : PoolIntArray = PoolIntArray([]) # 100 - neutralny, -1 - nieprzypisany

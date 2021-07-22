@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var cpu_vs_cpu: bool = false  # Allow to have fully automated game
 
@@ -20,12 +20,12 @@ var players_type: Array = []  #[PLAYERS_TYPE.HUMAN, PLAYERS_TYPE.HUMAN, PLAYERS_
 # TODO Maybe add players name?
 var player_resources: Array = []
 
-onready var round_node = $HUD/HUD/Round
-onready var round_label = $HUD/HUD/Round/Label
-onready var end_turn_dialog: ConfirmationDialog = $HUD/HUD/EndTurnDialog
-onready var end_game_color_rect: ColorRect = $HUD/HUD/EndGameColorRect
-onready var end_game_dialog: AcceptDialog = $HUD/HUD/EndGameDialog
-onready var start_game_campaign_dialog: AcceptDialog = $HUD/HUD/StartGameCampaignDialog
+@onready var round_node = $HUD/HUD/Round
+@onready var round_label = $HUD/HUD/Round/Label
+@onready var end_turn_dialog: ConfirmationDialog = $HUD/HUD/EndTurnDialog
+@onready var end_game_color_rect: ColorRect = $HUD/HUD/EndGameColorRect
+@onready var end_game_dialog: AcceptDialog = $HUD/HUD/EndGameDialog
+@onready var start_game_campaign_dialog: AcceptDialog = $HUD/HUD/StartGameCampaignDialog
 
 var attacked_icon = load("res://HUD/AttackedIcon/AttackedIcon.tscn")
 
@@ -43,8 +43,8 @@ var selection_ant_color_enemy: Color = Color("#2cd91515")
 var selection_hex_color_own: Color = Color("#6689d400")
 var selection_hex_color_enemy: Color = Color("#2cd91515")
 
-var terrain_overlay_node: CSGTorus = preload("res://Overlay/TerrainOverlay.tscn").instance()
-var unit_overlay_node: CSGTorus = preload("res://Overlay/UnitOverlay.tscn").instance()
+var terrain_overlay_node: CSGTorus3D = preload("res://Overlay/TerrainOverlay.tscn").instantiate()
+var unit_overlay_node: CSGTorus3D = preload("res://Overlay/UnitOverlay.tscn").instantiate()
 
 var single_map: SingleMap
 
@@ -122,7 +122,7 @@ func initialize_game() -> void:
 	players_type[0] = PLAYERS_TYPE.HUMAN  # First player is always a human
 
 	for _i in range(6):
-		var node: Spatial = ant_movement_overlay.instance()
+		var node: Node3D = ant_movement_overlay.instantiate()
 		add_child(node)
 		node.hide()
 		ant_movement.append(node)
@@ -150,7 +150,7 @@ func initialize_game() -> void:
 	gui_update_resources()
 
 	# Water
-	var water: Spatial = load("res://Terrain/Water/Water.tscn").instance()
+	var water: Node3D = load("res://Terrain/Water/Water.tscn").instantiate()
 	water.set_scale(Vector3(1000, 1, 1000))
 	add_child(water)
 
@@ -191,25 +191,25 @@ func connect_clickable_signals() -> void:
 			if thing.connect("ant_clicked", self, "ant_clicked") != OK:
 				assert(false)
 
-	if $HUD/HUD/Buildings.connect("upgrade_clicked", self, "handle_upgrade_building_click") != OK:
+	if $HUD/HUD/Buildings.connect("upgrade_clicked", Callable(self, "handle_upgrade_building_click")) != OK:
 		assert(false)
-	if $HUD/HUD/Buildings.connect("downgrade_clicked", self, "handle_downgrade_building_click") != OK:
+	if $HUD/HUD/Buildings.connect("downgrade_clicked", Callable(self, "handle_downgrade_building_click")) != OK:
 		assert(false)
-	if $HUD/HUD/Buildings.connect("create_unit_clicked", self, "handle_create_unit_click") != OK:
+	if $HUD/HUD/Buildings.connect("create_unit_clicked", Callable(self, "handle_create_unit_click")) != OK:
 		assert(false)
-	if $HUD/HUD/Units.connect("destroy_unit_clicked", self, "handle_destroy_unit_click") != OK:
+	if $HUD/HUD/Units.connect("destroy_unit_clicked", Callable(self, "handle_destroy_unit_click")) != OK:
 		assert(false)
-	if $HUD/HUD/Units.connect("move_unit_clicked", self, "handle_move_unit_click") != OK:
+	if $HUD/HUD/Units.connect("move_unit_clicked", Callable(self, "handle_move_unit_click")) != OK:
 		assert(false)
 
 	# TODO Po zakończeniu testów, zacząć pokazywać okno potwierdzające chęć zakończenia tury
 #	round_node.connect("try_to_end_turn_clicked",self,"try_to_end_turn")
-	round_node.connect("try_to_end_turn_clicked", self, "end_turn", [true])
+	round_node.connect("try_to_end_turn_clicked", Callable(self, "end_turn"), [true])
 
-	if end_turn_dialog.connect("confirmed", self, "end_turn", [true])  != OK:
+	if end_turn_dialog.connect("confirmed", Callable(self, "end_turn"), [true])  != OK:
 		assert(false)
 
-	if end_game_dialog.connect("confirmed", self, "end_game")  != OK:
+	if end_game_dialog.connect("confirmed", Callable(self, "end_game"))  != OK:
 		assert(false)
 
 
@@ -232,16 +232,16 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 
 	var start_units: int = single_map.units[start_c.y][start_c.x]["stats"]["ants"]
 	var end_units: int = 0
-	if !single_map.units[end_c.y][end_c.x].empty():
+	if !single_map.units[end_c.y][end_c.x].is_empty():
 		end_units = single_map.units[end_c.y][end_c.x]["stats"]["ants"]
 
 	var result = single_map.move_unit(start_c, end_c)
 
-	var start_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(start_c, single_map.size))
-	var end_hex: Spatial = $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size))
+	var start_hex: Node3D = $Map.get_node(SingleMap.convert_coordinates_to_name(start_c, single_map.size))
+	var end_hex: Node3D = $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size))
 
 	if single_map.fields[end_c.y][end_c.x] != current_player:
-		var attack_icon = attacked_icon.instance()
+		var attack_icon = attacked_icon.instantiate()
 		attack_icon.show_icon(start_units, end_units, result.attacker_defeated, result.defender_defeated)
 		end_hex.add_child(attack_icon)
 
@@ -250,7 +250,7 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 	match result.result:
 		# Stosowany również do przechodzenia na własne terytoria
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_EMPTY_FIELD:
-			var start_ant: Spatial = get_unit_from_field(start_c)
+			var start_ant: Node3D = get_unit_from_field(start_c)
 			start_hex.remove_child(start_ant)
 			end_hex.add_child(start_ant)
 
@@ -262,12 +262,12 @@ func move_unit_3d(end_c: Vector2j, user_attack: bool):
 				if $Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).has_node(anthill_name):
 					$Map.get_node(SingleMap.convert_coordinates_to_name(end_c, single_map.size)).get_node(anthill_name).queue_free()
 		SingleMap.FIGHT_RESULTS.ATTACKER_WON_KILLED_ANT:
-			var end_ant: Spatial = get_unit_from_field(end_c)
+			var end_ant: Node3D = get_unit_from_field(end_c)
 			end_hex.remove_child(end_ant)
 			end_ant.set_name("TO DELETE")
 			end_ant.queue_free()
 
-			var start_ant: Spatial = get_unit_from_field(start_c)
+			var start_ant: Node3D = get_unit_from_field(start_c)
 			start_hex.remove_child(start_ant)
 			end_hex.add_child(start_ant)
 
@@ -343,7 +343,7 @@ func ant_clicked(ant: AntBase) -> void:
 		unit_overlay_node.get_material().albedo_color = selection_ant_color_enemy
 		possible_ant_movements()
 
-	unit_overlay_node.set_translation(ant.get_translation() + ant.get_parent().get_translation())
+	unit_overlay_node.set_position(ant.get_position() + ant.get_parent().get_position())
 	unit_overlay_node.set_scale(ant.get_scale())
 	unit_overlay_node.reset()
 	unit_overlay_node.start()
@@ -415,7 +415,7 @@ func hex_clicked(hex: SingleHex) -> void:
 	else:
 		terrain_overlay_node.get_material().albedo_color = selection_hex_color_enemy
 
-	terrain_overlay_node.set_translation(hex.get_translation())
+	terrain_overlay_node.set_position(hex.get_position())
 	terrain_overlay_node.set_scale(hex.get_scale() * Vector3(1, 0.5, 1))
 	terrain_overlay_node.reset()
 	terrain_overlay_node.start()
@@ -560,7 +560,7 @@ func handle_destroy_unit_click() -> void:
 	unit_overlay_node.hide()
 
 	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
-	assert(!single_map.units[selected_coordinates.y][selected_coordinates.x].empty())  # Pole musi posiadać jednostkę
+	assert(!single_map.units[selected_coordinates.y][selected_coordinates.x].is_empty())  # Pole musi posiadać jednostkę
 
 	var qq = single_map.units[selected_coordinates.y][selected_coordinates.x]
 	var type_of_unit = qq["type"]
@@ -586,25 +586,25 @@ func handle_destroy_unit_click() -> void:
 func handle_create_unit_click(type_of_unit: int) -> void:
 	Units.validate_type(type_of_unit)
 	assert(current_player == single_map.fields[selected_coordinates.y][selected_coordinates.x])  # Użytkownik musi posiadać to pole aby tworzyć na nim jednostki
-	assert(single_map.units[selected_coordinates.y][selected_coordinates.x].empty())  # Pole nie może posiadać na sobie żadnej jednostki
+	assert(single_map.units[selected_coordinates.y][selected_coordinates.x].is_empty())  # Pole nie może posiadać na sobie żadnej jednostki
 
-	var unit_3d: Spatial
+	var unit_3d: Node3D
 
 	match type_of_unit:
 		Units.TYPES_OF_ANTS.FLYING:
-			unit_3d = MapCreator.AntFlying.instance()
+			unit_3d = MapCreator.AntFlying.instantiate()
 		Units.TYPES_OF_ANTS.SOLDIER:
-			unit_3d = MapCreator.AntSoldier.instance()
+			unit_3d = MapCreator.AntSoldier.instantiate()
 		Units.TYPES_OF_ANTS.WORKER:
-			unit_3d = MapCreator.AntWorker.instance()
+			unit_3d = MapCreator.AntWorker.instantiate()
 		_:
 			assert(false, "Missing type of unit")
 
-	unit_3d.translation = Vector3(0, 1.192, 0)
+	unit_3d.position = Vector3(0, 1.192, 0)
 	$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).add_child(unit_3d)
 
 	# Connect
-	if unit_3d.connect("ant_clicked", self, "ant_clicked") != OK:
+	if unit_3d.connect("ant_clicked", Callable(self, "ant_clicked")) != OK:
 		assert(false)
 
 	single_map.add_unit(selected_coordinates, type_of_unit, 1)
@@ -639,24 +639,24 @@ func handle_upgrade_building_click(type_of_building: int) -> void:
 
 		single_map.building_add(selected_coordinates, type_of_building, 1)
 
-		var building_3d: Spatial
+		var building_3d: Node3D
 
 		match type_of_building:
 			Buildings.TYPES_OF_BUILDINGS.ANTHILL:
-				building_3d = MapCreator.Anthill.instance()
+				building_3d = MapCreator.Anthill.instantiate()
 			Buildings.TYPES_OF_BUILDINGS.BARRACKS:
-				building_3d = MapCreator.Barracks.instance()
+				building_3d = MapCreator.Barracks.instantiate()
 			Buildings.TYPES_OF_BUILDINGS.FARM:
-				building_3d = MapCreator.Farm.instance()
+				building_3d = MapCreator.Farm.instantiate()
 			Buildings.TYPES_OF_BUILDINGS.SAWMILL:
-				building_3d = MapCreator.Sawmill.instance()
+				building_3d = MapCreator.Sawmill.instantiate()
 			Buildings.TYPES_OF_BUILDINGS.GOLD_MINE:
-				building_3d = MapCreator.GoldMine.instance()
+				building_3d = MapCreator.GoldMine.instantiate()
 			Buildings.TYPES_OF_BUILDINGS.PILE:
-				building_3d = MapCreator.Piles.instance()
+				building_3d = MapCreator.Piles.instantiate()
 			_:
 				assert(false, "Missing type of building")
-		building_3d.translation = single_map.building_get_place_where_is_building(selected_coordinates, type_of_building)
+		building_3d.position = single_map.building_get_place_where_is_building(selected_coordinates, type_of_building)
 
 		$Map.get_node(SingleMap.convert_coordinates_to_name(selected_coordinates, single_map.size)).add_child(building_3d)
 
@@ -728,18 +728,18 @@ func update_field_color(coordinates: Vector2j) -> void:
 #	return false
 
 
-func get_unit_from_field(coordinates: Vector2j) -> Spatial:
+func get_unit_from_field(coordinates: Vector2j) -> Node3D:
 	for i in $Map.get_node(SingleMap.convert_coordinates_to_name(coordinates, single_map.size)).get_children():
 		if i.get_name().begins_with("ANT"):
 			return i
 	assert(false)
-	return Spatial.new()
+	return Node3D.new()
 
 
 func restore_ant_movement_ability():
 	for y in single_map.size.y:
 		for x in single_map.size.x:
-			if single_map.fields[y][x] == current_player && !single_map.units[y][x].empty():
+			if single_map.fields[y][x] == current_player && !single_map.units[y][x].is_empty():
 				var unit_type = single_map.units[y][x]["type"]
 				single_map.units[y][x]["stats"]["number_of_movement"] = Units.get_default_stats(unit_type, 1)["number_of_movement"]
 
@@ -774,9 +774,9 @@ func ai_add_units() -> void:
 
 	for _i in range(3):
 		var coordinate: Vector2j = all_coordinates[randi() % all_coordinates.size()]
-		var unit_to_create: int = randi() % Units.TYPES_OF_ANTS.ANT_MAX
+		var unit_to_create: int = randi() % int(Units.TYPES_OF_ANTS.ANT_MAX)
 
-		if single_map.units[coordinate.y][coordinate.x].empty():
+		if single_map.units[coordinate.y][coordinate.x].is_empty():
 			temp_res = player_resources[current_player].duplicate(true)
 			Resources.remove_resources(temp_res, Units.get_unit_to_build(unit_to_create, 1))
 
@@ -907,7 +907,7 @@ func ai_remove_to_costly_units() -> bool:
 	for y in single_map.size.y:
 		for x in single_map.size.x:
 			if single_map.fields[y][x] == current_player:
-				if !single_map.units[y][x].empty():
+				if !single_map.units[y][x].is_empty():
 					player_units.append(Vector2j.new(x, y))
 
 	# Nie trzeba usuwać mrówek jeśli jest ich 2 lub mniej
@@ -941,7 +941,7 @@ func ai_move_players() -> bool:
 		if single_map.units[coordinates.y][coordinates.x]["stats"]["number_of_movement"] > 0:
 #			print("Moving unit TODO")
 			var array_of_fields: Array = ai_get_array_of_closest_fields(coordinates)
-			if !array_of_fields.empty():
+			if !array_of_fields.is_empty():
 				selected_coordinates = coordinates
 				move_unit_3d(array_of_fields[array_of_fields.size() - 1], false)
 				unit_have_movement = true
@@ -966,7 +966,7 @@ func ai_get_array_of_closest_fields(unit_coordinates: Vector2j) -> Array:
 				value = NoneValue
 			else:
 				# Cannot move to field when already unit is there
-				if single_map.fields[y][x] == current_player && !single_map.units[y][x].empty():
+				if single_map.fields[y][x] == current_player && !single_map.units[y][x].is_empty():
 					value = NoneValue
 				else:
 					value = 10000000
@@ -983,7 +983,7 @@ func ai_get_array_of_closest_fields(unit_coordinates: Vector2j) -> Array:
 
 	var help_array = [[[0, -1], [1, -1], [-1, 0], [1, 0], [0, 1], [1, 1]], [[-1, -1], [0, -1], [-1, 0], [1, 0], [-1, 1], [0, 1]]]
 
-	while !to_check.empty():
+	while !to_check.is_empty():
 		var current_element: Vector2j = to_check.pop_front()
 		var current_value: int = to_check_value.pop_front()
 
@@ -1033,7 +1033,7 @@ func ai_get_array_of_closest_fields(unit_coordinates: Vector2j) -> Array:
 	to_check = [closest_enemy_terrain]
 	to_check_value = [closest_terrain_value]
 
-	while !to_check.empty():
+	while !to_check.is_empty():
 		var current_element: Vector2j = to_check.pop_front()
 		var current_value: int = to_check_value.pop_front()
 
@@ -1054,7 +1054,7 @@ func ai_get_array_of_closest_fields(unit_coordinates: Vector2j) -> Array:
 						if map_created[cep_y][cep_x] == current_value - 1:
 							elements_to_choose.append(Vector2j.new(cep_x, cep_y))
 
-		if !elements_to_choose.empty():
+		if !elements_to_choose.is_empty():
 			var random_element: Vector2j = elements_to_choose[randi() % elements_to_choose.size()]
 #			print("CLOSEST" + closest_enemy_terrain.to_string())
 #			print("HOW long" + str(current_value))

@@ -179,17 +179,17 @@ func shrink_map():
 
 	var single_map: SingleMap = SingleMap.new()
 	## Test map shrinking
-	var temp_spatial: Spatial
-	single_map.map = Spatial.new()
-	temp_spatial = Spatial.new()
-	temp_spatial.set_name(MapCreator.NODE_BASE_NAME + "2")
-	single_map.map.add_child(temp_spatial)
-	temp_spatial = Spatial.new()
-	temp_spatial.set_name(MapCreator.NODE_BASE_NAME + "4")
-	single_map.map.add_child(temp_spatial)
-	temp_spatial = Spatial.new()
-	temp_spatial.set_name(MapCreator.NODE_BASE_NAME + "5")
-	single_map.map.add_child(temp_spatial)
+	var temp_Node3D: Node3D
+	single_map.map = Node3D.new()
+	temp_Node3D = Node3D.new()
+	temp_Node3D.set_name(MapCreator.NODE_BASE_NAME + "2")
+	single_map.map.add_child(temp_Node3D)
+	temp_Node3D = Node3D.new()
+	temp_Node3D.set_name(MapCreator.NODE_BASE_NAME + "4")
+	single_map.map.add_child(temp_Node3D)
+	temp_Node3D = Node3D.new()
+	temp_Node3D.set_name(MapCreator.NODE_BASE_NAME + "5")
+	single_map.map.add_child(temp_Node3D)
 
 	single_map.set_size(Vector2j.new(3, 3))
 	single_map.initialize_fields(SingleMap.FIELD_TYPE.DEFAULT_FIELD)

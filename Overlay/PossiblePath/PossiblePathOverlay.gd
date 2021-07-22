@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var rotation_speed: float = 0.4
 

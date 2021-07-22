@@ -1,4 +1,4 @@
-extends CSGTorus
+extends CSGTorus3D
 
 var speed: float = 0.15
 var rotation_speed: float = 1.0
@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func reset() -> void:
-	basic_transform = get_translation()
+	basic_transform = get_position()
 	translate(Vector3(0, min_max_y.x / get_scale().y, 0))
 
 
@@ -29,8 +29,8 @@ func stop() -> void:
 
 func _process(delta: float) -> void:
 	rotate(Vector3(0, 1, 0).normalized(), rotation_speed * delta)
-	if get_translation().y > basic_transform.y + min_max_y.y:
+	if get_position().y > basic_transform.y + min_max_y.y:
 		direction = -1.0
-	elif get_translation().y < basic_transform.y + min_max_y.x:
+	elif get_position().y < basic_transform.y + min_max_y.x:
 		direction = 1.0
 	translate(Vector3(0, direction * speed * delta / get_scale().y, 0))

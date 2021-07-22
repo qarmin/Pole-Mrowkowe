@@ -48,19 +48,19 @@ func initialize_gui() -> void:
 		node.get_node("AspectRatioContainer/Icon").set_texture(load(building_icon[i]))
 
 		# Connect downgrade and upgrade buttons
-		if node.find_node("Upgrade").connect("button_up", self, "handle_upgrade_click", [types_of_buildings[i]]) != OK:
+		if node.find_node("Upgrade").connect("button_up", Callable(self, "handle_upgrade_click"), [types_of_buildings[i]]) != OK:
 			assert(false)
-		if node.find_node("Downgrade").connect("button_up", self, "handle_downgrade_click", [types_of_buildings[i]]) != OK:
+		if node.find_node("Downgrade").connect("button_up", Callable(self, "handle_downgrade_click"), [types_of_buildings[i]]) != OK:
 			assert(false)
 
-	for i in range(Units.TYPES_OF_ANTS.ANT_MAX):
+	for i in int(Units.TYPES_OF_ANTS.ANT_MAX):
 		var node: Node = find_node("Unit" + str(i + 1)).get_node("VBox")
 		assert(node != null)
 		single_unit_nodes.append(node)
 		node.get_node("AspectRatioContainer/Icon").set_texture(load(units_icon[i]))
 
 		# Connect downgrade and upgrade buttons
-		if node.find_node("CreateUnit").connect("button_up", self, "handle_create_unit_click", [types_of_units[i]]) != OK:
+		if node.find_node("CreateUnit").connect("button_up", Callable(self, "handle_create_unit_click"), [types_of_units[i]]) != OK:
 			assert(false)
 
 
@@ -222,7 +222,7 @@ func update_units_info(user_resources: Dictionary, buildings: Dictionary, coordi
 
 		var cloned_user_resources: Dictionary = user_resources.duplicate(false)
 
-		if !single_map.units[coordinates.y][coordinates.x].empty():
+		if !single_map.units[coordinates.y][coordinates.x].is_empty():
 			if single_map.units[coordinates.y][coordinates.x]["type"] == index:
 				icon_hint_text = "Usage:  " + Resources.string_resources_short(usage)
 				create_unit.hide()

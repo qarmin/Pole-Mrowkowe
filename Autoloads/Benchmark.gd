@@ -2,8 +2,8 @@ extends Node
 
 var points: int = 0
 var average_fps: float = 0
-var stages_frames: PoolIntArray = [0, 0, 0, 0, 0, 0]
-var stages_frames_per_second: PoolRealArray = [0, 0, 0, 0, 0, 0]
+var stages_frames: PackedInt32Array = [0, 0, 0, 0, 0, 0]
+var stages_frames_per_second: PackedFloat64Array = [0, 0, 0, 0, 0, 0]
 var speed_scale: float = 10.0
 const ONE_STAGE_TIME: float = 10.0
 const STAGES: int = 6

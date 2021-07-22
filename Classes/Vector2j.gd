@@ -7,7 +7,7 @@ var x: int = 0
 var y: int = 0
 
 
-func _init(p_x: int, p_y: int) -> void:
+func _init(p_x: int, p_y: int):
 	x = p_x
 	y = p_y
 

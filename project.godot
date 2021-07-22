@@ -8,27 +8,27 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Spatial",
-"class": "AntBase",
-"language": "GDScript",
+_global_script_classes=[{
+"base": "Node3D",
+"class": &"AntBase",
+"language": &"GDScript",
 "path": "res://Units/Ant.gd"
 }, {
-"base": "MeshInstance",
-"class": "SingleHex",
-"language": "GDScript",
+"base": "MeshInstance3D",
+"class": &"SingleHex",
+"language": &"GDScript",
 "path": "res://Terrain/SingleHex/SingleHex.gd"
 }, {
-"base": "Reference",
-"class": "SingleMap",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"SingleMap",
+"language": &"GDScript",
 "path": "res://Terrain/MapClass/SingleMap.gd"
 }, {
-"base": "Reference",
-"class": "Vector2j",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"Vector2j",
+"language": &"GDScript",
 "path": "res://Classes/Vector2j.gd"
-} ]
+}]
 _global_script_class_icons={
 "AntBase": "",
 "SingleHex": "",
@@ -68,7 +68,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PackedStringArray()
 
 [filesystem]
 
@@ -82,28 +82,28 @@ timers/tooltip_delay_sec=0.01
 
 game_exit={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_w={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_a={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_d={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_s={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 
 [memory]
@@ -122,7 +122,7 @@ limits/debugger_stdout/max_chars_per_second=32768
 
 quality/driver/driver_name="GLES2"
 threads/thread_model=2
-environment/default_clear_color=Color( 0.419608, 0.419608, 0.419608, 1 )
+environment/default_clear_color=Color(0.419608, 0.419608, 0.419608, 1)
 quality/filters/msaa=2
 quality/depth/hdr=false
 environment/default_environment="res://standard_environment.tres"
