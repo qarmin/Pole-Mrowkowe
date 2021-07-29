@@ -1,14 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://br45wsn2kd5ql"]
 
-[ext_resource path="res://Overlay/TerrainOverlay.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Overlay/TerrainOverlay.gd" id="1"]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="StandardMaterial3D" id="1"]
 
-[node name="TerrainOverlay" type="CSGTorus"]
-generate_lightmap = false
+[node name="TerrainOverlay" type="CSGTorus3D"]
 inner_radius = 0.7
 outer_radius = 1.35
 sides = 6
 ring_sides = 3
-material = SubResource( 1 )
-script = ExtResource( 1 )
+material = SubResource( "1" )
+script = ExtResource( "1" )

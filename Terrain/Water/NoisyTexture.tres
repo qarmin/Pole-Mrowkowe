@@ -1,6 +1,6 @@
-[gd_resource type="NoiseTexture" load_steps=2 format=2]
+[gd_resource type="NoiseTexture" load_steps=2 format=3 uid="uid://ca5f5idn7tiwm"]
 
-[sub_resource type="OpenSimplexNoise" id=1]
+[sub_resource type="OpenSimplexNoise" id="1"]
 seed = 177
 octaves = 1
 period = 0.1
@@ -11,4 +11,4 @@ lacunarity = 0.1
 width = 256
 height = 256
 seamless = true
-noise = SubResource( 1 )
+noise = SubResource( "1" )

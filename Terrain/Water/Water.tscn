@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dbo54fo8h7os2"]
 
-[ext_resource path="res://Terrain/Water/Water.tres" type="Material" id=1]
+[ext_resource type="Material" uid="uid://iafp4minpyhb" path="res://Terrain/Water/Water.tres" id="1"]
 
-[sub_resource type="PlaneMesh" id=3]
-material = ExtResource( 1 )
-size = Vector2( 1, 1 )
+[sub_resource type="PlaneMesh" id="3"]
+material = ExtResource( "1" )
+size = Vector2(1, 1)
 subdivide_width = 9
 subdivide_depth = 9
 
-[node name="Water" type="MeshInstance"]
-mesh = SubResource( 3 )
-material/0 = null
+[node name="Water" type="MeshInstance3D"]
+mesh = SubResource( "3" )
+surface_material_override/0 = null
+script = null

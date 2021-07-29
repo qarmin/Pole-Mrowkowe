@@ -1,19 +1,20 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://4fx38mxptpbt"]
 
-[ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Menu/MenuCampaign/BackToMenu.gd" type="Script" id=4]
-[ext_resource path="res://Menu/MenuCampaign/MenuCampaignSaveText.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Menu/MenuCampaign/GoToNewCampaign.gd" type="Script" id=6]
-[ext_resource path="res://Menu/MenuCampaign/GoToLoadCampaign.gd" type="Script" id=7]
-[ext_resource path="res://Menu/MenuCampaign/LoadGameImage.png" type="Texture" id=8]
-[ext_resource path="res://Menu/MenuCampaign/LoadGameImagePressed.png" type="Texture" id=9]
-[ext_resource path="res://Menu/MenuCampaign/NewGameImagePressed.png" type="Texture" id=10]
+[ext_resource type="Font" path="res://Menu/Menu/MenuEntries.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://cfvl3y63ka7yv" path="res://icon.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://dvf7qw24kwass" path="res://Menu/Menu/SubmenuTitle.tscn" id="3"]
+[ext_resource type="Script" path="res://Menu/MenuCampaign/BackToMenu.gd" id="4"]
+[ext_resource type="Font" path="res://Menu/MenuCampaign/MenuCampaignSaveText.tres" id="5"]
+[ext_resource type="Script" path="res://Menu/MenuCampaign/GoToNewCampaign.gd" id="6"]
+[ext_resource type="Script" path="res://Menu/MenuCampaign/GoToLoadCampaign.gd" id="7"]
+[ext_resource type="Texture2D" uid="uid://ded8pfskrlc4n" path="res://Menu/MenuCampaign/LoadGameImage.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://dk05qbqbstdlb" path="res://Menu/MenuCampaign/LoadGameImagePressed.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://cv3rgiac8bxtp" path="res://Menu/MenuCampaign/NewGameImagePressed.png" id="10"]
 
 [node name="MenuCampaign" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -24,29 +25,29 @@ anchor_top = 0.781
 anchor_right = 0.95
 anchor_bottom = 0.9
 custom_constants/separation = 18
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BackToMenu" type="Button" parent="Buttons"]
-margin_right = 273.0
-margin_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( "1" )
 text = "Back to menu"
-script = ExtResource( 4 )
+script = ExtResource( "4" )
 
-[node name="Options" parent="." instance=ExtResource( 3 )]
+[node name="Options" parent="." instance=ExtResource( "3" )]
 text = "campaign"
+structured_text_bidi_override_options = []
+script = null
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.05
 anchor_top = 0.25
 anchor_right = 0.9
 anchor_bottom = 0.7
-margin_right = 40.0
-margin_bottom = 40.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,7 +55,8 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.211765, 0.211765, 0.211765, 1 )
+color = Color(0.211765, 0.211765, 0.211765, 1)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,68 +70,57 @@ custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 809.0
-margin_bottom = 269.0
 custom_constants/separation = 126
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NewGame" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer"]
-margin_right = 336.0
-margin_bottom = 259.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 
 [node name="TextureButton" type="TextureButton" parent="Control/MarginContainer/HBoxContainer/NewGame"]
-margin_right = 336.0
-margin_bottom = 215.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 10 )
+texture_normal = ExtResource( "2" )
+texture_pressed = ExtResource( "10" )
 expand = true
-script = ExtResource( 6 )
+script = ExtResource( "6" )
 
 [node name="NewGame" type="Label" parent="Control/MarginContainer/HBoxContainer/NewGame"]
-margin_top = 219.0
-margin_right = 336.0
-margin_bottom = 259.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( "5" )
 text = "New Game"
 align = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="LoadGame" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer"]
-margin_left = 462.0
-margin_right = 799.0
-margin_bottom = 259.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 
 [node name="TextureButton" type="TextureButton" parent="Control/MarginContainer/HBoxContainer/LoadGame"]
-margin_right = 337.0
-margin_bottom = 215.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 9 )
+texture_normal = ExtResource( "8" )
+texture_pressed = ExtResource( "9" )
 expand = true
-script = ExtResource( 7 )
+script = ExtResource( "7" )
 
 [node name="LoadGame" type="Label" parent="Control/MarginContainer/HBoxContainer/LoadGame"]
-margin_top = 219.0
-margin_right = 337.0
-margin_bottom = 259.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( "5" )
 text = "Load Game"
 align = 1
+structured_text_bidi_override_options = []
+script = null
 
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]
 [connection signal="button_up" from="Control/MarginContainer/HBoxContainer/NewGame/TextureButton" to="Control/MarginContainer/HBoxContainer/NewGame/TextureButton" method="_on_CreateNewGame_pressed"]

@@ -1,11 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://3vlq225t1cu4"]
 
-[ext_resource path="res://Units/Outfit/OutfitBase.tres" type="Material" id=1]
+[ext_resource type="Material" path="res://Units/Outfit/OutfitBase.tres" id="1"]
 
-[sub_resource type="CubeMesh" id=1]
-material = ExtResource( 1 )
+[sub_resource type="BoxMesh" id="1"]
+material = ExtResource( "1" )
 
-[node name="Outfit" type="MeshInstance"]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="Outfit" type="MeshInstance3D"]
+transform = Transform3D(1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0)
+mesh = SubResource( "1" )
+surface_material_override/0 = null
+script = null

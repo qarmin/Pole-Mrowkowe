@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://l5f270uyumm"]
 
-[ext_resource path="res://Models/Buildings/Anthill/Anthill.glb" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://cn0fca2d8rkry" path="res://Models/Buildings/Anthill/Anthill.glb" id="1"]
 
-[node name="Anthill" instance=ExtResource( 1 )]
-transform = Transform( 0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, 0 )
+[node name="Anthill" instance=ExtResource( "1" )]
+transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, 0)
 
 [node name="Cube" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 0 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 0)

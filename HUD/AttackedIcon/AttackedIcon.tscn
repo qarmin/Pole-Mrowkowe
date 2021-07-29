@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://pmj71qwsstjx"]
 
-[ext_resource path="res://HUD/AttackedIcon/AttackedIcon.png" type="Texture" id=1]
-[ext_resource path="res://HUD/AttackedIcon/AttackedIcon.gd" type="Script" id=2]
-[ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=3]
+[ext_resource type="Texture2D" uid="uid://ccbw3e3ug6brt" path="res://HUD/AttackedIcon/AttackedIcon.png" id="1"]
+[ext_resource type="Script" path="res://HUD/AttackedIcon/AttackedIcon.gd" id="2"]
+[ext_resource type="FontData" path="res://Fonts/MainFont.ttf" id="3"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "SIze"
 length = 3.0
 tracks/0/type = "transform"
@@ -13,7 +13,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, 2.5, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5, 3, 1, 0, 4.5, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5 )
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 2.5, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5, 3, 1, 0, 4.5, 0, 0, 0, 0, 1, 0.5, 0.5, 0.5)
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
@@ -21,142 +21,137 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="DynamicFont" id=2]
-size = 50
-font_data = ExtResource( 3 )
+[sub_resource type="Font" id="2"]
+data/0 = ExtResource( "3" )
 
 [node name="Sprite3D" type="Sprite3D"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0 )
-texture = ExtResource( 1 )
-script = ExtResource( 2 )
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0)
+texture = ExtResource( "1" )
+script = ExtResource( "2" )
 
 [node name="Numbers" type="Sprite3D" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.6187, 0 )
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.6187, 0)
 flip_h = true
 flip_v = true
+script = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/SIze = SubResource( 1 )
+anims/SIze = SubResource( "1" )
+blend_times = []
+script = null
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 170, 130 )
+[node name="Viewport" type="SubViewport" parent="."]
 transparent_bg = true
+size = Vector2i(170, 130)
+script = null
 
 [node name="Fight" type="VBoxContainer" parent="Viewport"]
-margin_right = 166.0
-margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Basic" type="HBoxContainer" parent="Viewport/Fight"]
-margin_right = 166.0
-margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Attacker" type="Label" parent="Viewport/Fight/Basic"]
-margin_right = 60.0
-margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( "2" )
 text = "100"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="vs" type="Label" parent="Viewport/Fight/Basic"]
-margin_left = 64.0
-margin_right = 102.0
-margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( "2" )
 text = "vs"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Defender" type="Label" parent="Viewport/Fight/Basic"]
-margin_left = 106.0
-margin_right = 166.0
-margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( "2" )
 text = "200"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Lost" type="HBoxContainer" parent="Viewport/Fight"]
-modulate = Color( 0.752941, 0, 0, 1 )
-margin_top = 64.0
-margin_right = 166.0
-margin_bottom = 124.0
+modulate = Color(0.752941, 0, 0, 1)
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Attacker" type="Label" parent="Viewport/Fight/Lost"]
-margin_right = 60.0
-margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( "2" )
 text = "100"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="vs" type="Label" parent="Viewport/Fight/Lost"]
-modulate = Color( 1, 0.568627, 0.568627, 1 )
-margin_left = 64.0
-margin_right = 102.0
-margin_bottom = 60.0
+modulate = Color(1, 0.568627, 0.568627, 1)
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( "2" )
 text = "vs"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Defender" type="Label" parent="Viewport/Fight/Lost"]
-margin_left = 106.0
-margin_right = 166.0
-margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( "2" )
 text = "200"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }

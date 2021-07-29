@@ -1,49 +1,44 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=19 format=3 uid="uid://dpvaikuggl4bs"]
 
-[ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
-[ext_resource path="res://HUD/RoundsCircle.png" type="Texture" id=2]
-[ext_resource path="res://Fonts/MainFont.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://HUD/ResourcesIcons/wood.png" type="Texture" id=4]
-[ext_resource path="res://HUD/ResourcesIcons/water.png" type="Texture" id=5]
-[ext_resource path="res://HUD/ResourcesIcons/food.png" type="Texture" id=6]
-[ext_resource path="res://HUD/ResourcesIcons/gold.png" type="Texture" id=7]
-[ext_resource path="res://HUD/ResourcesIcons/AccessPoint.png" type="Texture" id=8]
-[ext_resource path="res://HUD/Round.gd" type="Script" id=9]
-[ext_resource path="res://HUD/BuildingMenu/BuildingsMenu.tscn" type="PackedScene" id=10]
-[ext_resource path="res://HUD/ConfirmationDialog/ConfirmationDialog.gd" type="Script" id=11]
-[ext_resource path="res://HUD/ResourcesIcons/Resources.gd" type="Script" id=12]
-[ext_resource path="res://Units/Outfit/SingleHexTEAM3.png" type="Texture" id=13]
-[ext_resource path="res://HUD/UnitMenu/UnitMenu.tscn" type="PackedScene" id=14]
+[ext_resource type="Script" path="res://HUD/HUD.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bdhx0dxqlxfl8" path="res://HUD/RoundsCircle.png" id="2"]
+[ext_resource type="FontData" path="res://Fonts/MainFont.ttf" id="3"]
+[ext_resource type="Texture2D" uid="uid://btk6y30vjiqn1" path="res://HUD/ResourcesIcons/wood.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dukpdoinbj7b7" path="res://HUD/ResourcesIcons/water.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b82jfxggdfopn" path="res://HUD/ResourcesIcons/food.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cnjm3k8xptu8x" path="res://HUD/ResourcesIcons/gold.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://ci08sggde4mki" path="res://HUD/ResourcesIcons/AccessPoint.png" id="8"]
+[ext_resource type="Script" path="res://HUD/Round.gd" id="9"]
+[ext_resource type="PackedScene" path="res://HUD/BuildingMenu/BuildingsMenu.tscn" id="10"]
+[ext_resource type="Script" path="res://HUD/ConfirmationDialog/ConfirmationDialog.gd" id="11"]
+[ext_resource type="Script" path="res://HUD/ResourcesIcons/Resources.gd" id="12"]
+[ext_resource type="Texture2D" uid="uid://bvwa6lbqxk1rs" path="res://Units/Outfit/SingleHexTEAM3.png" id="13"]
+[ext_resource type="PackedScene" path="res://HUD/UnitMenu/UnitMenu.tscn" id="14"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 21
-font_data = ExtResource( 3 )
+[sub_resource type="Font" id="1"]
+data/0 = ExtResource( "3" )
 
-[sub_resource type="DynamicFont" id=2]
-size = 120
-font_data = ExtResource( 3 )
+[sub_resource type="Font" id="2"]
+data/0 = ExtResource( "3" )
 
-[sub_resource type="DynamicFont" id=3]
-size = 26
-font_data = ExtResource( 3 )
+[sub_resource type="Font" id="3"]
+data/0 = ExtResource( "3" )
 
-[sub_resource type="DynamicFont" id=4]
-size = 40
-font_data = ExtResource( 3 )
+[sub_resource type="Font" id="4"]
+data/0 = ExtResource( "3" )
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Resources" type="Control" parent="."]
 anchor_right = 0.45
-margin_bottom = 40.0
-script = ExtResource( 12 )
+script = ExtResource( "12" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -52,7 +47,8 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
-color = Color( 0, 0.168627, 0.341176, 1 )
+color = Color(0, 0.168627, 0.341176, 1)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -60,191 +56,169 @@ __meta__ = {
 [node name="HBox" type="HBoxContainer" parent="Resources"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -10.0
 custom_constants/separation = 5
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Gold" type="HBoxContainer" parent="Resources/HBox"]
-margin_right = 146.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Gold"]
-margin_right = 47.0
-margin_bottom = 40.0
 hint_tooltip = "Gold, ants always want more power and gold"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-texture = ExtResource( 7 )
+texture = ExtResource( "7" )
 expand = true
 stretch_mode = 6
+script = null
 
 [node name="Label" type="Label" parent="Resources/HBox/Gold"]
-margin_left = 51.0
-margin_right = 146.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( "1" )
 text = "5000 (+180)"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="Wood" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 151.0
-margin_right = 298.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Wood"]
-margin_right = 47.0
-margin_bottom = 40.0
 hint_tooltip = "Ants looks at people and trying to build advanced building from wood"
 size_flags_horizontal = 11
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-texture = ExtResource( 4 )
+texture = ExtResource( "4" )
 expand = true
 stretch_mode = 6
+script = null
 
 [node name="Label" type="Label" parent="Resources/HBox/Wood"]
-margin_left = 51.0
-margin_right = 147.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( "1" )
 text = "5000 (+180)"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="Water" type="HBoxContainer" parent="Resources/HBox"]
 visible = false
-margin_left = 247.0
-margin_right = 366.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Water"]
-margin_right = 57.0
-margin_bottom = 40.0
 size_flags_horizontal = 11
 size_flags_vertical = 3
-texture = ExtResource( 5 )
+texture = ExtResource( "5" )
 expand = true
 stretch_mode = 6
+script = null
 
 [node name="Label" type="Label" parent="Resources/HBox/Water"]
-margin_left = 61.0
-margin_right = 119.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( "1" )
 text = "5000"
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="Food" type="HBoxContainer" parent="Resources/HBox"]
-margin_left = 303.0
-margin_right = 450.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/Food"]
-margin_right = 47.0
-margin_bottom = 40.0
 hint_tooltip = "Ant want eat, ant need to eat, and eats food"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-texture = ExtResource( 6 )
+texture = ExtResource( "6" )
 expand = true
 stretch_mode = 6
+script = null
 
 [node name="Label" type="Label" parent="Resources/HBox/Food"]
-margin_left = 51.0
-margin_right = 147.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( "1" )
 text = "5000 (+180)"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="AccessPoints" type="HBoxContainer" parent="Resources/HBox"]
 visible = false
-margin_left = 337.0
-margin_right = 445.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources/HBox/AccessPoints"]
-margin_right = 52.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 8 )
+texture = ExtResource( "8" )
 expand = true
 stretch_mode = 6
+script = null
 
 [node name="Label" type="Label" parent="Resources/HBox/AccessPoints"]
-margin_left = 56.0
-margin_right = 108.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( "1" )
 text = "2/5"
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Buildings" parent="." instance=ExtResource( 10 )]
+[node name="Buildings" parent="." instance=ExtResource( "10" )]
 
-[node name="Units" parent="." instance=ExtResource( 14 )]
+[node name="Units" parent="." instance=ExtResource( "14" )]
 visible = false
 
 [node name="Round" type="TextureRect" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -181.0
-margin_right = -6.10352e-05
-margin_bottom = 180.0
-texture = ExtResource( 2 )
+texture = ExtResource( "2" )
 expand = true
 stretch_mode = 6
-script = ExtResource( 9 )
+script = ExtResource( "9" )
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -253,24 +227,22 @@ __meta__ = {
 anchor_left = 0.15
 anchor_right = 1.0
 anchor_bottom = 0.85
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( "2" )
+custom_colors/font_color = Color(0, 0, 0, 1)
 text = "1"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EndTurnDialog" type="ConfirmationDialog" parent="."]
+size = Vector2i(321, 100)
 visible = true
-margin_left = 306.0
-margin_top = 222.0
-margin_right = 639.0
-margin_bottom = 314.0
-window_title = "Confirm turn ending"
 dialog_text = "Are you sure that you want to end turn?"
-script = ExtResource( 11 )
+script = ExtResource( "11" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -278,8 +250,7 @@ __meta__ = {
 [node name="CurrentPlayer" type="Control" parent="."]
 anchor_left = 0.45
 anchor_right = 0.691
-margin_right = 0.0639648
-margin_bottom = 40.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -287,9 +258,10 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="CurrentPlayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 13 )
+texture = ExtResource( "13" )
 expand = true
 stretch_mode = 1
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -299,10 +271,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( "3" )
 text = "Current Player"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -311,9 +285,11 @@ __meta__ = {
 anchor_top = 0.081
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( "4" )
 text = "MOVING UNIT MODE"
 align = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -322,40 +298,25 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.203922 )
+color = Color(0, 0, 0, 0.203922)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EndGameDialog" type="AcceptDialog" parent="."]
 visible = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -100.5
-margin_top = -44.0
-margin_right = 100.5
-margin_bottom = 44.0
-window_title = "Game End"
 dialog_text = "You TODO"
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StartGameCampaignDialog" type="AcceptDialog" parent="."]
 visible = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -100.5
-margin_top = -44.0
-margin_right = 100.5
-margin_bottom = 44.0
-window_title = "Game End"
 dialog_text = "Text TODo
 "
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }

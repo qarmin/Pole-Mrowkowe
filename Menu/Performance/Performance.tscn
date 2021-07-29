@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://mnueo45xd6ru"]
 
-[ext_resource path="res://Menu/Performance/Performance.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Menu/Performance/Performance.gd" id="1"]
 
 [node name="Performance" type="VBoxContainer"]
 custom_constants/separation = 0
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://blsm7sidhc60u"]
 
-[ext_resource path="res://HUD/UnitMenu/MoveUnit.png" type="Texture" id=1]
+[ext_resource type="Texture2D" uid="uid://bgcr2w1ug7y0p" path="res://HUD/UnitMenu/MoveUnit.png" id="1"]
 
-[node name="UnitClickableIcons" type="Spatial"]
+[node name="UnitClickableIcons" type="Node3D"]
+script = null
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 1
-texture = ExtResource( 1 )
+texture = ExtResource( "1" )
+script = null

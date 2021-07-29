@@ -1,29 +1,37 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://bjgj4ctoobja6"]
 
-[ext_resource path="res://Units/Ant.gd" type="Script" id=1]
-[ext_resource path="res://Units/Outfit/Outfit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Units/Helmets/Helmet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Units/Body/Body.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" path="res://Units/Ant.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://3vlq225t1cu4" path="res://Units/Outfit/Outfit.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://djynrsq6bmwq4" path="res://Units/Helmets/Helmet.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://rp181u0nm541" path="res://Units/Body/Body.tscn" id="4"]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 1, 1.12511, 1.12389 )
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(2, 2.25022, 2.24778)
 
-[node name="ANTSoldier" type="Spatial"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-script = ExtResource( 1 )
+[node name="ANTSoldier" type="Node3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+script = ExtResource( "1" )
 
-[node name="Body" parent="." instance=ExtResource( 4 )]
+[node name="Body" parent="." instance=ExtResource( "4" )]
+surface_material_override/0 = null
+script = null
 
-[node name="Helmet" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581 )
+[node name="Helmet" parent="." instance=ExtResource( "3" )]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.929736, 0.723581)
+surface_material_override/0 = null
+script = null
 
-[node name="Outfit" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561 )
+[node name="Outfit" parent="." instance=ExtResource( "2" )]
+transform = Transform3D(1.08541, 0, 0, 0, 0.338853, 0, 0, 0, 0.504823, 0, 0.686908, 0.0366561)
+surface_material_override/0 = null
+script = null
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="StaticBody" type="StaticBody3D" parent="."]
+script = null
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.134998, 0 )
-shape = SubResource( 1 )
+[node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.134998, 0)
+shape = SubResource( "1" )
+script = null
 
 [connection signal="input_event" from="StaticBody" to="." method="_on_StaticBody_input_event"]

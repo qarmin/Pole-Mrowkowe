@@ -1,16 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://co3xd1wft30tw"]
 
-[ext_resource path="res://HUD/BuildingMenu/Anthill.png" type="Texture" id=1]
-[ext_resource path="res://HUD/Up.png" type="Texture" id=2]
-[ext_resource path="res://HUD/Down.png" type="Texture" id=3]
-[ext_resource path="res://HUD/BuildingMenu/DisabledButton.png" type="Texture" id=4]
-[ext_resource path="res://HUD/BuildingMenu/BuildingFont.tres" type="DynamicFont" id=5]
+[ext_resource type="Texture2D" uid="uid://bndey6md00o2i" path="res://HUD/BuildingMenu/Anthill.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://eytwvjyv22q" path="res://HUD/Up.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bag0p3xf5c8ed" path="res://HUD/Down.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://caaktuklo7wlw" path="res://HUD/BuildingMenu/DisabledButton.png" id="4"]
+[ext_resource type="Font" path="res://HUD/BuildingMenu/BuildingFont.tres" id="5"]
 
 [node name="VBox" type="Control"]
-margin_right = 286.0
-margin_bottom = 172.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -18,7 +17,8 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0.364706, 0.364706, 0.537255 )
+color = Color(0, 0.364706, 0.364706, 0.537255)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -26,40 +26,33 @@ __meta__ = {
 [node name="VBox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = 3.0
-margin_right = -3.0
-margin_bottom = -3.0
 custom_constants/separation = 1
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="VBox"]
-margin_right = 280.0
-margin_bottom = 20.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( "5" )
 text = "Mrówka LVL 1"
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBox"]
-margin_top = 21.0
-margin_right = 280.0
-margin_bottom = 166.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch_mode = 1
+script = null
 
 [node name="Icon" type="TextureRect" parent="VBox/AspectRatioContainer"]
-margin_left = 67.5
-margin_right = 212.5
-margin_bottom = 145.0
 size_flags_horizontal = 5
 size_flags_vertical = 3
-texture = ExtResource( 1 )
+texture = ExtResource( "1" )
 expand = true
 stretch_mode = 7
+script = null
 
 [node name="Upgrade" type="TextureButton" parent="VBox/AspectRatioContainer/Icon"]
 anchor_left = 0.7
@@ -67,10 +60,11 @@ anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.3
 hint_tooltip = "TODO Update this"
-texture_normal = ExtResource( 2 )
-texture_disabled = ExtResource( 4 )
+texture_normal = ExtResource( "2" )
+texture_disabled = ExtResource( "4" )
 expand = true
 stretch_mode = 5
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -80,13 +74,12 @@ anchor_left = 0.7
 anchor_top = 0.7
 anchor_right = 0.95
 anchor_bottom = 0.95
-margin_left = 0.297302
-margin_right = 0.297302
 hint_tooltip = "TODO update this"
-texture_normal = ExtResource( 3 )
-texture_disabled = ExtResource( 4 )
+texture_normal = ExtResource( "3" )
+texture_disabled = ExtResource( "4" )
 expand = true
 stretch_mode = 4
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }

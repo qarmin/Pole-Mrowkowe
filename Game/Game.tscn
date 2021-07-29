@@ -1,20 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://rf2g0ewrh8ep"]
 
-[ext_resource path="res://Game/Game.gd" type="Script" id=1]
-[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=2]
-[ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://standard_environment.tres" type="Environment" id=6]
+[ext_resource type="Script" path="res://Game/Game.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Camera/Camera.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dpvaikuggl4bs" path="res://HUD/HUD.tscn" id="5"]
+[ext_resource type="Environment" uid="uid://b6c8ci21gry6i" path="res://standard_environment.tres" id="6"]
 
-[node name="Game" type="Spatial"]
-script = ExtResource( 1 )
+[node name="Game" type="Node3D"]
+script = ExtResource( "1" )
 
-[node name="Camera" parent="." instance=ExtResource( 2 )]
+[node name="Camera" parent="." instance=ExtResource( "2" )]
 
-[node name="Overlays" type="Spatial" parent="."]
+[node name="Overlays" type="Node3D" parent="."]
+script = null
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = null
 
-[node name="HUD" parent="HUD" instance=ExtResource( 5 )]
+[node name="HUD" parent="HUD" instance=ExtResource( "5" )]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 6 )
+environment = ExtResource( "6" )
+script = null

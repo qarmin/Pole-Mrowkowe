@@ -1,26 +1,29 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://5vptuavec8p0"]
 
-[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Tests/PerformanceCheckerMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Menu/Performance/Performance.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Tests/PerformanceChecker.gd" type="Script" id=4]
+[ext_resource type="PackedScene" uid="uid://c6cf2tydvjo11" path="res://Camera/Camera.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Tests/PerformanceCheckerMap.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://mnueo45xd6ru" path="res://Menu/Performance/Performance.tscn" id="3"]
+[ext_resource type="Script" path="res://Tests/PerformanceChecker.gd" id="4"]
 
-[node name="PerformanceChecker" type="Spatial"]
-script = ExtResource( 4 )
+[node name="PerformanceChecker" type="Node3D"]
+script = ExtResource( "4" )
 
-[node name="Camera" parent="." instance=ExtResource( 1 )]
+[node name="Camera" parent="." instance=ExtResource( "1" )]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( -2.18557e-08, 0.866025, -0.5, 3.78552e-08, 0.5, 0.866025, 1, -1.95399e-14, -4.37114e-08, -8.29793, 11.5272, 0 )
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0.866025, -0.5, 3.78552e-08, 0.5, 0.866025, 1, -1.95399e-14, -4.37114e-08, -8.29793, 11.5272, 0)
 light_energy = 0.2
+script = null
 
 [node name="Menu" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Performance" parent="Menu" instance=ExtResource( 3 )]
+[node name="Performance" parent="Menu" instance=ExtResource( "3" )]
 
-[node name="Map" parent="." instance=ExtResource( 2 )]
+[node name="Map" parent="." instance=ExtResource( "2" )]
+script = null

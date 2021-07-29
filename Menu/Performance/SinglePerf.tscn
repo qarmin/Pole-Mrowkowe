@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://q0ck8xc4sjrc"]
 
-[sub_resource type="NoiseTexture" id=1]
+[sub_resource type="NoiseTexture" id="1"]
 width = 1
 height = 1
 
@@ -8,19 +8,22 @@ height = 1
 anchor_right = 0.0292969
 anchor_bottom = 0.0233333
 text = "FPS: "
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 1, 1, 1, 0.498039 )
+modulate = Color(1, 1, 1, 0.498039)
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = SubResource( 1 )
+texture = SubResource( "1" )
 expand = true
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }

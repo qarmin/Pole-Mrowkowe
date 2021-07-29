@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://lic8yk1ute0i"]
 
-[ext_resource path="res://Overlay/UnitOverlay.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Overlay/UnitOverlay.gd" id="1"]
 
-[sub_resource type="SpatialMaterial" id=1]
-params_cull_mode = 2
-albedo_color = Color( 0.290196, 0.937255, 0.968627, 1 )
+[sub_resource type="StandardMaterial3D" id="1"]
+cull_mode = 2
+albedo_color = Color(0.290196, 0.937255, 0.968627, 1)
 metallic_specular = 0.0
 
-[node name="UnitOverlay" type="CSGTorus"]
-transform = Transform( 1, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0, 0 )
+[node name="UnitOverlay" type="CSGTorus3D"]
+transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0, 0)
 sides = 4
 ring_sides = 4
-material = SubResource( 1 )
-script = ExtResource( 1 )
+material = SubResource( "1" )
+script = ExtResource( "1" )

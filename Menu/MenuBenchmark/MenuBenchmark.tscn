@@ -1,63 +1,61 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://brkegt2adbvl6"]
 
-[ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Menu/MenuBenchmark/BackToMenu.gd" type="Script" id=3]
-[ext_resource path="res://Menu/MenuBenchmark/MenuBenchmark.gd" type="Script" id=4]
-[ext_resource path="res://Menu/MenuBenchmark/StartBenchmark.gd" type="Script" id=5]
-[ext_resource path="res://Menu/MenuBenchmark/Results.tres" type="DynamicFont" id=6]
+[ext_resource type="Font" path="res://Menu/Menu/MenuEntries.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://dvf7qw24kwass" path="res://Menu/Menu/SubmenuTitle.tscn" id="2"]
+[ext_resource type="Script" path="res://Menu/MenuBenchmark/BackToMenu.gd" id="3"]
+[ext_resource type="Script" path="res://Menu/MenuBenchmark/MenuBenchmark.gd" id="4"]
+[ext_resource type="Script" path="res://Menu/MenuBenchmark/StartBenchmark.gd" id="5"]
+[ext_resource type="Font" path="res://Menu/MenuBenchmark/Results.tres" id="6"]
 
 [node name="MenuBenchmark" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 4 )
+script = ExtResource( "4" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Benchmark" parent="." instance=ExtResource( 2 )]
+[node name="Benchmark" parent="." instance=ExtResource( "2" )]
 text = "Benchmark"
+structured_text_bidi_override_options = []
+script = null
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 anchor_left = 0.05
 anchor_top = 0.781
 anchor_right = 0.95
 anchor_bottom = 0.9
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StartBenchmark" type="Button" parent="Buttons"]
-margin_right = 250.0
-margin_bottom = 71.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = ExtResource( 1 )
+rect_min_size = Vector2(250, 0)
+custom_fonts/font = ExtResource( "1" )
 text = "Start Benchmark"
-script = ExtResource( 5 )
+script = ExtResource( "5" )
 
 [node name="Label" type="Label" parent="Buttons"]
-margin_left = 254.0
-margin_right = 737.0
-margin_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1000.0
+structured_text_bidi_override_options = []
+script = null
 
 [node name="BackToMenu" type="Button" parent="Buttons"]
-margin_left = 741.0
-margin_right = 921.0
-margin_bottom = 71.0
-rect_min_size = Vector2( 180, 0 )
-custom_fonts/font = ExtResource( 1 )
+rect_min_size = Vector2(180, 0)
+custom_fonts/font = ExtResource( "1" )
 text = "Back to menu"
-script = ExtResource( 3 )
+script = ExtResource( "3" )
 
 [node name="TextureRect" type="ColorRect" parent="."]
 anchor_left = 0.1
 anchor_top = 0.25
 anchor_right = 0.9
 anchor_bottom = 0.75
-color = Color( 0.113725, 0.113725, 0.113725, 1 )
+color = Color(0.113725, 0.113725, 0.113725, 1)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -65,86 +63,87 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="WarningStart" type="Label" parent="TextureRect/VBoxContainer"]
-margin_right = 819.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( "6" )
 text = "To get results, you must Start benchmark!"
 align = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/VBoxContainer"]
-margin_top = 44.0
-margin_right = 819.0
-margin_bottom = 84.0
+script = null
 
 [node name="Low" type="Label" parent="TextureRect/VBoxContainer/HBoxContainer"]
-margin_right = 407.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( "6" )
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="High" type="Label" parent="TextureRect/VBoxContainer/HBoxContainer"]
-margin_left = 411.0
-margin_right = 819.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( "6" )
 align = 1
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="Graph" type="TextureRect" parent="TextureRect/VBoxContainer"]
-margin_top = 88.0
-margin_right = 819.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 0, 100 )
+rect_min_size = Vector2(0, 100)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 expand = true
+script = null
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 2048, 512 )
-usage = 0
+[node name="Viewport" type="SubViewport" parent="."]
+size = Vector2i(2048, 512)
+script = null
 
 [node name="ColorRect" type="ColorRect" parent="Viewport"]
 anchor_right = 1.01
 anchor_bottom = 1.154
-margin_right = 40.0
-margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.0901961, 0.0901961, 0.0901961, 1 )
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+script = null
 
 [node name="FrameTime1" type="Line2D" parent="Viewport"]
 width = 6.0
-default_color = Color( 0.729412, 0.772549, 0, 1 )
+default_color = Color(0.729412, 0.772549, 0, 1)
+script = null
 
 [node name="FrameTime2" type="Line2D" parent="Viewport"]
 width = 6.0
-default_color = Color( 0.129412, 0.811765, 0.556863, 1 )
+default_color = Color(0.129412, 0.811765, 0.556863, 1)
+script = null
 
 [node name="FrameTime3" type="Line2D" parent="Viewport"]
 width = 6.0
-default_color = Color( 0, 0.694118, 0.709804, 1 )
+default_color = Color(0, 0.694118, 0.709804, 1)
+script = null
 
 [node name="FrameTime4" type="Line2D" parent="Viewport"]
 width = 6.0
-default_color = Color( 0.121569, 0, 0.709804, 1 )
+default_color = Color(0.121569, 0, 0.709804, 1)
+script = null
 
 [node name="FrameTime5" type="Line2D" parent="Viewport"]
 width = 6.0
-default_color = Color( 0.709804, 0, 0.45098, 1 )
+default_color = Color(0.709804, 0, 0.45098, 1)
+script = null
 
 [node name="FrameTime6" type="Line2D" parent="Viewport"]
 width = 6.0
-default_color = Color( 0.709804, 0.2, 0, 1 )
+default_color = Color(0.709804, 0.2, 0, 1)
+script = null
 
 [connection signal="pressed" from="Buttons/StartBenchmark" to="Buttons/StartBenchmark" method="_on_StartBenchmark_pressed"]
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

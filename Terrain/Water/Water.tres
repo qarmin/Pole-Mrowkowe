@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://iafp4minpyhb"]
 
-[ext_resource path="res://Terrain/Water/Water.png" type="Texture2D" id=2]
-[ext_resource path="res://Terrain/Water/NoisyTexture.tres" type="Texture2D" id=3]
+[ext_resource type="Texture2D" uid="uid://rusjkocwase8" path="res://Terrain/Water/Water.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ca5f5idn7tiwm" path="res://Terrain/Water/NoisyTexture.tres" id="3"]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id="1"]
 code = "shader_type spatial;
 
 uniform vec2 amplitude = vec2(0.01, 0.05);
@@ -53,7 +53,7 @@ void fragment() {
 }"
 
 [resource]
-shader = SubResource( 1 )
+shader = SubResource( "1" )
 shader_param/amplitude = Vector2(0.103, 0.003)
 shader_param/frequency = Vector2(0, 0)
 shader_param/time_factor = Vector2(2, 3)
@@ -63,6 +63,6 @@ shader_param/uv_offset_amplitude = 0.208
 shader_param/texture_scale = Vector2(20, 20)
 shader_param/refraction = 0.04
 shader_param/beer_factor = 1.0
-shader_param/uv_offset_texture = ExtResource( 3 )
-shader_param/texturemap = ExtResource( 2 )
-shader_param/normalmap = ExtResource( 3 )
+shader_param/uv_offset_texture = ExtResource( "3" )
+shader_param/texturemap = ExtResource( "2" )
+shader_param/normalmap = ExtResource( "3" )

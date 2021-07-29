@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b2trr112dty4c"]
 
-[ext_resource path="res://Menu/Menu/MenuEntries.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Menu/Menu/SubmenuTitle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Menu/MenuOptions/BackToMenu.gd" type="Script" id=3]
+[ext_resource type="Font" path="res://Menu/Menu/MenuEntries.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://dvf7qw24kwass" path="res://Menu/Menu/SubmenuTitle.tscn" id="2"]
+[ext_resource type="Script" path="res://Menu/MenuOptions/BackToMenu.gd" id="3"]
 
 [node name="MenuOptions" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -17,19 +18,20 @@ anchor_top = 0.781
 anchor_right = 0.95
 anchor_bottom = 0.9
 custom_constants/separation = 18
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BackToMenu" type="Button" parent="Buttons"]
-margin_right = 273.0
-margin_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( "1" )
 text = "Back to menu"
-script = ExtResource( 3 )
+script = ExtResource( "3" )
 
-[node name="Options" parent="." instance=ExtResource( 2 )]
+[node name="Options" parent="." instance=ExtResource( "2" )]
+structured_text_bidi_override_options = []
+script = null
 
 [connection signal="pressed" from="Buttons/BackToMenu" to="Buttons/BackToMenu" method="_on_BackToMenu_pressed"]

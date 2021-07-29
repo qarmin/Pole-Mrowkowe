@@ -1,33 +1,38 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://d1p77bx7g8sr"]
 
-[ext_resource path="res://Overlay/PossiblePath/material_yellow.tres" type="Material" id=1]
-[ext_resource path="res://Overlay/PossiblePath/PossiblePathOverlay.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://Overlay/PossiblePath/PossiblePathOverlay.gd" id="2"]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxMesh" id="1"]
 
-[node name="Spatial" type="Spatial"]
-transform = Transform( 0.70822, 0, -0.372117, 0, 0.8, 0, 0.372117, 0, 0.70822, 0, 1, 0 )
-script = ExtResource( 2 )
+[node name="Spatial" type="Node3D"]
+transform = Transform3D(0.70822, 0, -0.372117, 0, 0.8, 0, 0.372117, 0, 0.70822, 0, 1, 0)
+script = ExtResource( "2" )
 
-[node name="Spatial" type="Spatial" parent="."]
+[node name="Spatial" type="Node3D" parent="."]
+script = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
-transform = Transform( 0.7, 0, 0, 0, 0.14, 0, 0, 0, 0.073, 0, 0, -0.863154 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+[node name="MeshInstance" type="MeshInstance3D" parent="Spatial"]
+transform = Transform3D(0.7, 0, 0, 0, 0.14, 0, 0, 0, 0.073, 0, 0, -0.863154)
+mesh = SubResource( "1" )
+surface_material_override/0 = null
+script = null
 
-[node name="Spatial2" type="Spatial" parent="."]
-transform = Transform( -0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0, 0 )
+[node name="Spatial2" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0, 0)
+script = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Spatial2"]
-transform = Transform( 0.7, 0, 0, 0, 0.14, 0, 0, 0, 0.073, 0, 0, -0.863154 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+[node name="MeshInstance" type="MeshInstance3D" parent="Spatial2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.14, 0, 0, 0, 0.073, 0, 0, -0.863154)
+mesh = SubResource( "1" )
+surface_material_override/0 = null
+script = null
 
-[node name="Spatial3" type="Spatial" parent="."]
-transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 0, 0 )
+[node name="Spatial3" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 0, 0)
+script = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Spatial3"]
-transform = Transform( 0.7, 0, 0, 0, 0.14, 0, 0, 0, 0.073, 0, 0, -0.863154 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+[node name="MeshInstance" type="MeshInstance3D" parent="Spatial3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.14, 0, 0, 0, 0.073, 0, 0, -0.863154)
+mesh = SubResource( "1" )
+surface_material_override/0 = null
+script = null
