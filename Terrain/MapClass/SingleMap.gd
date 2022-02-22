@@ -240,7 +240,7 @@ func building_remove(coordinates: Vector2j, building: int) -> void:
 	assert(buildings[coordinates.y][coordinates.x].has(building))  # Budynek musi istnieć
 
 	var ret = buildings[coordinates.y][coordinates.x].erase(building)
-	assert(ret == OK)
+	assert(ret)
 
 
 func building_change_level(coordinates: Vector2j, building: int, level: int) -> void:

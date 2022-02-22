@@ -10,4 +10,3 @@ subdivide_depth = 9
 
 [node name="Water" type="MeshInstance"]
 mesh = SubResource( 3 )
-material/0 = null

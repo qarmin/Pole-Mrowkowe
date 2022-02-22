@@ -8,4 +8,3 @@ material = ExtResource( 1 )
 [node name="Helmet" type="MeshInstance"]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0314672, 0.085295, -0.00368309 )
 mesh = SubResource( 1 )
-material/0 = null
