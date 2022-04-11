@@ -111,7 +111,7 @@ func _input(event) -> void:
 			rotate_object_local(Vector3(1, 0, 0), rot_y)  # then rotate in X
 
 
-func move_camera(roman: int, delta: float = -1) -> void:
+func move_camera(roman: int, delta: float = -1.0) -> void:
 	if delta < 0:
 		delta = 1.0
 

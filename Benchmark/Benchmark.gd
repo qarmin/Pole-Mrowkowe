@@ -2,7 +2,7 @@ extends Spatial
 
 var current_stage: int = 1
 
-var ready: bool = false
+var is_ready: bool = false
 var start_wait_time: float = 1.0
 var middle_wait_time: float = 1.0
 var benchmark_ended: bool = false
@@ -14,7 +14,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.is_pressed():
 			if event.get_scancode() == KEY_ESCAPE:
-				ready = false
+				is_ready = false
 				Benchmark.clear_results()
 				test_ended()
 
@@ -55,7 +55,7 @@ func test_started() -> void:
 	$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 	$Settings.set_text("Minimal Settings(1/6)\nMap 3x3")
 
-	ready = true
+	is_ready = true
 
 
 ## Ładuje mapy z wysokimi ustawieniami
@@ -72,7 +72,7 @@ func test_middle() -> void:
 	$CameraMovement.set_speed_scale(Benchmark.speed_scale)
 	$Settings.set_text("Maximum Settings(4/6)\nMap 3x3")
 
-	ready = true
+	is_ready = true
 
 
 ## Na zakończenie wypisuje wyniki i ładuje scene z benchmarkiem
@@ -102,7 +102,7 @@ func test_ended() -> void:
 ## Dodaje co każdą klatkę do wyniku 1 punkt i sprawdza czy dany test się nie zakończył
 func _process(delta: float) -> void:
 	if !benchmark_ended:
-		if ready:
+		if is_ready:
 			Benchmark.stages_frames[current_stage - 1] += 1
 			Benchmark.points += 1
 			Benchmark.time_frame[current_stage - 1].append(delta)
@@ -135,7 +135,7 @@ func _animation_finished(anim_name: String) -> void:
 		$Settings.set_text("Configuring environment")
 		#$DirectionalLight.set_param(Light.PARAM_ENERGY,0.0)
 		#$DirectionalLight.set_shadow(true) # TODO - Zrobić aby cienie były tylko w GLES 3 lub Vulkanie - GLES 2 ma bardzo kanciaste cienie
-		ready = false
+		is_ready = false
 	elif anim_name == "CameraMovement4":
 		current_stage = 5
 		show_map(2)
